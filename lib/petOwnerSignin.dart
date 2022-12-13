@@ -16,12 +16,16 @@ class _petOwnerSignin extends State<petOwnerSignin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Image.asset('Assets/header2.png', fit: BoxFit.fill),
-          backgroundColor: Colors.white,
-        ),
-        body: SafeArea(
+        body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("Assets/screenHeader.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+        child: SafeArea(
             child: Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -114,6 +118,6 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                               width: 5,
                             )),
                       ), //sign in container عدلي النافقيتر
-                    ]))));
+                    ])))));
   }
 }

@@ -65,6 +65,9 @@ flutter:
     - Assets/header1.png
     - Assets/header2.png
     - Assets/Picture1.png
+    - Assets/bg1.png
+    - Assets/screenHeader.png
+    - Assets/bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
