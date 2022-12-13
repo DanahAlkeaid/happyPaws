@@ -100,6 +100,7 @@ class _clinicsign extends State<clinicsign> {
                   ),
                   Container(
                     child: TextField(
+
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '**********',

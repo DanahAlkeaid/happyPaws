@@ -4,6 +4,7 @@ import 'clinicsign.dart';
 import 'petOwnerSignin.dart';
 import 'signinScreen.dart';
 import 'loginScreen.dart';
+import 'testScreen.dart';
 
 
 class FirstScreen extends StatefulWidget {
@@ -90,6 +91,29 @@ class _FirstScreenState extends State<FirstScreen> {
               height: 30,
               width: 200,
               color: Colors.white,
+            ),
+            Container(
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => testScreen()));
+                  },
+                  child: Text(" test screen",
+                      style: TextStyle(fontSize: 20, color: Colors.black)),
+                  style: ButtonStyle(
+                      backgroundColor:
+                      MaterialStateProperty.all(Color(0xFFC2D961)))),
+              height: 50,
+              width: 200,
+              decoration: BoxDecoration(
+                  color: Color(0xFFC2D961),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Color(0xFFC2D963),
+                    width: 5,
+                  )),
             ),
           ]),
         ),
