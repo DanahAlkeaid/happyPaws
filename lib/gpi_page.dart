@@ -18,7 +18,7 @@ class _gpi_pageState extends State<gpi_page> {
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/App_Header.png'),
+                      image: AssetImage('Assets/App_Header.png'),
                       fit: BoxFit.fill
                   )
               ),

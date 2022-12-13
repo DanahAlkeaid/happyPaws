@@ -18,16 +18,19 @@ class _loginScreenState extends State<loginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("Assets/screenHeader.png"),
-                fit: BoxFit.cover,
+        backgroundColor: Color(0xfffaf7f4),
+        appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
               ),
             ),
-
+            elevation: 0
+        ),
+        body: Container(
             child: SafeArea(
             child: Center(
                 child: Column(
@@ -38,15 +41,10 @@ class _loginScreenState extends State<loginScreen> {
                         style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                       ),
                       Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
+                        height: 40,
+
                       ),
-                      Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
-                      ),
+
                       Text(
                         "رقم الهاتف",
                         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
@@ -62,8 +60,7 @@ class _loginScreenState extends State<loginScreen> {
                       ), //phone number filed
                       Container(
                         height: 20,
-                        width: 200,
-                        color: Colors.white,
+
                       ),
                       Text(
                         "كلمة المرور",

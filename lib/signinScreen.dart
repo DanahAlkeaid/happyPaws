@@ -14,7 +14,18 @@ class _signinScreen extends State<signinScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xfffaf7f4),
+        appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
+              ),
+            ),
+            elevation: 0
+        ),
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -24,16 +35,14 @@ class _signinScreen extends State<signinScreen> {
             ),
             child: SafeArea(
                 child: Column(children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context); //action coe when button is pressed
-                    },
-                    icon: Icon(Icons.send),
-                  ),
+
                   Center(
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Container(
+                              height: 150,
+                            ),
                             Text(
                               "! أهلًا بك ",
                               style:
@@ -41,8 +50,6 @@ class _signinScreen extends State<signinScreen> {
                             ),
                             Container(
                               height: 20,
-                              width: 200,
-                              color: Colors.white,
                             ),
                             Text(
                               "هل أنت؟",
@@ -51,8 +58,7 @@ class _signinScreen extends State<signinScreen> {
                             ),
                             Container(
                               height: 20,
-                              width: 200,
-                              color: Colors.white,
+
                             ),
                             Container(
                               child: ElevatedButton(
@@ -80,8 +86,7 @@ class _signinScreen extends State<signinScreen> {
                             ), //مربي container
                             Container(
                               height: 20,
-                              width: 200,
-                              color: Colors.white,
+
                             ),
 
                             Container(

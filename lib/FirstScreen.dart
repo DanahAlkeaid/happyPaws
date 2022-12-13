@@ -16,14 +16,19 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-
-      body: Container( decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("Assets/screenHeader.png"),
-          fit: BoxFit.cover,
+        backgroundColor: Color(0xfffaf7f4),
+        appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
+              ),
+            ),
+            elevation: 0
         ),
-      ), child:
+      body: Container(  child:
       SafeArea(
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -36,8 +41,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
             Container(
               height: 20,
-              width: 200,
-              color: Colors.white,
+
             ),
             Container(
               child: ElevatedButton(
@@ -62,8 +66,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ), //login container
             Container(
               height: 20,
-              width: 200,
-              color: Colors.white,
+
             ),
             Container(
               child: ElevatedButton(
@@ -90,8 +93,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ), //sign in container
             Container(
               height: 30,
-              width: 200,
-              color: Colors.white,
+
             ),
             Container(
               child: ElevatedButton(

@@ -35,15 +35,20 @@ class _clinicsign extends State<clinicsign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xfffaf7f4),
+        appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
+              ),
+            ),
+            elevation: 0
+        ),
         body: SingleChildScrollView(
           child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("Assets/screenHeader.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: SafeArea(
                   child: Center(
                       child: Column(
@@ -63,8 +68,6 @@ class _clinicsign extends State<clinicsign> {
                     ),
                     Container(
                       height: 20,
-                      width: 200,
-                      color: Colors.white,
                     ),
                     Text(
                       "اسم العيادة",
@@ -87,8 +90,7 @@ class _clinicsign extends State<clinicsign> {
                     ), //name filed
                     Container(
                       height: 20,
-                      width: 200,
-                      color: Colors.white,
+
                     ),
                     Text(
                       "رقم الهاتف",
@@ -110,8 +112,7 @@ class _clinicsign extends State<clinicsign> {
                     ), //phone number filed
                     Container(
                       height: 20,
-                      width: 200,
-                      color: Colors.white,
+
                     ),
                     Text(
                       "كلمة المرور",
@@ -252,8 +253,7 @@ class _clinicsign extends State<clinicsign> {
                     ),
                     Container(
                       height: 20,
-                      width: 200,
-                      color: Colors.white,
+
                     ),
                     Text(
                       "موقع العيادة",
@@ -272,8 +272,7 @@ class _clinicsign extends State<clinicsign> {
                     ), //location filed
                     Container(
                       height: 20,
-                      width: 200,
-                      color: Colors.white,
+
                     ),
                     Container(
                       child: ElevatedButton(

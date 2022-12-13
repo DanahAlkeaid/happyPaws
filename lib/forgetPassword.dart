@@ -17,15 +17,18 @@ class _forgetPassword extends State<forgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("Assets/screenHeader.png"),
-                fit: BoxFit.cover,
+        appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
               ),
             ),
-
+            elevation: 0
+        ),
+        body: Container(
             child: SafeArea(
                 child: Center(
                     child: Column(

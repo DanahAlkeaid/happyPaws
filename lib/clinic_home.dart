@@ -20,7 +20,7 @@ class _clinic_homeState extends State<clinic_home> {
           flexibleSpace: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/App_Header.png'),
+                    image: AssetImage('Assets/App_Header.png'),
                     fit: BoxFit.fill
                 )
             ),

@@ -32,14 +32,19 @@ class _petOwnerSignin extends State<petOwnerSignin> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        backgroundColor: Colors.white,
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("Assets/screenHeader.png"),
-                fit: BoxFit.cover,
+        backgroundColor: Color(0xfffaf7f4),
+        appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
               ),
             ),
+            elevation: 0
+        ),
+        body: Container(
         child: SafeArea(
             child: Center(
                 child: Column(
@@ -51,8 +56,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ),
                       Container(
                         height: 20,
-                        width: 200,
-                        color: Colors.white,
+
                       ),
                       Text(
                         "الاسم",
@@ -68,8 +72,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ), //name filed
                       Container(
                         height: 20,
-                        width: 200,
-                        color: Colors.white,
+
                       ),
                       Text(
                         "رقم الهاتف",
@@ -85,8 +88,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ), //phone number filed
                       Container(
                         height: 20,
-                        width: 200,
-                        color: Colors.white,
+
                       ),
                       Text(
                         "كلمة المرور",
@@ -188,15 +190,10 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ],)//password filed
                       ,
                       Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
+                        height: 40,
+
                       ),
-                      Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
-                      ),
+
                       Container(
                         child: ElevatedButton(
                             onPressed: () {
