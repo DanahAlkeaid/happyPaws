@@ -19,11 +19,14 @@ class _FirstScreenState extends State<FirstScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Image.asset('Assets/header2.png', fit: BoxFit.fill),
-        backgroundColor: Colors.white,
-      ),
-      body: SafeArea(
+
+      body: Container( decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("Assets/screenHeader.png"),
+          fit: BoxFit.cover,
+        ),
+      ), child:
+      SafeArea(
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image(
@@ -31,7 +34,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ), //hh
             Text(
               "مرحبًا",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
+              style: TextStyle(fontSize: 50, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
             ),
             Container(
               height: 20,
@@ -118,6 +121,7 @@ class _FirstScreenState extends State<FirstScreen> {
           ]),
         ),
       ),
+      )
     );
   }
 }

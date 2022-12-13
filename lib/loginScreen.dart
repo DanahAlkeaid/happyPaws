@@ -18,18 +18,23 @@ class _loginScreenState extends State<loginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Image.asset('Assets/header2.png', fit: BoxFit.fill),
-          backgroundColor: Colors.white,
-        ),
-        body: SafeArea(
+
+        body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("Assets/screenHeader.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            child: SafeArea(
             child: Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "معلومات تسجيل الدخول",
-                        style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                       ),
                       Container(
                         height: 20,
@@ -43,12 +48,13 @@ class _loginScreenState extends State<loginScreen> {
                       ),
                       Text(
                         "رقم الهاتف",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
                       ),
                       Container(
                         child: TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: Colors.black)),
                             hintText: '+9665********',
                           ),
                         ),
@@ -60,35 +66,28 @@ class _loginScreenState extends State<loginScreen> {
                       ),
                       Text(
                         "كلمة المرور",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
                       ),
                       Container(
                         child: TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(color: Colors.black)),
                             hintText: '**********',
                           ),
                         ),
                       ), //password filed
+                      Container(
+                        height: 10,
+                      ),
                       Text(
                         "نسيت كلمة المرور؟",
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
                       ),
                       Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
-                      ), //forget password
-                      Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
+                        height: 55,
                       ),
-                      Container(
-                        height: 20,
-                        width: 200,
-                        color: Colors.white,
-                      ),
+
                       Container(
                         child: ElevatedButton(
                             onPressed: () {
@@ -98,7 +97,7 @@ class _loginScreenState extends State<loginScreen> {
                                       builder: (context) => loginScreen()));
                             },
                             child: Text("تسجيل الدخول",
-                                style: TextStyle(fontSize: 20, color: Colors.black)),
+                                style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: 'Tajawal')),
                             style: ButtonStyle(
                                 backgroundColor:
                                 MaterialStateProperty.all(Color(0xFFC2D961)))),
@@ -112,6 +111,6 @@ class _loginScreenState extends State<loginScreen> {
                               width: 5,
                             )),
                       ), //login container عدلي النافقيتر
-                    ]))));
+                    ])))));
   }
 }

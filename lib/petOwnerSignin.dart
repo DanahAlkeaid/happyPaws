@@ -13,6 +13,21 @@ class petOwnerSignin extends StatefulWidget {
 }
 
 class _petOwnerSignin extends State<petOwnerSignin> {
+  bool isEightChar = false;
+  bool hasUpperChar = false;
+  bool _isVisible = false;
+
+  onPasswordChanged(String password) {
+    final CharRange = RegExp(r'[A-Z]');
+    setState(() {
+      isEightChar = false;
+      if (password.length >= 8) isEightChar = true;
+
+      hasUpperChar = false;
+      if (CharRange.hasMatch(password)) hasUpperChar = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,14 +92,101 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                         "كلمة المرور",
                         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
                       ),
-                      Container(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '**********',
-                          ),
+                       Column (children: [
+                        Container(
+                          height: 20,
                         ),
-                      ), //password filed
+
+                        TextField(
+                          onChanged: (password) => onPasswordChanged(password),
+                          obscureText: !_isVisible,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = !_isVisible;
+                                });
+                              },
+                              icon: _isVisible
+                                  ? Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                              )
+                                  : Icon(
+                                Icons.visibility_off,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.black)),
+                            hintText: "***********",
+                            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                          ),
+                        ), //password field
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                  color: isEightChar ? Colors.green : Colors.transparent,
+                                  border: isEightChar
+                                      ? Border.all(color: Colors.transparent)
+                                      : Border.all(color: Colors.grey.shade400),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Center(
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("تحتوي على 8 حروف أو أرقام")
+                          ],
+                        ),  //has 8 characters
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                  color: hasUpperChar ? Colors.green : Colors.transparent,
+                                  border: hasUpperChar
+                                      ? Border.all(color: Colors.transparent)
+                                      : Border.all(color: Colors.grey.shade400),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Center(
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("تحتوي على حرف كبير واحد على الأقل")
+                          ],
+                        ), // has one upper case
+                      ],)//password filed
+                      ,
                       Container(
                         height: 20,
                         width: 200,
