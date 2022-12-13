@@ -14,7 +14,7 @@ class FirstScreen extends StatefulWidget {
   @override
   State<FirstScreen> createState() => _FirstScreenState();
 }
-
+//dalia
 class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _FirstScreenState extends State<FirstScreen> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image(
               image: AssetImage("Assets/logo1.png"),
-            ),
+            ), //hh
             Text(
               "مرحبًا",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
