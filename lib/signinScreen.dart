@@ -37,7 +37,7 @@ class _signinScreen extends State<signinScreen> {
                             Text(
                               "! أهلًا بك ",
                               style:
-                              TextStyle(fontSize: 50, fontWeight: FontWeight.w900),
+                              TextStyle(fontSize: 50, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                             ),
                             Container(
                               height: 20,
@@ -47,7 +47,7 @@ class _signinScreen extends State<signinScreen> {
                             Text(
                               "هل أنت؟",
                               style:
-                              TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+                              TextStyle(fontSize: 30, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                             ),
                             Container(
                               height: 20,
@@ -64,7 +64,7 @@ class _signinScreen extends State<signinScreen> {
                                   },
                                   child: Text("مُربي",
                                       style:
-                                      TextStyle(fontSize: 20, color: Colors.black)),
+                                      TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(
                                           Color(0xFFC2D961)))),
@@ -94,7 +94,7 @@ class _signinScreen extends State<signinScreen> {
                                   },
                                   child: Text("عيادة ",
                                       style:
-                                      TextStyle(fontSize: 20, color: Colors.black)),
+                                      TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(
                                           Color(0xFFC2D961)))),

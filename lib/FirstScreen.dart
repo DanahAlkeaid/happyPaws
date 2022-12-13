@@ -44,7 +44,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         MaterialPageRoute(builder: (context) => loginScreen()));
                   },
                   child: Text("تسجيل دخول",
-                      style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'fonts/Tajawal-Regular.ttf')),
+                      style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                   style: ButtonStyle(
                       backgroundColor:
                       MaterialStateProperty.all(Color(0xFFC2D961)))),
@@ -72,7 +72,7 @@ class _FirstScreenState extends State<FirstScreen> {
                             builder: (context) => signinScreen()));
                   },
                   child: Text("تسجيل جديد",
-                      style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'fonts/Tajawal-Regular.ttf')),
+                      style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
                   style: ButtonStyle(
                       backgroundColor:
                       MaterialStateProperty.all(Color(0xFFC2D961)))),

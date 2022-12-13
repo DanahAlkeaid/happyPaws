@@ -32,7 +32,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                     children: [
                       Text(
                         "تسجيل مُربي جديد",
-                        style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                       ),
                       Container(
                         height: 20,
@@ -41,7 +41,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ),
                       Text(
                         "الاسم",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
                       ),
                       Container(
                         child: TextField(
@@ -58,7 +58,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ),
                       Text(
                         "رقم الهاتف",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
                       ),
                       Container(
                         child: TextField(
@@ -75,7 +75,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                       ),
                       Text(
                         "كلمة المرور",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
                       ),
                       Container(
                         child: TextField(
@@ -104,7 +104,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                                       builder: (context) => loginScreen()));
                             },
                             child: Text("تسجيل المُربي",
-                                style: TextStyle(fontSize: 20, color: Colors.black)),
+                                style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                             style: ButtonStyle(
                                 backgroundColor:
                                 MaterialStateProperty.all(Color(0xFFC2D961)))),
