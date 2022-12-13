@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'clinicsign.dart';
+import 'petOwnerSignin.dart';
 import 'signinScreen.dart';
-import 'loginScreen.dart';
 import 'FirstScreen.dart';
 
 
-class clinicsign extends StatefulWidget {
-  const clinicsign({Key? key}) : super(key: key);
+class loginScreen extends StatefulWidget {
+  const loginScreen({Key? key}) : super(key: key);
 
   @override
-  State<clinicsign> createState() => _clinicsign();
+  State<loginScreen> createState() => _loginScreenState();
 }
 
-class _clinicsign extends State<clinicsign> {
-  bool checkedValue = false;
-  bool newValue = false;
-
-  bool checkedValue1 = false;
-  bool newValue1 = false;
-
+class _loginScreenState extends State<loginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +28,7 @@ class _clinicsign extends State<clinicsign> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "تسجيل عيادة جديدة",
+                        "معلومات تسجيل الدخول",
                         style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
                       ),
                       Container(
@@ -41,18 +36,6 @@ class _clinicsign extends State<clinicsign> {
                         width: 200,
                         color: Colors.white,
                       ),
-                      Text(
-                        "اسم العيادة",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
-                      ),
-                      Container(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: ' ',
-                          ),
-                        ),
-                      ), //name filed
                       Container(
                         height: 20,
                         width: 200,
@@ -88,48 +71,19 @@ class _clinicsign extends State<clinicsign> {
                         ),
                       ), //password filed
                       Text(
-                        "نوع العيادة",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
-                      ),
-                      CheckboxListTile(
-                        title: Text(" عيادة مركزية"),
-                        value: checkedValue,
-                        onChanged: (newValue) {
-                          setState(() {
-                            checkedValue = newValue!;
-                          });
-                        },
-                        controlAffinity:
-                        ListTileControlAffinity.leading, //  <-- leading Checkbox
-                      ),
-                      CheckboxListTile(
-                        title: Text(" عيادة متنقلة"),
-                        value: checkedValue1,
-                        onChanged: (newValue1) {
-                          setState(() {
-                            checkedValue1 = newValue1!;
-                          });
-                        },
-                        controlAffinity:
-                        ListTileControlAffinity.leading, //  <-- leading Checkbox
+                        "نسيت كلمة المرور؟",
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
                       ),
                       Container(
                         height: 20,
                         width: 200,
                         color: Colors.white,
-                      ),
-                      Text(
-                        "موقع العيادة",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
-                      ),
+                      ), //forget password
                       Container(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'الشارع، الحي',
-                          ),
-                        ),
-                      ), //location filed
+                        height: 20,
+                        width: 200,
+                        color: Colors.white,
+                      ),
                       Container(
                         height: 20,
                         width: 200,
@@ -143,7 +97,7 @@ class _clinicsign extends State<clinicsign> {
                                   MaterialPageRoute(
                                       builder: (context) => loginScreen()));
                             },
-                            child: Text("تسجيل العيادة",
+                            child: Text("تسجيل الدخول",
                                 style: TextStyle(fontSize: 20, color: Colors.black)),
                             style: ButtonStyle(
                                 backgroundColor:
@@ -157,7 +111,7 @@ class _clinicsign extends State<clinicsign> {
                               color: Color(0xFFC2D963),
                               width: 5,
                             )),
-                      ), //sign in container عدلي النافقيتر
+                      ), //login container عدلي النافقيتر
                     ]))));
   }
 }
