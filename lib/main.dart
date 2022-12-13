@@ -25,7 +25,7 @@ class _FirstScreenState extends State<FirstScreen> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image(
               image: AssetImage("Assets/logo1.png"),
-            ),
+            ), //hh
             Text(
               "مرحبًا",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
