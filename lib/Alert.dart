@@ -12,8 +12,15 @@ class _AlertState extends State<Alert> {
   Widget build(BuildContext) => Scaffold(
     appBar: AppBar(
       title: const Text('التنبيهات'),
-      backgroundColor: Colors.white,
-
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('Assets/App_Header.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+        ),
+        elevation: 0
     ),
   );
 }
