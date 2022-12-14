@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'ChangePass.dart';
 class MyAccount extends StatelessWidget{
   const MyAccount({Key? key}) : super(key: key);
   @override
@@ -102,7 +102,10 @@ class MyAccount extends StatelessWidget{
                 child: Row(mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ChangePass()));
+                      },
                       icon: const Icon(Icons.edit,color: Color(0xff194919),),
                     ),
                   ],
