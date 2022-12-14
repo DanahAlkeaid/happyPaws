@@ -12,8 +12,16 @@ class _InfoState extends State<Info> {
   Widget build(BuildContext) => Scaffold(
     appBar: AppBar(
       title: const Text('معلومات عامة'),
-      backgroundColor: Colors.white,
-
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('Assets/App_Header.png'),
+                  fit: BoxFit.fill
+              )
+          ),
+        ),
+        elevation: 0
+        
     ),
   );
 }

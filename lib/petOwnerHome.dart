@@ -26,7 +26,15 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   Widget build(BuildContext context) =>Scaffold(
 
       appBar: AppBar(
-        backgroundColor: Color(0xff194919),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('Assets/App_Header.png'),
+                    fit: BoxFit.fill
+                )
+            ),
+          ),
+          elevation: 0
       ),
       drawer: const NavigationDrawer(),
       body:SafeArea(
