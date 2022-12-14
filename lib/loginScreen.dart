@@ -25,84 +25,112 @@ class _loginScreenState extends State<loginScreen> {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('Assets/App_Header.png'),
-                      fit: BoxFit.fill
-                  )
-              ),
+                      fit: BoxFit.fill)),
             ),
-            elevation: 0
-        ),
+            elevation: 0),
         body: SingleChildScrollView(
           child: Container(
               child: SafeArea(
-              child: Center(
-                  child: Column(
+                  child: Container(
+                      child: Column(
+                       //   mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                Container(
+                  height: 50,
+                ),
+                Text(
+                  "معلومات تسجيل الدخول",
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'ElMessiri'),
+                ),
+                Container(
+                  height: 40,
+                ),
+
+                Text(
+                  "رقم الهاتف",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                  textAlign: TextAlign.left,
+                ),
+                Container(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Color(0xFFDDEABF),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      hintText: '+9665********',
+                    ),
+                  ),
+                ), //phone number filed
+                Container(
+                  height: 20,
+                ),
+                Text(
+                  "كلمة المرور",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                ),
+                Container(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Color(0xFFDDEABF),
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: BorderSide(color: Colors.black)),
+                      hintText: '**********',
+                    ),
+                  ),
+                ), //password filed
+                Container(
+                  height: 10,
+                ),
+
+                Container(
+                  child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(height: 50,),
-                        Text(
-                          "معلومات تسجيل الدخول",
-                          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
-                        ),
-                        Container(
-                          height: 40,
-
-                        ),
-
-                        Text(
-                          "رقم الهاتف",
-                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
-                        ),
-                        Container(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(color: Colors.black)),
-                              hintText: '+9665********',
-                            ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ForgetPassword()));
+                          },
+                          child: Text(
+                            'اضغط هنا ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Tajawal',
+                                color: Colors.blueAccent),
                           ),
-                        ), //phone number filed
-                        Container(
-                          height: 20,
-
                         ),
-                        Text(
-                          "كلمة المرور",
-                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
-                        ),
-                        Container(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(color: Colors.black)),
-                              hintText: '**********',
-                            ),
-                          ),
-                        ), //password filed
                         Container(
                           height: 10,
                         ),
-
-                       Container(child: Row(mainAxisAlignment: MainAxisAlignment.center, children:[
-                         GestureDetector(
-                           onTap: () {    Navigator.push(context,
-                               MaterialPageRoute(builder: (context) => ForgetPassword()));   },
-                           child: Text( 'اضغط هنا ', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900,fontFamily: 'Tajawal', color: Colors.blueAccent),),
-                         ),
-                  Container(height: 10,)
-                  ,
-                         Text(
-                           "نسيت كلمة المرور؟",
-                           style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
-                         ),
-
-
-
-                       ]),),
-
-
-                        Container(
-                          height: 55,
+                        Text(
+                          "نسيت كلمة المرور؟",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal'),
                         ),
+                      ]),
+                ),
+
+                Container(
+                  height: 55,
+                ),
 
                         Container(
                           child: ElevatedButton(
@@ -112,22 +140,23 @@ class _loginScreenState extends State<loginScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => petOwnerHome()));
                               },
-                              child: Text("تسجيل الدخول",
-                                  style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: 'Tajawal')),
                               style: ButtonStyle(
-                                  backgroundColor:
-                                  MaterialStateProperty.all(Color(0xFFC2D961)))),
-                          height: 50,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              color: Color(0xFFC2D961),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: Color(0xFFC2D963),
-                                width: 5,
-                              )),
+                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                      Color(0xFFC2D961)),
+                                  shape: MaterialStateProperty
+                                      .all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(100),
+                                          side: BorderSide(
+                                            color: Color(0xFF130160),
+                                          )))),
+                              child: Text("تسجيل الدخول",
+                                  style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: 'Tajawal', fontWeight: FontWeight.w700)),
+
+
+
                         ), //login container عدلي النافقيتر
-                      ])))),
+                        )])))),
         ));
   }
 }
