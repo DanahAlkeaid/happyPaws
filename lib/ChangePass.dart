@@ -94,18 +94,17 @@ class _ChangePass extends State<ChangePass> {
                     },
                     child: Text("حفظ التعديلات",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                    style: ButtonStyle(
-                        backgroundColor:
-                        MaterialStateProperty.all(Color(0xFFC2D961)))),
-                height: 50,
-                width: 200,
-                decoration: BoxDecoration(
-                    color: Color(0xFFC2D961),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Color(0xFFC2D963),
-                      width: 5,
-                    )),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(
+                                color: Color(0xFF130160),
+                              )))),
+                ),
               ),
 
             ],
