@@ -5,14 +5,14 @@ import 'petOwnerSignin.dart';
 import 'signinScreen.dart';
 import 'FirstScreen.dart';
 
-class forgetPassword extends StatefulWidget {
-  const forgetPassword({Key? key}) : super(key: key);
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({Key? key}) : super(key: key);
 
   @override
-  State<forgetPassword> createState() => _forgetPassword();
+  State<ForgetPassword> createState() => _ForgetPassword();
 }
 
-class _forgetPassword extends State<forgetPassword> {
+class _ForgetPassword extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

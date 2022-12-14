@@ -4,7 +4,7 @@ import 'clinicsign.dart';
 import 'petOwnerSignin.dart';
 import 'signinScreen.dart';
 import 'FirstScreen.dart';
-import 'forgetPassword.dart';
+import 'ForgetPassword.dart';
 
 
 class loginScreen extends StatefulWidget {
@@ -82,7 +82,7 @@ class _loginScreenState extends State<loginScreen> {
                      Container(child: Row(mainAxisAlignment: MainAxisAlignment.center, children:[
                        GestureDetector(
                          onTap: () {    Navigator.push(context,
-                             MaterialPageRoute(builder: (context) => forgetPassword()));   },
+                             MaterialPageRoute(builder: (context) => ForgetPassword()));   },
                          child: Text( 'اضغط هنا ', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900,fontFamily: 'Tajawal', color: Colors.blueAccent),),
                        ),
                 Container(height: 10,)
