@@ -32,8 +32,8 @@ class _FirstScreenState extends State<FirstScreen> {
       SafeArea(
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Image(
-              image: AssetImage("Assets/logo1.png"),
+            Image( width: 300,
+              image: AssetImage("Assets/HPlogo.png"),
             ), //hh
             Text(
               "مرحبًا",
