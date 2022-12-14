@@ -32,6 +32,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+
+  cloud_firestore: ^4.2.0
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -70,6 +73,7 @@ flutter:
     - Assets/bg.png
     - Assets/App_Header.png
     - Assets/App_Logo.png
+    - Assets/HPlogo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
