@@ -11,6 +11,7 @@ class MyAccount extends StatefulWidget{
 class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext) => Scaffold(
+    backgroundColor: Color(0xfffaf7f4),
     appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -48,20 +49,16 @@ class _MyAccountState extends State<MyAccount> {
                 "الأسم",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
               ),
-              Container(
-                child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                        onPressed: (){},
-                        icon: const Icon(Icons.edit,color: Color(0xff194919),),
-                    ),
-                  ],
 
-                ),
-              ),
               Container(
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFDDEABF),
+                    filled: true,
+                    prefixIcon: IconButton(
+                    icon: Icon(Icons.edit,color: Color(0xff194919),),
+                      onPressed: () {  },
+                    ),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(color: Colors.black)),
                   ),
@@ -76,20 +73,16 @@ class _MyAccountState extends State<MyAccount> {
                 "رقم الهاتف",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
               ),
-              Container(
-                child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: (){},
-                      icon: const Icon(Icons.edit,color: Color(0xff194919),),
-                    ),
-                  ],
 
-                ),
-              ),
               Container(
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFDDEABF),
+                    filled: true,
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.edit,color: Color(0xff194919),),
+                      onPressed: () {  },
+                    ),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(color: Colors.black)),
                     hintText: '+9665********',
@@ -105,22 +98,18 @@ class _MyAccountState extends State<MyAccount> {
                 "كلمة المرور",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
               ),
-              Container(
-                child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePass()));
-                      },
-                      icon: const Icon(Icons.edit,color: Color(0xff194919),),
-                    ),
-                  ],
 
-                ),
-              ),
               Container(
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFDDEABF),
+                    filled: true,
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.edit,color: Color(0xff194919),),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePass()));
+                        },
+                    ),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(color: Colors.black)),
                     hintText: '**********',

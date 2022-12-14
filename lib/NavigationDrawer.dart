@@ -17,6 +17,7 @@ class NavigationDrawer extends StatefulWidget{
 class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   Widget build(BuildContext context) => Drawer(
+      backgroundColor: Color(0xfffaf7f4),
       child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -29,7 +30,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   );
 
   Widget buildHeader(BuildContext context) => Container(
-    color: Colors.white70,
+    color: Color(0xfffaf7f4),
     padding: EdgeInsets.only(
       top: MediaQuery.of(context).padding.top,
     ),

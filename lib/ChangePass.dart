@@ -10,6 +10,7 @@ class ChangePass extends StatefulWidget{
 class _ChangePass extends State<ChangePass> {
   @override
   Widget build(BuildContext) => Scaffold(
+    backgroundColor: Color(0xfffaf7f4),
     appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -33,7 +34,7 @@ class _ChangePass extends State<ChangePass> {
               ),
 
               Container(
-                height: 40,
+                height: 60,
               ),
 
               Text(
@@ -42,8 +43,14 @@ class _ChangePass extends State<ChangePass> {
               ),
 
               Container(
+                height: 30,
+              ),
+
+              Container(
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFDDEABF),
+                    filled: true,
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(color: Colors.black)),
                     hintText: '**********',
@@ -61,8 +68,14 @@ class _ChangePass extends State<ChangePass> {
               ),
 
               Container(
+                height: 30,
+              ),
+
+              Container(
                 child: TextField(
                   decoration: InputDecoration(
+                    fillColor: Color(0xFFDDEABF),
+                    filled: true,
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(color: Colors.black)),
                     hintText: '**********',

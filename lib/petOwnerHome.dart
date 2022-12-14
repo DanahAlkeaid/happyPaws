@@ -24,15 +24,16 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) =>Scaffold(
-
+      backgroundColor: Color(0xfffaf7f4),
       appBar: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('Assets/App_Header.png'),
                     fit: BoxFit.fill
-                )
+                ),
             ),
+
 
           ),
           elevation: 0
