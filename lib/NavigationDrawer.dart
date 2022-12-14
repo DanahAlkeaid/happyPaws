@@ -1,8 +1,10 @@
+import 'package:untitled/FirstScreen.dart';
+
 import 'petOwnerHome.dart';
 import 'MyAccount.dart';
 import 'Alert.dart';
 import 'Info.dart';
-import 'LogOut.dart';
+import 'FirstScreen.dart';
 import 'package:flutter/material.dart';
 class NavigationDrawer extends StatefulWidget{
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -82,7 +84,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             leading: const Icon(Icons.logout,color: Color(0xff194919),size: 30,),
             title: const Text('تسجيل خروج',style: TextStyle(fontSize: 20,color: Color(0xff194919)),),
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const LogOut(),
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const FirstScreen(),
               ));
             },
           ),
