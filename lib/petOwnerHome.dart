@@ -33,6 +33,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                     fit: BoxFit.fill
                 )
             ),
+
           ),
           elevation: 0
       ),
@@ -44,13 +45,13 @@ class _petOwnerHomeState extends State<petOwnerHome> {
             children: [
               AnimSearchBar(width: 400,
                 textController: textController,
-                color: Color(0xff194919),
+                color: Color(0xFFC2D961),
                 onSuffixTap: () {
                   setState(() {
                     textController.clear();
                   });
                 },
-                helpText: "Search Here....",
+                helpText: "ابحث هنا.....",
                 closeSearchOnSuffixTap: true,
 
               ),

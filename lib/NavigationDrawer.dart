@@ -28,7 +28,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   );
 
   Widget buildHeader(BuildContext context) => Container(
-    color: Color(0xff194919),
+    color: Colors.white70,
     padding: EdgeInsets.only(
       top: MediaQuery.of(context).padding.top,
     ),
@@ -42,7 +42,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         SizedBox(height: 10),
         Text(
           "ساره",
-          style: TextStyle(fontSize: 20,color: Colors.white),
+          style: TextStyle(fontSize: 20,color: Colors.black),
         )
       ],
     ),
