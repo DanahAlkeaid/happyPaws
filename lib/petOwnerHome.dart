@@ -10,7 +10,7 @@ import 'gpi_page.dart';
 import 'Alert.dart';
 import 'MyAccount.dart';
 import 'loginScreen.dart';
-
+import 'petAppointment.dart';
 
 class petOwnerHome extends StatefulWidget {
   const petOwnerHome({Key? key}) : super(key: key);
@@ -26,6 +26,17 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   Widget build(BuildContext context) =>Scaffold(
       backgroundColor: Color(0xfffaf7f4),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.calendar_month,
+              color: Color(0xff194919),
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => petAppointment()));
+            },
+          )
+        ],
           flexibleSpace: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -33,8 +44,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                     fit: BoxFit.fill
                 ),
             ),
-
-
           ),
           elevation: 0
       ),
@@ -59,6 +68,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
               Container(),
             ],
           ),
+
         ),
       ));
 

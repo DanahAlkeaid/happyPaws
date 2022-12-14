@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
-class Alert extends StatefulWidget{
-  const Alert({Key? key}) : super(key: key);
+import 'petOwnerHome.dart';
+class petAppointment extends StatefulWidget{
+  const petAppointment({Key? key}) : super(key: key);
 
   @override
-  State<Alert> createState() => _AlertState();
+  State<petAppointment> createState() => _petAppointment();
 }
 
-class _AlertState extends State<Alert> {
+class _petAppointment extends State<petAppointment> {
   @override
   Widget build(BuildContext) => Scaffold(
     backgroundColor: Color(0xfffaf7f4),
@@ -28,7 +28,7 @@ class _AlertState extends State<Alert> {
           child: Column(
             children: [
               Text(
-                'التنبيهات',
+                'المواعيد',
                 style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Color(0xff194919),fontFamily: 'ElMessiri'),
               )
             ],

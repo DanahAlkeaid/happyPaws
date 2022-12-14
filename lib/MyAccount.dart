@@ -34,6 +34,10 @@ class _MyAccountState extends State<MyAccount> {
               ),
 
               Container(
+                height: 20,
+              ),
+
+              Container(
                 child: CircleAvatar(
                   radius: 50,
                   child: Image(image: AssetImage('Assets/profile-icon.png'),
@@ -127,10 +131,12 @@ class _MyAccountState extends State<MyAccount> {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>petOwnerHome()));
                     },
                     child: Text("حفظ التعديلات",
-                        style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                        style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')
+                    ),
                     style: ButtonStyle(
                         backgroundColor:
-                        MaterialStateProperty.all(Color(0xFFC2D961)))),
+                        MaterialStateProperty.all(Color(0xFFC2D961)))
+                ),
                 height: 50,
                 width: 200,
                 decoration: BoxDecoration(
