@@ -36,7 +36,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       children: const [
         CircleAvatar(
           radius: 50,
-          backgroundColor: Colors.white70,
+          child: Image(image: AssetImage('Assets/profile-icon.png'),
+          ),
         ),
         SizedBox(height: 10),
         Text(
