@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/petOwnerHome.dart';
 import 'main.dart';
 import 'clinicsign.dart';
 import 'petOwnerSignin.dart';
 import 'signinScreen.dart';
 import 'FirstScreen.dart';
 import 'ForgetPassword.dart';
-
+import 'petOwnerHome.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
@@ -107,7 +108,7 @@ class _loginScreenState extends State<loginScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => loginScreen()));
+                                      builder: (context) => petOwnerHome()));
                             },
                             child: Text("تسجيل الدخول",
                                 style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: 'Tajawal')),
