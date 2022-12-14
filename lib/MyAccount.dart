@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'ChangePass.dart';
-class MyAccount extends StatelessWidget{
+class MyAccount extends StatefulWidget{
   const MyAccount({Key? key}) : super(key: key);
+
+  @override
+  State<MyAccount> createState() => _MyAccountState();
+}
+
+class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext) => Scaffold(
     appBar: AppBar(
@@ -103,8 +109,7 @@ class MyAccount extends StatelessWidget{
                   children: [
                     IconButton(
                       onPressed: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ChangePass()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePass()));
                       },
                       icon: const Icon(Icons.edit,color: Color(0xff194919),),
                     ),
@@ -152,7 +157,7 @@ class MyAccount extends StatelessWidget{
               Container(
                 child: ElevatedButton(
                     onPressed: () {},
-                    child: Text("حذف التعديلات",
+                    child: Text("حذف الحساب",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                     style: ButtonStyle(
                         backgroundColor:

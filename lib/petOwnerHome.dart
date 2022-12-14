@@ -6,7 +6,7 @@ import 'petOwnerSignin.dart';
 import 'signinScreen.dart';
 import 'FirstScreen.dart';
 import 'NavigationDrawer.dart';
-import 'Info.dart';
+import 'gpi_page.dart';
 import 'Alert.dart';
 import 'MyAccount.dart';
 import 'loginScreen.dart';
