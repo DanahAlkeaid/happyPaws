@@ -42,7 +42,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         SizedBox(height: 10),
         Text(
           "ساره",
-          style: TextStyle(fontSize: 20,color: Colors.black),
+          style: TextStyle(fontSize: 20,color: Colors.black,fontFamily: 'Tajawal'),
         )
       ],
     ),
@@ -55,7 +55,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         children: [
           ListTile(
             leading: const Icon(Icons.account_circle,color: Color(0xff194919),size: 30,),
-            title: const Text('حسابي',style: TextStyle(fontSize: 20,color: Color(0xff194919)),),
+            title: const Text('حسابي',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             onTap: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const MyAccount(),
               ));
@@ -64,7 +64,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           const Divider(color: Colors.black54,),
           ListTile(
             leading: const Icon(Icons.notifications_active,color: Color(0xff194919),size: 30,),
-            title: const Text('تنبيهات',style: TextStyle(fontSize: 20,color: Color(0xff194919)),),
+            title: const Text('تنبيهات',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             onTap: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const Alert(),
               ));
@@ -73,7 +73,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           const Divider(color: Colors.black54,),
           ListTile(
             leading: const Icon(Icons.medical_information,color: Color(0xff194919),size: 30,),
-            title: const Text('معلومات عامة',style: TextStyle(fontSize: 20,color: Color(0xff194919)),),
+            title: const Text('معلومات عامة',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             onTap: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const Info(),
               ));
@@ -82,21 +82,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           const Divider(color: Colors.black54,),
           ListTile(
             leading: const Icon(Icons.logout,color: Color(0xff194919),size: 30,),
-            title: const Text('تسجيل خروج',style: TextStyle(fontSize: 20,color: Color(0xff194919)),),
+            title: const Text('تسجيل خروج',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             onTap: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const FirstScreen(),
               ));
             },
           ),
           const Divider(color: Colors.black54,),
-          Text('تواصل معنا',style: TextStyle(fontSize: 20,color: Color(0xff194919)),),
+          Text('تواصل معنا',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
           ListTile(
-            title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 18,color: Color(0xff194919)),),
+            title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(Icons.telegram,color: Color(0xff194919),size: 30,),
             onTap: (){},
           ),
           ListTile(
-            title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 18,color: Color(0xff194919)),),
+            title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
             onTap: (){},
           )

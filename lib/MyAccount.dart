@@ -22,7 +22,7 @@ class MyAccount extends StatelessWidget{
             children: [
               Text(
                 'حسابي',
-                style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Color(0xff194919)),
+                style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Color(0xff194919),fontFamily: 'ElMessiri'),
               ),
 
               Container(
@@ -42,6 +42,17 @@ class MyAccount extends StatelessWidget{
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
               ),
               Container(
+                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: (){},
+                        icon: const Icon(Icons.edit,color: Color(0xff194919),),
+                    ),
+                  ],
+
+                ),
+              ),
+              Container(
                 child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
@@ -57,6 +68,17 @@ class MyAccount extends StatelessWidget{
               Text(
                 "رقم الهاتف",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
+              ),
+              Container(
+                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: (){},
+                      icon: const Icon(Icons.edit,color: Color(0xff194919),),
+                    ),
+                  ],
+
+                ),
               ),
               Container(
                 child: TextField(
@@ -75,6 +97,17 @@ class MyAccount extends StatelessWidget{
               Text(
                 "كلمة المرور",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
+              ),
+              Container(
+                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: (){},
+                      icon: const Icon(Icons.edit,color: Color(0xff194919),),
+                    ),
+                  ],
+
+                ),
               ),
               Container(
                 child: TextField(
