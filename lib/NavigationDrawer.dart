@@ -1,4 +1,5 @@
 import 'package:untitled/FirstScreen.dart';
+import 'package:untitled/gpi_page.dart';
 
 import 'petOwnerHome.dart';
 import 'MyAccount.dart';
@@ -75,7 +76,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             leading: const Icon(Icons.medical_information,color: Color(0xff194919),size: 30,),
             title: const Text('معلومات عامة',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const Info(),
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const gpi_page(),
               ));
             },
           ),

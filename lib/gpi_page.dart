@@ -28,9 +28,7 @@ class _gpi_pageState extends State<gpi_page> {
 
         body: Column(children: [
           Row(children: const [
-            // BackButton
-
-            //Heading
+            Text('TEST')
 
 
           ],)
