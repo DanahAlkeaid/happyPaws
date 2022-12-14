@@ -4,9 +4,14 @@ import 'Alert.dart';
 import 'Info.dart';
 import 'LogOut.dart';
 import 'package:flutter/material.dart';
-class NavigationDrawer extends StatelessWidget{
+class NavigationDrawer extends StatefulWidget{
   const NavigationDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<NavigationDrawer> createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   Widget build(BuildContext context) => Drawer(
       child: SingleChildScrollView(
@@ -19,6 +24,7 @@ class NavigationDrawer extends StatelessWidget{
           )
       )
   );
+
   Widget buildHeader(BuildContext context) => Container(
     color: Color(0xff194919),
     padding: EdgeInsets.only(
@@ -39,6 +45,7 @@ class NavigationDrawer extends StatelessWidget{
       ],
     ),
   );
+
   Widget buildMenuItems(BuildContext context) => Container(
       padding: const EdgeInsets.all(24),
       child: Wrap(
