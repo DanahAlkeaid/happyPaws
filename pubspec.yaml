@@ -75,6 +75,7 @@ flutter:
     - Assets/dog_icon.png
     - Assets/paw_icon.png
     - Assets/Pet_House.png
+    - Assets/profile-icon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
