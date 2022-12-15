@@ -71,6 +71,11 @@ flutter:
     - Assets/App_Header.png
     - Assets/App_Logo.png
     - Assets/HPlogo.png
+    - Assets/cat_icon.png
+    - Assets/dog_icon.png
+    - Assets/paw_icon.png
+    - Assets/Pet_House.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

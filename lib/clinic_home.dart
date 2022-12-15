@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'gpi_page.dart';
 
-
 class clinic_home extends StatefulWidget {
   const clinic_home ({Key? key}) : super (key: key);
 
@@ -17,59 +16,70 @@ class _clinic_homeState extends State<clinic_home> {
         backgroundColor: Color(0xfffaf7f4),
 
         appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('Assets/App_Header.png'),
-                    fit: BoxFit.fill
-                )
-            ),
+            leading: IconButton(
+              icon: (Icon(Icons.arrow_back_ios)),
+              color: Color(0xff034d23),
+              iconSize: 36,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => gpi_page()));
+              },
+            )
+            ,flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('Assets/App_Header.png'),
+                  fit: BoxFit.fill
+              )
           ),
+        ),
             elevation: 0
         ),
 
-        
+
         body:
         SafeArea(
           child: Column(children: [
 
             // App Logo
             Container(
-              child: const Image(alignment: Alignment.center
-                  ,fit: BoxFit.contain
-                  ,image: AssetImage("assets/App_Logo.png"
-                ),
-                  width: 100
-            )
+                child: const Image(alignment: Alignment.center
+                    ,fit: BoxFit.contain
+                    ,image: AssetImage("Assets/App_Logo.png"
+                    ),
+                    width: 100
+                )
             )
 
             //Greetings
             ,Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: const [
-              //Heading
-              Text("! مرحبًا  "
-                  ,style:TextStyle(
-                    fontFamily: "Elmessiri",
-                    fontSize: 46,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  )
-              )
-            ],),
+                //Heading
+                Text("! مرحبًا  "
+                    ,style:TextStyle(
+                      fontFamily: "Elmessiri",
+                      fontSize: 46,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    )
+                )
+              ],),
 
             //ClinicName
             Container(child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-              Text("  عيادة" //Get Clinic Name From DB
-                  ,style:TextStyle(
-                    fontFamily: "Almarai",
-                    fontSize: 30,
-                    color: Color(0xff034D23),
-                  )
-              )
-            ],))
+                Text("  عيادة" //Get Clinic Name From DB
+                    ,style:TextStyle(
+                      fontFamily: "Almarai",
+                      fontSize: 30,
+                      color: Color(0xff034D23),
+                    )
+                )
+              ],))
             ,const SizedBox(height: 10)
 
             //Menu Headings
