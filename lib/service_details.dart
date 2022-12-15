@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'gpi_page.dart';
+import 'clinic_services.dart';
 
 class service_details extends StatefulWidget {
   const service_details ({Key? key}) : super (key: key);
@@ -27,7 +27,7 @@ class _service_detailsState extends State<service_details> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const gpi_page()));
+                        builder: (context) => const clinic_services()));
               },
             )
             ,flexibleSpace: Container(

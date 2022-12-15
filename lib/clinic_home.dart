@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'gpi_page.dart';
+
+import 'Alert.dart';
+import 'FirstScreen.dart';
+import 'MyAccount.dart';
+import 'clinic_appointments.dart';
+import 'clinic_services.dart';
 
 class clinic_home extends StatefulWidget {
   const clinic_home ({Key? key}) : super (key: key);
@@ -16,28 +21,16 @@ class _clinic_homeState extends State<clinic_home> {
         backgroundColor: Color(0xfffaf7f4),
 
         appBar: AppBar(
-            leading: IconButton(
-              icon: (Icon(Icons.arrow_back_ios)),
-              color: Color(0xff034d23),
-              iconSize: 36,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => gpi_page()));
-              },
-            )
-            ,flexibleSpace: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('Assets/App_Header.png'),
-                  fit: BoxFit.fill
-              )
-          ),
-        ),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('Assets/App_Header.png'),
+                      fit: BoxFit.fill
+                  )
+              ),
+            ),
             elevation: 0
         ),
-
 
         body:
         SafeArea(
@@ -98,7 +91,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => gpi_page()));
+                            builder: (context) => clinic_services()));
                   },
                   style: ButtonStyle(
                       backgroundColor:
@@ -124,7 +117,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => gpi_page()));
+                            builder: (context) => clinic_appointments()));
                   },
                   style: ButtonStyle(
                       backgroundColor:
@@ -150,7 +143,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => gpi_page()));
+                            builder: (context) => Alert()));
                   },
                   style: ButtonStyle(
                       backgroundColor:
@@ -176,7 +169,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => gpi_page()));
+                            builder: (context) => MyAccount()));
                   },
                   style: ButtonStyle(
                       backgroundColor:
@@ -202,7 +195,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => gpi_page()));
+                            builder: (context) => FirstScreen()));
                   },
                   style: ButtonStyle(
                       backgroundColor:
@@ -228,7 +221,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => gpi_page()));
+                            builder: (context) => FirstScreen()));
                   },
                   style: ButtonStyle(
                       backgroundColor:

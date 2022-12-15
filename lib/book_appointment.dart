@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'gpi_page.dart';
+import 'petOwnerHome.dart';
+
 
 class book_appointments extends StatefulWidget {
   const book_appointments ({Key? key}) : super (key: key);
@@ -25,7 +26,7 @@ class _book_appointmentssState extends State<book_appointments> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const gpi_page()));
+                      builder: (context) => const petOwnerHome()));
             },
        )
           ,flexibleSpace: Container(

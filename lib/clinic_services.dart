@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'gpi_page.dart';
+import 'clinic_home.dart';
 
 class clinic_services extends StatefulWidget {
   const clinic_services ({Key? key}) : super (key: key);
@@ -24,7 +24,7 @@ class _clinic_servicesState extends State<clinic_services> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const gpi_page()));
+                        builder: (context) => const clinic_home()));
               },
             )
             ,flexibleSpace: Container(

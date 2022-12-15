@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'petOwnerHome.dart';
 
 class gpi_page extends StatefulWidget {
   const gpi_page ({Key? key}) : super (key: key);
@@ -23,7 +24,7 @@ class _gpi_pageState extends State<gpi_page> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => gpi_page()));
+                        builder: (context) => petOwnerHome()));
               },
             )
             ,flexibleSpace: Container(
