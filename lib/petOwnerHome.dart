@@ -26,6 +26,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   Widget build(BuildContext context) =>Scaffold(
       backgroundColor: Color(0xfffaf7f4),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Color(0xff194919),size: 30),
         actions: [
           IconButton(
             icon: Icon(Icons.calendar_month,
@@ -53,22 +54,58 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         Container(
           child: Column(
             children: [
-              AnimSearchBar(width: 400,
-                textController: textController,
-                color: Color(0xFFC2D961),
-                onSuffixTap: () {
-                  setState(() {
-                    textController.clear();
-                  });
-                },
-                helpText: "ابحث هنا.....",
-                closeSearchOnSuffixTap: true,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AnimSearchBar(width: 335,
+                    textController: textController,
+                    color: Color(0xFFC2D961),
+                    onSuffixTap: () {
+                      setState(() {
+                        textController.clear();
+                      });
+                    },
+                    helpText: "ابحث هنا.....",
+                    closeSearchOnSuffixTap: true,
+                  ),
+                  IconButton(icon: Icon(
+                    Icons.tune,
+                    color: Color(0xff194919),
+                    size: 30,),
+                    onPressed: () {},
+                  ),
+                ],
               ),
+             Column(
+               children: [
+                 ListTile(
+                   leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
+                   onTap: (){},
+                 ),
+                 Container(height: 20,),
+                 const Divider(color: Colors.black54,),
+                 ListTile(
+                   leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
+                   onTap: (){},
+                 ),
+                 Container(height: 20,),
+                 const Divider(color: Colors.black54,),
+                 ListTile(
+                   leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
+                   onTap: (){},
+                 ),
+                 Container(height: 20,),
+                 const Divider(color: Colors.black54,),
+                 ListTile(
+                   leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
+                   onTap: (){},
+                 ),
+               ],
+             ),
+
             ],
-
           ),
-
-
+          
         ),
       ));
 
