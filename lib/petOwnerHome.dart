@@ -63,11 +63,11 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                 },
                 helpText: "ابحث هنا.....",
                 closeSearchOnSuffixTap: true,
-
               ),
-              Container(),
             ],
+
           ),
+
 
         ),
       ));
