@@ -106,7 +106,7 @@ class _clinicsign extends State<clinicsign> {
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: Colors.black)),
 
-                          hintText: '+9665********',
+                          hintText: '9665********',
                         ),
                       ),
                     ), //phone number filed

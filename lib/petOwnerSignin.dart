@@ -82,7 +82,7 @@ class _petOwnerSignin extends State<petOwnerSignin> {
                         child: TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: '+9665********',
+                            hintText: '9665********',
                           ),
                         ),
                       ), //phone number filed

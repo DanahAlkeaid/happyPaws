@@ -65,7 +65,7 @@ class _loginScreenState extends State<loginScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      hintText: '+9665********',
+                      hintText: '9665********',
                     ),
                   ),
                 ), //phone number filed
