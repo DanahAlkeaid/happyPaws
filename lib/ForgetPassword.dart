@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'clinicsign.dart';
-import 'petOwnerSignin.dart';
-import 'signinScreen.dart';
+import 'petOwnerSignup.dart';
+import 'signupScreen.dart';
 import 'FirstScreen.dart';
 
 class ForgetPassword extends StatefulWidget {

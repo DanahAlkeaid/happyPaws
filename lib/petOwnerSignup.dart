@@ -5,13 +5,13 @@ import 'package:untitled/loginScreen.dart';
 
 import 'main.dart';
 import 'clinicsign.dart';
-import 'petOwnerSignin.dart';
-class petOwnerSignin extends StatefulWidget {
+
+class petOwnerSignup extends StatefulWidget {
   @override
-  _petOwnerSignin createState() => _petOwnerSignin();
+  _petOwnerSignup createState() => _petOwnerSignup();
 }
 
-class _petOwnerSignin extends State<petOwnerSignin> {
+class _petOwnerSignup extends State<petOwnerSignup> {
   //or final insted of TEC
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstnameController = TextEditingController();

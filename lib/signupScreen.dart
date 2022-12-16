@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'clinicsign.dart';
-import 'petOwnerSignin.dart';
+import 'petOwnerSignup.dart';
 
-class signinScreen extends StatefulWidget {
-  const signinScreen({Key? key}) : super(key: key);
+class signupScreen extends StatefulWidget {
+  const signupScreen({Key? key}) : super(key: key);
 
   @override
-  State<signinScreen> createState() => _signinScreen();
+  State<signupScreen> createState() => _signupScreen();
 }
 
-class _signinScreen extends State<signinScreen> {
+class _signupScreen extends State<signupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +68,7 @@ class _signinScreen extends State<signinScreen> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => petOwnerSignin()));
+                                            builder: (context) => petOwnerSignup()));
                                   },
                                   child: Text("مُربي",
                                       style:

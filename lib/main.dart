@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'clinicsign.dart';
-import 'petOwnerSignin.dart';
-import 'signinScreen.dart';
+import 'petOwnerSignup.dart';
+import 'signupScreen.dart';
 import 'FirstScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 

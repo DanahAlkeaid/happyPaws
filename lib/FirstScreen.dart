@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
-import 'signinScreen.dart';
+import 'signupScreen.dart';
 import 'loginScreen.dart';
 import 'testScreen.dart';
-import 'petOwnerSignin.dart';
+import 'petOwnerSignup.dart';
 
 
 class FirstScreen extends StatefulWidget {
@@ -86,7 +86,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => signinScreen()));
+                            builder: (context) => signupScreen()));
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -122,7 +122,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => petOwnerSignin()));
+                            builder: (context) => testScreen()));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),

@@ -5,7 +5,7 @@ import 'package:untitled/loginScreen.dart';
 
 import 'main.dart';
 import 'clinicsign.dart';
-import 'petOwnerSignin.dart';
+import 'petOwnerSignup.dart';
 class testScreen extends StatefulWidget {
   @override
   _testScreen createState() => _testScreen();
