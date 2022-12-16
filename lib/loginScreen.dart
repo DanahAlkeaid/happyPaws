@@ -33,7 +33,7 @@ class _loginScreenState extends State<loginScreen> {
               child: SafeArea(
                   child: Container(
                       child: Column(
-                       //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                 Container(
                   height: 50,
@@ -132,31 +132,38 @@ class _loginScreenState extends State<loginScreen> {
                   height: 55,
                 ),
 
-                        Container(
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => petOwnerHome()));
-                              },
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Color(0xFFC2D961)),
-                                  shape: MaterialStateProperty
-                                      .all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(100),
-                                          side: BorderSide(
-                                            color: Color(0xFF130160),
-                                          )))),
-                              child: Text("تسجيل الدخول",
-                                  style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: 'Tajawal', fontWeight: FontWeight.w700)),
-
-
-
-                        ), //login container عدلي النافقيتر
-                        )])))),
-        ));
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => petOwnerHome()));
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xFFC2D961)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    side: BorderSide(
+                                      color: Color(0xFF130160),
+                                    )))),
+                    child: Text("تسجيل الدخول",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Tajawal',
+                            fontWeight: FontWeight.w700)),
+                  ), //login container عدلي النافقيتر
+                )
+              ]
+                      )
+                  )
+              )
+          ),
+        )
+    );
   }
 }

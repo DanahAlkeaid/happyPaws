@@ -3,6 +3,7 @@ import 'main.dart';
 import 'signinScreen.dart';
 import 'loginScreen.dart';
 import 'testScreen.dart';
+import 'petOwnerSignin.dart';
 
 
 class FirstScreen extends StatefulWidget {
@@ -46,29 +47,40 @@ class _FirstScreenState extends State<FirstScreen> {
             Container(
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => loginScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => loginScreen()));
                   },
-                  child: Text("تسجيل دخول",
-                      style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFC2D961)))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
+                  child: Text(
+                    'تسجيل دخول',
+                    style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                  )),
               height: 50,
               width: 200,
-              decoration: BoxDecoration(
+             /* decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     color: Color(0xFFC2D963),
                     width: 5,
-                  )),
+                  )),*/
             ), //login container
             Container(
               height: 20,
 
             ),
-            Container(
+               Container(
               child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -76,20 +88,29 @@ class _FirstScreenState extends State<FirstScreen> {
                         MaterialPageRoute(
                             builder: (context) => signinScreen()));
                   },
-                  child: Text("تسجيل جديد",
-                      style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFC2D961)))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
+                  child: Text(
+                    'تسجيل جديد',
+                    style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                  )),
               height: 50,
               width: 200,
-              decoration: BoxDecoration(
+              /*decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     color: Color(0xFFC2D963),
                     width: 5,
-                  )),
+                  )),*/
             ), //sign in container
             Container(
               height: 30,
@@ -101,7 +122,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => testScreen()));
+                            builder: (context) => petOwnerSignin()));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),

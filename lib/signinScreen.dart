@@ -26,13 +26,15 @@ class _signinScreen extends State<signinScreen> {
             ),
             elevation: 0
         ),
-        body: Container(
-            decoration: BoxDecoration(
+        body:
+        Container(
+           /* decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("Assets/bg.png"),
                 fit: BoxFit.cover,
               ),
-            ),
+            ),*/
+
             child: SafeArea(
                 child: Column(children: [
 
