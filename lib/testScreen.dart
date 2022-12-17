@@ -75,7 +75,7 @@ class _testScreen extends State<testScreen> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "تسجيل مُربي جديد",
+                      "تسجيل عيادة جديد",
                       style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                     ),
                     SizedBox(
@@ -95,7 +95,7 @@ class _testScreen extends State<testScreen> {
 
                         Align( alignment : Alignment.centerRight ,
                           child: Text(
-                            "الاسم",
+                            "اسم العيادة",
                             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
                           ),
                         ),

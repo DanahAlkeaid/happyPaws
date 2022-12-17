@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
+import 'package:untitled/petOwnerHome.dart';
 
 import 'main.dart';
 import 'clinicsign.dart';
@@ -27,6 +28,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
     _passwordController.dispose();
     super.dispose();
   }
+
   bool isEightChar = false;
   bool hasUpperChar = false;
   bool _isVisible = false;
@@ -42,9 +44,6 @@ class _petOwnerSignup extends State<petOwnerSignup> {
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     // ignore: unnecessary_new
@@ -56,12 +55,9 @@ class _petOwnerSignup extends State<petOwnerSignup> {
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('Assets/App_Header.png'),
-                    fit: BoxFit.fill
-                )
-            ),
+                    fit: BoxFit.fill)),
           ),
-          elevation: 0
-      ),
+          elevation: 0),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -76,7 +72,10 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                   children: <Widget>[
                     Text(
                       "تسجيل مُربي جديد",
-                      style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
+                      style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'ElMessiri'),
                     ),
                     SizedBox(
                       height: 12,
@@ -87,19 +86,19 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                   children: <Widget>[
                     //NAME
 
-
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-
-                        Align( alignment : Alignment.centerRight ,
+                        Align(
+                          alignment: Alignment.centerRight,
                           child: Text(
                             "الاسم",
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Tajawal'),
                           ),
                         ),
-
                         SizedBox(
                           height: 5,
                         ),
@@ -115,7 +114,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                               ]),
                           child: TextFormField(
                             autovalidateMode:
-                            AutovalidateMode.onUserInteraction,
+                                AutovalidateMode.onUserInteraction,
                             controller: _firstnameController,
                             validator: validateFirstname,
                             decoration: InputDecoration(
@@ -123,11 +122,11 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
-                                    BorderSide(color: Colors.white)),
+                                        BorderSide(color: Colors.white)),
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
-                                    BorderSide(color: Colors.white)),
+                                        BorderSide(color: Colors.white)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15))),
                           ),
@@ -142,10 +141,14 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Align( alignment : Alignment.centerRight ,
+                        Align(
+                          alignment: Alignment.centerRight,
                           child: Text(
                             "البريد الإلكتروني",
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Tajawal'),
                           ),
                         ),
                         SizedBox(
@@ -163,7 +166,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                               ]),
                           child: TextFormField(
                             autovalidateMode:
-                            AutovalidateMode.onUserInteraction,
+                                AutovalidateMode.onUserInteraction,
                             controller: _emailController,
                             validator: validationEmail,
                             decoration: InputDecoration(
@@ -171,11 +174,11 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
-                                    BorderSide(color: Colors.white)),
+                                        BorderSide(color: Colors.white)),
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
-                                    BorderSide(color: Colors.white)),
+                                        BorderSide(color: Colors.white)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15))),
                           ),
@@ -184,7 +187,8 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                           height: 10,
                         ),
                         Center(
-                          child: Text(errorMessage,
+                          child: Text(
+                            errorMessage,
                           ),
                         )
                       ],
@@ -193,13 +197,16 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Align( alignment : Alignment.centerRight ,
+                        Align(
+                          alignment: Alignment.centerRight,
                           child: Text(
                             "رقم الهاتف",
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Tajawal'),
                           ),
                         ),
-
                         SizedBox(
                           height: 5,
                         ),
@@ -215,11 +222,9 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                               ]),
                           child: new TextFormField(
                             maxLength: 12,
-
                             autovalidateMode:
-                            AutovalidateMode.onUserInteraction,
+                                AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.number,
-
                             controller: _phonenumberController,
                             validator: validationPhoneNumber,
                             decoration: InputDecoration(
@@ -227,11 +232,11 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
-                                    BorderSide(color: Colors.white)),
+                                        BorderSide(color: Colors.white)),
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
                                     borderSide:
-                                    BorderSide(color: Colors.white)),
+                                        BorderSide(color: Colors.white)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15))),
                           ),
@@ -242,72 +247,114 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                       ],
                     ),
                     //PASSWORD
-                    Align( alignment : Alignment.centerRight ,
+                    Align(
+                      alignment: Alignment.centerRight,
                       child: Text(
                         "كلمة المرور",
-                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Tajawal'),
                       ),
                     ),
-                    Column (children: [
-                      Container(
-                        height: 20,
-                      ),
-
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 20,
-                                  offset: Offset(1, 1),
-                                  color: Colors.grey.withOpacity(0.26))
-                            ]),
-                        child: TextField(
-                          onChanged: (password) => onPasswordChanged(password),
-                          obscureText: !_isVisible,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _isVisible = !_isVisible;
-                                });
-                              },
-                              icon: _isVisible
-                                  ? Icon(
-                                Icons.visibility,
-                                color: Colors.black,
-                              )
-                                  : Icon(
-                                Icons.visibility_off,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                BorderSide(color: Colors.white)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                BorderSide(color: Colors.white)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            hintText: "***********",
-                            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                          ),
+                    Column(
+                      children: [
+                        Container(
+                          height: 20,
                         ),
-                      ), //password field
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Align( alignment : Alignment.centerRight ,
-                        child: Row(
+
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 20,
+                                    offset: Offset(1, 1),
+                                    color: Colors.grey.withOpacity(0.26))
+                              ]),
+                          child: TextField(
+                            onChanged: (password) =>
+                                onPasswordChanged(password),
+                            obscureText: !_isVisible,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isVisible = !_isVisible;
+                                  });
+                                },
+                                icon: _isVisible
+                                    ? Icon(
+                                        Icons.visibility,
+                                        color: Colors.black,
+                                      )
+                                    : Icon(
+                                        Icons.visibility_off,
+                                        color: Colors.grey,
+                                      ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(color: Colors.white)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              hintText: "***********",
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                            ),
+                          ),
+                        ), //password field
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 120,
+                              ),
+                              Text("تحتوي على 8 حروف أو أرقام"),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                    color: isEightChar
+                                        ? Colors.green
+                                        : Colors.transparent,
+                                    border: isEightChar
+                                        ? Border.all(color: Colors.transparent)
+                                        : Border.all(
+                                            color: Colors.grey.shade400),
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ), //has 8 characters
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
                           children: [
-                            SizedBox(width: 120,),
-
-                            Text("تحتوي على 8 حروف أو أرقام"),
-
+                            SizedBox(
+                              width: 75,
+                            ),
+                            Text("تحتوي على حرف كبير واحد على الأقل"),
                             SizedBox(
                               width: 10,
                             ),
@@ -316,8 +363,10 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                               width: 20,
                               height: 20,
                               decoration: BoxDecoration(
-                                  color: isEightChar ? Colors.green : Colors.transparent,
-                                  border: isEightChar
+                                  color: hasUpperChar
+                                      ? Colors.green
+                                      : Colors.transparent,
+                                  border: hasUpperChar
                                       ? Border.all(color: Colors.transparent)
                                       : Border.all(color: Colors.grey.shade400),
                                   borderRadius: BorderRadius.circular(50)),
@@ -330,40 +379,9 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                               ),
                             ),
                           ],
-                        ),
-                      ),  //has 8 characters
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(width: 75,),
-                          Text("تحتوي على حرف كبير واحد على الأقل"),
-
-                          SizedBox(
-                            width: 10,
-                          ),
-                          AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                color: hasUpperChar ? Colors.green : Colors.transparent,
-                                border: hasUpperChar
-                                    ? Border.all(color: Colors.transparent)
-                                    : Border.all(color: Colors.grey.shade400),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Center(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ), // has one upper case
-                    ],)
+                        ), // has one upper case
+                      ],
+                    )
                   ],
                 ),
                 SizedBox(
@@ -376,42 +394,61 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => loginScreen()));
+                                builder: (context) => petOwnerHome()));
                       },
-                      child: Text("تسجيل المُربي",
-                          style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                       style: ButtonStyle(
-                          backgroundColor:
-                          MaterialStateProperty.all(Color(0xFFC2D961)))),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFFC2D961)),
+                          shape: MaterialStateProperty
+                              .all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  side: BorderSide(
+                                    color: Color(0xFFC2D961),
+                                  )))),
+                      child: Text(
+                        'تسجيل المُربي',
+                        style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                      )),
                   height: 50,
                   width: 200,
-                  decoration: BoxDecoration(
-                      color: Color(0xFFC2D961),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: Color(0xFFC2D963),
-                        width: 5,
-                      )),
+                  /*decoration: BoxDecoration(
+                  color: Color(0xFFC2D961),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Color(0xFFC2D963),
+                    width: 5,
+                  )),*/
                 ), //sign in container عدلي النافقيتر
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => loginScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => loginScreen()));
                         },
                         child: Text(
                           "سجل دخولك",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
-
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Tajawal',
+                          ),
                         )),
                     Text(
                       "لديك حساب؟ ",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Tajawal'),
                     ),
-
                   ],
                 ),
               ],
@@ -464,6 +501,4 @@ class _petOwnerSignup extends State<petOwnerSignup> {
 
     return null;
   }
-
-
 }
