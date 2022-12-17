@@ -77,6 +77,9 @@ class _clinicsign extends State<clinicsign> {
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
+
+                //Page Title
+
                   Column(
                     children: <Widget>[
                       Text(
@@ -88,12 +91,13 @@ class _clinicsign extends State<clinicsign> {
                       ),
                     ],
                   ),
+
+
                   Column(
                     children: <Widget>[
-                      //NAME
 
 
-
+                      //Name
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -142,6 +146,7 @@ class _clinicsign extends State<clinicsign> {
                           )
                         ],
                       ),
+
 
                       //EMAIL
                       Column(
@@ -194,6 +199,8 @@ class _clinicsign extends State<clinicsign> {
                           )
                         ],
                       ),
+
+
                       //PHONE NUMBER
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,13 +253,17 @@ class _clinicsign extends State<clinicsign> {
                           )
                         ],
                       ),
-                      //PASSWORD
+
+
+                      //PASSWORD Title
                       Align( alignment : Alignment.centerRight ,
                         child: Text(
                           "كلمة المرور",
                           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
                         ),
                       ),
+
+                      // Password field and conditions
                       Column (children: [
                         Container(
                           height: 20,
@@ -369,113 +380,130 @@ class _clinicsign extends State<clinicsign> {
                           ],
                         ), // has one upper case
                       ],)
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                    alignment : Alignment.centerRight ,
-                    child: Text(
-                      "نوع العيادة",
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Tajawal'),
-                    ),
-                  ),
-                  CheckboxListTile(
-                    title: Text(" عيادة مركزية"),
-                    value: checkedValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        checkedValue = newValue!;
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity
-                        .leading, //  <-- leading Checkbox
-                  ),
-                  CheckboxListTile(
-                    title: Text(" عيادة متنقلة"),
-                    value: checkedValue1,
-                    onChanged: (newValue1) {
-                      setState(() {
-                        checkedValue1 = newValue1!;
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity
-                        .leading, //  <-- leading Checkbox
-                  ),
+                     , SizedBox(
+                        height: 20,
+                      ),
 
-                  Align(alignment : Alignment.centerRight ,
-                    child: Text(
-                      "موقع العيادة",
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Tajawal'),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 20,
-                              offset: Offset(1, 1),
-                              color: Colors.grey.withOpacity(0.26))
-                        ]),
-                    child: TextFormField(
 
-                      decoration: InputDecoration(
-                          hintText: ("الحي، الشارع "),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                              BorderSide(color: Colors.white)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                              BorderSide(color: Colors.white)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Container(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => clinic_home()));
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFFC2D961)),
-                            shape: MaterialStateProperty
-                                .all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    side: BorderSide(
-                                      color: Color(0xFFC2D961),
-                                    )))),
+                      // Clinic Type
+                      Align(
+                        alignment : Alignment.centerRight ,
                         child: Text(
-                          'تسجيل العيادة',
-                          style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
-                        )),
-                    height: 50,
-                    width: 200,
-                    /*decoration: BoxDecoration(
+                          "نوع العيادة",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal'),
+                        ),
+                      ),
+
+                      // stationary clinic check field
+                      CheckboxListTile(
+                        title: Text(" عيادة مركزية"),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity
+                            .leading, //  <-- leading Checkbox
+                      ),
+
+                      // truck check field
+                      CheckboxListTile(
+                        title: Text(" عيادة متنقلة"),
+                        value: checkedValue1,
+                        onChanged: (newValue1) {
+                          setState(() {
+                            checkedValue1 = newValue1!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity
+                            .leading, //  <-- leading Checkbox
+                      ),
+
+
+                      //Location Title
+                      Align(alignment : Alignment.centerRight ,
+                        child: Text(
+                          "موقع العيادة",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal'),
+                        ),
+                      ),
+
+
+                      //Location Field
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 20,
+                                  offset: Offset(1, 1),
+                                  color: Colors.grey.withOpacity(0.26))
+                            ]),
+                        child: TextFormField(
+
+                          decoration: InputDecoration(
+                              hintText: ("الحي، الشارع "),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                  BorderSide(color: Colors.white)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+
+
+                      //Sign Up Buttons
+                      Container(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => clinic_home()));
+                            },
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    Color(0xFFC2D961)),
+                                shape: MaterialStateProperty
+                                    .all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        side: BorderSide(
+                                          color: Color(0xFFC2D961),
+                                        )))),
+                            child: Text(
+                              'تسجيل العيادة',
+                              style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                            )),
+                        height: 50,
+                        width: 200,
+                        /*decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     color: Color(0xFFC2D963),
                     width: 5,
                   )),*/
-                  ), //sign in container عدلي النافقيتر
-                  SizedBox(height: 20,),
+                      ), //sign in container عدلي النافقيتر
+                      SizedBox(height: 20,), ],
+                  ),
+
+
+                  // Have Account? Log In Here
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
