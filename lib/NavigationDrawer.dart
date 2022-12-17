@@ -43,7 +43,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         ),
         SizedBox(height: 10),
         Text(
-          "ساره",
+          " ",
           style: TextStyle(fontSize: 20,color: Colors.black,fontFamily: 'Tajawal'),
         )
       ],
@@ -95,12 +95,19 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ListTile(
             title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(Icons.telegram,color: Color(0xff194919),size: 30,),
-            onTap: (){},
+            onTap: (){
+              Uri.parse('https://www.twetter.com');
+            },
           ),
           ListTile(
             title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
-            onTap: (){},
+            onTap: (){
+              Uri(
+                scheme: 'mailto',
+                path: 'HappyPaws_App@hotmail.com',
+              );
+            },
           )
         ],
       )
