@@ -21,10 +21,7 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
               color: Color(0xff034d23),
               iconSize: 36,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => clinic_home()));
+                Navigator.pop(context);
               },
             )
             ,flexibleSpace: Container(

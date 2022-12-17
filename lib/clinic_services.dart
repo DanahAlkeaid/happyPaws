@@ -21,10 +21,7 @@ class _clinic_servicesState extends State<clinic_services> {
               color: const Color(0xff034d23),
               iconSize: 36,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const clinic_home()));
+                Navigator.pop(context);
               },
             )
             ,flexibleSpace: Container(

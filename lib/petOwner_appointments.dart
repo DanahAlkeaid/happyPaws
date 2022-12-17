@@ -21,10 +21,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
             color: Color(0xff034d23),
             iconSize: 36,
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => gpi_page()));
+              Navigator.pop(context);
             },
           )
           ,flexibleSpace: Container(

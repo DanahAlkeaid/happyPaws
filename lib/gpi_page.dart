@@ -21,10 +21,7 @@ class _gpi_pageState extends State<gpi_page> {
               color: Color(0xff034d23),
               iconSize: 36,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => petOwnerHome()));
+                Navigator.pop(context);
               },
             )
             ,flexibleSpace: Container(

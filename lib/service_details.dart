@@ -19,18 +19,7 @@ class _service_detailsState extends State<service_details> {
         backgroundColor: const Color(0xfffaf7f4),
 
         appBar: AppBar(
-            leading: IconButton(
-              icon: (const Icon(Icons.arrow_back_ios)),
-              color: const Color(0xff034d23),
-              iconSize: 36,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const clinic_services()));
-              },
-            )
-            ,flexibleSpace: Container(
+            flexibleSpace: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('Assets/App_Header.png'),

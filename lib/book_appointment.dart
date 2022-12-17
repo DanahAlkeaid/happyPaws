@@ -23,10 +23,7 @@ class _book_appointmentssState extends State<book_appointments> {
             color: const Color(0xff034d23),
             iconSize: 36,
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const petOwnerHome()));
+              Navigator.pop(context);
             },
        )
           ,flexibleSpace: Container(
