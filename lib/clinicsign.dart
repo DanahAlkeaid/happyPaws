@@ -449,22 +449,31 @@ class _clinicsign extends State<clinicsign> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => loginScreen()));
+                                  builder: (context) => clinic_home()));
                         },
-                        child: Text("تسجيل المُربي",
-                            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                         style: ButtonStyle(
-                            backgroundColor:
-                            MaterialStateProperty.all(Color(0xFFC2D961)))),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color(0xFFC2D961)),
+                            shape: MaterialStateProperty
+                                .all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    side: BorderSide(
+                                      color: Color(0xFFC2D961),
+                                    )))),
+                        child: Text(
+                          'تسجيل العيادة',
+                          style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                        )),
                     height: 50,
                     width: 200,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFC2D961),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Color(0xFFC2D963),
-                          width: 5,
-                        )),
+                    /*decoration: BoxDecoration(
+                  color: Color(0xFFC2D961),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Color(0xFFC2D963),
+                    width: 5,
+                  )),*/
                   ), //sign in container عدلي النافقيتر
                   SizedBox(height: 20,),
                   Row(

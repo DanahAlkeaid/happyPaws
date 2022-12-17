@@ -70,21 +70,29 @@ class _signupScreen extends State<signupScreen> {
                                         MaterialPageRoute(
                                             builder: (context) => petOwnerSignup()));
                                   },
-                                  child: Text("مُربي",
-                                      style:
-                                      TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                   style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Color(0xFFC2D961)))),
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          Color(0xFFC2D961)),
+                                      shape: MaterialStateProperty
+                                          .all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(15),
+                                              side: BorderSide(
+                                                color: Color(0xFFC2D961),
+                                              )))),
+                                  child: Text(
+                                    'مُربي',
+                                    style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                                  )),
                               height: 50,
                               width: 200,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFC2D961),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: Color(0xFFC2D963),
-                                    width: 5,
-                                  )),
+                              /*decoration: BoxDecoration(
+                  color: Color(0xFFC2D961),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Color(0xFFC2D963),
+                    width: 5,
+                  )),*/
                             ), //مربي container
                             Container(
                               height: 20,
@@ -99,21 +107,29 @@ class _signupScreen extends State<signupScreen> {
                                         MaterialPageRoute(
                                             builder: (context) => clinicsign()));
                                   },
-                                  child: Text("عيادة ",
-                                      style:
-                                      TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                   style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Color(0xFFC2D961)))),
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          Color(0xFFC2D961)),
+                                      shape: MaterialStateProperty
+                                          .all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(15),
+                                              side: BorderSide(
+                                                color: Color(0xFFC2D961),
+                                              )))),
+                                  child: Text(
+                                    'عيادة',
+                                    style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                                  )),
                               height: 50,
                               width: 200,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFC2D961),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: Color(0xFFC2D963),
-                                    width: 5,
-                                  )),
+                              /*decoration: BoxDecoration(
+                  color: Color(0xFFC2D961),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Color(0xFFC2D963),
+                    width: 5,
+                  )),*/
                             ), //عيادة container عدلي النافقيتر
                           ]))
                 ]))));
