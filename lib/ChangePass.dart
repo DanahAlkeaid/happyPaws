@@ -8,11 +8,13 @@ class ChangePass extends StatefulWidget{
 }
 
 class _ChangePass extends State<ChangePass> {
-  bool checkedValue = false;
-  bool newValue = false;
+  final TextEditingController _passwordController = TextEditingController();
 
-  bool checkedValue1 = false;
-  bool newValue1 = false;
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   bool isEightChar = false;
   bool hasUpperChar = false;
   bool _isVisible = false;
@@ -54,37 +56,18 @@ class _ChangePass extends State<ChangePass> {
               ),
 
               Container(
-                height: 60,
-              ),
-
-              Text(
-                "ادخل كلمة المرور الحالية",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
-              ),
-
-              Container(
-                height: 30,
-              ),
-
-              Container(
-                child: TextField(
-                  decoration: InputDecoration(
-                    fillColor: Color(0xFFDDEABF),
-                    filled: true,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.black)),
-                    hintText: '**********',
-                  ),
-                ),
-              ),
-
-              Container(
                 height: 40,
               ),
 
-              Text(
-                "ادخل كلمة المرور الجديدة",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900,fontFamily: 'Tajawal'),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "ادخل كلمة المرور الحالية",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                ),
               ),
 
               Column(
@@ -93,71 +76,150 @@ class _ChangePass extends State<ChangePass> {
                     height: 20,
                   ),
 
-                  TextField(
-                    onChanged: (password) => onPasswordChanged(password),
-                    obscureText: !_isVisible,
-                    decoration: InputDecoration(
-                      fillColor: Color(0xFFDDEABF),
-                      filled: true,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _isVisible = !_isVisible;
-                          });
-                        },
-                        icon: _isVisible
-                            ? Icon(
-                          Icons.visibility,
-                          color: Colors.black,
-                        )
-                            : Icon(
-                          Icons.visibility_off,
-                          color: Colors.grey,
-                        ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 20,
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.26))
+                        ]),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        hintText: "***********",
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
                       ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.black)),
-
-                      hintText: "***********",
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
                     ),
                   ), //password field
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
 
-                  Row(
-                    children: [
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 500),
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                            color: isEightChar
-                                ? Colors.green
-                                : Colors.transparent,
-                            border: isEightChar
-                                ? Border.all(color: Colors.transparent)
-                                : Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Center(
-                          child: Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 15,
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "ادخل كلمة المرور الجديدة ",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                ),
+              ),
+
+              Column(
+                children: [
+                  Container(
+                    height: 20,
+                  ),
+
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 20,
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.26))
+                        ]),
+                    child: TextField(
+                      onChanged: (password) =>
+                          onPasswordChanged(password),
+                      obscureText: !_isVisible,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isVisible = !_isVisible;
+                            });
+                          },
+                          icon: _isVisible
+                              ? Icon(
+                            Icons.visibility,
+                            color: Colors.black,
+                          )
+                              : Icon(
+                            Icons.visibility_off,
+                            color: Colors.grey,
                           ),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.white)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        hintText: "***********",
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("تحتوي على 8 حروف أو أرقام")
-                    ],
+                    ),
+                  ), //password field
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 120,
+                        ),
+                        Text("تحتوي على 8 حروف أو أرقام"),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              color: isEightChar
+                                  ? Colors.green
+                                  : Colors.transparent,
+                              border: isEightChar
+                                  ? Border.all(color: Colors.transparent)
+                                  : Border.all(
+                                  color: Colors.grey.shade400),
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ), //has 8 characters
                   SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      SizedBox(
+                        width: 75,
+                      ),
+                      Text("تحتوي على حرف كبير واحد على الأقل"),
+                      SizedBox(
+                        width: 10,
+                      ),
                       AnimatedContainer(
                         duration: Duration(milliseconds: 500),
                         width: 20,
@@ -178,10 +240,6 @@ class _ChangePass extends State<ChangePass> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("تحتوي على حرف كبير واحد على الأقل")
                     ],
                   ), // has one upper case
                 ],
@@ -204,9 +262,9 @@ class _ChangePass extends State<ChangePass> {
                       shape: MaterialStateProperty
                           .all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
+                              borderRadius: BorderRadius.circular(15),
                               side: BorderSide(
-                                color: Color(0xFF130160),
+                                color: Color(0xFFC2D961),
                               )))),
                 ),
               ),
