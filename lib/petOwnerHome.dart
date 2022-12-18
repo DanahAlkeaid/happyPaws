@@ -51,9 +51,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       drawer: const NavigationDrawer(),
       body:SafeArea(
         child:
-        Container(
-          child: Column(
-            children: [
+        SingleChildScrollView(
+          child:SingleChildScrollView(
+            child: Column(
+             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -79,24 +80,36 @@ class _petOwnerHomeState extends State<petOwnerHome> {
              Column(
                children: [
                  ListTile(
+                   title: Text('',textAlign: TextAlign.center,),
+                   //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
+                   trailing: const CircleAvatar(radius: 20,),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
                  ListTile(
+                   title: Text('',textAlign: TextAlign.center,),
+                   //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
+                   trailing: const CircleAvatar(radius: 20,),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
                  ListTile(
+                   title: Text('',textAlign: TextAlign.center,),
+                   //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
+                   trailing: const CircleAvatar(radius: 20,),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
                  ListTile(
+                   title: Text('',textAlign: TextAlign.center,),
+                   //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
+                   trailing: const CircleAvatar(radius: 20,),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
@@ -105,8 +118,9 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
             ],
           ),
-          
+          ),
         ),
-      ));
+      ),
+  );
 
 }

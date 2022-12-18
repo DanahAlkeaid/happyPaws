@@ -47,7 +47,6 @@ class _ChangePass extends State<ChangePass> {
     ),
     body: SingleChildScrollView(
       child: Container(
-        child: Center(
           child: Column(
             children: [
               Text(
@@ -59,15 +58,22 @@ class _ChangePass extends State<ChangePass> {
                 height: 40,
               ),
 
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "ادخل كلمة المرور الحالية",
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Tajawal'),
-                ),
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "ادخل كلمة المرور الحالية",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Tajawal'),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ],
               ),
 
               Column(
@@ -271,7 +277,7 @@ class _ChangePass extends State<ChangePass> {
 
             ],
           ),
-        ),
+
       ),
     ),
   );
