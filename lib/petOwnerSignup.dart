@@ -3,7 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
 import 'package:untitled/petOwnerHome.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'main.dart';
 import 'clinicsign.dart';
 
@@ -41,6 +44,37 @@ class _petOwnerSignup extends State<petOwnerSignup> {
 
       hasUpperChar = false;
       if (CharRange.hasMatch(password)) hasUpperChar = true;
+    });
+  }
+
+  Future signUp() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        addUserDetails(
+            _firstnameController.text.trim(),
+            _emailController.text.trim(),
+            _phonenumberController.text.trim());
+        errorMessage = '';
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => petOwnerHome())); //MeterialHomePageRoute
+      } on FirebaseAuthException catch (error) {
+        errorMessage = error.message!;
+      }
+      setState(() {});
+    }
+  }
+
+  Future addUserDetails(String firstName, String email,
+      String phoneNumber) async {
+    await FirebaseFirestore.instance.collection('Users').add({
+      'firstname': firstName,
+      'email': email, //'smth@gmail.com'
+      'phonenumber': phoneNumber,
+      'type': 'petOwner',
     });
   }
 
@@ -390,12 +424,11 @@ class _petOwnerSignup extends State<petOwnerSignup> {
 
                 Container(
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => petOwnerHome()));
-                      },
+                      onPressed: () async {
+                          signUp();
+
+                          setState(() {});
+                        },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color(0xFFC2D961)),
