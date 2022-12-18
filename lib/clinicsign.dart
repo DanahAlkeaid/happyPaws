@@ -83,7 +83,7 @@ class _clinicsign extends State<clinicsign> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "تسجيل عيادة جديد",
+                        "تسجيل عيادة جديدة",
                         style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                       ),
                       SizedBox(
@@ -322,7 +322,7 @@ class _clinicsign extends State<clinicsign> {
                             children: [
                               SizedBox(width: 120,),
 
-                              Text("تحتوي على 8 حروف أو أرقام"),
+                              Text("تحتوي على 8 حروف أو أرقام",style: TextStyle(fontFamily: 'Tajawal'), ),
 
                               SizedBox(
                                 width: 10,
@@ -354,7 +354,7 @@ class _clinicsign extends State<clinicsign> {
                         Row(
                           children: [
                             SizedBox(width: 75,),
-                            Text("تحتوي على حرف كبير واحد على الأقل"),
+                            Text("تحتوي على حرف كبير واحد على الأقل",style: TextStyle(fontFamily: 'Tajawal'),),
 
                             SizedBox(
                               width: 10,
@@ -399,7 +399,7 @@ class _clinicsign extends State<clinicsign> {
 
                       // stationary clinic check field
                       CheckboxListTile(
-                        title: Text(" عيادة مركزية"),
+                        title: Text(" عيادة مركزية",style: TextStyle(fontFamily: 'Tajawal'),),
                         value: checkedValue,
                         onChanged: (newValue) {
                           setState(() {
@@ -412,7 +412,7 @@ class _clinicsign extends State<clinicsign> {
 
                       // truck check field
                       CheckboxListTile(
-                        title: Text(" عيادة متنقلة"),
+                        title: Text(" عيادة متنقلة",style: TextStyle(fontFamily: 'Tajawal'),),
                         value: checkedValue1,
                         onChanged: (newValue1) {
                           setState(() {
@@ -509,17 +509,26 @@ class _clinicsign extends State<clinicsign> {
                     children: <Widget>[
                       GestureDetector(
                           onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => loginScreen()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => loginScreen()));
                           },
                           child: Text(
                             "سجل دخولك",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
-
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal',
+                            ),
                           )),
                       Text(
                         "لديك حساب؟ ",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Tajawal'),
                       ),
                     ],
                   ),
