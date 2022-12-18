@@ -38,7 +38,7 @@ class _ForgetPassword extends State<ForgetPassword> {
                             "إعادة تعيين كلمة المرور",
                             style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, fontFamily: 'ElMessiri'),
                           ),
-                          Text('ادخل رقم الهاتف', style: TextStyle(fontFamily: 'Tajawal', fontSize: 20, fontWeight: FontWeight.w900))
+                          Text('ادخل عنوان البريد الإلكتروني', style: TextStyle(fontFamily: 'Tajawal', fontSize: 20, fontWeight: FontWeight.w900))
                         ])))));
   }
 }

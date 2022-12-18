@@ -63,46 +63,52 @@ class _loginScreenState extends State<loginScreen> {
                       ),
 
 
-                      //Phone number Title
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          "رقم الهاتف",
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: 'Tajawal'),
-                        ),
-                      ),
+                      //Email Field
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Align( alignment : Alignment.centerRight ,
+                                    child: Text(
+                                      "البريد الإلكتروني",
+                                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 20,
+                                              offset: Offset(1, 1),
+                                              color: Colors.grey.withOpacity(0.26))
+                                        ]),
+                                    child: TextFormField(
+                                      autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
 
-
-                              //phone number filed
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 20,
-                                  offset: Offset(1, 1),
-                                  color: Colors.grey.withOpacity(0.26))
-                            ]),
-                        child: new TextFormField(
-                          maxLength: 12,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              hintText: ("9665********"),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15))),
-                        ),
-                      ),
+                                      decoration: InputDecoration(
+                                          hintText: ("Example@gmail.com"),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(15),
+                                              borderSide:
+                                              BorderSide(color: Colors.white)),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(15),
+                                              borderSide:
+                                              BorderSide(color: Colors.white)),
+                                          border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(15))),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
                       Container(
                         height: 20,
                       ),
