@@ -11,20 +11,17 @@ class SuccessReset extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Color(0xfffaf7f4),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SuccessReset()));
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('Assets/App_Header.png'),
+                    fit: BoxFit.fill
+                )
             ),
-          )
-        ],
+          ),
+          elevation: 0
       ),
       body: Container(
         child: Column(children: [

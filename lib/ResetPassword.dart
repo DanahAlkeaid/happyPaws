@@ -122,12 +122,17 @@ class _ResetPasswordState extends State<ResetPassword> {
     }
 
     return Scaffold(
+      backgroundColor: Color(0xfffaf7f4),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('Assets/App_Header.png'),
+                    fit: BoxFit.fill
+                )
+            ),
+          ),
+          elevation: 0
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -135,7 +140,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 25,
+                  height: 30,
                 ),
                 Text(
                   'إعادة تعيين كلمة المرور',
