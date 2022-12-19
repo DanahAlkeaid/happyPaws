@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'appointment_confirmed.dart';
 import 'petOwnerHome.dart';
 
 
@@ -25,15 +26,15 @@ class _book_appointmentssState extends State<book_appointments> {
             onPressed: () {
               Navigator.pop(context);
             },
-       )
+          )
           ,flexibleSpace: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('Assets/App_Header.png'),
-                    fit: BoxFit.fill
-                )
-            ),
-          ),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('Assets/App_Header.png'),
+                fit: BoxFit.fill
+            )
+        ),
+      ),
           elevation: 0
       ),
 
@@ -53,7 +54,7 @@ class _book_appointmentssState extends State<book_appointments> {
               ),
               const Padding(
                 padding:EdgeInsets.fromLTRB(0, 0, 0, 12),
-                child:///***If you have exported images you must have to copy those images in assets/images directory.
+                child:
                 Image(
                   image:AssetImage("Assets/Pet_House.png"),
                   height:70,
@@ -90,7 +91,7 @@ class _book_appointmentssState extends State<book_appointments> {
                   EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                   label: Text("نوع العيادة"),
                   labelStyle: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     fontWeight: FontWeight.w400,
                     fontFamily: "Almarai",
                     color: Color(0xff034d23),
@@ -124,7 +125,7 @@ class _book_appointmentssState extends State<book_appointments> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:18,
+                    fontSize:24,
                     color:Color(0xff034d23),
                   ),
                 ),
@@ -136,7 +137,7 @@ class _book_appointmentssState extends State<book_appointments> {
                 children:[
 
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(0, 0, 144, 0),
+                    padding:const EdgeInsets.fromLTRB(0, 0, 117, 0),
                     child:MaterialButton(
                       onPressed:(){},
                       color:const Color(0xfffaf7f4),
@@ -166,7 +167,7 @@ class _book_appointmentssState extends State<book_appointments> {
                         style:TextStyle(
                           fontWeight:FontWeight.w400,
                           fontFamily: "Almarai",
-                          fontSize:18,
+                          fontSize:24,
                           color:Color(0xff034d23),
                         ),
                       ),
@@ -189,12 +190,15 @@ class _book_appointmentssState extends State<book_appointments> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:16,
+                    fontSize:23,
                     color:Color(0xff034d23),
                   ),
                 ),
               ),
-              const Align(
+
+              const SizedBox(height: 100)
+
+              ,const Align(
                 alignment:Alignment(1.0, 0.0),
                 child:Text(
                   "اختر الوقت",
@@ -203,28 +207,35 @@ class _book_appointmentssState extends State<book_appointments> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:16,
+                    fontSize:23,
                     color:Color(0xff034d23),
                   ),
                 ),
               ),
-              MaterialButton(
-                onPressed:(){},
-                color:const Color(0xffD5E694),
-                elevation:0,
-                shape:const RoundedRectangleBorder(
-                  borderRadius:BorderRadius.zero,
-                  side:BorderSide(color:Color(0xff034d23),width:1),
-                ),
-                padding:const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child:const Text("تأكيد الحجز", style: TextStyle( fontSize:18,
-                  fontWeight:FontWeight.w500,
-                  fontFamily: "Almarai",
-                ),),
-                textColor:const Color(0xff034d23),
-                height:40,
-                minWidth:140,
-              ),
+
+              const SizedBox(height: 100)
+
+
+              ,ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          //Check appointment confirmation then redirect to correct page
+                            builder: (context) => appointment_confirmed()));
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
+                  child: const Text(" تأكيد الحجز",
+                      style: TextStyle(fontSize: 29, color: Color(0xFF034D23)))),
             ],),),),
     );
   }
