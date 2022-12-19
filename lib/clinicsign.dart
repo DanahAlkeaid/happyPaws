@@ -279,7 +279,10 @@ class _clinicsign extends State<clinicsign> {
                                     offset: Offset(1, 1),
                                     color: Colors.grey.withOpacity(0.26))
                               ]),
-                          child: TextField(
+                          child: TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: _passwordController,
+                            validator: validationPassword,
                             onChanged: (password) => onPasswordChanged(password),
                             obscureText: !_isVisible,
                             decoration: InputDecoration(
@@ -577,6 +580,16 @@ class _clinicsign extends State<clinicsign> {
 
     return null;
   }
-
-
+  String? validationPassword(String? formPassword) {
+    if (formPassword == null || formPassword.trim().isEmpty) {
+      return "This fiels is required";
+    }
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(formPassword))
+      return '';
+    return null;
+  }
 }
+
