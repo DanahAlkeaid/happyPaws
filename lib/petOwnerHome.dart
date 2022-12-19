@@ -11,6 +11,7 @@ import 'gpi_page.dart';
 import 'Alert.dart';
 import 'MyAccount.dart';
 import 'loginScreen.dart';
+import 'book_appointment.dart';
 
 //test
 
@@ -87,31 +88,55 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                      style:TextStyle(
                        fontWeight:FontWeight.w400,
                        fontFamily: "Almarai",
-                       fontSize:16,
+                       fontSize:20,
                        color:Color(0xff034d23),
                      ),
                    ),
-                   subtitle: const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
-                     child:Align(
-                       alignment:Alignment.centerRight,
-                       child:Chip(
-                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
-                         label:const Text("نوع العيادة"),
-                         labelStyle: const TextStyle( fontSize:14,
-                         fontWeight:FontWeight.w400,
-                         fontFamily: "Almarai",
-                         color:Color(0xff034d23),
+                   subtitle:
+                       Row(
+                         children: [
+                           const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
+                             child:Align(
+                               alignment:Alignment.centerRight,
+                               child:Chip(
+                                 labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
+                                 label:const Text("نوع العيادة"),
+                                 labelStyle: const TextStyle( fontSize:14,
+                                 fontWeight:FontWeight.w400,
+                                 fontFamily: "Almarai",
+                                 color:Color(0xff034d23),
+                               ),
+                                 backgroundColor:Color(0xffD5E694),
+                                 elevation:0,
+                                 shadowColor:Color(0xff808080),
+                               ),
+                             ),
+                           ),
+                           const  Padding(padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                             child:Align(
+                               alignment:Alignment.center,
+                               child:Chip(
+                                 labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
+                                 label:const Text("نوع العيادة"),
+                                 labelStyle: const TextStyle( fontSize:14,
+                                   fontWeight:FontWeight.w400,
+                                   fontFamily: "Almarai",
+                                   color:Color(0xff034d23),
+                                 ),
+                                 backgroundColor:Color(0xffD5E694),
+                                 elevation:0,
+                                 shadowColor:Color(0xff808080),
+                               ),
+                             ),
+                           ),
+                         ],
                        ),
-                         backgroundColor:Color(0xffD5E694),
-                         elevation:0,
-                         shadowColor:Color(0xff808080),
-                       ),
-                     ),
-                   ),
                    trailing: const CircleAvatar(radius: 20,
                    child: Image(image: AssetImage('Assets/Pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
-                   onTap: (){},
+                   onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>book_appointments()));
+                     },
                  ),
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
@@ -121,7 +146,64 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                      style:TextStyle(
                        fontWeight:FontWeight.w400,
                        fontFamily: "Almarai",
-                       fontSize:16,
+                       fontSize:20,
+                       color:Color(0xff034d23),
+                     ),
+                   ),
+                   subtitle: Row(
+                     children: [
+                       const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
+                         child:Align(
+                           alignment:Alignment.centerRight,
+                           child:Chip(
+                             labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
+                             label:const Text("نوع العيادة"),
+                             labelStyle: const TextStyle( fontSize:14,
+                               fontWeight:FontWeight.w400,
+                               fontFamily: "Almarai",
+                               color:Color(0xff034d23),
+                             ),
+                             backgroundColor:Color(0xffD5E694),
+                             elevation:0,
+                             shadowColor:Color(0xff808080),
+                           ),
+                         ),
+                       ),
+                       const  Padding(padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                         child:Align(
+                           alignment:Alignment.center,
+                           child:Chip(
+                             labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
+                             label:const Text("نوع العيادة"),
+                             labelStyle: const TextStyle( fontSize:14,
+                               fontWeight:FontWeight.w400,
+                               fontFamily: "Almarai",
+                               color:Color(0xff034d23),
+                             ),
+                             backgroundColor:Color(0xffD5E694),
+                             elevation:0,
+                             shadowColor:Color(0xff808080),
+                           ),
+                         ),
+                       ),
+                     ],
+                   ),
+                   trailing: const CircleAvatar(radius: 20,
+                     child: Image(image: AssetImage('Assets/Pet_House.png')),),
+                   leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
+                   onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>book_appointments()));
+                   },
+                 ),
+                 Container(height: 20,),
+                 const Divider(color: Colors.black54,),
+                 ListTile(
+                   title: Text('اسم العيادة',
+                     textAlign: TextAlign.right,
+                     style:TextStyle(
+                       fontWeight:FontWeight.w400,
+                       fontFamily: "Almarai",
+                       fontSize:20,
                        color:Color(0xff034d23),
                      ),
                    ),
@@ -145,7 +227,9 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                    trailing: const CircleAvatar(radius: 20,
                      child: Image(image: AssetImage('Assets/Pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
-                   onTap: (){},
+                   onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>book_appointments()));
+                   },
                  ),
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
@@ -155,7 +239,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                      style:TextStyle(
                        fontWeight:FontWeight.w400,
                        fontFamily: "Almarai",
-                       fontSize:16,
+                       fontSize:20,
                        color:Color(0xff034d23),
                      ),
                    ),
@@ -179,41 +263,9 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                    trailing: const CircleAvatar(radius: 20,
                      child: Image(image: AssetImage('Assets/Pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
-                   onTap: (){},
-                 ),
-                 Container(height: 20,),
-                 const Divider(color: Colors.black54,),
-                 ListTile(
-                   title: Text('اسم العيادة',
-                     textAlign: TextAlign.right,
-                     style:TextStyle(
-                       fontWeight:FontWeight.w400,
-                       fontFamily: "Almarai",
-                       fontSize:16,
-                       color:Color(0xff034d23),
-                     ),
-                   ),
-                   subtitle: const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
-                     child:Align(
-                       alignment:Alignment.centerRight,
-                       child:Chip(
-                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
-                         label:const Text("نوع العيادة"),
-                         labelStyle: const TextStyle( fontSize:14,
-                           fontWeight:FontWeight.w400,
-                           fontFamily: "Almarai",
-                           color:Color(0xff034d23),
-                         ),
-                         backgroundColor:Color(0xffD5E694),
-                         elevation:0,
-                         shadowColor:Color(0xff808080),
-                       ),
-                     ),
-                   ),
-                   trailing: const CircleAvatar(radius: 20,
-                     child: Image(image: AssetImage('Assets/Pet_House.png')),),
-                   leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
-                   onTap: (){},
+                   onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>book_appointments()));
+                   },
                  ),
 
                ],
