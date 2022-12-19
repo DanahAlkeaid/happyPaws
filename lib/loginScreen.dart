@@ -5,7 +5,7 @@ import 'clinicsign.dart';
 import 'petOwnerSignup.dart';
 import 'signupScreen.dart';
 import 'FirstScreen.dart';
-import 'ForgetPassword.dart';
+import 'ResetPassword.dart';
 import 'petOwnerHome.dart';
 
 class loginScreen extends StatefulWidget {
@@ -187,7 +187,7 @@ class _loginScreenState extends State<loginScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ForgetPassword()));
+                                              ResetPassword()));
                                 },
                                 child: Text(
                                   'اضغط هنا ',
