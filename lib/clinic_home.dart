@@ -94,8 +94,15 @@ class _clinic_homeState extends State<clinic_home> {
                             builder: (context) => clinic_services()));
                   },
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD5E694))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
                   child: const Text(" الخدمات المقدمة",
                       style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
             )
@@ -120,8 +127,15 @@ class _clinic_homeState extends State<clinic_home> {
                             builder: (context) => clinic_appointments()));
                   },
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD5E694))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
                   child: const Text(" المواعيد المسجلة",
                       style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
             )
@@ -146,8 +160,15 @@ class _clinic_homeState extends State<clinic_home> {
                             builder: (context) => Alert()));
                   },
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD5E694))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
                   child: const Text(" التنبيهات",
                       style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
             )
@@ -172,8 +193,15 @@ class _clinic_homeState extends State<clinic_home> {
                             builder: (context) => MyAccount()));
                   },
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD5E694))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
                   child: const Text(" حسابي",
                       style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
             )
@@ -198,8 +226,15 @@ class _clinic_homeState extends State<clinic_home> {
                             builder: (context) => FirstScreen()));
                   },
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD5E694))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
                   child: const Text(" تواصل معنا",
                       style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
             )
@@ -224,8 +259,15 @@ class _clinic_homeState extends State<clinic_home> {
                             builder: (context) => FirstScreen()));
                   },
                   style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD5E694))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color(0xFFC2D961)),
+                      shape: MaterialStateProperty
+                          .all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: Color(0xFFC2D961),
+                              )))),
                   child: const Text(" تسجيل الخروج",
                       style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
             )
