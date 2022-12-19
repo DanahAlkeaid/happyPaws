@@ -83,7 +83,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  ListTile(
                    title: Text('',textAlign: TextAlign.center,),
                    //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
-                   trailing: const CircleAvatar(radius: 20,),
+                   trailing: const CircleAvatar(radius: 20,
+                   child: Image(image: AssetImage('Assets/pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
@@ -92,7 +93,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  ListTile(
                    title: Text('',textAlign: TextAlign.center,),
                    //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
-                   trailing: const CircleAvatar(radius: 20,),
+                   trailing: const CircleAvatar(radius: 20,
+                     child: Image(image: AssetImage('Assets/pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
@@ -101,7 +103,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  ListTile(
                    title: Text('',textAlign: TextAlign.center,),
                    //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
-                   trailing: const CircleAvatar(radius: 20,),
+                   trailing: const CircleAvatar(radius: 20,
+                     child: Image(image: AssetImage('Assets/pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
@@ -110,7 +113,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  ListTile(
                    title: Text('',textAlign: TextAlign.center,),
                    //subtitle: const  Icon(Icons.local_hospital, color: Color(0xff194919), size: 20,),
-                   trailing: const CircleAvatar(radius: 20,),
+                   trailing: const CircleAvatar(radius: 20,child: Image(image: AssetImage('Assets/pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){},
                  ),
