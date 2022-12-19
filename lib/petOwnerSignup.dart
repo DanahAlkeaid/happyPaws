@@ -517,7 +517,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
 
     String pattern = r'\w+@\w+\.\w+';
     RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(formEmail)) return 'يرج إدخال عنوان بريد صحيح';
+    if (!regex.hasMatch(formEmail)) return 'يرجى إدخال عنوان بريد صحيح';
     return null;
   }
 
