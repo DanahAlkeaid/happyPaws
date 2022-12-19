@@ -82,12 +82,20 @@ class _petOwnerHomeState extends State<petOwnerHome> {
              Column(
                children: [
                  ListTile(
-                   title: Text('اسم العيادة',textAlign: TextAlign.right,),
+                   title: Text('اسم العيادة',
+                     textAlign: TextAlign.right,
+                     style:TextStyle(
+                       fontWeight:FontWeight.w400,
+                       fontFamily: "Almarai",
+                       fontSize:16,
+                       color:Color(0xff034d23),
+                     ),
+                   ),
                    subtitle: const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
                      child:Align(
                        alignment:Alignment.centerRight,
                        child:Chip(
-                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:4),
+                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
                          label:const Text("نوع العيادة"),
                          labelStyle: const TextStyle( fontSize:14,
                          fontWeight:FontWeight.w400,
@@ -108,12 +116,20 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
                  ListTile(
-                   title: Text('اسم العيادة',textAlign: TextAlign.right,),
+                   title: Text('اسم العيادة',
+                     textAlign: TextAlign.right,
+                     style:TextStyle(
+                       fontWeight:FontWeight.w400,
+                       fontFamily: "Almarai",
+                       fontSize:16,
+                       color:Color(0xff034d23),
+                     ),
+                   ),
                    subtitle: const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
                      child:Align(
                        alignment:Alignment.centerRight,
                        child:Chip(
-                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:4),
+                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
                          label:const Text("نوع العيادة"),
                          labelStyle: const TextStyle( fontSize:14,
                            fontWeight:FontWeight.w400,
@@ -134,12 +150,20 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
                  ListTile(
-                   title: Text('اسم العيادة',textAlign: TextAlign.right,),
+                   title: Text('اسم العيادة',
+                     textAlign: TextAlign.right,
+                     style:TextStyle(
+                       fontWeight:FontWeight.w400,
+                       fontFamily: "Almarai",
+                       fontSize:16,
+                       color:Color(0xff034d23),
+                     ),
+                   ),
                    subtitle: const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
                      child:Align(
                        alignment:Alignment.centerRight,
                        child:Chip(
-                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:4),
+                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
                          label:const Text("نوع العيادة"),
                          labelStyle: const TextStyle( fontSize:14,
                            fontWeight:FontWeight.w400,
@@ -160,12 +184,20 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                  Container(height: 20,),
                  const Divider(color: Colors.black54,),
                  ListTile(
-                   title: Text('اسم العيادة',textAlign: TextAlign.right,),
+                   title: Text('اسم العيادة',
+                     textAlign: TextAlign.right,
+                     style:TextStyle(
+                       fontWeight:FontWeight.w400,
+                       fontFamily: "Almarai",
+                       fontSize:16,
+                       color:Color(0xff034d23),
+                     ),
+                   ),
                    subtitle: const  Padding(padding: EdgeInsets.fromLTRB(79, 0, 0, 0),
                      child:Align(
                        alignment:Alignment.centerRight,
                        child:Chip(
-                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:4),
+                         labelPadding:EdgeInsets.symmetric(vertical: 0,horizontal:2),
                          label:const Text("نوع العيادة"),
                          labelStyle: const TextStyle( fontSize:14,
                            fontWeight:FontWeight.w400,
