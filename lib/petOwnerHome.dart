@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:untitled/petOwner_appointments.dart';
 import 'main.dart';
 import 'clinicsign.dart';
 import 'petOwnerSignup.dart';
@@ -10,7 +11,7 @@ import 'gpi_page.dart';
 import 'Alert.dart';
 import 'MyAccount.dart';
 import 'loginScreen.dart';
-import 'petAppointment.dart';
+
 
 class petOwnerHome extends StatefulWidget {
   const petOwnerHome({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => petAppointment()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => petOwner_appointments()));
             },
           )
         ],
