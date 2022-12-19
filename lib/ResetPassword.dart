@@ -56,46 +56,41 @@ class _ResetPasswordState extends State<ResetPassword> {
       return true;
     }
   }
-
+  void ShowAlert() {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        shape:
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        content: Container(
+          height: 60,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+              color: Colors.deepOrange.shade800,
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Stack(children: [
+            Center(
+              child: Column(
+                children: [
+                  Text(
+                    "هذا البريد الالكتروني غير مسجل مسبقاً",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Tajawal'),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+            ),
+            //IconButton(icon:  ,onPressed: ,)
+          ]),
+        )));
+  }
   @override
   Widget build(BuildContext context) {
-    void ShowAlert() {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          content: Container(
-            height: 90,
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            child: Stack(children: [
-              Center(
-                child: Column(
-                  children: [
-                    Text("!خطأ",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'ElMessiri'),),
-                    Text(
-                      "هذا البريد الالكتروني غير مسجل مسبقاً",
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Tajawal'),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                ),
-              ),
-              //IconButton(icon:  ,onPressed: ,)
-            ]),
-          )));
-    }
+
 
     /*        void sendOtp() async {
    if(await checkIfEmailInUse()){
@@ -166,13 +161,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                   height: h * 0.1,
                 ),
                 Container(
-                  padding: EdgeInsets.only(right: 220, bottom: 20),
-                  child: Text(
-                    'البريد الالكتروني',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'Tajawal'),
+                  padding: EdgeInsets.only(right: 30, bottom: 20),
+                  child: Align( alignment: Alignment.centerRight,
+                    child: Text(
+                      'البريد الالكتروني',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Tajawal'),
+                    ),
                   ),
                 ),
                 Container(
@@ -198,7 +195,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         filled: true,
                         prefixIcon: Icon(
                           Icons.email,
-                          color: Color(0xFF130160).withOpacity(0.25),
+                          color: Colors.grey
                         ),
                         hintText: 'Example@gmail.com',
                         //label: Text("Email"),
@@ -245,7 +242,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-  void ShowAlert() {
+  /*void ShowAlert() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -253,20 +250,19 @@ class _ResetPasswordState extends State<ResetPassword> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         content: Container(
-          height: 60,
+          height: 30,
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.green,
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Stack(children: [
             Center(
               child: Column(
                 children: [
                   Text(
-                "   هذا البريد الالكتروني غير مسجل مسبقاً في التطبيق",
+                "  هذا البريد الالكتروني غير مسجل مسبقاً في التطبيق",
                 style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w900,
+                    fontSize: 9,
                     fontFamily: 'Tajawal'),
 
                   )],
@@ -275,5 +271,5 @@ class _ResetPasswordState extends State<ResetPassword> {
             //IconButton(icon:  ,onPressed: ,)
           ]),
         )));
-  }
+  }*/
 }
