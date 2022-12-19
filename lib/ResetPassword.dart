@@ -5,9 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:form_field_validator/form_field_validator.dart';//أتأكد من دورها!!
 import 'SuccessReset.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -266,9 +264,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                 children: [
                   Text(
                     "خطأ!",
-                    style: GoogleFonts.comfortaa(
-                        fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Tajawal'),
                   Text("   هذا البريد الالكتروني غير مسجل مسبقاً في التطبيق",
                       style: TextStyle(
                           fontSize: 17,
