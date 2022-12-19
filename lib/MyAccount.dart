@@ -28,6 +28,14 @@ class _MyAccountState extends State<MyAccount> {
   Widget build(BuildContext) => Scaffold(
     backgroundColor: Color(0xfffaf7f4),
     appBar: AppBar(
+        leading: IconButton(
+          icon: (Icon(Icons.arrow_back_ios)),
+          color: Color(0xff034d23),
+          iconSize: 36,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
