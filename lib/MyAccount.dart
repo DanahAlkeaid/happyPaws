@@ -353,7 +353,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
 
-
+SizedBox(height: 50,),
 
             ],
       ),

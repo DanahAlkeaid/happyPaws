@@ -353,7 +353,7 @@ class _clinicsign extends State<clinicsign> {
                         ),
                         Row(
                           children: [
-                            SizedBox(width: 75,),
+                            SizedBox(width: 70,),
                             Text("تحتوي على حرف كبير واحد على الأقل",style: TextStyle(fontFamily: 'Tajawal'),),
 
                             SizedBox(

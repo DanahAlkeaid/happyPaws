@@ -386,7 +386,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                         Row(
                           children: [
                             SizedBox(
-                              width: 75,
+                              width: 70,
                             ),
                             Text("تحتوي على حرف كبير واحد على الأقل"),
                             SizedBox(
