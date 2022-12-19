@@ -68,7 +68,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                       });
                     },
                     helpText: "ابحث هنا.....",
-                    closeSearchOnSuffixTap: true,
+                    closeSearchOnSuffixTap: true, onSubmitted: (String ) {  },
                   ),
                   IconButton(icon: Icon(
                     Icons.tune,

@@ -263,17 +263,13 @@ class _ResetPasswordState extends State<ResetPassword> {
               child: Column(
                 children: [
                   Text(
-                    "خطأ!",
+                "   هذا البريد الالكتروني غير مسجل مسبقاً في التطبيق",
                 style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.w900,
                     fontFamily: 'Tajawal'),
-                  Text("   هذا البريد الالكتروني غير مسجل مسبقاً في التطبيق",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Tajawal'))
-                ],
+
+                  )],
               ),
             ),
             //IconButton(icon:  ,onPressed: ,)
