@@ -70,7 +70,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
 
   Future addUserDetails(String firstName, String email,
       String phoneNumber) async {
-    await FirebaseFirestore.instance.collection('Users').add({
+    await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstName,
       'email': email, //'smth@gmail.com'
       'phonenumber': phoneNumber,
@@ -307,7 +307,10 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                                     offset: Offset(1, 1),
                                     color: Colors.grey.withOpacity(0.26))
                               ]),
-                          child: TextField(
+                          child: TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: _passwordController,
+                              validator: validationPassword,
                             onChanged: (password) =>
                                 onPasswordChanged(password),
                             obscureText: !_isVisible,
@@ -534,6 +537,17 @@ class _petOwnerSignup extends State<petOwnerSignup> {
     } else if (formPhoneNumber.length != 10)
       msg = 'Mobile Number must be of 10 digit';*/
 
+    return null;
+  }
+  String? validationPassword(String? formPassword) {
+    if (formPassword == null || formPassword.trim().isEmpty) {
+      return "This fiels is required";
+    }
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(formPassword))
+      return '';
     return null;
   }
 }
