@@ -20,6 +20,17 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  String errorMessage = '';
+  var loading = false;
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
+  }
+
+
   final _formKey = GlobalKey<FormState>();
   bool _isVisible = false;
 

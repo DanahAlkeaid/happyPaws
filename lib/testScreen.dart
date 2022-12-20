@@ -66,7 +66,7 @@ class _testScreen extends State<testScreen> {
           elevation: 0
       ),
       body: Form(
-        key: _formKey,
+       // key: _formKey,
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 40),
