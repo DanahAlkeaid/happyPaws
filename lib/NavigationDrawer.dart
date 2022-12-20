@@ -96,7 +96,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
             onTap: (){
-              Uri.parse('https://www.twetter.com');
+              Uri.parse('https://www.twitter.com');
             },
           ),
           ListTile(
