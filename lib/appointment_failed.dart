@@ -92,7 +92,7 @@ class _appointment_failedState extends State<appointment_failed> {
                                     color: Color(0xFFC2D961),
                                   )))),
                       child: const Text(" الصفحة الرئيسية",
-                          style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                          style: TextStyle(fontSize: 20, color: Color(0xFF034D23)))),
                 ),
               ],),),),),
 

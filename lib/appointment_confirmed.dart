@@ -91,7 +91,7 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
                                     color: Color(0xFFC2D961),
                                   )))),
                       child: const Text(" المواعيد",
-                          style: TextStyle(fontSize: 33, color: Color(0xFF034D23)))),
+                          style: TextStyle(fontSize: 20, color: Color(0xFF034D23)))),
                 )
 
             ,Padding(
@@ -114,7 +114,7 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
                                     color: Color(0xFFC2D961),
                                   )))),
                       child: const Text(" الصفحة الرئيسية",
-                          style: TextStyle(fontSize: 33, color: Color(0xFF034D23)))),
+                          style: TextStyle(fontSize: 20, color: Color(0xFF034D23)))),
             ),
               ],),),),),
 
