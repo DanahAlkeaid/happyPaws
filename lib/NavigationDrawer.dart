@@ -1,6 +1,6 @@
 import 'package:untitled/FirstScreen.dart';
 import 'package:untitled/gpi_page.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'petOwnerHome.dart';
 import 'MyAccount.dart';
 import 'Alert.dart';
@@ -94,7 +94,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           Text('تواصل معنا',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
           ListTile(
             title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-            leading: const Icon(Icons.telegram,color: Color(0xff194919),size: 30,),
+            leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
             onTap: (){
               Uri.parse('https://www.twetter.com');
             },
