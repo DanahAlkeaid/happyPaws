@@ -52,7 +52,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         return false;
       }
     } catch (error) {
-      ShowAlert();
+      //ShowAlert();
       return true;
     }
   }
