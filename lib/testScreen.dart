@@ -13,7 +13,6 @@ class testScreen extends StatefulWidget {
 
 class _testScreen extends State<testScreen> {
   //or final insted of TEC
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phonenumberController = TextEditingController();
