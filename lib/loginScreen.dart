@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/clinic_home.dart';
 import 'package:untitled/petOwnerHome.dart';
 import 'main.dart';
 import 'clinicsign.dart';
@@ -7,6 +8,9 @@ import 'signupScreen.dart';
 import 'FirstScreen.dart';
 import 'ResetPassword.dart';
 import 'petOwnerHome.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
@@ -18,6 +22,77 @@ class loginScreen extends StatefulWidget {
 class _loginScreenState extends State<loginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isVisible = false;
+
+  void Loginbtn() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+            email: _emailTextController.text.trim().toLowerCase(),//يحتاج تعريف للمتغيرات
+            password: _passwordTextController.text.trim())
+            .then((value) {
+          AuthorizeAccess(context);
+        });
+      } catch (error) {
+        ShowAlert();
+      }
+    } else {
+      print("not validated");
+    }
+  }
+
+  AuthorizeAccess(BuildContext context) async {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: _emailTextController.text.trim().toLowerCase())
+        .get()
+        .then((snapshot) {
+      if (snapshot.docs[0].data()["type"] == "clinic")
+           {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => clinic_home()));
+      } else {
+        if (snapshot.docs[0].data()["type"] == "petOwner") {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => petOwnerHome()));
+        }
+      }
+    });
+  }
+
+  void ShowAlert() {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        shape:
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        content: Container(
+          height: 60,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+              color: Colors.deepOrange.shade800,
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Stack(children: [
+            Center(
+              child: Column(
+                children: [
+                  Text(
+                    "هذا البريد الالكتروني غير مسجل مسبقاً",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Tajawal'),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+            ),
+            //IconButton(icon:  ,onPressed: ,)
+          ]),
+        )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,10 +295,7 @@ class _loginScreenState extends State<loginScreen> {
                       Container(
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => petOwnerHome()));
+                              Loginbtn();
                             },
                             style: ButtonStyle(
                                 backgroundColor:
