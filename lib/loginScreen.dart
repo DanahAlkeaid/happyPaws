@@ -12,6 +12,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
 
@@ -35,17 +36,20 @@ class _loginScreenState extends State<loginScreen> {
   bool _isVisible = false;
 
   void Loginbtn() async {
+
     if (_formKey.currentState!.validate()) {
       try {
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-            email: _emailTextController.text.trim(), //.toLowerCase(),//يحتاج تعريف للمتغيرات
-            password: _passwordTextController.text.trim())
-        .then((value) {
+            email: _emailTextController.text.trim().toLowerCase(),
+            password: _passwordTextController.text.trim()).then((value) {
           AuthorizeAccess(context);
         });
       } catch (error) {
-        ShowAlert();
+        setState(() {
+          ShowAlert();
+        });
+        /*ShowAlert();*/
       }
     } else {
       print("not validated");
@@ -55,7 +59,7 @@ class _loginScreenState extends State<loginScreen> {
   AuthorizeAccess(BuildContext context) async {
     FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: _emailTextController.text.trim()/*.toLowerCase()*/)
+        .where('email', isEqualTo: _emailTextController.text.trim().toLowerCase())
         .get()
         .then((snapshot) {
       if (snapshot.docs[0].data()["type"] == "clinic")
@@ -89,7 +93,7 @@ class _loginScreenState extends State<loginScreen> {
               child: Column(
                 children: [
                   Text(
-                    "هذا البريد الالكتروني غير مسجل مسبقاً",
+                    "هذه المدخلات خاطئة",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:untitled/clinic_home.dart';
@@ -46,7 +48,38 @@ class _clinicsign extends State<clinicsign> {
     });
   }
 
+  Future signUp() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        addUserDetails(
+            _firstnameController.text.trim(),
+            _emailController.text.trim(),
+            _phonenumberController.text.trim());
+        errorMessage = '';
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => clinic_home())); //MeterialHomePageRoute
+      } on FirebaseAuthException catch (error) {
+        errorMessage = error.message!;
+      }
+      setState(() {});
+    }
+  }
 
+  Future addUserDetails(String firstName, String email,
+      String phoneNumber) async {
+    /*await FirebaseFirestore.instance.collection('users').add({
+      'firstname': firstName,
+      'email': email, //'smth@gmail.com'
+      'phonenumber': phoneNumber,
+      'type': 'clinic',
+      'clinicType':/* اذا both لازم يكون فيه كولكشن داخل الملف فيه ملفين واحد للمركزية والثاني للمتنقلة*/,
+      'description':/*ماعرفت اخذه من المتغير*/,
+    });*/
+  }
 
 
   @override
@@ -473,10 +506,7 @@ class _clinicsign extends State<clinicsign> {
                       Container(
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => clinic_home()));
+                              signUp();
                             },
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all<Color>(
