@@ -13,13 +13,6 @@ import 'MyAccount.dart';
 import 'loginScreen.dart';
 import 'book_appointment.dart';
 
-const List<Widget> category = <Widget>[
-  Text('التقيمم'),
-  Text('المسافة'),
-  Text('النوع'),
-];
-//test
-
 class petOwnerHome extends StatefulWidget {
   const petOwnerHome({Key? key}) : super(key: key);
 
@@ -29,8 +22,6 @@ class petOwnerHome extends StatefulWidget {
 
 
 class _petOwnerHomeState extends State<petOwnerHome> {
-  final List<bool> _selectedCategory = <bool>[false,true,false];
-  bool vertical = false;
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) =>Scaffold(
@@ -100,30 +91,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                                 ),
                               ),
                             ),
-                            Divider(color: Colors.black54,),
-                            ToggleButtons(
-                                direction: vertical ? Axis.vertical : Axis.horizontal,
-                                onPressed: (int index){
-                                  setState(() {
-                                    _selectedCategory[index] = !_selectedCategory[index];
-                                  });
-                                },
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              selectedBorderColor: Color(0xFFC2D961),
-                              selectedColor: Color(0xff194919),
-                              fillColor: Color(0xFFC2D961),
-                              color: Color(0xff194919),
-                              constraints: const BoxConstraints(
-                                minHeight: 40.0,
-                                minWidth: 80.0,
-                              ),
-                              isSelected: _selectedCategory,
-                              children: category,
-                            ),
                             Container(height: 20,),
                             ElevatedButton(
                               onPressed: () {},
-                              child: Text("تطبيق",
+                              child: Text("التقييم",
                                   style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                               style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(
