@@ -39,9 +39,9 @@ class _loginScreenState extends State<loginScreen> {
       try {
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-            email: _emailTextController.text.trim().toLowerCase(),//يحتاج تعريف للمتغيرات
+            email: _emailTextController.text.trim(), //.toLowerCase(),//يحتاج تعريف للمتغيرات
             password: _passwordTextController.text.trim())
-            .then((value) {
+        .then((value) {
           AuthorizeAccess(context);
         });
       } catch (error) {
@@ -55,7 +55,7 @@ class _loginScreenState extends State<loginScreen> {
   AuthorizeAccess(BuildContext context) async {
     FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: _emailTextController.text.trim().toLowerCase())
+        .where('email', isEqualTo: _emailTextController.text.trim()/*.toLowerCase()*/)
         .get()
         .then((snapshot) {
       if (snapshot.docs[0].data()["type"] == "clinic")
