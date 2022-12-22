@@ -174,7 +174,7 @@ class _service_detailsState extends State<service_details> {
                                                 padding:EdgeInsets.fromLTRB(2, 0, 0, 0),
                                                 child:Align(
                                                   alignment:Alignment(-0.1, 0.0),
-                                                  child:///***If you have exported images you must have to copy those images in assets/images directory.
+                                                  child:
                                                   Image(
                                                     image:AssetImage("Assets/dog_icon.png"),
                                                     height:50,
@@ -194,7 +194,7 @@ class _service_detailsState extends State<service_details> {
                                               ),
                                               const Padding(
                                                 padding:EdgeInsets.fromLTRB(38, 0, 0, 0),
-                                                child:///***If you have exported images you must have to copy those images in assets/images directory.
+                                                child:
                                                 Image(
                                                   image:AssetImage("Assets/cat_icon.png"),
                                                   height:40,
