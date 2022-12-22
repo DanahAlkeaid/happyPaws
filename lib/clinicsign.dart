@@ -8,18 +8,26 @@ import 'package:untitled/loginScreen.dart';
 import 'main.dart';
 import 'clinicsign.dart';
 import 'petOwnerSignup.dart';
+
+
 class clinicsign extends StatefulWidget {
   @override
   _clinicsign createState() => _clinicsign();
 }
 
+
+int _groupValue = -1;
 class _clinicsign extends State<clinicsign> {
   //or final insted of TEC
+  
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phonenumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+
+
   String errorMessage = '';
   var loading = false;
   void dispose() {
@@ -27,6 +35,7 @@ class _clinicsign extends State<clinicsign> {
     _emailController.dispose();
     _phonenumberController.dispose();
     _passwordController.dispose();
+    _locationController.dispose();
     super.dispose();
   }
   bool isEightChar = false;
@@ -58,7 +67,9 @@ class _clinicsign extends State<clinicsign> {
         addUserDetails(
             _firstnameController.text.trim(),
             _emailController.text.trim(),
-            _phonenumberController.text.trim());
+            _phonenumberController.text.trim(),
+        _locationController.text.trim());
+          
         errorMessage = '';
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => clinic_home())); //MeterialHomePageRoute
@@ -70,7 +81,7 @@ class _clinicsign extends State<clinicsign> {
   }
 
   Future addUserDetails(String firstName, String email,
-      String phoneNumber) async {
+      String phoneNumber, String location) async {
     /*await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstName,
       'email': email, //'smth@gmail.com'
@@ -421,46 +432,7 @@ class _clinicsign extends State<clinicsign> {
                       ),
 
 
-                      // Clinic Type
-                      Align(
-                        alignment : Alignment.centerRight ,
-                        child: Text(
-                          "نوع العيادة",
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: 'Tajawal'),
-                        ),
-                      ),
-
-                      // stationary clinic check field
-                      CheckboxListTile(
-                        title: Text(" عيادة مركزية",style: TextStyle(fontFamily: 'Tajawal'),),
-                        value: checkedValue,
-                        onChanged: (newValue) {
-                          setState(() {
-                            checkedValue = newValue!;
-                          });
-                        },
-                        controlAffinity: ListTileControlAffinity
-                            .leading, //  <-- leading Checkbox
-                      ),
-
-                      // truck check field
-                      CheckboxListTile(
-                        title: Text(" عيادة متنقلة",style: TextStyle(fontFamily: 'Tajawal'),),
-                        value: checkedValue1,
-                        onChanged: (newValue1) {
-                          setState(() {
-                            checkedValue1 = newValue1!;
-                          });
-                        },
-                        controlAffinity: ListTileControlAffinity
-                            .leading, //  <-- leading Checkbox
-                      ),
-
-
-                      //Location Title
+              //Location Title
                       Align(alignment : Alignment.centerRight ,
                         child: Text(
                           "موقع العيادة",
@@ -484,7 +456,8 @@ class _clinicsign extends State<clinicsign> {
                                   color: Colors.grey.withOpacity(0.26))
                             ]),
                         child: TextFormField(
-
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _locationController,
                           decoration: InputDecoration(
                               hintText: ("الحي، الشارع "),
                               focusedBorder: OutlineInputBorder(
@@ -621,5 +594,6 @@ class _clinicsign extends State<clinicsign> {
       return '';
     return null;
   }
+
 }
 

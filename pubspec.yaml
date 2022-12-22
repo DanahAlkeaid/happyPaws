@@ -59,7 +59,7 @@ flutter_icons:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: Assets/splashScreen2.png
+  image: Assets/splaash.png
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -76,7 +76,6 @@ flutter:
     - Assets/logo1.png
     - Assets/header1.png
     - Assets/header2.png
-    - Assets/Picture1.png
     - Assets/bg1.png
     - Assets/screenHeader.png
     - Assets/bg.png
