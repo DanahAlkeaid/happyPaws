@@ -274,9 +274,33 @@ class _PetChangePass extends State<PetChangePass>{
                 Container(
                   child: ElevatedButton(
                     onPressed: () {
+                      //change password function
+                    },
+                    child: Text(" تغيير",
+                        style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFFC2D961)),
+                        shape: MaterialStateProperty
+                            .all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: BorderSide(
+                                  color: Color(0xFFC2D961),
+                                )))),
+                  ),
+                ),
+
+                Container(
+                  height: 20,
+                ),
+
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> ChangePass()));
                     },
-                    child: Text("حفظ التعديلات",
+                    child: Text("الغاء",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(

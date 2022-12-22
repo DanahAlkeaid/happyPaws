@@ -49,6 +49,7 @@ class _ChangePass extends State<ChangePass> {
 
     ),
     body: Form(
+      key: _formKey,
       child: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 40),
