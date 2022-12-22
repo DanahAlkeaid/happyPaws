@@ -269,7 +269,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                               child:
                               const Align(
                                 alignment:Alignment(0.1, 0.0),
-                                child:///***If you have exported images you must have to copy those images in assets/images directory.
+                                child:
                                 Image(
                                   image:AssetImage("Assets/Pet_House.png"),
                                   height:50,
@@ -458,7 +458,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                               child:
                               const Align(
                                 alignment:Alignment(0.1, 0.0),
-                                child:///***If you have exported images you must have to copy those images in assets/images directory.
+                                child:
                                 Image(
                                   image:AssetImage("Assets/Pet_House.png"),
                                   height:50,
@@ -647,7 +647,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                               child:
                               const Align(
                                 alignment:Alignment(0.1, 0.0),
-                                child:///***If you have exported images you must have to copy those images in assets/images directory.
+                                child:
                                 Image(
                                   image:AssetImage("Assets/Pet_House.png"),
                                   height:50,
@@ -836,7 +836,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                               child:
                               const Align(
                                 alignment:Alignment(0.1, 0.0),
-                                child:///***If you have exported images you must have to copy those images in assets/images directory.
+                                child:
                                 Image(
                                   image:AssetImage("Assets/Pet_House.png"),
                                   height:50,
