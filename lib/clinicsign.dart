@@ -82,14 +82,12 @@ class _clinicsign extends State<clinicsign> {
 
   Future addUserDetails(String firstName, String email,
       String phoneNumber, String location) async {
-    /*await FirebaseFirestore.instance.collection('users').add({
+    await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstName,
       'email': email, //'smth@gmail.com'
       'phonenumber': phoneNumber,
       'type': 'clinic',
-      'clinicType':/* اذا both لازم يكون فيه كولكشن داخل الملف فيه ملفين واحد للمركزية والثاني للمتنقلة*/,
-      'description':/*ماعرفت اخذه من المتغير*/,
-    });*/
+      'description': location});
   }
 
 

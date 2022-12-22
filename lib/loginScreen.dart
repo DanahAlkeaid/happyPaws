@@ -13,6 +13,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
+
+
+
 class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
 
@@ -34,8 +37,43 @@ class _loginScreenState extends State<loginScreen> {
 
   final _formKey = GlobalKey<FormState>();
   bool _isVisible = false;
-
   void Loginbtn() async {
+
+
+      /*var formdata = _formKey.currentState;
+      if (formdata!.validate()) {
+        formdata.save();
+        try {
+          /*showLoading(context);*/
+          UserCredential userCredential = await FirebaseAuth.instance
+              .signInWithEmailAndPassword(email: _emailTextController.text.trim().toLowerCase(),
+              password: _passwordTextController.text.trim());
+          return userCredential;
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'user-not-found') {
+            Navigator.of(context).pop();
+
+            /*AwesomeDialog(
+                context: context,
+                title: "Error",
+                body: Text("No user found for that email"))
+              ..show();*/
+          } else if (e.code == 'wrong-password') {
+            Navigator.of(context).pop();
+            AwesomeDialog(
+                context: context,
+                title: "Error",
+                body: Text("Wrong password provided for that user"))
+              ..show();
+          }
+        }
+      } else {
+        print("Not Vaild");
+      }*/
+
+
+
+    //الميثود القديمة تحت
 
     if (_formKey.currentState!.validate()) {
       try {
@@ -43,13 +81,79 @@ class _loginScreenState extends State<loginScreen> {
             .signInWithEmailAndPassword(
             email: _emailTextController.text.trim().toLowerCase(),
             password: _passwordTextController.text.trim()).then((value) {
-          AuthorizeAccess(context);
+            AuthorizeAccess(context);
         });
-      } catch (error) {
-        setState(() {
-          ShowAlert();
-        });
-        /*ShowAlert();*/
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found'){
+          Navigator.of(context).pop();
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              content: Container(
+                height: 60,
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange.shade800,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Stack(children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "لا يوجد مستخدم بهذا اليريد الالكتروني",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Tajawal'),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
+                  ),
+                  //IconButton(icon:  ,onPressed: ,)
+                ]),
+              )));
+
+        }
+        else if(e.code == 'wrong-password'){
+          Navigator.of(context).pop();
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              content: Container(
+                height: 60,
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange.shade800,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Stack(children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "كلمة المرور غير صحيحة",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Tajawal'),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
+                  ),
+                  //IconButton(icon:  ,onPressed: ,)
+                ]),
+              )));
+
+        }
       }
     } else {
       print("not validated");
@@ -62,12 +166,12 @@ class _loginScreenState extends State<loginScreen> {
         .where('email', isEqualTo: _emailTextController.text.trim().toLowerCase())
         .get()
         .then((snapshot) {
-      if (snapshot.docs[0].data()["type"] == "clinic")
+      if (snapshot.docs[3].data()["type"] == "clinic")
            {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => clinic_home()));
       } else {
-        if (snapshot.docs[0].data()["type"] == "petOwner") {
+        if (snapshot.docs[3].data()["type"] == "petOwner") {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => petOwnerHome()));
         }
@@ -75,7 +179,7 @@ class _loginScreenState extends State<loginScreen> {
     });
   }
 
-  void ShowAlert() {
+  /*void ShowAlert() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -106,7 +210,7 @@ class _loginScreenState extends State<loginScreen> {
             //IconButton(icon:  ,onPressed: ,)
           ]),
         )));
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
