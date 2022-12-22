@@ -5,9 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
 
-import 'main.dart';
-import 'clinicsign.dart';
-import 'petOwnerSignup.dart';
+
 
 
 class clinicsign extends StatefulWidget {
@@ -16,7 +14,7 @@ class clinicsign extends StatefulWidget {
 }
 
 
-int _groupValue = -1;
+
 class _clinicsign extends State<clinicsign> {
   //or final insted of TEC
   
@@ -552,7 +550,7 @@ class _clinicsign extends State<clinicsign> {
       return "يرجى إدخال اسم";
     } else if ((validCharacters.hasMatch(formFullname))) {
       return 'يجب أن يحتوي الاسم على حروف فقط';
-    } else if (formFullname != null && formFullname.length < 2) {
+    } else if ( formFullname.length < 2) {
       return 'يجب أن يحتوى الاسم على حرفين على الأقل';
     } else
       return null;

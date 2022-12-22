@@ -11,9 +11,10 @@ import 'petOwnerHome.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:ui';
 
 
-
+FirebaseAuth auth = FirebaseAuth.instance;
 
 
 class loginScreen extends StatefulWidget {
@@ -24,140 +25,58 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
-  final TextEditingController _emailTextController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
-  String errorMessage = '';
-  var loading = false;
-  void dispose() {
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-    super.dispose();
+
+
+  String? ValidateEmpty(value) {
+    if (value != null && value.isEmpty) {
+      return "يرجى ادخال كلمة المرور";
+    } else {
+      InputDecoration(
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+      );
+      return null;
+    }
   }
 
-
-  final _formKey = GlobalKey<FormState>();
-  bool _isVisible = false;
   void Loginbtn() async {
-
-
-      /*var formdata = _formKey.currentState;
-      if (formdata!.validate()) {
-        formdata.save();
-        try {
-          /*showLoading(context);*/
-          UserCredential userCredential = await FirebaseAuth.instance
-              .signInWithEmailAndPassword(email: _emailTextController.text.trim().toLowerCase(),
-              password: _passwordTextController.text.trim());
-          return userCredential;
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'user-not-found') {
-            Navigator.of(context).pop();
-
-            /*AwesomeDialog(
-                context: context,
-                title: "Error",
-                body: Text("No user found for that email"))
-              ..show();*/
-          } else if (e.code == 'wrong-password') {
-            Navigator.of(context).pop();
-            AwesomeDialog(
-                context: context,
-                title: "Error",
-                body: Text("Wrong password provided for that user"))
-              ..show();
-          }
-        }
-      } else {
-        print("Not Vaild");
-      }*/
-
-
-
-    //الميثود القديمة تحت
-
-    if (_formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
       try {
-        await FirebaseAuth.instance
+        await _auth
             .signInWithEmailAndPassword(
             email: _emailTextController.text.trim().toLowerCase(),
-            password: _passwordTextController.text.trim()).then((value) {
-            AuthorizeAccess(context);
+            password: _passwordTextController.text.trim())
+            .then((value) {
+          AuthorizeAccess(context);
         });
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found'){
-          Navigator.of(context).pop();
-
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              content: Container(
-                height: 60,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    color: Colors.deepOrange.shade800,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Stack(children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          "لا يوجد مستخدم بهذا اليريد الالكتروني",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Tajawal'),
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  ),
-                  //IconButton(icon:  ,onPressed: ,)
-                ]),
-              )));
-
-        }
-        else if(e.code == 'wrong-password'){
-          Navigator.of(context).pop();
-
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              content: Container(
-                height: 60,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    color: Colors.deepOrange.shade800,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Stack(children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          "كلمة المرور غير صحيحة",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Tajawal'),
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  ),
-                  //IconButton(icon:  ,onPressed: ,)
-                ]),
-              )));
-
-        }
+      } catch (error) {
+        setState(() {
+          err =true;
+        });
       }
-    } else {
-      print("not validated");
     }
+  }
+
+  String? validationUser(String? User){
+    if (User == null || User.trim().isEmpty) {
+      err = false;
+
+      return "هذه الخانة مطلوبة  ";
+    }
+    String pattern = r'\w+@\w+\.\w+';
+    final emailRegExp = RegExp(pattern);
+   // final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if( !emailRegExp.hasMatch(User)){
+      return 'ىرجى إدخال بريد إلكتروني صحيح';
+    }
+
+    if (err) {
+      err = false;
+      return "كلمة المرور أو عنوان البريد الإلكتروني غير صحيحة";
+    }
+
+    return null;
   }
 
   AuthorizeAccess(BuildContext context) async {
@@ -166,54 +85,49 @@ class _loginScreenState extends State<loginScreen> {
         .where('email', isEqualTo: _emailTextController.text.trim().toLowerCase())
         .get()
         .then((snapshot) {
-      if (snapshot.docs[3].data()["type"] == "clinic")
-           {
+          print('00000000000000');
+          print(snapshot.docs[0].data()['type']);
+          print('00000000000000');
+      //var type = (snapshot.data)['userType'];
+      if (snapshot.docs[0].data()["type"] == "clinic") {
+
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => clinic_home()));
       } else {
-        if (snapshot.docs[3].data()["type"] == "petOwner") {
+        if (snapshot.docs[0].data()["type"] == "petOwner") {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => petOwnerHome()));
         }
-      }
-    });
+
+            }
+
+        });
+    }
+
+
+  var loading = false;
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
   }
 
-  /*void ShowAlert() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        content: Container(
-          height: 60,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              color: Colors.deepOrange.shade800,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: Stack(children: [
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    "هذه المدخلات خاطئة",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Tajawal'),
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-            ),
-            //IconButton(icon:  ,onPressed: ,)
-          ]),
-        )));
-  }*/
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    TextEditingController _emailTextController = TextEditingController();
+    TextEditingController _passwordTextController = TextEditingController();
+  String _error = '';
+  bool err = false;
+
+    bool _isVisible = false;
+
+    final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
     return Scaffold(
         backgroundColor: Color(0xfffaf7f4),
         appBar: AppBar(
@@ -225,7 +139,7 @@ class _loginScreenState extends State<loginScreen> {
             ),
             elevation: 0),
         body: Form(
-          key: _formKey,
+          key: formKey,
           child: SingleChildScrollView(
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 40),
@@ -283,7 +197,8 @@ class _loginScreenState extends State<loginScreen> {
                                     child: TextFormField(
                                       autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
-
+                                      controller: _emailTextController,
+                                      validator: validationUser,
                                       decoration: InputDecoration(
                                           hintText: ("Example@gmail.com"),
                                           focusedBorder: OutlineInputBorder(
@@ -303,7 +218,7 @@ class _loginScreenState extends State<loginScreen> {
                                   ),
                                 ],
                               ),
-                      Container(
+                      SizedBox(
                         height: 20,
                       ),
 
@@ -332,7 +247,10 @@ class _loginScreenState extends State<loginScreen> {
                                   offset: Offset(1, 1),
                                   color: Colors.grey.withOpacity(0.26))
                             ]),
-                        child: TextField(
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _passwordTextController,
+                          validator: ValidateEmpty,
                           obscureText: !_isVisible,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -436,13 +354,7 @@ class _loginScreenState extends State<loginScreen> {
                             )),
                         height: 50,
                         width: 200,
-                        /*decoration: BoxDecoration(
-                    color: Color(0xFFC2D961),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Color(0xFFC2D963),
-                      width: 5,
-                    )),*/
+
                       ),
                       SizedBox(
                         height: 20,
@@ -481,6 +393,8 @@ class _loginScreenState extends State<loginScreen> {
                       ),
                     ])))),
           ),
-        ));
+        )
+    );
   }
 }
+
