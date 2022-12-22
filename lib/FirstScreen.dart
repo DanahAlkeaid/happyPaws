@@ -10,6 +10,7 @@ import 'testScreen.dart';
 import 'petOwnerSignup.dart';
 import 'service_details.dart';
 import 'petOwnerHome.dart';
+import 'clinic_home.dart';
 
 
 class FirstScreen extends StatefulWidget {
@@ -128,7 +129,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => petOwnerHome()));
+                            builder: (context) => clinic_home()));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),

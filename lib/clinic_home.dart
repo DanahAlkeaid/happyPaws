@@ -42,7 +42,8 @@ class _clinic_homeState extends State<clinic_home> {
                     ,fit: BoxFit.contain
                     ,image: AssetImage("Assets/App_Logo.png"
                     ),
-                    width: 100
+                  width: 130,
+                  height: 130,
                 )
             )
 
@@ -54,7 +55,7 @@ class _clinic_homeState extends State<clinic_home> {
                 Text("! مرحبًا  "
                     ,style:TextStyle(
                       fontFamily: "Elmessiri",
-                      fontSize: 46,
+                      fontSize: 35,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     )
@@ -73,12 +74,12 @@ class _clinic_homeState extends State<clinic_home> {
                     )
                 )
               ],))
-            ,const SizedBox(height: 10)
+            ,const SizedBox(height: 12)
 
             //Menu Headings
             ,Container(
               height: 60,
-              width: 350,
+              width: 270,
               decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(50),
@@ -104,14 +105,14 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" الخدمات المقدمة",
-                      style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
             )
 
-            ,const SizedBox(height: 20)
+            ,const SizedBox(height: 15)
 
             ,Container(
               height: 60,
-              width: 350,
+              width: 270,
               decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(50),
@@ -137,14 +138,14 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" المواعيد المسجلة",
-                      style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
             )
 
-            ,const SizedBox(height: 20)
+            ,const SizedBox(height: 15)
 
             ,Container(
               height: 60,
-              width: 350,
+              width: 270,
               decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(50),
@@ -170,14 +171,14 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" التنبيهات",
-                      style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
             )
 
-            ,const SizedBox(height: 20)
+            ,const SizedBox(height: 15)
 
             ,Container(
               height: 60,
-              width: 350,
+              width: 270,
               decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(50),
@@ -203,14 +204,14 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" حسابي",
-                      style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
             )
 
-            ,const SizedBox(height: 20)
+            ,const SizedBox(height: 15)
 
             ,Container(
               height: 60,
-              width: 350,
+              width: 270,
               decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(50),
@@ -236,14 +237,14 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" تواصل معنا",
-                      style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
             )
 
-            ,const SizedBox(height: 20)
+            ,const SizedBox(height: 15)
 
             ,Container(
               height: 60,
-              width: 350,
+              width: 270,
               decoration: BoxDecoration(
                   color: Color(0xFFC2D961),
                   borderRadius: BorderRadius.circular(50),
@@ -269,7 +270,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" تسجيل الخروج",
-                      style: TextStyle(fontSize: 40, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
             )
 
           ],),
