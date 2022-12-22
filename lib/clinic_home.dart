@@ -105,7 +105,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" الخدمات المقدمة",
-                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             )
 
             ,const SizedBox(height: 15)
@@ -138,7 +138,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" المواعيد المسجلة",
-                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             )
 
             ,const SizedBox(height: 15)
@@ -171,7 +171,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" التنبيهات",
-                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             )
 
             ,const SizedBox(height: 15)
@@ -204,7 +204,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" حسابي",
-                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             )
 
             ,const SizedBox(height: 15)
@@ -237,7 +237,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" تواصل معنا",
-                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             )
 
             ,const SizedBox(height: 15)
@@ -270,7 +270,7 @@ class _clinic_homeState extends State<clinic_home> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" تسجيل الخروج",
-                      style: TextStyle(fontSize: 35, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             )
 
           ],),
