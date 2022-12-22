@@ -100,7 +100,12 @@ class _service_detailsState extends State<service_details> {
                                                   icon:const Icon(
                                                       Icons.clear
                                                   ),
-                                                  onPressed:(){},
+                                                  onPressed:(){
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => clinic_services()));
+                                                  },
                                                   color:const Color(0xff212435),
                                                   iconSize:24,
                                                 ),
