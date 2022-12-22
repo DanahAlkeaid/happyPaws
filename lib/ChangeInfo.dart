@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'MyAccount.dart';
+import 'PetChangePass.dart';
+
 class ChangePass extends StatefulWidget{
   const ChangePass({Key? key}) : super(key: key);
 
@@ -12,7 +14,6 @@ class _ChangePass extends State<ChangePass> {
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phonenumberController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   String errorMessage = '';
   var loading = false;
@@ -21,23 +22,7 @@ class _ChangePass extends State<ChangePass> {
     _firstnameController.dispose();
     _emailController.dispose();
     _phonenumberController.dispose();
-    _passwordController.dispose();
     super.dispose();
-  }
-
-  bool isEightChar = false;
-  bool hasUpperChar = false;
-  bool _isVisible = false;
-
-  onPasswordChanged(String password) {
-    final CharRange = RegExp(r'[A-Z]');
-    setState(() {
-      isEightChar = false;
-      if (password.length >= 8) isEightChar = true;
-
-      hasUpperChar = false;
-      if (CharRange.hasMatch(password)) hasUpperChar = true;
-    });
   }
 
   @override
@@ -244,197 +229,28 @@ class _ChangePass extends State<ChangePass> {
                   ],
                 ),
 
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "ادخل كلمة المرور الحالية",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
+                Container(
+                  height: 20,
                 ),
 
-                Column(
-                  children: [
-                    Container(
-                      height: 20,
-                    ),
-
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 20,
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.26))
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Colors.white)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Colors.white)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          hintText: "***********",
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                        ),
-                      ),
-                    ), //password field
-                    SizedBox(
-                      height: 30,
-                    ),
-                  ],
-                ),
-
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "ادخل كلمة المرور الجديدة ",
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'Tajawal'),
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> PetChangePass()));
+                    },
+                    child: Text(" تغيير كلمة المرور",
+                        style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFFC2D961)),
+                        shape: MaterialStateProperty
+                            .all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: BorderSide(
+                                  color: Color(0xFFC2D961),
+                                )))),
                   ),
-                ),
-
-                Column(
-                  children: [
-                    Container(
-                      height: 20,
-                    ),
-
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 20,
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.26))
-                          ]),
-                      child: TextField(
-                        onChanged: (password) =>
-                            onPasswordChanged(password),
-                        obscureText: !_isVisible,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _isVisible = !_isVisible;
-                              });
-                            },
-                            icon: _isVisible
-                                ? Icon(
-                              Icons.visibility,
-                              color: Colors.black,
-                            )
-                                : Icon(
-                              Icons.visibility_off,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Colors.white)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Colors.white)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          hintText: "***********",
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                        ),
-                      ),
-                    ), //password field
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 120,
-                          ),
-                          Text("تحتوي على 8 حروف أو أرقام"),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                color: isEightChar
-                                    ? Colors.green
-                                    : Colors.transparent,
-                                border: isEightChar
-                                    ? Border.all(color: Colors.transparent)
-                                    : Border.all(
-                                    color: Colors.grey.shade400),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Center(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ), //has 8 characters
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 75,
-                        ),
-                        Text("تحتوي على حرف كبير واحد على الأقل"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 500),
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                              color: hasUpperChar
-                                  ? Colors.green
-                                  : Colors.transparent,
-                              border: hasUpperChar
-                                  ? Border.all(color: Colors.transparent)
-                                  : Border.all(color: Colors.grey.shade400),
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Center(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ), // has one upper case
-                  ],
                 ),
 
                 Container(
