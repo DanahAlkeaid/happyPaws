@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/ChangePass.dart';
+import 'package:untitled/ChangeInfo.dart';
 import 'package:untitled/appointment_confirmed.dart';
 import 'package:untitled/appointment_failed.dart';
 import 'package:untitled/petOwnerHome.dart';
