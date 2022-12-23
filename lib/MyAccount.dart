@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/petOwnerHome.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'ChangeInfo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+
 class MyAccount extends StatefulWidget{
   const MyAccount({Key? key}) : super(key: key);
 
@@ -237,7 +242,7 @@ class _MyAccountState extends State<MyAccount> {
               Container(
                 child: ElevatedButton(
                     onPressed: () {
-                      //showPopup();
+                      showPopup();
                     },
                     child: Text("حذف الحساب",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
@@ -264,7 +269,79 @@ class _MyAccountState extends State<MyAccount> {
     ),
   );
 
-}
+
+  showPopup() {
+    Alert(
+      style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
+      closeIcon: Container(),
+      context: context,
+      title: "حذف الحساب",
+      desc:
+      "هل أنت متأكد من رغبتك بحذف الحساب؟",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "إلغاء",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.circular(0.0),
+        ),
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حذف",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          // onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+            await DeleteAcc();
+
+
+
+          }, //to do
+          color: Color.fromARGB(255, 200, 62, 62),
+
+        ),
+      ],
+    ).show();
+  }
+
+
+   DeleteAcc() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    user!.delete();
+    showPopup2();
+
+    /*final String uid;
+
+    MyAccount({this.uid});
+
+    final CollectionReference userCollection =
+    Firestore.instance.collection('users');
+    return userCollection.document(uid).delete();*/
+  }
+
+  showPopup2() {
+    Alert(
+      style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
+      context: context,
+      //مو متأكدة من الصورة
+      image:SvgPicture.asset("gs://happypaws-49d3d.appspot.com/green.webp",width: 70,) ,
+      desc: "تم حذف الحساب",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+
+
+
+      ],
+    ).show();
+
+  }
+
+  }
 
 
 
