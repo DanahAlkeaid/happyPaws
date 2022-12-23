@@ -7,6 +7,8 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'clinic_home.dart';
 import 'FirstScreen.dart';
 import 'clinic_services.dart';
+import 'clinicChangeInfo.dart';
+
 class clinicMyAccount extends StatefulWidget{
   const clinicMyAccount({Key? key}) : super(key: key);
 
@@ -284,7 +286,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
               Container(
                 child: ElevatedButton(
                   onPressed: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>clinicChangeInfo()));
                   },
                   child: Text("تعديل المعلومات",
                       style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')
