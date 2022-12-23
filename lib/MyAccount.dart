@@ -278,7 +278,7 @@ class _MyAccountState extends State<MyAccount> {
       context: context,
       title: "حذف الحساب",
       desc:
-      " عند النقر على حذف لا يمكنك التراجع \n هل أنت متأكد من رغبتك بحذف الحساب؟",
+      " هل أنت متأكد من رغبتك بحذف الحساب؟",
       buttons: [
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
@@ -329,8 +329,10 @@ class _MyAccountState extends State<MyAccount> {
     Alert(
       style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
-      //مو متأكدة من الصورة
-      image:SvgPicture.asset("gs://happypaws-49d3d.appspot.com/green.webp",width: 70,) ,
+      //عيت تشتغل الصوره
+      image: Image( width: 70,
+        image: AssetImage("Assets/green.webp"),
+      ),       /*SvgPicture.asset("gs://happypaws-49d3d.appspot.com/green.webp",width: 70,) ,*/
       desc: "تم حذف الحساب",
       closeFunction: null,
       closeIcon: Container(),

@@ -91,6 +91,7 @@ flutter:
     - Assets/profile-icon.png
     - Assets/appointment_confirmed.png
     - Assets/appointment_failed.png
+    - Assets/green.webp
 
 
 
