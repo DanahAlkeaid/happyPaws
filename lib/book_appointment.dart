@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'appointment_confirmed.dart';
-import 'petOwnerHome.dart';
-
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 
 class book_appointments extends StatefulWidget {
   const book_appointments ({Key? key}) : super (key: key);
@@ -12,7 +11,15 @@ class book_appointments extends StatefulWidget {
 }
 
 class _book_appointmentssState extends State<book_appointments> {
+  //variable to store the selected appointment date and time
+  DateTime selectedDate = DateTime.now();
+  DateTime selectedTime = DateTime.now();
 
+  @override
+  void initState() {
+    super.initState();
+    selectedTime = getDateTime();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +60,12 @@ class _book_appointmentssState extends State<book_appointments> {
                 width:16,
               ),
               const Padding(
-                padding:EdgeInsets.fromLTRB(0, 0, 0, 12),
+                padding:EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child:
                 Image(
                   image:AssetImage("Assets/Pet_House.png"),
-                  height:70,
-                  width:70,
+                  height:60,
+                  width:60,
                   fit:BoxFit.contain,
                 ),
               ),
@@ -69,7 +76,7 @@ class _book_appointmentssState extends State<book_appointments> {
                 style:TextStyle(
                   fontWeight:FontWeight.w700,
                   fontFamily: "Almarai",
-                  fontSize:42,
+                  fontSize:30,
                   color:Color(0xff034d23),
                 ),
               ),
@@ -80,7 +87,7 @@ class _book_appointmentssState extends State<book_appointments> {
                 style:TextStyle(
                   fontWeight:FontWeight.w400,
                   fontFamily: "Almarai",
-                  fontSize:27,
+                  fontSize:23,
                   color:Color(0xff009245),
                 ),
               ),
@@ -91,7 +98,7 @@ class _book_appointmentssState extends State<book_appointments> {
                   EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                   label: Text("نوع العيادة"),
                   labelStyle: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w400,
                     fontFamily: "Almarai",
                     color: Color(0xff034d23),
@@ -106,14 +113,14 @@ class _book_appointmentssState extends State<book_appointments> {
               ),
               const Divider(
                 color:Color(0xffbda520),
-                height:16,
+                height:10,
                 thickness:1,
                 indent:0,
                 endIndent:0,
               ),
 
               const SizedBox(
-                height:16,
+                height:12,
                 width:16,
               ),
               const Align(
@@ -125,7 +132,7 @@ class _book_appointmentssState extends State<book_appointments> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:24,
+                    fontSize:20,
                     color:Color(0xff034d23),
                   ),
                 ),
@@ -157,7 +164,7 @@ class _book_appointmentssState extends State<book_appointments> {
                     ),
                   ),
                   const Padding(
-                    padding:EdgeInsets.fromLTRB(59, 0, 0, 0),
+                    padding:EdgeInsets.fromLTRB(78, 0, 0, 0),
                     child:Align(
                       alignment:Alignment.centerRight,
                       child:Text(
@@ -167,7 +174,7 @@ class _book_appointmentssState extends State<book_appointments> {
                         style:TextStyle(
                           fontWeight:FontWeight.w400,
                           fontFamily: "Almarai",
-                          fontSize:24,
+                          fontSize:20,
                           color:Color(0xff034d23),
                         ),
                       ),
@@ -176,11 +183,13 @@ class _book_appointmentssState extends State<book_appointments> {
                 ],),
               const Divider(
                 color:Color(0xffbda520),
-                height:16,
+                height:13,
                 thickness:0,
                 indent:0,
                 endIndent:0,
               ),
+
+
               const Align(
                 alignment:Alignment(1.0, 0.0),
                 child:Text(
@@ -190,14 +199,40 @@ class _book_appointmentssState extends State<book_appointments> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:23,
+                    fontSize:20,
                     color:Color(0xff034d23),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 100)
+              //Date picker
+              SizedBox(
+                height: 120,
+                child:   Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    DatePicker(
+                      DateTime.now(),
+                      width: 70,
+                      height: 100,
+                      initialSelectedDate: DateTime.now(),
+                      selectionColor: Color(0xffD5E694),
+                      selectedTextColor: Color(0xff034d23),
+                      //only show 7 days
+                      daysCount: 7,
+                      locale: "ar",
+                      onDateChange: (date) {
+                        // New date selected
+                        setState(() {
+                          selectedDate = date;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              )
 
+              ,const SizedBox(height: 20)
               ,const Align(
                 alignment:Alignment(1.0, 0.0),
                 child:Text(
@@ -207,15 +242,31 @@ class _book_appointmentssState extends State<book_appointments> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:23,
+                    fontSize:20,
                     color:Color(0xff034d23),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 100)
+              const SizedBox(height: 20)
 
+              //Time picker
+              ,SizedBox(
+                height:100 ,
+                child: CupertinoDatePicker(
+                  minuteInterval: 30,
+                  // initial date time is the dateTime variable
+                  initialDateTime: selectedTime,
+                  onDateTimeChanged:(DateTime newDate) {
+                    setState(() => selectedTime = newDate  );
+                  },
+                  use24hFormat: false,
+                  mode: CupertinoDatePickerMode.time,
+                ),
 
+              )
+
+              ,const SizedBox(height: 25)
               ,ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -235,8 +286,14 @@ class _book_appointmentssState extends State<book_appointments> {
                                 color: Color(0xFFC2D961),
                               )))),
                   child: const Text(" تأكيد الحجز",
-                      style: TextStyle(fontSize: 29, color: Color(0xFF034D23)))),
+                      style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
             ],),),),
     );
   }
+}
+
+DateTime getDateTime() {
+  final now = DateTime.now();
+
+  return DateTime(now.year, now.month, now.day, now.hour, 30);
 }
