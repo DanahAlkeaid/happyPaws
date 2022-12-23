@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/clinicMyAccount.dart';
 
 import 'Alert.dart';
 import 'FirstScreen.dart';
 import 'MyAccount.dart';
 import 'clinic_appointments.dart';
 import 'clinic_services.dart';
+import 'clinicMyAccount.dart';
 
 class clinic_home extends StatefulWidget {
   const clinic_home ({Key? key}) : super (key: key);
@@ -191,7 +193,7 @@ class _clinic_homeState extends State<clinic_home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MyAccount()));
+                            builder: (context) => clinicMyAccount()));
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
