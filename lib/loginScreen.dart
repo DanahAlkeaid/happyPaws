@@ -86,7 +86,7 @@ class _loginScreenState extends State<loginScreen> {
         .get()
         .then((snapshot) {
           print('00000000000000');
-          print(snapshot.docs[0].data()['type']);
+          print(snapshot.docs);
           print('00000000000000');
       //var type = (snapshot.data)['userType'];
       if (snapshot.docs[0].data()["type"] == "clinic") {
