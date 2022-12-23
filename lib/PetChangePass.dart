@@ -12,15 +12,19 @@ class _PetChangePass extends State<PetChangePass>{
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _CurrPassController = TextEditingController();
 
   void dispose() {
     _passwordController.dispose();
+    _CurrPassController.dispose();
     super.dispose();
   }
 
   bool isEightChar = false;
   bool hasUpperChar = false;
   bool _isVisible = false;
+  bool obscure = true;
+  bool error2 = false;
 
   onPasswordChanged(String password) {
     final CharRange = RegExp(r'[A-Z]');
@@ -31,6 +35,18 @@ class _PetChangePass extends State<PetChangePass>{
       hasUpperChar = false;
       if (CharRange.hasMatch(password)) hasUpperChar = true;
     });
+  }
+
+  String? validationCurrent(String? formPassword) {
+    if (formPassword == null || formPassword.trim().isEmpty) {
+      error2 = false;
+      return "Required";
+    }
+    if (error2) {
+      error2 = false;
+      return "Wrong Password";
+    }
+    return null;
   }
 
   @override
@@ -109,6 +125,10 @@ class _PetChangePass extends State<PetChangePass>{
                                 color: Colors.grey.withOpacity(0.26))
                           ]),
                       child: TextField(
+                        onChanged: (password) =>
+                            validationCurrent(password),
+                        obscureText: obscure,
+                        controller: _CurrPassController,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -323,7 +343,5 @@ class _PetChangePass extends State<PetChangePass>{
     ),
 
   );
-
-
 
 }
