@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:untitled/FirstScreen.dart';
 import 'package:untitled/gpi_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/link.dart';
 import 'petOwnerHome.dart';
 import 'MyAccount.dart';
 import 'Alert.dart';
 import 'gpi_page.dart';
 import 'FirstScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/src/services/platform_channel.dart';
+import 'package:url_launcher/src/link.dart';
+
 class NavigationDrawer extends StatefulWidget{
   const NavigationDrawer({Key? key}) : super(key: key);
 
@@ -92,13 +99,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
           const Divider(color: Colors.black54,),
           Text('تواصل معنا',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-          ListTile(
+
+          Link(
+            target: LinkTarget.blank,
+            uri: Uri.parse('https://twitter.com/Happypaws_app'),
+            builder: (context, followLink)=>ListTile(
             title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
-            onTap: (){
-              Uri.parse('https://www.twitter.com');
-            },
+            onTap: followLink,
+            //Uri.parse('https://www.twitter.com');
+            ),
           ),
+
           ListTile(
             title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
