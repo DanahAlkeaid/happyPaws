@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/FirstScreen.dart';
 import 'package:untitled/petOwnerHome.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'ChangeInfo.dart';
@@ -277,16 +278,16 @@ class _MyAccountState extends State<MyAccount> {
       context: context,
       title: "حذف الحساب",
       desc:
-      "هل أنت متأكد من رغبتك بحذف الحساب؟",
+      " عند النقر على حذف لا يمكنك التراجع \n هل أنت متأكد من رغبتك بحذف الحساب؟",
       buttons: [
         DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
             "إلغاء",
             style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
           ),
           onPressed: () => Navigator.pop(context),
           color: Color(0xFFC2D961),
-          radius: BorderRadius.circular(0.0),
         ),
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
@@ -313,6 +314,7 @@ class _MyAccountState extends State<MyAccount> {
     User? user = FirebaseAuth.instance.currentUser;
     user!.delete();
     showPopup2();
+    showPopup2();
 
     /*final String uid;
 
@@ -333,9 +335,23 @@ class _MyAccountState extends State<MyAccount> {
       closeFunction: null,
       closeIcon: Container(),
       buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          // onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => FirstScreen()));
 
 
 
+          }, //to do
+          color: Color(0xFFC2D961),
+
+        ),
       ],
     ).show();
 
