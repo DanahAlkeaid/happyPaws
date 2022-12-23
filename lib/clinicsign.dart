@@ -85,7 +85,14 @@ class _clinicsign extends State<clinicsign> {
       'email': email, //'smth@gmail.com'
       'phonenumber': phoneNumber,
       'type': 'clinic',
-      'description': location});
+      'description': location,
+      'profilepic':'',
+      'rate': 0,
+      'services.خدمات التنظيف والتنزيين':[null],
+      'services.خدمات علاجية':[null],
+      'services.خدمات متنقلة':[null],
+      'services.أخرى':[null]
+    });
   }
 
 
