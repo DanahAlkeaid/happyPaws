@@ -26,7 +26,7 @@ class _MyAccountState extends State<MyAccount> {
           color: Color(0xff034d23),
           iconSize: 36,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>petOwnerHome()));
           },
         ),
         flexibleSpace: Container(

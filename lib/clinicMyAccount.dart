@@ -26,7 +26,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
           color: Color(0xff034d23),
           iconSize: 36,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>clinic_home()));
           },
         ),
         flexibleSpace: Container(
