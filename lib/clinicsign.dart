@@ -88,12 +88,17 @@ class _clinicsign extends State<clinicsign> {
       'description': location,
       'profilepic':'',
       'rate': 0,
-      'services':[{'خدمات التنظيف والتنزيين': [null],
+      'services':{{'خدمات التنظيف والتنزيين'},
+        {'خدمات علاجية'},
+        {'خدمات متنقلة'},
+        {'أخرى'}
+      }}
+      /*'services':[{'خدمات التنظيف والتنزيين': [null],
         'خدمات علاجية':[null],
         'خدمات متنقلة':[null],
         'أخرى':[null]
-      }],
-    });
+      }],*/
+    );
   }
 
 
