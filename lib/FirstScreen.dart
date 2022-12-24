@@ -129,7 +129,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                         builder: (context) => clinic_home()));
+                         builder: (context) => petOwnerHome()));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),
