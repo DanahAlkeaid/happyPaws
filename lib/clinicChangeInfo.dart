@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/clinicMyAccount.dart';
-import 'clinicMyAccount.dart';
 import 'clinicChangePass.dart';
 
 class clinicChangeInfo extends StatefulWidget{

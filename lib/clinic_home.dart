@@ -6,7 +6,7 @@ import 'FirstScreen.dart';
 import 'MyAccount.dart';
 import 'clinic_appointments.dart';
 import 'clinic_services.dart';
-import 'clinicMyAccount.dart';
+
 
 class clinic_home extends StatefulWidget {
   const clinic_home ({Key? key}) : super (key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'clinic_services.dart';
+
 
 class addTruck extends StatefulWidget {
   const addTruck ({Key? key}) : super (key: key);

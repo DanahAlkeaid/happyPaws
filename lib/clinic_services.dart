@@ -5,9 +5,6 @@ import 'package:untitled/addOther.dart';
 import 'package:untitled/addTruck.dart';
 import 'package:untitled/editOther.dart';
 import 'package:untitled/editTruck.dart';
-import 'clinic_home.dart';
-import 'service_details.dart';
-import 'addGrooming.dart';
 import 'editGrooming.dart';
 import 'editMedical.dart';
 

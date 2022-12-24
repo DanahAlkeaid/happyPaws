@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'clinic_home.dart';
 
 class clinic_appointments extends StatefulWidget {
   const clinic_appointments ({Key? key}) : super (key: key);
