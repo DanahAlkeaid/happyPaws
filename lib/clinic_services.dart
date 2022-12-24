@@ -446,7 +446,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ],),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    padding:const EdgeInsets.fromLTRB(0, 0, 2, 0),
                     child:MaterialButton(
                       onPressed:(){},
                       color:const Color(0xfffaf7f4),
@@ -606,7 +606,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ],),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(50, 0, 0, 0),
+                    padding:const EdgeInsets.fromLTRB(51, 0, 0, 0),
                     child:MaterialButton(
                       onPressed:(){},
                       color:const Color(0xfffaf7f4),
