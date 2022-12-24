@@ -3,6 +3,7 @@ import 'package:untitled/ChangeInfo.dart';
 import 'package:untitled/appointment_confirmed.dart';
 import 'package:untitled/appointment_failed.dart';
 import 'package:untitled/petOwnerHome.dart';
+import 'clinic_services.dart';
 import 'main.dart';
 import 'signupScreen.dart';
 import 'loginScreen.dart';
@@ -129,7 +130,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                         builder: (context) => petOwnerHome()));
+                         builder: (context) => clinic_services()));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),

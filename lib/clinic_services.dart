@@ -9,15 +9,18 @@ import 'editGrooming.dart';
 import 'editMedical.dart';
 
 class clinic_services extends StatefulWidget {
-  final String email;
-  //const clinic_services ({Key? key}) : super (key: key);
-  const clinic_services(this.email, {super.key});
+  const clinic_services ({Key? key}) : super (key: key);
 
   @override
   State<clinic_services> createState() => _clinic_servicesState();
 }
 
 class _clinic_servicesState extends State<clinic_services> {
+  //Variables to control the visibility of the secondary services
+  bool show_grooming_services = false;
+  bool show_medical_services = false;
+  bool show_truck_services = false;
+  bool show_others_services = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +78,13 @@ class _clinic_servicesState extends State<clinic_services> {
                 ),
               ),
 
-
-
              // add service
-
-
               const SizedBox(
                 height:16,
                 width:16,
               ),
+
+              //Service categories
 
               //grooming services
               Row(
@@ -149,83 +150,83 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:140,
                     ),
                   ),
-                  const Icon(
-                    Icons.expand_more,
-                    color:Color(0xff034d23),
-                    size:37,
+                  IconButton(
+                    icon: const Icon(Icons.expand_more),
+                    color: Color(0xff034d23),
+                    iconSize: 37,
+                    onPressed: () {
+                      setState(() {
+                        show_grooming_services = !show_grooming_services;
+                      });
+                    },
                   ),
                 ],),
               const Divider(
                 color:Color(0xffbda520),
                 height:12,
-                thickness:0,
+                thickness:1,
                 indent:6,
                 endIndent:8,
               ),
-              Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
 
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child:Icon(
-                      Icons.delete,
-                      color:Color(0xff034d23),
-                      size:24,
+              //secondary grooming services
+              Visibility(
+                visible: show_grooming_services,
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  crossAxisAlignment:CrossAxisAlignment.center,
+                  mainAxisSize:MainAxisSize.max,
+                  children:[
+
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child:Icon(
+                        Icons.delete,
+                        color:Color(0xff034d23),
+                        size:24,
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed:(){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => editGrooming()));
-                    },
-                    color:const Color(0xfffaf7f4),
-                    elevation:0,
-                    shape:const RoundedRectangleBorder(
-                      borderRadius:BorderRadius.zero,
-                      side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    MaterialButton(
+                      onPressed:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => editGrooming()));
+                      },
+                      color:const Color(0xfffaf7f4),
+                      elevation:0,
+                      shape:const RoundedRectangleBorder(
+                        borderRadius:BorderRadius.zero,
+                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      ),
+                      padding:const EdgeInsets.all(16),
+                      child:const Text("تعديل", style: TextStyle( fontSize:14,
+                        fontWeight:FontWeight.w400,
+                        fontFamily: "Elmessiri",
+                      ),),
+                      textColor:const Color(0xff034d23),
+                      height:10,
+                      minWidth:12,
                     ),
-                    padding:const EdgeInsets.all(16),
-                    child:const Text("تعديل", style: TextStyle( fontSize:14,
-                      fontWeight:FontWeight.w400,
-                      fontFamily: "Elmessiri",
-                    ),),
-                    textColor:const Color(0xff034d23),
-                    height:10,
-                    minWidth:12,
-                  ),
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                    child:Align(
-                      alignment:Alignment(0.5, 0.0),
-                      child:Text(
-                        "الخدمة الفرعية",
-                        textAlign: TextAlign.start,
-                        overflow:TextOverflow.clip,
-                        style:TextStyle(
-                          fontWeight:FontWeight.w400,
-                          fontFamily: "Elmessiri",
-                          fontSize:16,
-                          color:Color(0xff009245),
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment(0.5, 0.0),
+                        child:Text(
+                          "الخدمة الفرعية",
+                          textAlign: TextAlign.start,
+                          overflow:TextOverflow.clip,
+                          style:TextStyle(
+                            fontWeight:FontWeight.w400,
+                            fontFamily: "Elmessiri",
+                            fontSize:16,
+                            color:Color(0xff009245),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],),
-
-              const Divider(
-                color:Color(0xffbda520),
-                height:16,
-                thickness:0,
-                indent:0,
-                endIndent:0,
+                  ],),
               ),
-
-
 
               //medical services
               Row(
@@ -291,82 +292,83 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:140,
                     ),
                   ),
-                  const Icon(
-                    Icons.expand_more,
-                    color:Color(0xff034d23),
-                    size:37,
+                  IconButton(
+                    icon: const Icon(Icons.expand_more),
+                    color: Color(0xff034d23),
+                    iconSize: 37,
+                    onPressed: () {
+                      setState(() {
+                        show_medical_services = !show_medical_services;
+                      });
+                    },
                   ),
                 ],),
               const Divider(
                 color:Color(0xffbda520),
                 height:12,
-                thickness:0,
+                thickness:1,
                 indent:6,
                 endIndent:8,
               ),
-              Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
 
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child:Icon(
-                      Icons.delete,
-                      color:Color(0xff034d23),
-                      size:24,
+              //secondary medical services
+              Visibility(
+                visible: show_medical_services,
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  crossAxisAlignment:CrossAxisAlignment.center,
+                  mainAxisSize:MainAxisSize.max,
+                  children:[
+
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child:Icon(
+                        Icons.delete,
+                        color:Color(0xff034d23),
+                        size:24,
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed:(){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => editMedical()));
-                    },
-                    color:const Color(0xfffaf7f4),
-                    elevation:0,
-                    shape:const RoundedRectangleBorder(
-                      borderRadius:BorderRadius.zero,
-                      side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    MaterialButton(
+                      onPressed:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => editMedical()));
+                      },
+                      color:const Color(0xfffaf7f4),
+                      elevation:0,
+                      shape:const RoundedRectangleBorder(
+                        borderRadius:BorderRadius.zero,
+                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      ),
+                      padding:const EdgeInsets.all(16),
+                      child:const Text("تعديل", style: TextStyle( fontSize:14,
+                        fontWeight:FontWeight.w400,
+                        fontFamily: "Elmessiri",
+                      ),),
+                      textColor:const Color(0xff034d23),
+                      height:10,
+                      minWidth:12,
                     ),
-                    padding:const EdgeInsets.all(16),
-                    child:const Text("تعديل", style: TextStyle( fontSize:14,
-                      fontWeight:FontWeight.w400,
-                      fontFamily: "Elmessiri",
-                    ),),
-                    textColor:const Color(0xff034d23),
-                    height:10,
-                    minWidth:12,
-                  ),
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                    child:Align(
-                      alignment:Alignment(0.5, 0.0),
-                      child:Text(
-                        "الخدمة الفرعية",
-                        textAlign: TextAlign.start,
-                        overflow:TextOverflow.clip,
-                        style:TextStyle(
-                          fontWeight:FontWeight.w400,
-                          fontFamily: "Elmessiri",
-                          fontSize:16,
-                          color:Color(0xff009245),
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment(0.5, 0.0),
+                        child:Text(
+                          "الخدمة الفرعية",
+                          textAlign: TextAlign.start,
+                          overflow:TextOverflow.clip,
+                          style:TextStyle(
+                            fontWeight:FontWeight.w400,
+                            fontFamily: "Elmessiri",
+                            fontSize:16,
+                            color:Color(0xff009245),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],),
-
-              const Divider(
-                color:Color(0xffbda520),
-                height:16,
-                thickness:0,
-                indent:0,
-                endIndent:0,
+                  ],),
               ),
-
 
               //truck services
               Row(
@@ -432,83 +434,83 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:140,
                     ),
                   ),
-                  const Icon(
-                    Icons.expand_more,
-                    color:Color(0xff034d23),
-                    size:37,
+                  IconButton(
+                    icon: const Icon(Icons.expand_more),
+                    color: Color(0xff034d23),
+                    iconSize: 37,
+                    onPressed: () {
+                      setState(() {
+                        show_truck_services = !show_truck_services;
+                      });
+                    },
                   ),
                 ],),
               const Divider(
                 color:Color(0xffbda520),
                 height:12,
-                thickness:0,
+                thickness:1,
                 indent:6,
                 endIndent:8,
               ),
-              Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
 
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child:Icon(
-                      Icons.delete,
-                      color:Color(0xff034d23),
-                      size:24,
+              //secondary truck services
+              Visibility(
+                visible: show_truck_services,
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  crossAxisAlignment:CrossAxisAlignment.center,
+                  mainAxisSize:MainAxisSize.max,
+                  children:[
+
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child:Icon(
+                        Icons.delete,
+                        color:Color(0xff034d23),
+                        size:24,
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed:(){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => editTruck()));
-                    },
-                    color:const Color(0xfffaf7f4),
-                    elevation:0,
-                    shape:const RoundedRectangleBorder(
-                      borderRadius:BorderRadius.zero,
-                      side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    MaterialButton(
+                      onPressed:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => editTruck()));
+                      },
+                      color:const Color(0xfffaf7f4),
+                      elevation:0,
+                      shape:const RoundedRectangleBorder(
+                        borderRadius:BorderRadius.zero,
+                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      ),
+                      padding:const EdgeInsets.all(16),
+                      child:const Text("تعديل", style: TextStyle( fontSize:14,
+                        fontWeight:FontWeight.w400,
+                        fontFamily: "Elmessiri",
+                      ),),
+                      textColor:const Color(0xff034d23),
+                      height:10,
+                      minWidth:12,
                     ),
-                    padding:const EdgeInsets.all(16),
-                    child:const Text("تعديل", style: TextStyle( fontSize:14,
-                      fontWeight:FontWeight.w400,
-                      fontFamily: "Elmessiri",
-                    ),),
-                    textColor:const Color(0xff034d23),
-                    height:10,
-                    minWidth:12,
-                  ),
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                    child:Align(
-                      alignment:Alignment(0.5, 0.0),
-                      child:Text(
-                        "الخدمة الفرعية",
-                        textAlign: TextAlign.start,
-                        overflow:TextOverflow.clip,
-                        style:TextStyle(
-                          fontWeight:FontWeight.w400,
-                          fontFamily: "Elmessiri",
-                          fontSize:16,
-                          color:Color(0xff009245),
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment(0.5, 0.0),
+                        child:Text(
+                          "الخدمة الفرعية",
+                          textAlign: TextAlign.start,
+                          overflow:TextOverflow.clip,
+                          style:TextStyle(
+                            fontWeight:FontWeight.w400,
+                            fontFamily: "Elmessiri",
+                            fontSize:16,
+                            color:Color(0xff009245),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],),
-
-              const Divider(
-                color:Color(0xffbda520),
-                height:16,
-                thickness:0,
-                indent:0,
-                endIndent:0,
+                  ],),
               ),
-
-
 
               // other services
               Row(
@@ -574,81 +576,85 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:140,
                     ),
                   ),
-                  const Icon(
-                    Icons.expand_more,
-                    color:Color(0xff034d23),
-                    size:37,
+                  IconButton(
+                    icon: const Icon(Icons.expand_more),
+                    color: Color(0xff034d23),
+                    iconSize: 37,
+                    onPressed: () {
+                      setState(() {
+                        show_others_services = !show_others_services;
+                      });
+                    },
                   ),
                 ],),
               const Divider(
                 color:Color(0xffbda520),
                 height:12,
-                thickness:0,
+                thickness:1,
                 indent:6,
                 endIndent:8,
               ),
-              Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
 
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child:Icon(
-                      Icons.delete,
-                      color:Color(0xff034d23),
-                      size:24,
+              //secondary other services
+              Visibility(
+                visible: show_others_services,
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  crossAxisAlignment:CrossAxisAlignment.center,
+                  mainAxisSize:MainAxisSize.max,
+                  children:[
+
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child:Icon(
+                        Icons.delete,
+                        color:Color(0xff034d23),
+                        size:24,
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed:(){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => editOther()));
-                    },
-                    color:const Color(0xfffaf7f4),
-                    elevation:0,
-                    shape:const RoundedRectangleBorder(
-                      borderRadius:BorderRadius.zero,
-                      side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    MaterialButton(
+                      onPressed:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => editOther()));
+                      },
+                      color:const Color(0xfffaf7f4),
+                      elevation:0,
+                      shape:const RoundedRectangleBorder(
+                        borderRadius:BorderRadius.zero,
+                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      ),
+                      padding:const EdgeInsets.all(16),
+                      child:const Text("تعديل", style: TextStyle( fontSize:14,
+                        fontWeight:FontWeight.w400,
+                        fontFamily: "Elmessiri",
+                      ),),
+                      textColor:const Color(0xff034d23),
+                      height:10,
+                      minWidth:12,
                     ),
-                    padding:const EdgeInsets.all(16),
-                    child:const Text("تعديل", style: TextStyle( fontSize:14,
-                      fontWeight:FontWeight.w400,
-                      fontFamily: "Elmessiri",
-                    ),),
-                    textColor:const Color(0xff034d23),
-                    height:10,
-                    minWidth:12,
-                  ),
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                    child:Align(
-                      alignment:Alignment(0.5, 0.0),
-                      child:Text(
-                        "الخدمة الفرعية",
-                        textAlign: TextAlign.start,
-                        overflow:TextOverflow.clip,
-                        style:TextStyle(
-                          fontWeight:FontWeight.w400,
-                          fontFamily: "Elmessiri",
-                          fontSize:16,
-                          color:Color(0xff009245),
+                    const Padding(
+                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment(0.5, 0.0),
+                        child:Text(
+                          "الخدمة الفرعية",
+                          textAlign: TextAlign.start,
+                          overflow:TextOverflow.clip,
+                          style:TextStyle(
+                            fontWeight:FontWeight.w400,
+                            fontFamily: "Elmessiri",
+                            fontSize:16,
+                            color:Color(0xff009245),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],),
-
-              const Divider(
-                color:Color(0xffbda520),
-                height:16,
-                thickness:0,
-                indent:0,
-                endIndent:0,
+                  ],),
               ),
+
+
             ],),),),
 
     );
