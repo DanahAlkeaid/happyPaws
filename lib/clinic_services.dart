@@ -147,15 +147,18 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:140,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.expand_more),
-                    color: Color(0xff034d23),
-                    iconSize: 37,
-                    onPressed: () {
-                      setState(() {
-                        show_grooming_services = !show_grooming_services;
-                      });
-                    },
+                  Padding(
+                    padding:const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                    child: IconButton(
+                      icon: const Icon(Icons.expand_more),
+                      color: Color(0xff034d23),
+                      iconSize: 37,
+                      onPressed: () {
+                        setState(() {
+                          show_grooming_services = !show_grooming_services;
+                        });
+                      },
+                    ),
                   ),
                 ],),
               const Divider(
@@ -175,14 +178,34 @@ class _clinic_servicesState extends State<clinic_services> {
                   mainAxisSize:MainAxisSize.max,
                   children:[
 
-                    const Padding(
-                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child:Icon(
-                        Icons.delete,
-                        color:Color(0xff034d23),
-                        size:24,
+                    Padding(
+                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment.center,
+                        child: TextButton(
+                          onPressed:(){},
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("", style: TextStyle( fontSize:14,
+                                fontWeight:FontWeight.w400,
+                                fontFamily: "Elmessiri",
+                                color: Color(0xff034d23),
+                              ),), // <-- Text
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Icon( // <-- Icon
+                                Icons.delete,
+                                color:Color(0xff034d23),
+                                size: 24.0,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
+
                     MaterialButton(
                       onPressed:(){
                         Navigator.push(
@@ -196,7 +219,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         borderRadius:BorderRadius.zero,
                         side:BorderSide(color:Color(0xfffaf7f4),width:1),
                       ),
-                      padding:const EdgeInsets.all(16),
+                      padding:const EdgeInsets.all(0),
                       child:const Text("تعديل", style: TextStyle( fontSize:14,
                         fontWeight:FontWeight.w400,
                         fontFamily: "Elmessiri",
@@ -206,7 +229,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:12,
                     ),
                     const Padding(
-                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      padding:EdgeInsets.fromLTRB(66, 0, 0, 0),
                       child:Align(
                         alignment:Alignment(0.5, 0.0),
                         child:Text(
@@ -313,12 +336,31 @@ class _clinic_servicesState extends State<clinic_services> {
                   mainAxisSize:MainAxisSize.max,
                   children:[
 
-                    const Padding(
-                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child:Icon(
-                        Icons.delete,
-                        color:Color(0xff034d23),
-                        size:24,
+                    Padding(
+                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment.center,
+                        child: TextButton(
+                          onPressed:(){},
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("", style: TextStyle( fontSize:14,
+                                fontWeight:FontWeight.w400,
+                                fontFamily: "Elmessiri",
+                                color: Color(0xff034d23),
+                              ),), // <-- Text
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Icon( // <-- Icon
+                                Icons.delete,
+                                color:Color(0xff034d23),
+                                size: 24.0,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     MaterialButton(
@@ -334,7 +376,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         borderRadius:BorderRadius.zero,
                         side:BorderSide(color:Color(0xfffaf7f4),width:1),
                       ),
-                      padding:const EdgeInsets.all(16),
+                      padding:const EdgeInsets.all(0),
                       child:const Text("تعديل", style: TextStyle( fontSize:14,
                         fontWeight:FontWeight.w400,
                         fontFamily: "Elmessiri",
@@ -454,12 +496,31 @@ class _clinic_servicesState extends State<clinic_services> {
                   mainAxisSize:MainAxisSize.max,
                   children:[
 
-                    const Padding(
-                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child:Icon(
-                        Icons.delete,
-                        color:Color(0xff034d23),
-                        size:24,
+                    Padding(
+                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment.center,
+                        child: TextButton(
+                          onPressed:(){},
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("", style: TextStyle( fontSize:14,
+                                fontWeight:FontWeight.w400,
+                                fontFamily: "Elmessiri",
+                                color: Color(0xff034d23),
+                              ),), // <-- Text
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Icon( // <-- Icon
+                                Icons.delete,
+                                color:Color(0xff034d23),
+                                size: 24.0,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     MaterialButton(
@@ -475,7 +536,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         borderRadius:BorderRadius.zero,
                         side:BorderSide(color:Color(0xfffaf7f4),width:1),
                       ),
-                      padding:const EdgeInsets.all(16),
+                      padding:const EdgeInsets.all(0),
                       child:const Text("تعديل", style: TextStyle( fontSize:14,
                         fontWeight:FontWeight.w400,
                         fontFamily: "Elmessiri",
@@ -564,15 +625,18 @@ class _clinic_servicesState extends State<clinic_services> {
                       minWidth:140,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.expand_more),
-                    color: Color(0xff034d23),
-                    iconSize: 37,
-                    onPressed: () {
-                      setState(() {
-                        show_others_services = !show_others_services;
-                      });
-                    },
+                  Padding(
+                    padding:const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                    child: IconButton(
+                      icon: const Icon(Icons.expand_more),
+                      color: Color(0xff034d23),
+                      iconSize: 37,
+                      onPressed: () {
+                        setState(() {
+                          show_others_services = !show_others_services;
+                        });
+                      },
+                    ),
                   ),
                 ],),
               const Divider(
@@ -592,12 +656,31 @@ class _clinic_servicesState extends State<clinic_services> {
                   mainAxisSize:MainAxisSize.max,
                   children:[
 
-                    const Padding(
-                      padding:EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child:Icon(
-                        Icons.delete,
-                        color:Color(0xff034d23),
-                        size:24,
+                    Padding(
+                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child:Align(
+                        alignment:Alignment.center,
+                        child: TextButton(
+                          onPressed:(){},
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("", style: TextStyle( fontSize:14,
+                                fontWeight:FontWeight.w400,
+                                fontFamily: "Elmessiri",
+                                color: Color(0xff034d23),
+                              ),), // <-- Text
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Icon( // <-- Icon
+                                Icons.delete,
+                                color:Color(0xff034d23),
+                                size: 24.0,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     MaterialButton(
@@ -613,7 +696,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         borderRadius:BorderRadius.zero,
                         side:BorderSide(color:Color(0xfffaf7f4),width:1),
                       ),
-                      padding:const EdgeInsets.all(16),
+                      padding:const EdgeInsets.all(0),
                       child:const Text("تعديل", style: TextStyle( fontSize:14,
                         fontWeight:FontWeight.w400,
                         fontFamily: "Elmessiri",
