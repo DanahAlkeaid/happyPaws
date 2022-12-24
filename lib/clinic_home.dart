@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/clinicMyAccount.dart';
 
@@ -16,8 +18,63 @@ class clinic_home extends StatefulWidget {
 }
 
 class _clinic_homeState extends State<clinic_home> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var cEmail;
+  var cName='';
+ // var requestID;
+ // late String category;
+ // late FirebaseMessaging messaging;
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    clName();
+    openCollection();
+
+
+  }
+
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('mlEmail', isEqualTo: '${cEmail}')
+        .snapshots();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+
+    cEmail = user.email;
+
+    print(cEmail) ;
+
+  }
+
+
+   clName()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${cEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs);
+      var clinicName=snapshot.docs[0].data()['firstname'];
+
+
+      setState(() {
+        cName='${clinicName} ';
+
+        print(cName);
+
+        // print(exBio);
+
+
+      });
+
+    }); }
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xfffaf7f4),
@@ -54,6 +111,7 @@ class _clinic_homeState extends State<clinic_home> {
               ,Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
+
                   //Heading
                   Text("! مرحبًا  "
                       ,style:TextStyle(
@@ -68,14 +126,14 @@ class _clinic_homeState extends State<clinic_home> {
               //ClinicName
               Container(child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("  عيادة" //Get Clinic Name From DB
+                children:  [
+                  Text(' عيادة ${cName}' //Get Clinic Name From DB
                       ,style:TextStyle(
-                        fontFamily: "Almarai",
+                       fontFamily: "Almarai",
                         fontSize: 30,
                         color: Color(0xff034D23),
                       )
-                  )
+                  ),
                 ],))
               ,const SizedBox(height: 12)
 
@@ -282,3 +340,5 @@ class _clinic_homeState extends State<clinic_home> {
     );
   }
 }
+
+
