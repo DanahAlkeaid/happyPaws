@@ -86,19 +86,24 @@ class _clinicsign extends State<clinicsign> {
       'phonenumber': phoneNumber,
       'type': 'clinic',
       'description': location,
-      'profilepic':'',
-      'rate': 0,
-      'services':[[{'خدمات التنظيف والتنزيين'}],
+      'profilepic': '',
+      'rate': null,
+      /*'services':[[{'خدمات التنظيف والتنزيين'}],
         [{'خدمات علاجية'}],
         [{'خدمات متنقلة'}],
-       [ {'أخرى'}]]
+       [ {'أخرى'}]]*/
+      'services': {'خدمات التنظيف والتنزيين': {'null' :['الاسم' , 'السعر']},
+        'خدمات علاجية': {'null' :[null]},
+        'خدمات متنقلة': {'null' :[null]},
+        'أخرى': {'null' :[null]}
       }
-      /*'services':[{'خدمات التنظيف والتنزيين': [null],
-        'خدمات علاجية':[null],
-        'خدمات متنقلة':[null],
-        'أخرى':[null]
-      }],*/
-    );
+    /*'services': {[{'خدمات التنظيف والتنزيين': [null],
+        'خدمات علاجية': [null],
+        'خدمات متنقلة': [null],
+        'أخرى': [null]
+      }]}*/
+      ,
+    } );
   }
 
 
