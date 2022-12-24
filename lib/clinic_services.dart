@@ -3,9 +3,13 @@ import 'package:untitled/addGrooming.dart';
 import 'package:untitled/addMedical.dart';
 import 'package:untitled/addOther.dart';
 import 'package:untitled/addTruck.dart';
+import 'package:untitled/editOther.dart';
+import 'package:untitled/editTruck.dart';
 import 'clinic_home.dart';
 import 'service_details.dart';
 import 'addGrooming.dart';
+import 'editGrooming.dart';
+import 'editMedical.dart';
 
 class clinic_services extends StatefulWidget {
   const clinic_services ({Key? key}) : super (key: key);
@@ -178,7 +182,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => service_details()));
+                              builder: (context) => editGrooming()));
                     },
                     color:const Color(0xfffaf7f4),
                     elevation:0,
@@ -320,7 +324,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => service_details()));
+                              builder: (context) => editMedical()));
                     },
                     color:const Color(0xfffaf7f4),
                     elevation:0,
@@ -461,7 +465,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => service_details()));
+                              builder: (context) => editTruck()));
                     },
                     color:const Color(0xfffaf7f4),
                     elevation:0,
@@ -603,7 +607,7 @@ class _clinic_servicesState extends State<clinic_services> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => service_details()));
+                              builder: (context) => editOther()));
                     },
                     color:const Color(0xfffaf7f4),
                     elevation:0,
