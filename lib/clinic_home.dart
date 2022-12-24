@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:untitled/clinicMyAccount.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Alert.dart';
 import 'FirstScreen.dart';
@@ -102,8 +105,8 @@ class _clinic_homeState extends State<clinic_home> {
                       ,fit: BoxFit.contain
                       ,image: AssetImage("Assets/App_Logo.png"
                       ),
-                    width: 130,
-                    height: 130,
+                    width: 110,
+                    height: 110,
                   )
               )
 
@@ -129,7 +132,7 @@ class _clinic_homeState extends State<clinic_home> {
                 children:  [
                   Text(' عيادة ${cName}' //Get Clinic Name From DB
                       ,style:TextStyle(
-                       fontFamily: "Almarai",
+                       fontFamily: "Tajawal",
                         fontSize: 30,
                         color: Color(0xff034D23),
                       )
@@ -270,7 +273,7 @@ class _clinic_homeState extends State<clinic_home> {
 
               ,const SizedBox(height: 15)
 
-              ,Container(
+              /*,Container(
                 height: 60,
                 width: 270,
                 decoration: BoxDecoration(
@@ -299,9 +302,9 @@ class _clinic_homeState extends State<clinic_home> {
                                 )))),
                     child: const Text(" تواصل معنا",
                         style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
-              )
+              )*/
 
-              ,const SizedBox(height: 15)
+             /* ,const SizedBox(height: 15)*/
 
               ,Container(
                 height: 60,
@@ -332,7 +335,44 @@ class _clinic_homeState extends State<clinic_home> {
                                 )))),
                     child: const Text(" تسجيل الخروج",
                         style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
-              )
+              ),
+Row(children: [SizedBox(width: 150,),Expanded(child: Container(
+
+    child: Link(
+      target: LinkTarget.blank,
+      uri: Uri.parse('https://twitter.com/Happypaws_app'),
+      builder: (context, followLink)=>ListTile(
+
+        leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
+        onTap: followLink,
+      ),
+    ),)),
+Expanded(child: Container(
+  child:  ListTile(
+    title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
+    leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
+    onTap: () async{
+      final toEmail='HappyPawsApp@hotmail.com';
+      final url='mailto:$toEmail';
+      if(await canLaunch (url)){
+        await launch(url);
+      }
+    },
+  ),
+) ,)
+
+,SizedBox(width: 150,)
+],),
+
+/*Row(mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+
+
+
+
+
+],),*/
+
 
             ],),
           ),
