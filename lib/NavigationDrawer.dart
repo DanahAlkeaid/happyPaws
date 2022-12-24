@@ -107,18 +107,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
             onTap: followLink,
-            //Uri.parse('https://www.twitter.com');
             ),
           ),
 
           ListTile(
             title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
             leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
-            onTap: (){
-              Uri(
-                scheme: 'mailto',
-                path: 'HappyPaws_App@hotmail.com',
-              );
+            onTap: () async{
+              final toEmail='HappyPawsApp@hotmail.com';
+              final url='mailto:$toEmail';
+              if(await canLaunch (url)){
+                await launch(url);
+              }
             },
           )
         ],
