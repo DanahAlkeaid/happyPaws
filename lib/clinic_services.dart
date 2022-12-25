@@ -9,6 +9,8 @@ import 'editGrooming.dart';
 import 'editMedical.dart';
 
 class clinic_services extends StatefulWidget {
+  // final String email;
+  // const clinic_services(this.email, {super.key});
   const clinic_services ({Key? key}) : super (key: key);
 
   @override
