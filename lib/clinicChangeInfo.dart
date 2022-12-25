@@ -1,9 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/clinicMyAccount.dart';
 import 'clinicChangePass.dart';
 
+
 class clinicChangeInfo extends StatefulWidget{
-  const clinicChangeInfo({Key? key}) : super(key: key);
+
+  final cName;
+  final cLocation;
+  final cPhonenumber;
+  final cEmail;
+  const clinicChangeInfo(this.cName, this.cLocation, this.cPhonenumber, this.cEmail, {super.key} );
 
   @override
   State<clinicChangeInfo> createState() => _clinicChangeInfo();
@@ -11,14 +19,15 @@ class clinicChangeInfo extends StatefulWidget{
 
 class _clinicChangeInfo extends State<clinicChangeInfo> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstnameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phonenumberController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
+  late TextEditingController _firstnameController = TextEditingController(text:widget.cName);
+  late TextEditingController _emailController = TextEditingController(text:widget.cEmail);
+  late TextEditingController _phonenumberController = TextEditingController(text:widget.cPhonenumber);
+  late TextEditingController _locationController = TextEditingController(text:widget.cLocation);
 
   String errorMessage = '';
   var loading = false;
-
+var doc_id;
+var nameValue;
   void dispose() {
     _firstnameController.dispose();
     _emailController.dispose();
@@ -315,7 +324,7 @@ class _clinicChangeInfo extends State<clinicChangeInfo> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> clinicMyAccount()));
-                    },
+                    },child: ElevatedButton(onPressed:(){SaveEdit();},
                     child: Text("حفظ التعديلات",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                     style: ButtonStyle(
@@ -330,12 +339,12 @@ class _clinicChangeInfo extends State<clinicChangeInfo> {
                                 )))),
                   ),
                 ),
-
+                ),
                 Container(
                   height: 100,
                 )
 
-              ],
+                ],
             ),
 
           ),
@@ -379,4 +388,54 @@ class _clinicChangeInfo extends State<clinicChangeInfo> {
     return null;
   }
 
-}
+  SaveEdit() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        //  uploadimage(profilePic);
+        setState(() {
+          nameValue = _firstnameController.text;
+        });
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: '${widget.cEmail}')
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            doc_id = element.id;
+            print(doc_id);
+          });
+        });
+        var imge = await FirebaseFirestore.instance
+            .collection('Users')
+            .doc('${doc_id}').update({
+          'description': _locationController.text.trim(),
+          'firstname': _firstnameController.text.trim(),
+          'phonenumber': _phonenumberController.text.trim()
+        }
+        );
+        Navigator.of(context).pop();
+        showPopup();
+      }
+      catch (error) {
+        print("$error");
+      }
+    } else {
+      print("حدث خطأ");
+    }
+  }
+    showPopup() {
+      Alert(
+        style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+        context: context,
+        desc: "تم حفط التعديلات بنجاح",
+        // desc: "Check your Inbox!",
+        closeFunction: null,
+        closeIcon: Container(),
+        buttons: [],
+      ).show();
+
+    }
+
+  }
+
+

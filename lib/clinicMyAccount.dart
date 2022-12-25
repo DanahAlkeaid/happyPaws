@@ -332,8 +332,13 @@ class _clinicMyAccount extends State<clinicMyAccount> {
 
               Container(
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>clinicChangeInfo()));
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => clinicChangeInfo(
+                              cName, cLocation,cPhone, cEmail)),
+                    ).then((value) => _stateUpdate());
                   },
                   child: Text("تعديل المعلومات",
                       style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')
@@ -472,6 +477,14 @@ class _clinicMyAccount extends State<clinicMyAccount> {
       ],
     ).show();
 
+  }
+
+  void _stateUpdate() {
+    setState(() {
+      getCurrentUser();
+      clInfo();
+    });
+    print("تم تحديث البيانات");
   }
 
 }
