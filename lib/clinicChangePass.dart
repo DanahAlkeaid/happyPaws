@@ -298,8 +298,7 @@ class _clinicChangePass extends State<clinicChangePass>{
                 Container(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> clinicChangeInfo()));
-                    },
+Navigator.pop(context)  ;                  },
                     child: Text("الغاء",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                     style: ButtonStyle(
