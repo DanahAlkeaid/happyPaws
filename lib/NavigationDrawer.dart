@@ -44,8 +44,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     child: Column(
       children: const [
         CircleAvatar(
+          backgroundColor: Colors.white70,
           radius: 50,
-          child: Image(image: AssetImage('Assets/profile-icon.png'),
+          child: Icon(
+            Icons.person,
+            color: Color(0xff194919),
+            size: 90,
           ),
         ),
         SizedBox(height: 10),
@@ -122,6 +126,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             },
           )
         ],
-      )
+      ),
   );
 }

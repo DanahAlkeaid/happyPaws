@@ -7,7 +7,6 @@ import 'ChangeInfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class MyAccount extends StatefulWidget{
   const MyAccount({Key? key}) : super(key: key);
 
@@ -16,6 +15,48 @@ class MyAccount extends StatefulWidget{
 }
 
 class _MyAccountState extends State<MyAccount> {
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var pName='';
+  var pEmail;
+  var pPhone;
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    pInfo();
+    openCollection();
+  }
+
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .snapshots();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+    pEmail = user.email;
+  }
+
+  pInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var clinicName=snapshot.docs[0].data()['firstname'];
+    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
+
+    setState(() {
+      pName='${clinicName} ';
+      pPhone='${clinicPhone} ';
+    });
+
+    });
+  }
 
   @override
   Widget build(BuildContext) => Scaffold(
@@ -64,13 +105,23 @@ class _MyAccountState extends State<MyAccount> {
                 ],
               ),
 
-              Container(
-                child: CircleAvatar(
-                  radius: 50,
-                  child: Image(image: AssetImage('Assets/profile-icon.png'),
+              Column(
+                children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                      backgroundColor: Colors.white70,
+                      radius: 50,
+
+                      child: Icon(
+                        Icons.person,
+                        color: Color(0xff194919),
+                        size: 90,
+                      ),
                   ),
                 ),
-              ),
+                ],
+                ),
 
               Container(
                 height: 30,
@@ -107,7 +158,7 @@ class _MyAccountState extends State<MyAccount> {
                             ]),
                         child:Align(
                         child: Text(
-                          'petOwner Name',
+                          '$pName',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 25,
@@ -151,7 +202,7 @@ class _MyAccountState extends State<MyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            'petOwner Email',
+                            '$pEmail',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
@@ -194,7 +245,7 @@ class _MyAccountState extends State<MyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            'petOwner Phone',
+                            '$pPhone',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,

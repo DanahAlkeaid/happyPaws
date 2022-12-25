@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:untitled/userChangePass.dart';
 import 'MyAccount.dart';
 import 'PetChangePass.dart';
@@ -11,10 +13,17 @@ class ChangePass extends StatefulWidget{
 }
 
 class _ChangePass extends State<ChangePass> {
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phonenumberController = TextEditingController();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var pName='';
+  var pEmail;
+  var pPhone;
 
   String errorMessage = '';
   var loading = false;
@@ -24,6 +33,42 @@ class _ChangePass extends State<ChangePass> {
     _emailController.dispose();
     _phonenumberController.dispose();
     super.dispose();
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    pInfo();
+    openCollection();
+  }
+
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .snapshots();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+    pEmail = user.email;
+  }
+
+  pInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var clinicName=snapshot.docs[0].data()['firstname'];
+    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
+
+    setState(() {
+      pName='${clinicName} ';
+      pPhone='${clinicPhone} ';
+    });
+
+    });
   }
 
   @override
@@ -100,6 +145,7 @@ class _ChangePass extends State<ChangePass> {
                         AutovalidateMode.onUserInteraction,
                         controller: _firstnameController,
                         validator: validateFirstname,
+                        initialValue: '$pName',
                         decoration: InputDecoration(
                             hintText: (" "),
                             focusedBorder: OutlineInputBorder(
@@ -152,6 +198,7 @@ class _ChangePass extends State<ChangePass> {
                         AutovalidateMode.onUserInteraction,
                         controller: _emailController,
                         validator: validationEmail,
+                        initialValue: '$pEmail',
                         decoration: InputDecoration(
                             hintText: ("Example@gmail.com"),
                             focusedBorder: OutlineInputBorder(
@@ -211,6 +258,7 @@ class _ChangePass extends State<ChangePass> {
                         keyboardType: TextInputType.number,
                         controller: _phonenumberController,
                         validator: validationPhoneNumber,
+                        initialValue: '$pPhone',
                         decoration: InputDecoration(
                             hintText: ("9665********"),
                             focusedBorder: OutlineInputBorder(
