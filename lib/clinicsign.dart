@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
 
@@ -43,7 +47,7 @@ class _clinicsign extends State<clinicsign> {
   bool newValue = false;
   bool checkedValue1 = false;
   bool newValue1 = false;
-
+String profilepic = "";
   onPasswordChanged(String password) {
     final CharRange = RegExp(r'[A-Z]');
     setState(() {
@@ -86,7 +90,7 @@ class _clinicsign extends State<clinicsign> {
       'phonenumber': phoneNumber,
       'type': 'clinic',
       'description': location,
-      'profilepic': '',
+      'profilepic': Image.network(profilepic),
       'rate': null,
       /*'services':[[{'خدمات التنظيف والتنزيين'}],
         [{'خدمات علاجية'}],
@@ -154,6 +158,37 @@ class _clinicsign extends State<clinicsign> {
                   Column(
                     children: <Widget>[
 
+
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              uploadImage();
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 80, bottom: 24),
+                              height: 120,
+                              width: 120,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.grey,
+                              ),
+                              child: Center(
+                                child: profilepic == " " ? const Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 80,
+                                ) : ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.network(profilepic),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),
 
                       //Name
                       Column(
@@ -609,5 +644,21 @@ class _clinicsign extends State<clinicsign> {
     return null;
   }
 
+  void uploadImage() async{
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery,
+    maxHeight: 512,
+      maxWidth: 512,
+    );
+Reference ref = FirebaseStorage.instance.ref().child('profilePic.jpg');
+
+    await ref.putFile(File(image!.path));
+ref.getDownloadURL().then((value) async
+{
+  setState(() {
+    profilepic = value;
+  });
+}
+);
+  }
 }
 
