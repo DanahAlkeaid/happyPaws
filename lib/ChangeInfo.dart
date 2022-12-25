@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/userChangePass.dart';
 import 'MyAccount.dart';
 import 'PetChangePass.dart';
 
 class ChangePass extends StatefulWidget{
-  const ChangePass({Key? key}) : super(key: key);
+  final pName;
+  final pPhoneNum;
+  final pEmail;
+
+  const ChangePass(this.pName, this.pEmail, this.pPhoneNum, {super.key} );
 
   @override
   State<ChangePass> createState() => _ChangePass();
@@ -27,6 +32,9 @@ class _ChangePass extends State<ChangePass> {
 
   String errorMessage = '';
   var loading = false;
+  var doc_id;
+  var nameValue;
+
 
   void dispose() {
     _firstnameController.dispose();
@@ -60,12 +68,12 @@ class _ChangePass extends State<ChangePass> {
         .where('email', isEqualTo: '${pEmail}')
         .get()
         .then((snapshot) { print(snapshot.docs[0].data());
-    var clinicName=snapshot.docs[0].data()['firstname'];
-    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
+    var PetOwnerName=snapshot.docs[0].data()['firstname'];
+    var PetOwnerPhone=snapshot.docs[0].data()['phonenumber'];
 
     setState(() {
-      pName='${clinicName} ';
-      pPhone='${clinicPhone} ';
+      pName='${PetOwnerName} ';
+      pPhone='${PetOwnerPhone} ';
     });
 
     });
@@ -373,6 +381,51 @@ class _ChangePass extends State<ChangePass> {
       return "يجب أن يحتوي الرقم على ١٢ خانة";
     }
     return null;
+  }
+
+  SaveEdit() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        setState(() {
+          nameValue = _firstnameController.text;
+        });
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: '${widget.pEmail}')
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            doc_id = element.id;
+            print(doc_id);
+          });
+        });
+        var update = await FirebaseFirestore.instance
+            .collection('Users')
+            .doc('${doc_id}').update({
+          'firstname': _firstnameController.text.trim(),
+          'phonenumber': _phonenumberController.text.trim()
+        }
+        );
+        Navigator.of(context).pop();
+        showPopup();
+      }
+      catch (error) {
+        print("$error");
+      }
+    } else {
+      print("حدث خطأ");
+    }
+  }
+
+  showPopup() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "تم حفط التعديلات بنجاح",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [],
+    ).show();
   }
 
 }

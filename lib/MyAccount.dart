@@ -47,12 +47,12 @@ class _MyAccountState extends State<MyAccount> {
         .where('email', isEqualTo: '${pEmail}')
         .get()
         .then((snapshot) { print(snapshot.docs[0].data());
-    var clinicName=snapshot.docs[0].data()['firstname'];
-    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
+    var PetOwnerName=snapshot.docs[0].data()['firstname'];
+    var PetOwnerPhone=snapshot.docs[0].data()['phonenumber'];
 
     setState(() {
-      pName='${clinicName} ';
-      pPhone='${clinicPhone} ';
+      pName='${PetOwnerName} ';
+      pPhone='${PetOwnerPhone} ';
     });
 
     });
@@ -269,7 +269,7 @@ class _MyAccountState extends State<MyAccount> {
               Container(
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass()));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass()));
                     },
                     child: Text("تعديل المعلومات",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')
