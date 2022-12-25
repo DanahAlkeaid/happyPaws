@@ -6,7 +6,7 @@ import 'package:untitled/clinicMyAccount.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Alert.dart';
+import 'PetNotification.dart';
 import 'FirstScreen.dart';
 import 'MyAccount.dart';
 import 'clinic_appointments.dart';
