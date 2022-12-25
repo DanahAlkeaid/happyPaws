@@ -16,6 +16,54 @@ class clinicMyAccount extends StatefulWidget{
 }
 class _clinicMyAccount extends State<clinicMyAccount> {
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var cName='';
+  var cEmail;
+  var cPhone;
+  var cLocation;
+
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    clInfo();
+    openCollection();
+  }
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${cEmail}')
+        .snapshots();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+    cEmail = user.email;
+  }
+
+  clInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${cEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var clinicName=snapshot.docs[0].data()['firstname'];
+    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
+    var clinicLocation=snapshot.docs[0].data()['description'];
+
+    setState(() {
+      cName='${clinicName} ';
+      cPhone='${clinicPhone} ';
+      cLocation='${clinicLocation}';
+    });
+
+    }); }
+
+
+
+
+
   @override
   Widget build(BuildContext) => Scaffold(
     backgroundColor: Color(0xfffaf7f4),
@@ -106,7 +154,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            'clinic Name',
+                            '${cName}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
@@ -150,7 +198,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            'clinic Email',
+                            '${cEmail}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
@@ -193,7 +241,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            'clinic Phone',
+                            '${cPhone}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
@@ -214,7 +262,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          "موقع العياده",
+                          "موقع العيادة",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w900,
@@ -236,7 +284,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            'clinic location',
+                            '${cLocation}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,

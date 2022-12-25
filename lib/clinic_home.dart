@@ -41,7 +41,7 @@ class _clinic_homeState extends State<clinic_home> {
   openCollection() {
     _reqStream = FirebaseFirestore.instance
         .collection('users')
-        .where('mlEmail', isEqualTo: '${cEmail}')
+        .where('email', isEqualTo: '${cEmail}')
         .snapshots();
   }
 
@@ -336,7 +336,12 @@ class _clinic_homeState extends State<clinic_home> {
                     child: const Text(" تسجيل الخروج",
                         style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
               ),
-Row(children: [SizedBox(width: 150,),Expanded(child: Container(
+
+//هذا المفروض ايقونات تويتر وايميل لكن يضبط ويخرب بمزاجه
+
+/*Row(children:
+[SizedBox(width: 150,),
+  Expanded(child: Container(
 
     child: Link(
       target: LinkTarget.blank,
@@ -362,7 +367,7 @@ Expanded(child: Container(
 ) ,)
 
 ,SizedBox(width: 150,)
-],),
+],),*/
 
 /*Row(mainAxisAlignment: MainAxisAlignment.center,
   children: [
