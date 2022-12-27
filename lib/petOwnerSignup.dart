@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
 import 'package:untitled/petOwnerHome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'main.dart';
-import 'clinicsign.dart';
 
 class petOwnerSignup extends StatefulWidget {
   @override

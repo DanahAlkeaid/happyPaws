@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:untitled/clinicMyAccount.dart';
 import 'package:untitled/userChangePass.dart';
-import 'clinicChangePass.dart';
 
 
 class clinicChangeInfo extends StatefulWidget{
