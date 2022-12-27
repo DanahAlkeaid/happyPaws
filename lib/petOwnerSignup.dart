@@ -522,23 +522,23 @@ class _petOwnerSignup extends State<petOwnerSignup> {
   }
 
   String? validationPhoneNumber(String? formPhoneNumber) {
-    //String msg = '';
+    RegExp regex =
+    RegExp(r'^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$');
+    String phone1 = formPhoneNumber!;
+
+
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
-
+    if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
     if (formPhoneNumber.length != 12) {
       return "يجب أن يحتوي الرقم على ١٢ خانة";
     }
-    /*else if (formPhoneNumber.substring(0) != '0') {
-      msg = 'Mobile Number must start with 05';
-    } else if (formPhoneNumber.substring(1) != '5') {
-      msg = 'Mobile Number must start with 05';
-    } else if (formPhoneNumber.length != 10)
-      msg = 'Mobile Number must be of 10 digit';*/
-
     return null;
   }
+
+
+
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
       return "This fiels is required";

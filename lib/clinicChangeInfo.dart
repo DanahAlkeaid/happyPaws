@@ -131,62 +131,8 @@ var nameValue;
                   ],
                 ),
 
-                //EMAIL
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "البريد الإلكتروني",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 20,
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.26))
-                          ]),
-                      child: TextFormField(
-                        autovalidateMode:
-                        AutovalidateMode.onUserInteraction,
-                        controller: _emailController,
-                        validator: validationEmail,
-                        decoration: InputDecoration(
-                            hintText: ("Example@gmail.com"),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                BorderSide(color: Colors.white)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                BorderSide(color: Colors.white)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Text(
-                        errorMessage,
-                      ),
-                    )
-                  ],
-                ),
+
+
 
                 //PHONE NUMBER
                 Column(
@@ -373,11 +319,15 @@ var nameValue;
   }
 
   String? validationPhoneNumber(String? formPhoneNumber) {
-    //String msg = '';
+    RegExp regex =
+    RegExp(r'^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$');
+    String phone1 = formPhoneNumber!;
+
+
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
-
+    if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
     if (formPhoneNumber.length != 12) {
       return "يجب أن يحتوي الرقم على ١٢ خانة";
     }
