@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/clinicMyAccount.dart';
+import 'package:untitled/userChangePass.dart';
 import 'clinicChangePass.dart';
 
 
@@ -299,7 +300,7 @@ var nameValue;
                 Container(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> clinicChangePass()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> userChangePass()));
                     },
                     child: Text(" تغيير كلمة المرور",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
@@ -321,13 +322,10 @@ var nameValue;
                 ),
 
                 Container(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> clinicMyAccount()));
-                    },child: ElevatedButton(onPressed:(){SaveEdit();},
-                    child: Text("حفظ التعديلات",
-                        style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                    style: ButtonStyle(
+                 child: SizedBox(
+                    child: ElevatedButton(onPressed:(){SaveEdit();},
+                      child: Text('حفظ التغييرات',style:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'))
+                      ,style:ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFFC2D961)),
                         shape: MaterialStateProperty
@@ -336,10 +334,8 @@ var nameValue;
                                 borderRadius: BorderRadius.circular(15),
                                 side: BorderSide(
                                   color: Color(0xFFC2D961),
-                                )))),
-                  ),
-                ),
-                ),
+                                )))),),
+                ),),
                 Container(
                   height: 100,
                 )
@@ -406,7 +402,7 @@ var nameValue;
           });
         });
         var imge = await FirebaseFirestore.instance
-            .collection('Users')
+            .collection('users')
             .doc('${doc_id}').update({
           'description': _locationController.text.trim(),
           'firstname': _firstnameController.text.trim(),
