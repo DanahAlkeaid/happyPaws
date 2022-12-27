@@ -268,8 +268,9 @@ class _MyAccountState extends State<MyAccount> {
 
               Container(
                 child: ElevatedButton(
-                    onPressed: () {
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass()));
+                    onPressed: () async {
+                      await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass(pName, pPhone, pEmail)),
+                      ).then((value) => _stateUpdate());
                     },
                     child: Text("تعديل المعلومات",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')
@@ -408,6 +409,14 @@ class _MyAccountState extends State<MyAccount> {
       ],
     ).show();
 
+  }
+
+  void _stateUpdate() {
+    setState(() {
+      getCurrentUser();
+      pInfo();
+    });
+    print("تم تحديث البيانات");
   }
 
   }

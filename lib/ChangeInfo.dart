@@ -294,7 +294,7 @@ class _ChangePass extends State<ChangePass> {
                 Container(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> PetChangePass()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> userChangePass()));
                     },
                     child: Text(" تغيير كلمة المرور",
                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
@@ -317,9 +317,7 @@ class _ChangePass extends State<ChangePass> {
 
                 Container(
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MyAccount()));
-                      },
+                      onPressed: () { SaveEdit(); },
                       child: Text("حفظ التعديلات",
                           style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                     style: ButtonStyle(
