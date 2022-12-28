@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'appointment_confirmed.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:day_night_time_picker/lib/constants.dart';
 
 class book_appointments extends StatefulWidget {
   const book_appointments ({Key? key}) : super (key: key);
@@ -12,14 +14,18 @@ class book_appointments extends StatefulWidget {
 
 class _book_appointmentssState extends State<book_appointments> {
   //variable to store the selected appointment date and time
+  TimeOfDay _time = TimeOfDay.now();
   DateTime selectedDate = DateTime.now();
   DateTime selectedTime = DateTime.now();
+  bool iosStyle = true;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedTime = getDateTime();
+
+  void onTimeChanged(TimeOfDay newTime) {
+    setState(() {
+      _time = newTime;
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -248,25 +254,30 @@ class _book_appointmentssState extends State<book_appointments> {
                 ),
               ),
 
-              const SizedBox(height: 20)
-
               //Time picker
-              ,SizedBox(
-                height:100 ,
-                child: CupertinoDatePicker(
-                  minuteInterval: 30,
-                  // initial date time is the dateTime variable
-                  initialDateTime: selectedTime,
-                  onDateTimeChanged:(DateTime newDate) {
-                    setState(() => selectedTime = newDate  );
-                  },
-                  use24hFormat: false,
-                  mode: CupertinoDatePickerMode.time,
-                ),
+            Container(
+            child: createInlinePicker(
+            elevation: 1,
+            value: _time,
+            onChange: onTimeChanged,
+            minuteInterval: MinuteInterval.THIRTY,
+            iosStylePicker: iosStyle,
+            is24HrFormat: false,
+            //Set start and end time
+            minHour: 9,
+            maxHour: 21,
+            maxMinute:30,
+            //Styling
+            sunAsset: Image.asset("Assets/sun.png"),
+            moonAsset: Image.asset("Assets/moon.png"),
+            isOnChangeValueMode: true,
+            accentColor: Colors.black,
+            barrierColor: Color(0xfffaf7f4),
+            wheelHeight: 150
+        ),
+      ),
 
-              )
-
-              ,const SizedBox(height: 25)
+              const SizedBox(height: 5)
               ,ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -287,13 +298,9 @@ class _book_appointmentssState extends State<book_appointments> {
                               )))),
                   child: const Text(" تأكيد الحجز",
                       style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
+              const SizedBox(height: 20)
             ],),),),
     );
   }
 }
 
-DateTime getDateTime() {
-  final now = DateTime.now();
-
-  return DateTime(now.year, now.month, now.day, now.hour, 30);
-}
