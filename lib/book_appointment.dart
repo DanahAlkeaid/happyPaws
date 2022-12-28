@@ -15,6 +15,7 @@ class book_appointments extends StatefulWidget {
 class _book_appointmentssState extends State<book_appointments> {
   //variable to store the selected appointment date and time
   TimeOfDay _time = TimeOfDay.now();
+  String formattedTime = "";
   DateTime _date = DateTime.now();
   String formattedDate = "";
   bool iosStyle = true;
@@ -23,6 +24,7 @@ class _book_appointmentssState extends State<book_appointments> {
   void onTimeChanged(TimeOfDay newTime) {
     setState(() {
       _time = newTime;
+      formattedTime = _time.toString().replaceAll("(", "").replaceAll(")", "").replaceAll("TimeOfDay", "");
     });
   }
 
