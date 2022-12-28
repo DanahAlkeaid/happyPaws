@@ -267,7 +267,9 @@ class _book_appointmentssState extends State<book_appointments> {
                         MaterialPageRoute(
                           //Check appointment confirmation then redirect to correct page
                             builder: (context) => appointment_confirmed()));
-                  },
+                    print(_time);
+                    print(_date);
+                    print(formattedDate);},
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color(0xFFC2D961)),
