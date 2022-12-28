@@ -15,8 +15,7 @@ class book_appointments extends StatefulWidget {
 class _book_appointmentssState extends State<book_appointments> {
   //variable to store the selected appointment date and time
   TimeOfDay _time = TimeOfDay.now();
-  DateTime selectedDate = DateTime.now();
-  DateTime selectedTime = DateTime.now();
+  DateTime _date = DateTime.now();
   bool iosStyle = true;
 
 
@@ -97,26 +96,7 @@ class _book_appointmentssState extends State<book_appointments> {
                   color:Color(0xff009245),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: Chip(
-                  labelPadding:
-                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                  label: Text("نوع العيادة"),
-                  labelStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "Almarai",
-                    color: Color(0xff034d23),
-                  ),
-                  backgroundColor: Color(0xffD5E694),
-                  elevation: 0,
-                  shadowColor: Color(0xff808080),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                ),
-              ),
+
               const Divider(
                 color:Color(0xffbda520),
                 height:10,
@@ -230,7 +210,7 @@ class _book_appointmentssState extends State<book_appointments> {
                       onDateChange: (date) {
                         // New date selected
                         setState(() {
-                          selectedDate = date;
+                          _date = date;
                         });
                       },
                     ),
