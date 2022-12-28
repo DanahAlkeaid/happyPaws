@@ -16,6 +16,7 @@ class _book_appointmentssState extends State<book_appointments> {
   //variable to store the selected appointment date and time
   TimeOfDay _time = TimeOfDay.now();
   DateTime _date = DateTime.now();
+  String formattedDate = "";
   bool iosStyle = true;
 
 
@@ -211,6 +212,7 @@ class _book_appointmentssState extends State<book_appointments> {
                         // New date selected
                         setState(() {
                           _date = date;
+                          formattedDate = _date.toString().replaceAll("00:00:00.000", "");
                         });
                       },
                     ),
