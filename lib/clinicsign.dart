@@ -74,8 +74,9 @@ class _clinicsign extends State<clinicsign> {
             _firstnameController.text.trim(),
             _emailController.text.trim(),
             _phonenumberController.text.trim(),
-        _locationController.text.trim());
-
+        _locationController.text.trim(),
+      //  _photo. ,
+        );
           
         errorMessage = '';
         Navigator.push(
@@ -95,6 +96,7 @@ class _clinicsign extends State<clinicsign> {
       'phonenumber': phoneNumber,
       'type': 'clinic',
       'description': location,
+      //'profilepic': Image.network('_photo'),
       //'profilepic': Image.network(profilepic),
       'rate': null,
       /*'services':[[{'خدمات التنظيف والتنزيين'}],
@@ -173,7 +175,7 @@ class _clinicsign extends State<clinicsign> {
                             },
                             child: CircleAvatar(
                               radius: 55,
-                              backgroundColor: Color(0xffFDCF09),
+                              backgroundColor: Color(0xfffaf7f4),
                               child: _photo != null
                                   ? ClipRRect(
                                 borderRadius: BorderRadius.circular(50),
@@ -638,12 +640,12 @@ class _clinicsign extends State<clinicsign> {
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
-
     if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
-
+    if (formPhoneNumber.length != 12) {
+      return "يجب أن يحتوي الرقم على ١٢ خانة";
+    }
     return null;
   }
-
 
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
