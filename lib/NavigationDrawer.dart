@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:untitled/FirstScreen.dart';
 import 'package:untitled/gpi_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/src/services/platform_channel.dart';
 import 'package:url_launcher/src/link.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NavigationDrawer extends StatefulWidget{
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -22,6 +23,51 @@ class NavigationDrawer extends StatefulWidget{
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var pEmail;
+  var pName='';
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    petName();
+    openCollection();
+  }
+
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .snapshots();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+
+    pEmail = user.email;
+
+    print(pEmail) ;
+
+  }
+
+  petName()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs);
+    var petOwnerName=snapshot.docs[0].data()['firstname'];
+
+    setState(() {
+      pName='${petOwnerName} ';
+
+      print(pName);
+    });
+
+    }); }
+
   @override
   Widget build(BuildContext context) => Drawer(
       backgroundColor: Color(0xfffaf7f4),
@@ -43,6 +89,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     ),
     child: Column(
       children: const [
+        SizedBox(height: 10),
         CircleAvatar(
           backgroundColor: Colors.white70,
           radius: 50,
@@ -53,10 +100,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
         ),
         SizedBox(height: 10),
-        Text(
-          " ",
-          style: TextStyle(fontSize: 20,color: Colors.black,fontFamily: 'Tajawal'),
-        )
+        /*Text(
+          '${pName}',
+          style:
+          TextStyle(fontSize: 20,color: Colors.black,fontFamily: 'Tajawal'),
+        ),*/
       ],
     ),
   );
