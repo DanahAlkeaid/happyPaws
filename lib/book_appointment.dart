@@ -270,6 +270,7 @@ class _book_appointmentssState extends State<book_appointments> {
                           //Check appointment confirmation then redirect to correct page
                             builder: (context) => appointment_confirmed()));
                     print(_time);
+                    print(formattedTime);
                     print(_date);
                     print(formattedDate);},
                   style: ButtonStyle(
