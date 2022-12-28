@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
-
-
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as Path;
 
 
 class clinicsign extends StatefulWidget {
@@ -20,8 +19,13 @@ class clinicsign extends StatefulWidget {
 
 
 class _clinicsign extends State<clinicsign> {
-  //or final insted of TEC
-  
+
+
+  firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -29,9 +33,9 @@ class _clinicsign extends State<clinicsign> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
-
   String errorMessage = '';
   var loading = false;
+
   void dispose() {
     _firstnameController.dispose();
     _emailController.dispose();
@@ -47,7 +51,7 @@ class _clinicsign extends State<clinicsign> {
   bool newValue = false;
   bool checkedValue1 = false;
   bool newValue1 = false;
-String profilepic = "";
+
   onPasswordChanged(String password) {
     final CharRange = RegExp(r'[A-Z]');
     setState(() {
@@ -71,6 +75,7 @@ String profilepic = "";
             _emailController.text.trim(),
             _phonenumberController.text.trim(),
         _locationController.text.trim());
+
           
         errorMessage = '';
         Navigator.push(
@@ -90,7 +95,7 @@ String profilepic = "";
       'phonenumber': phoneNumber,
       'type': 'clinic',
       'description': location,
-      'profilepic': Image.network(profilepic),
+      //'profilepic': Image.network(profilepic),
       'rate': null,
       /*'services':[[{'خدمات التنظيف والتنزيين'}],
         [{'خدمات علاجية'}],
@@ -163,30 +168,34 @@ String profilepic = "";
                         children: [
                           GestureDetector(
                             onTap: () {
-                              uploadImage();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 80, bottom: 24),
-                              height: 120,
-                              width: 120,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.grey,
-                              ),
-                              child: Center(
-                                child: profilepic == " " ? const Icon(
-                                  Icons.person,
-                                  color: Colors.white,
-                                  size: 80,
-                                ) : ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(profilepic),
-                                ),
-                              ),
-                            ),
-                          ),
+                              _showPicker(context);
 
+                            },
+                            child: CircleAvatar(
+                              radius: 55,
+                              backgroundColor: Color(0xffFDCF09),
+                              child: _photo != null
+                                  ? ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Image.file(
+                                  _photo!,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )
+                           : Container(
+          decoration: BoxDecoration(
+          color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(50)),
+          width: 100,
+          height: 100,
+          child: Icon(
+            Icons.camera_alt,
+            color: Colors.grey[800],
+          ),
+        ),)
+                          )
                         ],
                       ),
 
@@ -629,10 +638,9 @@ String profilepic = "";
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
+
     if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
-    if (formPhoneNumber.length != 12) {
-      return "يجب أن يحتوي الرقم على ١٢ خانة";
-    }
+
     return null;
   }
 
@@ -649,21 +657,78 @@ String profilepic = "";
     return null;
   }
 
-  void uploadImage() async{
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery,
-    maxHeight: 512,
-      maxWidth: 512,
-    );
-Reference ref = FirebaseStorage.instance.ref().child('profilePic.jpg');
-
-    await ref.putFile(File(image!.path));
-ref.getDownloadURL().then((value) async
-{
-  setState(() {
-    profilepic = value;
-  });
-}
-);
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Gallery'),
+                      onTap: () {
+                        imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
+
+  Future imgFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+    final fileName = Path.basename(_photo!.path);
+    final destination = 'files/$fileName';
+
+    try {
+    //  var firebase_storage;
+      final ref = firebase_storage.FirebaseStorage.instance
+          .ref(destination)
+          .child('file/');
+      await ref.putFile(_photo!);
+    } catch (e) {
+      print('error occured');
+    }
+  }
+
 }
 

@@ -325,10 +325,10 @@ var nameValue;
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
-    if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
+
     if (formPhoneNumber.length != 12) {
       return "يجب أن يحتوي الرقم على ١٢ خانة";
-    }
+    }   if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
     return null;
   }
 
