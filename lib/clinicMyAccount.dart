@@ -22,6 +22,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
   var cEmail;
   var cPhone;
   var cLocation;
+  var cPic;
 
 
   void initState() {
@@ -51,11 +52,12 @@ class _clinicMyAccount extends State<clinicMyAccount> {
     var clinicName=snapshot.docs[0].data()['firstname'];
     var clinicPhone=snapshot.docs[0].data()['phonenumber'];
     var clinicLocation=snapshot.docs[0].data()['description'];
-
+var profilePic =snapshot.docs[0].data()['profilepic'];
     setState(() {
       cName='${clinicName} ';
       cPhone='${clinicPhone} ';
       cLocation='${clinicLocation}';
+      cPic = '${profilePic}';
     });
 
     }); }
@@ -112,11 +114,11 @@ class _clinicMyAccount extends State<clinicMyAccount> {
               ),
 
               Container(
-                child: CircleAvatar(
-                  radius: 50,
-                  child: Image(image: AssetImage('Assets/profile-icon.png'),
-                  ),
-                ),
+                  child: CircleAvatar(
+                    radius: 55,
+                    backgroundColor: Color(0xfffaf7f4),
+                   // child:borderRadius: BorderRadius.circular(50),
+                child: Image.network(cPic),)
               ),
 
               Container(
@@ -337,7 +339,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => clinicChangeInfo(
-                              cName, cLocation,cPhone, cEmail)),
+                              cName, cLocation,cPhone, cEmail, cPic)),
                     ).then((value) => _stateUpdate());
                   },
                   child: Text("تعديل المعلومات",

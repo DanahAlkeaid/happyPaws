@@ -186,7 +186,7 @@ String imageURL = '';
                   Column(
                     children: <Widget>[
 
-
+//profile pic
                       Column(
                         children: [
                           GestureDetector(

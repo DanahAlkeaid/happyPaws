@@ -1,7 +1,19 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/userChangePass.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as Path;
+import 'package:flutter/gestures.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+
+
+
 
 
 class clinicChangeInfo extends StatefulWidget{
@@ -10,13 +22,18 @@ class clinicChangeInfo extends StatefulWidget{
   final cLocation;
   final cPhonenumber;
   final cEmail;
-  const clinicChangeInfo(this.cName, this.cLocation, this.cPhonenumber, this.cEmail, {super.key} );
+  final cPic;
+  const clinicChangeInfo(this.cName, this.cLocation, this.cPhonenumber, this.cEmail, this.cPic, {super.key} );
 
   @override
   State<clinicChangeInfo> createState() => _clinicChangeInfo();
 }
 
 class _clinicChangeInfo extends State<clinicChangeInfo> {
+  File? _photo ;
+  final ImagePicker _picker = ImagePicker();
+  String imageURL = '';
+
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _firstnameController = TextEditingController(text:widget.cName);
   late TextEditingController _emailController = TextEditingController(text:widget.cEmail);
@@ -75,6 +92,41 @@ var nameValue;
 
                 Container(
                   height: 30,
+                ),
+
+                Column(
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          _showPicker(context);
+
+                        },
+                        child: CircleAvatar(
+                          radius: 55,
+                          backgroundColor: Color(0xfffaf7f4),
+                          child: _photo != null
+                              ? ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.file(
+                              _photo!,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.fitHeight,
+                            ),
+                          )
+                              : Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(50)),
+                            width: 100,
+                            height: 100,
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: Colors.grey[800],
+                            ),
+                          ),)
+                    )
+                  ],
                 ),
 
                 //Name
@@ -354,7 +406,8 @@ var nameValue;
             .doc('${doc_id}').update({
           'description': _locationController.text.trim(),
           'firstname': _firstnameController.text.trim(),
-          'phonenumber': _phonenumberController.text.trim()
+          'phonenumber': _phonenumberController.text.trim(),
+          'profilepic' :imageURL,
         }
         );
         Navigator.of(context).pop();
@@ -380,6 +433,84 @@ var nameValue;
 
     }
 
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Gallery'),
+                      onTap: () {
+                        imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
+
+  Future imgFromCamera() async {
+    XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromGallery() async {
+    XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+    final fileName = Path.basename(_photo!.path);
+    final destination = 'files/$fileName';
+
+    try {
+
+      Reference ref = FirebaseStorage.instance.refFromURL(widget.cPic);
+
+      //  var firebase_storage;
+      // Reference ref = firebase_storage.FirebaseStorage.instance
+      //     .ref(destination)
+      //     .child('file/');
+       await ref.putFile(_photo!);
+       imageURL = await ref.getDownloadURL();
+    } catch (e) {
+      print('error occured');
+    }
+  }
+
+
+}
 
 
