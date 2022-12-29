@@ -200,10 +200,9 @@ class _book_appointmentssState extends State<book_appointments> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     DatePicker(
-                      DateTime.now(),
+                      DateTime.now().add(Duration(days: 1)),
                       width: 70,
                       height: 100,
-                      initialSelectedDate: DateTime.now(),
                       selectionColor: Color(0xffD5E694),
                       selectedTextColor: Color(0xff034d23),
                       //only show 7 days
@@ -245,7 +244,7 @@ class _book_appointmentssState extends State<book_appointments> {
             onChange: onTimeChanged,
             minuteInterval: MinuteInterval.THIRTY,
             iosStylePicker: true,
-            is24HrFormat: false,
+            is24HrFormat: true,
             //Set start and end time
             minHour: 9,
             maxHour: 21,
