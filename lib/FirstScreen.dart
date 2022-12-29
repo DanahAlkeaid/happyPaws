@@ -5,6 +5,7 @@ import 'package:untitled/appointment_failed.dart';
 import 'package:untitled/petOwnerHome.dart';
 import 'book_appointment.dart';
 import 'clinic_services.dart';
+import 'clinicsign.dart';
 import 'main.dart';
 import 'signupScreen.dart';
 import 'loginScreen.dart';
@@ -131,7 +132,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                         builder: (context) => book_appointments()));
+                         builder: (context) => clinicsign()));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),
