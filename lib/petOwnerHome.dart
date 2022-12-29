@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'main.dart';
@@ -22,7 +24,10 @@ class petOwnerHome extends StatefulWidget {
 
 
 class _petOwnerHomeState extends State<petOwnerHome> {
+
   TextEditingController textController = TextEditingController();
+  var doc_id;
+
   @override
   Widget build(BuildContext context) =>Scaffold(
       backgroundColor: Color(0xfffaf7f4),
@@ -93,7 +98,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                             ),
                             Container(height: 20,),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {SortByRate();},
                               child: Text("التقييم",
                                   style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                               style: ButtonStyle(
@@ -147,4 +152,16 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       ),
   );
 
+  SortByRate() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .orderBy('rate', descending: true)
+        .get()
+        .then((value) {
+        value.docs.forEach((element) {
+        doc_id = element.id;
+        print(doc_id);
+      });
+    });
+  }
 }
