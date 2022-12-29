@@ -23,6 +23,8 @@ class _clinicMyAccount extends State<clinicMyAccount> {
   var cPhone;
   var cLocation;
   var cPic;
+  var cStart;
+  var cEnd;
 
 
   void initState() {
@@ -52,12 +54,16 @@ class _clinicMyAccount extends State<clinicMyAccount> {
     var clinicName=snapshot.docs[0].data()['firstname'];
     var clinicPhone=snapshot.docs[0].data()['phonenumber'];
     var clinicLocation=snapshot.docs[0].data()['description'];
-var profilePic =snapshot.docs[0].data()['profilepic'];
+    var profilePic =snapshot.docs[0].data()['profilepic'];
+    var startTime =snapshot.docs[0].data()['StartTime'];
+    var endTime =snapshot.docs[0].data()['EndTime'];
     setState(() {
       cName='${clinicName} ';
       cPhone='${clinicPhone} ';
       cLocation='${clinicLocation}';
       cPic = '${profilePic}';
+      cStart= '${startTime}';
+      cEnd= '${endTime}';
     });
 
     }); }
@@ -287,6 +293,51 @@ var profilePic =snapshot.docs[0].data()['profilepic'];
                         child:Align(
                           child: Text(
                             '${cLocation}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Tajawal'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      )
+                    ],
+                  ),
+
+                  SizedBox(height: 20,),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          " أوقات العمل",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal'),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 20,
+                                  offset: Offset(1, 1),
+                                  color: Colors.grey.withOpacity(0.26))
+                            ]),
+                        child:Align(
+                          child: Text(
+                            '${cStart} - ${cEnd}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
