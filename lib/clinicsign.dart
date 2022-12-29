@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,9 +24,9 @@ class _clinicsign extends State<clinicsign> {
 
   firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
 
-  File? _photo;
+  File? _photo ;
   final ImagePicker _picker = ImagePicker();
-
+String imageURL = '';
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -96,7 +97,7 @@ class _clinicsign extends State<clinicsign> {
       'phonenumber': phoneNumber,
       'type': 'clinic',
       'description': location,
-      //'profilepic': Image.network('_photo'),
+      'profilepic': imageURL,
       //'profilepic': Image.network(profilepic),
       'rate': null,
       /*'services':[[{'خدمات التنظيف والتنزيين'}],
@@ -690,7 +691,7 @@ class _clinicsign extends State<clinicsign> {
   }
 
   Future imgFromCamera() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
 
     setState(() {
       if (pickedFile != null) {
@@ -703,7 +704,7 @@ class _clinicsign extends State<clinicsign> {
   }
 
   Future imgFromGallery() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
@@ -723,10 +724,11 @@ class _clinicsign extends State<clinicsign> {
 
     try {
     //  var firebase_storage;
-      final ref = firebase_storage.FirebaseStorage.instance
+      Reference ref = firebase_storage.FirebaseStorage.instance
           .ref(destination)
           .child('file/');
       await ref.putFile(_photo!);
+      imageURL = await ref.getDownloadURL();
     } catch (e) {
       print('error occured');
     }
