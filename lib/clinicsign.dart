@@ -120,6 +120,8 @@ String imageURL = '';
       'profilepic': imageURL,
       //'profilepic': Image.network(profilepic),
       'rate': null,
+      'StartTime' : formattedStime,
+      'EndTime' : formattedEtime,
       /*'services':[[{'خدمات التنظيف والتنزيين'}],
         [{'خدمات علاجية'}],
         [{'خدمات متنقلة'}],
