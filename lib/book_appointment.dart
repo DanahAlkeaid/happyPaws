@@ -18,7 +18,6 @@ class _book_appointmentssState extends State<book_appointments> {
   String formattedTime = "";
   DateTime _date = DateTime.now();
   String formattedDate = "";
-  bool iosStyle = true;
 
 
   void onTimeChanged(TimeOfDay newTime) {
@@ -245,7 +244,7 @@ class _book_appointmentssState extends State<book_appointments> {
             value: _time,
             onChange: onTimeChanged,
             minuteInterval: MinuteInterval.THIRTY,
-            iosStylePicker: iosStyle,
+            iosStylePicker: true,
             is24HrFormat: false,
             //Set start and end time
             minHour: 9,
