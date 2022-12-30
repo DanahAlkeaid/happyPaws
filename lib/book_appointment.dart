@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'appointment_confirmed.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
@@ -19,12 +18,132 @@ class _book_appointmentssState extends State<book_appointments> {
   DateTime _date = DateTime.now();
   String formattedDate = "";
 
-
+//A method to format the appointment time
   void onTimeChanged(TimeOfDay newTime) {
     setState(() {
       _time = newTime;
       formattedTime = _time.toString().replaceAll("(", "").replaceAll(")", "").replaceAll("TimeOfDay", "");
     });
+  }
+
+//A method to check if the chosen appointment day is a weekday
+  bool isWorkday() {
+    if (_date.weekday == DateTime.friday) {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            icon: const Icon(Icons.error_outline_rounded,
+                color: const Color(0xffc51515),
+                size: 55),
+
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Align(alignment : Alignment.centerRight ,
+                    child: Text('،العيادة مغلقة في اليوم المحدد',
+                        style: TextStyle(fontSize: 20,
+                            fontFamily: 'Tajwal',
+                            color: Colors.black)),
+                  ),
+                  Align(alignment : Alignment.centerRight ,
+                    child: Text('.الرجاء إختيار يوم أخر',
+                        style: TextStyle(fontSize: 20,
+                            fontFamily: 'Tajwal',
+                            color: Colors.black)),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              Align(alignment : Alignment.center ,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFFC2D961)),
+                        shape: MaterialStateProperty
+                            .all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: const BorderSide(
+                                  color: Color(0xFFC2D961),
+                                )))),
+                    child: const Text("حسناً",
+                        style: TextStyle(fontSize: 18,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
+              ),
+            ],
+          );
+        },
+      );
+      return false;
+    }
+    else
+    {
+      return true;}
+  }
+
+//A method to check if all the information are complete before booking the appointment
+  bool isComplete() {
+    if (formattedTime == "" || formattedDate == "") {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            icon: const Icon(Icons.error_outline_rounded,
+                color: const Color(0xffc51515),
+                size: 55),
+
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Align(alignment : Alignment.centerRight ,
+                    child: Text('،الرجاء التأكد من إدخال جميع',
+                        style: TextStyle(fontSize: 20,
+                            fontFamily: 'Tajwal',
+                            color: Colors.black)),
+                  ),
+                  Align(alignment : Alignment.centerRight ,
+                    child: Text('.المعلومات المطلوبة',
+                        style: TextStyle(fontSize: 20,
+                            fontFamily: 'Tajwal',
+                            color: Colors.black)),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              Align(alignment : Alignment.center ,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFFC2D961)),
+                        shape: MaterialStateProperty
+                            .all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: const BorderSide(
+                                  color: Color(0xFFC2D961),
+                                )))),
+                    child: const Text("حسناً",
+                        style: TextStyle(fontSize: 18,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
+              ),
+            ],
+          );
+        },
+      );
+      return false;
+    }
+    else
+    {
+      return true;}
   }
 
   @override
@@ -237,40 +356,45 @@ class _book_appointmentssState extends State<book_appointments> {
               ),
 
               //Time picker
-            Container(
-            child: createInlinePicker(
-            elevation: 1,
-            value: _time,
-            onChange: onTimeChanged,
-            minuteInterval: MinuteInterval.THIRTY,
-            iosStylePicker: true,
-            is24HrFormat: true,
-            //Set start and end time
-            minHour: 9,
-            maxHour: 21,
-            maxMinute:30,
-            //Styling
-            sunAsset: Image.asset("Assets/sun.png"),
-            moonAsset: Image.asset("Assets/moon.png"),
-            isOnChangeValueMode: true,
-            accentColor: Colors.black,
-            barrierColor: Color(0xfffaf7f4),
-            wheelHeight: 150
-        ),
-      ),
+              Container(
+                child: createInlinePicker(
+                    elevation: 1,
+                    value: _time,
+                    onChange: onTimeChanged,
+                    minuteInterval: MinuteInterval.THIRTY,
+                    iosStylePicker: true,
+                    is24HrFormat: true,
+                    //Set start and end time
+                    minHour: 9,
+                    maxHour: 21,
+                    maxMinute:30,
+                    //Styling
+                    sunAsset: Image.asset("Assets/sun.png"),
+                    moonAsset: Image.asset("Assets/moon.png"),
+                    isOnChangeValueMode: true,
+                    accentColor: Colors.black,
+                    barrierColor: Color(0xfffaf7f4),
+                    wheelHeight: 150
+                ),
+              ),
 
               const SizedBox(height: 5)
               ,ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          //Check appointment confirmation then redirect to correct page
-                            builder: (context) => appointment_confirmed()));
-                    print(_time);
-                    print(formattedTime);
-                    print(_date);
-                    print(formattedDate);},
+                    //Check if the chosen day is a workday and check information completion
+                    if (isWorkday() && isComplete()) {
+                      //Confirm appointment only if it is a workday
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            //Check appointment confirmation then redirect to correct page
+                              builder: (context) => appointment_confirmed()));
+                      print(_time);
+                      print(formattedTime);
+                      print(_date);
+                      print(formattedDate);
+                      print(DateTime.friday);}
+                  },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color(0xFFC2D961)),
@@ -283,9 +407,8 @@ class _book_appointmentssState extends State<book_appointments> {
                               )))),
                   child: const Text(" تأكيد الحجز",
                       style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
-              const SizedBox(height: 20)
+              const SizedBox(height: 30)
             ],),),),
     );
   }
 }
-
