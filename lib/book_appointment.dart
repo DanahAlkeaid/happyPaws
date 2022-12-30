@@ -153,6 +153,7 @@ class _book_appointmentssState extends State<book_appointments> {
 //Get the current petOwner info
   FirebaseAuth _auth = FirebaseAuth.instance;
   late final Stream<QuerySnapshot> _reqStream;
+  CollectionReference appointments = FirebaseFirestore.instance.collection('appointments');
   var pEmail;
   var pName='';
   var pPhone;
@@ -162,10 +163,6 @@ class _book_appointmentssState extends State<book_appointments> {
     getCurrentUser();
     pInfo();
     openCollection();
-    //TEST !!!
-    print(pEmail);
-    print(pName);
-    print(pPhone);
   }
 
   getCurrentUser()  {
@@ -195,12 +192,12 @@ class _book_appointmentssState extends State<book_appointments> {
         .snapshots();
   }
 
+//Storing the appointment at the cloud firestore
 
-//A method to store the appointment at the cloud firestore
-  Future addAppointment(String clinic, String clinicPhone,
-      String service, String petOwner, String petOwnerPhone,
-      String date, String time) async {
-    await FirebaseFirestore.instance.collection('appointments').add({
+  Future<void> addAppointment() {
+    // Call the user's CollectionReference to add a new user
+    return appointments
+        .add({
       //Data from clinic
       'clinic': null,
       'clinicPhone': null,
@@ -210,7 +207,9 @@ class _book_appointmentssState extends State<book_appointments> {
       'petOwnerPhone': pPhone,
       'date': formattedDate,
       'time': formattedTime,
-    } );
+    })
+        .then((value) => print("Appointment Added"))
+        .catchError((error) => print("Failed to add appointment: $error"));
   }
 
   @override
@@ -337,7 +336,7 @@ class _book_appointmentssState extends State<book_appointments> {
               ,const Divider(
                 color:Color(0xffbda520),
                 height:13,
-                thickness:0,
+                thickness:1,
                 indent:0,
                 endIndent:0,
               ),
@@ -427,6 +426,7 @@ class _book_appointmentssState extends State<book_appointments> {
               const SizedBox(height: 5)
               ,ElevatedButton(
                   onPressed: () {
+                    addAppointment();
                     //Check if the chosen day is a workday and check information completion
                     if (isWorkday() && isComplete()) {
                       //Confirm appointment only if it is a workday

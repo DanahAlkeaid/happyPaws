@@ -95,263 +95,300 @@ class _petOwnerSignup extends State<petOwnerSignup> {
             padding: EdgeInsets.symmetric(horizontal: 40),
             height: MediaQuery.of(context).size.height - 50,
             width: double.infinity,
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(
-                      "تسجيل مُربي جديد",
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'ElMessiri'),
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    //NAME
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "الاسم",
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Tajawal'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 20,
-                                    offset: Offset(1, 1),
-                                    color: Colors.grey.withOpacity(0.26))
-                              ]),
-                          child: TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            controller: _firstnameController,
-                            validator: validateFirstname,
-                            decoration: InputDecoration(
-                                hintText: (" "),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    ),
-
-                    //EMAIL
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "البريد الإلكتروني",
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Tajawal'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 20,
-                                    offset: Offset(1, 1),
-                                    color: Colors.grey.withOpacity(0.26))
-                              ]),
-                          child: TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            controller: _emailController,
-                            validator: validationEmail,
-                            decoration: InputDecoration(
-                                hintText: ("Example@gmail.com"),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Center(
-                          child: Text(
-                            errorMessage,
-                          ),
-                        )
-                      ],
-                    ),
-                    //PHONE NUMBER
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "رقم الهاتف",
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Tajawal'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 20,
-                                    offset: Offset(1, 1),
-                                    color: Colors.grey.withOpacity(0.26))
-                              ]),
-                          child: new TextFormField(
-                            maxLength: 12,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            keyboardType: TextInputType.number,
-                            controller: _phonenumberController,
-                            validator: validationPhoneNumber,
-                            decoration: InputDecoration(
-                                hintText: ("9665********"),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    ),
-                    //PASSWORD
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "كلمة المرور",
+            child: SingleChildScrollView(
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        "تسجيل مُربي جديد",
                         style: TextStyle(
-                            fontSize: 25,
+                            fontSize: 35,
                             fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal'),
+                            fontFamily: 'ElMessiri'),
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 20,
-                        ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      //NAME
 
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 20,
-                                    offset: Offset(1, 1),
-                                    color: Colors.grey.withOpacity(0.26))
-                              ]),
-                          child: TextFormField(
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            controller: _passwordController,
-                              validator: validationPassword,
-                            onChanged: (password) =>
-                                onPasswordChanged(password),
-                            obscureText: !_isVisible,
-                            decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _isVisible = !_isVisible;
-                                  });
-                                },
-                                icon: _isVisible
-                                    ? Icon(
-                                        Icons.visibility,
-                                        color: Colors.black,
-                                      )
-                                    : Icon(
-                                        Icons.visibility_off,
-                                        color: Colors.grey,
-                                      ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              hintText: "***********",
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "الاسم",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: 'Tajawal'),
                             ),
                           ),
-                        ), //password field
-                        SizedBox(
-                          height: 30,
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 20,
+                                      offset: Offset(1, 1),
+                                      color: Colors.grey.withOpacity(0.26))
+                                ]),
+                            child: TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: _firstnameController,
+                              validator: validateFirstname,
+                              decoration: InputDecoration(
+                                  hintText: (" "),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
+
+                      //EMAIL
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "البريد الإلكتروني",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: 'Tajawal'),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 20,
+                                      offset: Offset(1, 1),
+                                      color: Colors.grey.withOpacity(0.26))
+                                ]),
+                            child: TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: _emailController,
+                              validator: validationEmail,
+                              decoration: InputDecoration(
+                                  hintText: ("Example@gmail.com"),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Center(
+                            child: Text(
+                              errorMessage,
+                            ),
+                          )
+                        ],
+                      ),
+                      //PHONE NUMBER
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "رقم الهاتف",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: 'Tajawal'),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 20,
+                                      offset: Offset(1, 1),
+                                      color: Colors.grey.withOpacity(0.26))
+                                ]),
+                            child: new TextFormField(
+                              maxLength: 12,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              keyboardType: TextInputType.number,
+                              controller: _phonenumberController,
+                              validator: validationPhoneNumber,
+                              decoration: InputDecoration(
+                                  hintText: ("9665********"),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide:
+                                          BorderSide(color: Colors.white)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
+                      //PASSWORD
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          "كلمة المرور",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal'),
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Row(
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            height: 20,
+                          ),
+
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 20,
+                                      offset: Offset(1, 1),
+                                      color: Colors.grey.withOpacity(0.26))
+                                ]),
+                            child: TextFormField(
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              controller: _passwordController,
+                                validator: validationPassword,
+                              onChanged: (password) =>
+                                  onPasswordChanged(password),
+                              obscureText: !_isVisible,
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _isVisible = !_isVisible;
+                                    });
+                                  },
+                                  icon: _isVisible
+                                      ? Icon(
+                                          Icons.visibility,
+                                          color: Colors.black,
+                                        )
+                                      : Icon(
+                                          Icons.visibility_off,
+                                          color: Colors.grey,
+                                        ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide(color: Colors.white)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: BorderSide(color: Colors.white)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                hintText: "***********",
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                              ),
+                            ),
+                          ), //password field
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 120,
+                                ),
+                                Text("تحتوي على 8 حروف أو أرقام"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                AnimatedContainer(
+                                  duration: Duration(milliseconds: 500),
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                      color: isEightChar
+                                          ? Colors.green
+                                          : Colors.transparent,
+                                      border: isEightChar
+                                          ? Border.all(color: Colors.transparent)
+                                          : Border.all(
+                                              color: Colors.grey.shade400),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 15,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ), //has 8 characters
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
                             children: [
                               SizedBox(
-                                width: 120,
+                                width: 70,
                               ),
-                              Text("تحتوي على 8 حروف أو أرقام"),
+                              Text("تحتوي على حرف كبير واحد على الأقل"),
                               SizedBox(
                                 width: 10,
                               ),
@@ -360,13 +397,12 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                                 width: 20,
                                 height: 20,
                                 decoration: BoxDecoration(
-                                    color: isEightChar
+                                    color: hasUpperChar
                                         ? Colors.green
                                         : Colors.transparent,
-                                    border: isEightChar
+                                    border: hasUpperChar
                                         ? Border.all(color: Colors.transparent)
-                                        : Border.all(
-                                            color: Colors.grey.shade400),
+                                        : Border.all(color: Colors.grey.shade400),
                                     borderRadius: BorderRadius.circular(50)),
                                 child: Center(
                                   child: Icon(
@@ -377,115 +413,81 @@ class _petOwnerSignup extends State<petOwnerSignup> {
                                 ),
                               ),
                             ],
-                          ),
-                        ), //has 8 characters
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 70,
-                            ),
-                            Text("تحتوي على حرف كبير واحد على الأقل"),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                  color: hasUpperChar
-                                      ? Colors.green
-                                      : Colors.transparent,
-                                  border: hasUpperChar
-                                      ? Border.all(color: Colors.transparent)
-                                      : Border.all(color: Colors.grey.shade400),
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Center(
-                                child: Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ), // has one upper case
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                          ), // has one upper case
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
 
-                Container(
-                  child: ElevatedButton(
-                      onPressed: () async {
-                          signUp();
+                  Container(
+                    child: ElevatedButton(
+                        onPressed: () async {
+                            signUp();
 
-                          setState(() {});
-                        },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFFC2D961)),
-                          shape: MaterialStateProperty
-                              .all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  side: BorderSide(
-                                    color: Color(0xFFC2D961),
-                                  )))),
-                      child: Text(
-                        'تسجيل المُربي',
-                        style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
-                      )),
-                  height: 50,
-                  width: 200,
-                  /*decoration: BoxDecoration(
-                  color: Color(0xFFC2D961),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Color(0xFFC2D963),
-                    width: 5,
-                  )),*/
-                ), //sign in container عدلي النافقيتر
-                SizedBox(
-                  height: 20,
-                ),
-
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => loginScreen()));
-                        },
+                            setState(() {});
+                          },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color(0xFFC2D961)),
+                            shape: MaterialStateProperty
+                                .all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    side: BorderSide(
+                                      color: Color(0xFFC2D961),
+                                    )))),
                         child: Text(
-                          "سجل دخولك",
-                          style: TextStyle(
-                            color: Colors.blueAccent,
+                          'تسجيل المُربي',
+                          style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+                        )),
+                    height: 50,
+                    width: 200,
+                    /*decoration: BoxDecoration(
+                    color: Color(0xFFC2D961),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Color(0xFFC2D963),
+                      width: 5,
+                    )),*/
+                  ), //sign in container عدلي النافقيتر
+                  SizedBox(
+                    height: 20,
+                  ),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => loginScreen()));
+                          },
+                          child: Text(
+                            "سجل دخولك",
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal',
+                            ),
+                          )),
+                      Text(
+                        "لديك حساب؟ ",
+                        style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal',
-                          ),
-                        )),
-                    Text(
-                      "لديك حساب؟ ",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Tajawal'),
-                    ),
-                  ],
-                ),
-              ],
+                            fontFamily: 'Tajawal'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
