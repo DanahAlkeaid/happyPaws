@@ -343,10 +343,10 @@ class _userChangePassState extends State<userChangePass> {
                 ],
               ),
             ]),
-          ),
+  ]),
         ),
       ),
-    );
+    ));
   }
 
   String? validationCurrent(String? formPassword) {

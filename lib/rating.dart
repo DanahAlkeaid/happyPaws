@@ -298,6 +298,8 @@ class _ratingState extends State<rating> {
       // });}catch(error){
       // print(error);
 
+    }catch(error){
+      print(error);
     }
 
   }
