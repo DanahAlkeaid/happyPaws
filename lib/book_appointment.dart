@@ -193,7 +193,6 @@ class _book_appointmentssState extends State<book_appointments> {
   }
 
 //Storing the appointment at the cloud firestore
-
   Future<void> addAppointment() {
     // Call the user's CollectionReference to add a new user
     return appointments
