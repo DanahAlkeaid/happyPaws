@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+
 class userChangePass extends StatefulWidget {
   const userChangePass({super.key});
 
@@ -18,6 +19,10 @@ class _userChangePassState extends State<userChangePass> {
     getCurrentUser();
   }
 
+  bool isEightChar = false;
+  bool hasUpperChar = false;
+  bool _isVisible = false;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController _PassTextController = TextEditingController();
   TextEditingController _CurrTextController = TextEditingController();
@@ -27,6 +32,18 @@ class _userChangePassState extends State<userChangePass> {
   bool obscure2 = true;
   bool obscure3 = true;
   bool error2 = false;
+
+  onPasswordChanged(String password) {
+    final CharRange = RegExp(r'[A-Z]');
+    setState(() {
+      isEightChar = false;
+      if (password.length >= 8) isEightChar = true;
+
+      hasUpperChar = false;
+      if (CharRange.hasMatch(password)) hasUpperChar = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -53,237 +70,280 @@ class _userChangePassState extends State<userChangePass> {
           elevation: 0
 
       ),
-      body: Container(
-        padding: EdgeInsets.only(left: 15, right: 15),
-        color: Color(0xfffaf7f4),
-        height: h,
-        child: Form(
-          key: formKey,
-          child: Column(children: [
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          height: MediaQuery.of(context).size.height - 50,
+          width: double.infinity,
+          child: Form(
+            key: formKey,
+            child: Column(children: [
 
-            Text(
-              ' تغيير كلمة المرور ',
-              style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Color(0xff194919),fontFamily: 'ElMessiri'),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            SvgPicture.asset(
-              'App_Logo.png',
-              height: h * 0.15,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              // padding: EdgeInsets.only(left:40, right: 40,),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "كلمة المرور الحالية",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Tajawal'),
+              Text(
+                ' تغيير كلمة المرور ',
+                style: TextStyle(fontSize: 30,fontWeight: FontWeight.w900,color: Color(0xff194919),fontFamily: 'ElMessiri'),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              // alignment: Alignment.center,
-              width: w * 0.9,
-              height: h * 0.1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: validationCurrent,
-                obscureText: obscure,
-                controller: _CurrTextController,
-                decoration: InputDecoration(
-                    fillColor: Color.fromARGB(255, 255, 255, 255),
-                    filled: true,
-                    hintText: ("كلمة المرور الحالية"),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscure = !obscure;
-                        });
-                      },
-                      icon: Icon(
-                        obscure ? Icons.visibility : Icons.visibility_off,
+              SizedBox(
+                height: 50,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                // padding: EdgeInsets.only(left:40, right: 40,),
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "كلمة المرور الحالية",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                // alignment: Alignment.center,
+
+                width: w * 0.9,
+                height: h * 0.1,
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: validationCurrent,
+                  obscureText: obscure,
+                  controller: _CurrTextController,
+                  decoration: InputDecoration(
+                      fillColor: Color.fromARGB(255, 255, 255, 255),
+                      filled: true,
+                      hintText: ("كلمة المرور الحالية"),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscure = !obscure;
+                          });
+                        },
+                        icon: Icon(
+                          obscure ?  Icons.visibility_off : Icons.visibility,
+                        ),
+                        color: Colors.grey,
                       ),
-                      color: Colors.grey,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
               ),
-            ),
-            Container(
-              // padding: EdgeInsets.only(left:40, right: 40,),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'كلمة المرور الجديدة',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Tajawal'),
+              Container(
+                // padding: EdgeInsets.only(left:40, right: 40,),
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'كلمة المرور الجديدة',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              // alignment: Alignment.center,
-              width: w * 0.9,
-              height: h * 0.1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: validationPassword,
-                obscureText: obscure2,
-                controller: _PassTextController,
-                decoration: InputDecoration(
-                    fillColor: Color.fromARGB(255, 255, 255, 255),
-                    filled: true,
-                    hintText: ("كلمة المرور الجديدة"),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscure2 = !obscure2;
-                        });
-                      },
-                      icon: Icon(
-                        obscure2 ? Icons.visibility : Icons.visibility_off,
+              SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                // alignment: Alignment.center,
+                width: w * 0.9,
+                height: h * 0.1,
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: validationPassword,
+                  obscureText: obscure2,
+                  controller: _PassTextController,
+                  onChanged: (password) => onPasswordChanged(password),
+                  decoration: InputDecoration(
+                      fillColor: Color.fromARGB(255, 255, 255, 255),
+                      filled: true,
+                      hintText: ("كلمة المرور الجديدة"),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscure2 = !obscure2;
+                          });
+                        },
+                        icon: Icon(
+                          obscure2 ? Icons.visibility_off :  Icons.visibility,
+                        ),
+                        color: Colors.grey,
                       ),
-                      color: Colors.grey,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Container(
-              //  padding: EdgeInsets.only(left:40, right: 40,),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'تأكيد كلمة المرور',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Tajawal'),
+              SizedBox(
+                height: 5,
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              // alignment: Alignment.center,
-              width: w * 0.9,
-              height: h * 0.1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: ValidateEmpty,
-                obscureText: obscure3,
-                controller: _CPassTextController,
-                decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscure3 = !obscure3;
-                        });
-                      },
-                      icon: Icon(
-                        obscure3 ? Icons.visibility : Icons.visibility_off,
+              Container(
+                //  padding: EdgeInsets.only(left:40, right: 40,),
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'تأكيد كلمة المرور',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Tajawal'),
+                ),
+              ),
+              SizedBox(
+                // alignment: Alignment.center,
+                width: w * 0.9,
+                height: h * 0.1,
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: ValidateEmpty,
+                  obscureText: obscure3,
+                  controller: _CPassTextController,
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscure3 = !obscure3;
+                          });
+                        },
+                        icon: Icon(
+                          obscure3 ? Icons.visibility_off :  Icons.visibility,
+                        ),
+                        color: Colors.grey,
                       ),
-                      color: Colors.grey,
-                    ),
-                    fillColor: Color.fromARGB(255, 255, 255, 255),
-                    filled: true,
-                    hintText: ("تأكيد كلمة المرور"),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                      fillColor: Color.fromARGB(255, 255, 255, 255),
+                      filled: true,
+                      hintText: ("تأكيد كلمة المرور"),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.white)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+
+            SizedBox(
+              height: 30,
             ),
+            Align( alignment : Alignment.centerRight ,
+              child: Row(
+                children: [
+                  SizedBox(width: 120,),
+
+                  Text("تحتوي على 8 حروف أو أرقام",style: TextStyle(fontFamily: 'Tajawal'), ),
+
+                  SizedBox(
+                    width: 10,
+                  ),
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: isEightChar ? Colors.green : Colors.transparent,
+                        border: isEightChar
+                            ? Border.all(color: Colors.transparent)
+                            : Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),  //has 8 characters
             SizedBox(
               height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  width: w * 0.4,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(
-                        context,
-                      ).pop();
-                    },
-                    child: Text(
-                      'إلغاء',
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Tajawal'),
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFFC2D961)),
-                        shape: MaterialStateProperty
-                            .all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                side: BorderSide(
-                                  color: Color(0xFFC2D961),
-                                )))),
+                children: [
+                  SizedBox(width: 70,),
+                  Text("تحتوي على حرف كبير واحد على الأقل",style: TextStyle(fontFamily: 'Tajawal'),),
+
+                  SizedBox(
+                    width: 10,
                   ),
-                ),
-                SizedBox(
-                  width: w * 0.4,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await _changePassword(_PassTextController.text.trim(),
-                          _CurrTextController.text.trim());
-                    },
-                    child: Text('تغيير',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: w * 0.4,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(
+                          context,
+                        ).pop();
+                      },
+                      child: Text(
+                        'إلغاء',
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal')),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFFC2D961)),
-                        shape: MaterialStateProperty
-                            .all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                side: BorderSide(
-                                  color: Color(0xFFC2D961),
-                                )))),
+                            fontFamily: 'Tajawal'),
+                      ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color(0xFFC2D961)),
+                            shape: MaterialStateProperty
+                                .all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    side: BorderSide(
+                                      color: Color(0xFFC2D961),
+                                    )))),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ]),
+                  SizedBox(
+                    width: w * 0.4,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await _changePassword(_PassTextController.text.trim(),
+                            _CurrTextController.text.trim());
+                      },
+                      child: Text('تغيير',
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Tajawal')),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFFC2D961)),
+                          shape: MaterialStateProperty
+                              .all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  side: BorderSide(
+                                    color: Color(0xFFC2D961),
+                                  )))),
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+          ),
         ),
       ),
     );
@@ -292,11 +352,11 @@ class _userChangePassState extends State<userChangePass> {
   String? validationCurrent(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
       error2 = false;
-      return "Required";
+      return "مطلوب";
     }
     if (error2) {
       error2 = false;
-      return "Wrong Password";
+      return "كلمة مرور خاطئة";
     }
     return null;
   }
@@ -324,7 +384,7 @@ class _userChangePassState extends State<userChangePass> {
                 ),
                 onPressed: () => Navigator.pop(context),
                 color: Color(0xFFC2D961),
-                radius: BorderRadius.circular(0.0),
+                radius: const BorderRadius.all(Radius.circular(6)),
               ),
               DialogButton(
                 radius: const BorderRadius.all(Radius.circular(6)),
@@ -364,7 +424,7 @@ class _userChangePassState extends State<userChangePass> {
 
   String? ValidateEmpty(value) {
     if (value != null && value.isEmpty) {
-      return "Required";
+      return "مطلوب";
     } else {
       InputDecoration(
         errorBorder: UnderlineInputBorder(
@@ -373,7 +433,7 @@ class _userChangePassState extends State<userChangePass> {
       );
 
       if (_CPassTextController.text.trim() != _PassTextController.text.trim()) {
-        return ("Password Doesn't match");
+        return ("كلمة المرور غير مطابقة");
       }
     }
   }
@@ -388,13 +448,13 @@ class _userChangePassState extends State<userChangePass> {
 
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
-      return "Required";
+      return "هذا الحقل مطلوب";
     }
     String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
     RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(formPassword))
-      return 'Password must be at least 8 characters\ninclude an uppercase letter, number and symbol';
+      return '';
     return null;
   }
 
