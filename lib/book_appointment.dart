@@ -3,6 +3,10 @@ import 'appointment_confirmed.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class book_appointments extends StatefulWidget {
   const book_appointments ({Key? key}) : super (key: key);
@@ -146,6 +150,69 @@ class _book_appointmentssState extends State<book_appointments> {
       return true;}
   }
 
+//Get the current petOwner info
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var pEmail;
+  var pName='';
+  var pPhone;
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    pInfo();
+    openCollection();
+    //TEST !!!
+    print(pEmail);
+    print(pName);
+    print(pPhone);
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+    pEmail = user.email;
+  }
+
+  pInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var petOwnerName = snapshot.docs[0].data()['firstname'];
+    var petOwnerPhone = snapshot.docs[0].data()['phonenumber'];
+    setState(() {
+      pName ='${petOwnerName} ';
+      pPhone ='${petOwnerPhone} ';
+    });
+
+    }); }
+
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .snapshots();
+  }
+
+
+//A method to store the appointment at the cloud firestore
+  Future addAppointment(String clinic, String clinicPhone,
+      String service, String petOwner, String petOwnerPhone,
+      String date, String time) async {
+    await FirebaseFirestore.instance.collection('appointments').add({
+      //Data from clinic
+      'clinic': null,
+      'clinicPhone': null,
+      'service': null,
+      //Data from petOwner
+      'petOwner': pName,
+      'petOwnerPhone': pPhone,
+      'date': formattedDate,
+      'time': formattedTime,
+    } );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -233,7 +300,7 @@ class _book_appointmentssState extends State<book_appointments> {
               const Align(
                 alignment:Alignment(1.0, 0.0),
                 child:Text(
-                  "الخدمات العلاجية",
+                  ":الخدمات العلاجية المختارة",
                   textAlign: TextAlign.start,
                   overflow:TextOverflow.clip,
                   style:TextStyle(
@@ -244,51 +311,30 @@ class _book_appointmentssState extends State<book_appointments> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment:MainAxisAlignment.start,
+
+              const SizedBox(height: 10)
+              ,Row(
+                mainAxisAlignment:MainAxisAlignment.end,
                 crossAxisAlignment:CrossAxisAlignment.center,
                 mainAxisSize:MainAxisSize.max,
-                children:[
-
-                  Padding(
-                    padding:const EdgeInsets.fromLTRB(0, 0, 117, 0),
-                    child:MaterialButton(
-                      onPressed:(){},
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
-                      ),
-                      padding:const EdgeInsets.all(16),
-                      child:const Text("حذف", style: TextStyle( fontSize:17,
+                children:const [
+                  Align(
+                    alignment:Alignment.centerRight,
+                    child:Text(
+                      "اسم الخدمة",
+                      textAlign: TextAlign.start,
+                      overflow:TextOverflow.clip,
+                      style:TextStyle(
                         fontWeight:FontWeight.w400,
                         fontFamily: "Almarai",
-                      ),),
-                      textColor:const Color(0xffd60f0f),
-                      height:20,
-                      minWidth:10,
-                    ),
-                  ),
-                  const Padding(
-                    padding:EdgeInsets.fromLTRB(78, 0, 0, 0),
-                    child:Align(
-                      alignment:Alignment.centerRight,
-                      child:Text(
-                        "اسم الخدمة",
-                        textAlign: TextAlign.start,
-                        overflow:TextOverflow.clip,
-                        style:TextStyle(
-                          fontWeight:FontWeight.w400,
-                          fontFamily: "Almarai",
-                          fontSize:20,
-                          color:Color(0xff034d23),
-                        ),
+                        fontSize:20,
+                        color:Color(0xff034d23),
                       ),
                     ),
                   ),
                 ],),
-              const Divider(
+              const SizedBox(height: 10)
+              ,const Divider(
                 color:Color(0xffbda520),
                 height:13,
                 thickness:0,
