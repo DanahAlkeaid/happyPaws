@@ -55,10 +55,93 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           child:SingleChildScrollView(
             child: Column(
              children: [
-              Row(
+               Container(
+                 decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 20,
+                      offset: Offset(1, 1),
+                      color: Colors.grey.withOpacity(0.26))
+                ]),
+                 child: TextField(
+                   onChanged: (textEntered){
+                     setState(() {
+                       userNameText = textEntered;
+                     });
+                     SearchingPost(textEntered);
+                   },
+                   decoration: InputDecoration(
+                     hintText: 'ابحث هنا .......',
+                     hintStyle: TextStyle(color: Colors.grey),
+                     focusedBorder: OutlineInputBorder(
+                         borderRadius: BorderRadius.circular(15),
+                         borderSide:
+                         BorderSide(color: Colors.white)),
+                     enabledBorder: OutlineInputBorder(
+                         borderRadius: BorderRadius.circular(15),
+                         borderSide:
+                         BorderSide(color: Colors.white)),
+                     prefixIcon: IconButton(
+                       onPressed: () {
+                         SearchingPost(userNameText);
+                       },
+                       icon: Icon(Icons.search,
+                       color: Color(0xff194919),
+                       size: 25,),
+                     ),
+                     suffixIcon: IconButton(icon: Icon(
+                       Icons.tune,
+                       color: Color(0xff194919),
+                       size: 25,),
+                       onPressed: () {
+                         showModalBottomSheet(
+                             isDismissible: true,
+                             context: context,
+                             builder: (builder){
+                               return Column(
+                                 children: [
+                                   Container(
+                                     padding: EdgeInsets.symmetric(vertical: 50),
+                                     height: 200,
+                                     child: Text(
+                                       'الترتيب',
+                                       textAlign: TextAlign.center,
+                                       style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
+                                       ),
+                                     ),
+                                   ),
+                                   Container(height: 20,),
+                                   ElevatedButton(
+                                     onPressed: () {SortByRate();},
+                                     child: Text("التقييم",
+                                         style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                                     style: ButtonStyle(
+                                         backgroundColor: MaterialStateProperty.all<Color>(
+                                             Color(0xFFC2D961)),
+                                         shape: MaterialStateProperty
+                                             .all<RoundedRectangleBorder>(
+                                             RoundedRectangleBorder(
+                                                 borderRadius: BorderRadius.circular(15),
+                                                 side: BorderSide(
+                                                   color: Color(0xFFC2D961),
+                                                 )))),
+                                   ),
+                                 ],
+                               );
+                             }
+                         );
+                       },
+                     ),
+                   ),
+                 ),
+               ),
+              SizedBox(height: 20,),
+              /*SRow(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AnimSearchBar(width: 335,
+                  /*AnimSearchBar(width: 335,
                     textController: textController,
                     color: Color(0xFFC2D961),
                     onSuffixTap: () {
@@ -68,7 +151,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                     },
                     helpText: "ابحث هنا.....",
                     closeSearchOnSuffixTap: true, onSubmitted: (String ) {  },
-                  ),
+                  ),*/
+
                   IconButton(icon: Icon(
                     Icons.tune,
                     color: Color(0xff194919),
@@ -113,7 +197,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                     },
                   ),
                 ],
-              ),
+              ),*/
              Column(
                children: [
                  ListTile(
@@ -156,6 +240,20 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         doc_id = element.id;
         print(doc_id);
       });
+    });
+  }
+
+  Future<QuerySnapshot>? list;
+  String userNameText ='';
+
+  SearchingPost(String textEntered){
+    list = FirebaseFirestore.instance
+        .collection('usrs')
+        .where('firstname',isGreaterThanOrEqualTo: textEntered)
+        .get();
+
+    setState(() {
+      list;
     });
   }
 }
