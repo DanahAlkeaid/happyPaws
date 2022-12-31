@@ -88,7 +88,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       top: MediaQuery.of(context).padding.top,
     ),
     child: Column(
-      children: const [
+      children: [
         SizedBox(height: 10),
         CircleAvatar(
           backgroundColor: Colors.white70,
@@ -100,11 +100,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
         ),
         SizedBox(height: 10),
-        /*Text(
+        Text(
           '${pName}',
           style:
           TextStyle(fontSize: 20,color: Colors.black,fontFamily: 'Tajawal'),
-        ),*/
+        ),
       ],
     ),
   );
