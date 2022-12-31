@@ -12,8 +12,8 @@ class rating extends StatefulWidget {
   final  PetOwner_email;
   final  Clinic_email;
   final  appointment_ID;
-  final DName;
-  const rating(this.PetOwner_email, this.Clinic_email, this.appointment_ID, this.DName, {super.key});
+
+  const rating(this.PetOwner_email, this.Clinic_email, this.appointment_ID,  {super.key});
 
 
   @override

@@ -3,16 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/petOwner_appointments.dart';
-import 'main.dart';
-import 'clinicsign.dart';
-import 'petOwnerSignup.dart';
-import 'signupScreen.dart';
-import 'FirstScreen.dart';
+import 'package:untitled/viewClinic.dart';
+
 import 'NavigationDrawer.dart';
-import 'gpi_page.dart';
-import 'PetNotification.dart';
-import 'MyAccount.dart';
-import 'loginScreen.dart';
+
 import 'book_appointment.dart';
 
 class petOwnerHome extends StatefulWidget {
@@ -136,7 +130,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                    child: Image(image: AssetImage('Assets/Pet_House.png')),),
                    leading: const Icon(Icons.star,color: Color(0xffe8c60b),size: 20,),
                    onTap: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=>book_appointments()));
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>viewClinic(title: 'clinic',)));
                      },
                  ),
                  Container(height: 20,),
