@@ -240,7 +240,7 @@ class _userChangePassState extends State<userChangePass> {
               ),
 
             SizedBox(
-              height: 30,
+              height: 10,
             ),
             Align( alignment : Alignment.centerRight ,
               child: Row(
