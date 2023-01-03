@@ -415,7 +415,7 @@ class _ChangePass extends State<ChangePass> {
         print("$error");
       }
     } else {
-      print("حدث خطأ");
+      print(" خطأ في تغيير المعلومات الشخصية");
     }
   }
 

@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MyAccount extends StatefulWidget{
-  const MyAccount({Key? key}) : super(key: key);
+  const MyAccount(pEmail,{Key? key}) : super(key: key);
 
   @override
   State<MyAccount> createState() => _MyAccountState();
