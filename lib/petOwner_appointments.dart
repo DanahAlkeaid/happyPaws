@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'gpi_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class petOwner_appointments extends StatefulWidget {
   const petOwner_appointments ({Key? key}) : super (key: key);
@@ -9,6 +14,71 @@ class petOwner_appointments extends StatefulWidget {
 }
 
 class _petOwner_appointmentsState extends State<petOwner_appointments> {
+
+//Get the current petOwner info
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  CollectionReference appointments = FirebaseFirestore.instance.collection('appointments');
+  //currentUser info
+  var pEmail;
+
+  //Appointment info
+  var petOwner;
+  var petownerPhone;
+  var clinic;
+  var clinicPhone;
+  var bookedService;
+  var appointmentDate;
+  var appointmentTime;
+
+  var numOfAppointments = 0;
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      numOfAppointments++;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    pInfo();
+    openUsersCollection();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+    pEmail = user.email;
+  }
+
+  pInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var petOwnerPhone = snapshot.docs[0].data()['phonenumber'];
+    setState(() {
+      petownerPhone ='${petOwnerPhone} ';
+    });
+    //TEST !!!
+    print(pEmail);
+    print(petOwnerPhone);
+    }); }
+
+
+  openUsersCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${pEmail}')
+        .snapshots();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,36 +117,34 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
             children: [
               Align(
                 alignment:Alignment(0.8, 0.0),
-                child:Padding(
-                  padding:EdgeInsets.fromLTRB(139, 0, 0, 0),
-                  child:Row(
-                    mainAxisAlignment:MainAxisAlignment.end,
-                    crossAxisAlignment:CrossAxisAlignment.center,
-                    mainAxisSize:MainAxisSize.max,
-                    children:const [
-                      Align(
-                        alignment:Alignment.centerRight,
-                        child:Text(
-                          "المواعيد ",
-                          textAlign: TextAlign.right,
-                          overflow:TextOverflow.clip,
-                          style:TextStyle(
-                            fontWeight:FontWeight.w700,
-                            fontFamily: "Almarai",
-                            fontSize:37,
-                            color:Color(0xff034d23),
-                          ),
-                        ),
-                      ),
-                      Align(
-                    alignment:Alignment.centerRight,
-                        child:Icon(
-                          Icons.calendar_today,
+                child:Row(
+                  mainAxisAlignment:MainAxisAlignment.end,
+                  crossAxisAlignment:CrossAxisAlignment.center,
+                  mainAxisSize:MainAxisSize.max,
+                  children:const [
+                    Align(
+                      alignment:Alignment.centerRight,
+                      child:Text(
+                        "المواعيد ",
+                        textAlign: TextAlign.right,
+                        overflow:TextOverflow.clip,
+                        style:TextStyle(
+                          fontWeight:FontWeight.w700,
+                          fontFamily: "Almarai",
+                          fontSize:37,
                           color:Color(0xff034d23),
-                          size:33,
                         ),
                       ),
-                    ],),),),
+                    ),
+                    Align(
+                  alignment:Alignment.centerRight,
+                      child:Icon(
+                        Icons.calendar_today,
+                        color:Color(0xff034d23),
+                        size:33,
+                      ),
+                    ),
+                  ],),),
 
           const SizedBox(height: 20)
 
@@ -86,183 +154,267 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                 shrinkWrap:true,
                 physics:ScrollPhysics(),
                 children:[
-                  //Get appointment details from DB
-                  //Each card represent an appointment
 
-                  Card(
-                    margin:EdgeInsets.fromLTRB(0, 0, 0, 16),
-                    color:Color(0xffffffff),
-                    shadowColor:Color(0x4d939393),
-                    elevation:1,
-                    shape:RoundedRectangleBorder(
-                      borderRadius:BorderRadius.circular(4.0),
-                      side: BorderSide(color:Color(0x4d9e9e9e), width:1),
-                    ),
-                    child:
-                    Align(
-                      alignment:Alignment(0.8, 0.1),
-                      child:Padding(
-                        padding:EdgeInsets.all(16),
-                        child:Row(
-                          mainAxisAlignment:MainAxisAlignment.start,
-                          crossAxisAlignment:CrossAxisAlignment.center,
-                          mainAxisSize:MainAxisSize.max,
-                          children:[
+                  //Get all petOwner appointments and display them as cards
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance.collection("appointments").where('petOwnerPhone', isEqualTo: '${petownerPhone}').snapshots(),
+                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
-                            Expanded(
-                              flex: 1,
-                              child: Row(
-                                mainAxisAlignment:MainAxisAlignment.start,
-                                crossAxisAlignment:CrossAxisAlignment.center,
-                                mainAxisSize:MainAxisSize.max,
-                                children:[
+                      if(snapshot.hasData) {
+                        final snap = snapshot.data!.docs;
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          physics:ScrollPhysics(),
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: snap.length,
 
-                                  Expanded(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding:EdgeInsets.symmetric(vertical: 0,horizontal:16),
-                                      child:
-                                      Column(
-                                        mainAxisAlignment:MainAxisAlignment.start,
-                                        crossAxisAlignment:CrossAxisAlignment.start,
-                                        mainAxisSize:MainAxisSize.max,
-                                        children: [
-                                          Align(
-                                            alignment:Alignment(-0.0, 0.0),
-                                            child:Row(
-                                              mainAxisAlignment:MainAxisAlignment.start,
-                                              crossAxisAlignment:CrossAxisAlignment.center,
-                                              mainAxisSize:MainAxisSize.max,
-                                              children:[
-
-                                                IconButton(
-                                                  icon:const Icon(
-                                                      Icons.clear
-                                                  ),
-                                                  onPressed:(){},
-                                                  color:Color(0xff212435),
-                                                  iconSize:24,
-                                                ),
-                                                Align(
-                                                  alignment:Alignment.topLeft,
-                                                  child:MaterialButton(
-                                                    onPressed:(){},
-                                                    color:Color(0xffffffff),
-                                                    elevation:0,
-                                                    shape:const RoundedRectangleBorder(
-                                                      borderRadius:BorderRadius.zero,
-                                                      side:BorderSide(color:Color(0xffffffff),width:0),
-                                                    ),
-                                                    padding:EdgeInsets.fromLTRB(12, 1, 16, 1),
-                                                    child:Text("التفاصيل", style: TextStyle( fontSize:16,
-                                                      fontWeight:FontWeight.w400,
-                                                      fontFamily: "Almarai",
-                                                    ),),
-                                                    textColor:Color(0xff034d23),
-                                                    height:9,
-                                                    minWidth:10,
-                                                  ),
-                                                ),
-                                              ],),),
-                                          const Align(
-                                            alignment:Alignment.centerRight,
-                                            child:Text(
-                                              "الموعد",
-                                              textAlign: TextAlign.start,
-                                              maxLines:1,
-                                              overflow:TextOverflow.clip,
-                                              style:TextStyle(
-                                                fontWeight:FontWeight.w700,
-                                                fontFamily: "Almarai",
-                                                fontSize:27,
-                                                color:Color(0xff034d23),
-                                              ),
-                                            ),
-                                          ),
-                                          const Padding(
-                                            padding:EdgeInsets.symmetric(vertical: 4,horizontal:0),
-                                            child:Align(
-                                              alignment:Alignment.centerRight,
-                                              child:Text(
-                                                "اسم العيادة",
-                                                textAlign: TextAlign.start,
-                                                maxLines:1,
-                                                overflow:TextOverflow.ellipsis,
-                                                style:TextStyle(
-                                                  fontWeight:FontWeight.w400,
-                                                  fontFamily: "Almarai",
-                                                  fontSize:16,
-                                                  color:Color(0xff009245),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const Align(
-                                            alignment:Alignment.centerRight,
-                                            child:Text(
-                                              "الوقت",
-                                              textAlign: TextAlign.start,
-                                              overflow:TextOverflow.clip,
-                                              style:TextStyle(
-                                                fontWeight:FontWeight.w400,
-                                                fontFamily: "Almarai",
-                                                fontSize:16,
-                                                color:Color(0xff034d23),
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:MainAxisAlignment.end,
-                                            crossAxisAlignment:CrossAxisAlignment.center,
-                                            mainAxisSize:MainAxisSize.max,
-                                            children:[
-
-                                              const Padding(
-                                                padding:EdgeInsets.fromLTRB(0, 0, 2, 0),
-                                                child:Text(
-                                                  "التاريخ",
-                                                  textAlign: TextAlign.start,
-                                                  overflow:TextOverflow.clip,
-                                                  style:TextStyle(
-                                                    fontWeight:FontWeight.w400,
-                                                    fontFamily: "Almarai",
-                                                    fontSize:16,
-                                                    color:Color(0xff034d23),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],),
-                                        ],),),),
-                                ],),),
-                            Container(
-                              alignment:Alignment.center,
-                              margin:EdgeInsets.all(0),
-                              padding:EdgeInsets.all(10),
-                              width:50,
-                              decoration: BoxDecoration(
-                                color:Color(0xfffaf7f4),
-                                shape:BoxShape.circle,
-                                border:Border.all(color:Color(0xff034d23),width:1),
+                          itemBuilder: (context, index) {
+                            return Card(
+                              margin:EdgeInsets.fromLTRB(0, 0, 0, 16),
+                              color:Color(0xffffffff),
+                              shadowColor:Color(0x4d939393),
+                              elevation:1,
+                              shape:RoundedRectangleBorder(
+                                borderRadius:BorderRadius.circular(4.0),
+                                side: BorderSide(color:Color(0x4d9e9e9e), width:1),
                               ),
                               child:
-                              const Align(
-                                alignment:Alignment(0.1, 0.0),
-                                child:
-                                Image(
-                                  image:AssetImage("Assets/Pet_House.png"),
-                                  height:50,
-                                  width:266,
-                                  fit:BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                          ],),),),
-                  ),
+                              Align(
+                                alignment:Alignment(0.8, 0.1),
+                                child:Padding(
+                                  padding:EdgeInsets.all(16),
+                                  child:Row(
+                                    mainAxisAlignment:MainAxisAlignment.start,
+                                    crossAxisAlignment:CrossAxisAlignment.center,
+                                    mainAxisSize:MainAxisSize.max,
+                                    children:[
 
+                                      Expanded(
+                                        flex: 1,
+                                        child: Row(
+                                          mainAxisAlignment:MainAxisAlignment.start,
+                                          crossAxisAlignment:CrossAxisAlignment.center,
+                                          mainAxisSize:MainAxisSize.max,
+                                          children:[
 
+                                            Expanded(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding:EdgeInsets.symmetric(vertical: 0,horizontal:16),
+                                                child:
+                                                Column(
+                                                  mainAxisAlignment:MainAxisAlignment.end,
+                                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                                  mainAxisSize:MainAxisSize.max,
+                                                  children: [
+                                                    Align(
+                                                      alignment:Alignment(-0.0, 0.0),
+                                                      child:Row(
+                                                        mainAxisAlignment:MainAxisAlignment.start,
+                                                        crossAxisAlignment:CrossAxisAlignment.center,
+                                                        mainAxisSize:MainAxisSize.max,
+                                                        children:[
 
+                                                          IconButton(
+                                                            icon:const Icon(
+                                                                Icons.clear
+                                                            ),
+                                                            onPressed:(){showPopup(snapshot.data!.docs[index].reference);},
+                                                            color:Color(0xff212435),
+                                                            iconSize:24,
+                                                          ),
+                                                          Align(
+                                                            alignment:Alignment.topLeft,
+                                                            child:MaterialButton(
+                                                              onPressed:(){},
+                                                              color:Color(0xffffffff),
+                                                              elevation:0,
+                                                              shape:const RoundedRectangleBorder(
+                                                                borderRadius:BorderRadius.zero,
+                                                                side:BorderSide(color:Color(0xffffffff),width:0),
+                                                              ),
+                                                              padding:EdgeInsets.fromLTRB(12, 1, 16, 1),
+                                                              child:Text("التفاصيل", style: TextStyle( fontSize:16,
+                                                                fontWeight:FontWeight.w400,
+                                                                fontFamily: "Almarai",
+                                                              ),),
+                                                              textColor:Color(0xff034d23),
+                                                              height:9,
+                                                              minWidth:10,
+                                                            ),
+                                                          ),
+                                                        ],),),
+                                                    Align(
+                                                      alignment:Alignment.centerRight,
+                                                      child:Text(
+                                                        "${snap[index]['service']}",
+                                                        textAlign: TextAlign.start,
+                                                        maxLines:1,
+                                                        overflow:TextOverflow.clip,
+                                                        style:TextStyle(
+                                                          fontWeight:FontWeight.w700,
+                                                          fontFamily: "Almarai",
+                                                          fontSize:20,
+                                                          color:Color(0xff034d23),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:EdgeInsets.symmetric(vertical: 4,horizontal:0),
+                                                      child:Align(
+                                                        alignment:Alignment.centerRight,
+                                                        child:Text(
+                                                          "${snap[index]['clinic']}",
+                                                          textAlign: TextAlign.start,
+                                                          maxLines:1,
+                                                          overflow:TextOverflow.ellipsis,
+                                                          style:TextStyle(
+                                                            fontWeight:FontWeight.w400,
+                                                            fontFamily: "Almarai",
+                                                            fontSize:18,
+                                                            color:Color(0xff009245),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:MainAxisAlignment.start,
+                                                      crossAxisAlignment:CrossAxisAlignment.center,
+                                                      mainAxisSize:MainAxisSize.max,
+                                                      children: [
+
+                                                        Padding(
+                                                          padding:EdgeInsets.fromLTRB(25, 0, 33, 0),
+                                                          child:Text(
+                                                            "${snap[index]['date']}",
+                                                            textAlign: TextAlign.start,
+                                                            overflow:TextOverflow.clip,
+                                                            style:TextStyle(
+                                                              fontWeight:FontWeight.w400,
+                                                              fontFamily: "Almarai",
+                                                              fontSize:17,
+                                                              color:Color(0xff034d23),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:EdgeInsets.fromLTRB(70, 0, 0, 0),
+                                                          child:Align(
+                                                            alignment:Alignment.centerRight,
+                                                            child:Text(
+                                                              "${snap[index]['time']}",
+                                                              textAlign: TextAlign.start,
+                                                              overflow:TextOverflow.clip,
+                                                              style:TextStyle(
+                                                                fontWeight:FontWeight.w400,
+                                                                fontFamily: "Almarai",
+                                                                fontSize:17,
+                                                                color:Color(0xff034d23),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],),
+                                                  ],),),),
+                                          ],),),
+                                      Container(
+                                        alignment:Alignment.center,
+                                        margin:EdgeInsets.all(0),
+                                        padding:EdgeInsets.all(10),
+                                        width:50,
+                                        decoration: BoxDecoration(
+                                          color:Color(0xfffaf7f4),
+                                          shape:BoxShape.circle,
+                                          border:Border.all(color:Color(0xff034d23),width:1),
+                                        ),
+                                        child:
+                                        const Align(
+                                          alignment:Alignment(0.1, 0.0),
+                                          child:
+                                          Image(
+                                            image:AssetImage("Assets/Pet_House.png"),
+                                            height:50,
+                                            width:266,
+                                            fit:BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                    ],),),),
+                            );
+                          },
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  )
                 ],),
             ],),),),
     );
+
   }
+  showPopup(DocumentReference id) {
+    Alert(
+      style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
+      closeIcon: Container(),
+      context: context,
+      title: "حذف الموعد",
+      desc:
+      " هل أنت متأكد من رغبتك بحذف الموعد؟",
+      buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "إلغاء",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+        ),
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حذف",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          // onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+            await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
+              await myTransaction.delete(id);
+              Navigator.pop(context);
+              showPopup2();
+            });
+          }, //to do
+          color: Color.fromARGB(255, 200, 62, 62),
+
+        ),
+      ],
+    ).show();
+  }
+
+  showPopup2() {
+    Alert(
+      style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
+      context: context,
+      desc: "تم حذف الموعد",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+
+        ),
+      ],
+    ).show();
+
+  }
+
 }
+

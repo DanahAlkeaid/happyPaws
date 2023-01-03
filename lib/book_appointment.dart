@@ -425,10 +425,9 @@ class _book_appointmentssState extends State<book_appointments> {
               const SizedBox(height: 5)
               ,ElevatedButton(
                   onPressed: () {
-                    addAppointment();
                     //Check if the chosen day is a workday and check information completion
                     if (isWorkday() && isComplete()) {
-                      //Confirm appointment only if it is a workday
+                      addAppointment();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
