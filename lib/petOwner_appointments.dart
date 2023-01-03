@@ -299,7 +299,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                                                           ),
                                                         ),
                                                         Padding(
-                                                          padding:EdgeInsets.fromLTRB(70, 0, 0, 0),
+                                                          padding:EdgeInsets.fromLTRB(69, 0, 0, 0),
                                                           child:Align(
                                                             alignment:Alignment.centerRight,
                                                             child:Text(
