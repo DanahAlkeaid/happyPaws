@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/viewClinic.dart';
 import 'dart:async';
 import 'clinic_services.dart';
+import 'NavigationDrawer.dart';
 
 
 
@@ -90,10 +91,10 @@ class _ReportStatus extends State<Report> {
       // var token = data.docs[index]['token'];
       // var pic = data.docs[index]['EXprofilepic'];
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => viewClinic(title: '',/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
+      //Navigator.push(
+          //context,
+          //MaterialPageRoute(
+             // builder: (context) => viewClinic(title: '',/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
     },
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,6 +222,7 @@ class _ReportStatus extends State<Report> {
     return Scaffold(
       backgroundColor: Color(0xFFf9f9f9),
       appBar: topAppBar,
+      drawer: const NavigationDrawer(),
       body: makeBody(),
     );
   }
