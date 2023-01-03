@@ -106,7 +106,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                             ),
                             Container(height: 20,),
                             ElevatedButton(
-                              onPressed: () {/*SortByRate();*/},
+                              onPressed: () {SortByRate();},
                               child: Text("التقييم",
                                   style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                               style: ButtonStyle(
