@@ -255,7 +255,7 @@ class _clinic_homeState extends State<clinic_home> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => clinicMyAccount()));
+                              builder: (context) => clinicMyAccount(cEmail)));
                     },
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(

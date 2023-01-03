@@ -1,4 +1,9 @@
+import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 class addGrooming extends StatefulWidget {
@@ -12,6 +17,72 @@ class _addGrooming extends State<addGrooming> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _serviceName = TextEditingController();
   final TextEditingController _price = TextEditingController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  var cEmail;
+  var doc_id;
+  get sName => _serviceName;
+  get sPrice => _price;
+
+  List<Map> service = [{
+    'الاسم ': 'sName',
+    'السعر ': 'sPrice',
+  }];
+
+
+  SaveEdit() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        //  uploadimage(profilePic);
+        setState(() {
+        });
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: '${cEmail}')
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            doc_id = element.id;
+            print(doc_id);
+          });
+        });
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc('${doc_id}').set({
+
+         "خدمات التنظيف والتنزيين" :  FieldValue.arrayUnion([service])
+
+        });
+
+
+        Navigator.of(context).pop();
+        showPopup();
+      }
+      catch (error) {
+        print("$error");
+      }
+    } else {
+      print("خطأ في تغيير المعلومات الشخصية ");
+    }
+  }
+
+
+  showPopup() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "تم إضافة الخدمة ",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [],
+    ).show();
+
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+    cEmail = user.email;
+  }
 
 
   String errorMessage = '';
@@ -258,7 +329,7 @@ _price.dispose();
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => Navigator.pop(context),
+    onPressed:(){/*addService();*/}
                                                // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -292,3 +363,4 @@ String? validateService(String? formService) {
 
   return null;
 }
+

@@ -9,7 +9,7 @@ import 'clinic_services.dart';
 import 'clinicChangeInfo.dart';
 
 class clinicMyAccount extends StatefulWidget{
-  const clinicMyAccount({Key? key}) : super(key: key);
+  const clinicMyAccount(cEmail, {Key? key}) : super(key: key);
 
   @override
   State<clinicMyAccount> createState() => _clinicMyAccount();
@@ -31,14 +31,9 @@ class _clinicMyAccount extends State<clinicMyAccount> {
     super.initState();
     getCurrentUser();
     clInfo();
-    openCollection();
+
   }
-  openCollection() {
-    _reqStream = FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: '${cEmail}')
-        .snapshots();
-  }
+
 
   getCurrentUser()  {
     final User user = _auth.currentUser! ;

@@ -417,7 +417,7 @@ var nameValue;
         print("$error");
       }
     } else {
-      print("حدث خطأ");
+      print("خطأ في تغيير المعلومات الشخصية ");
     }
   }
     showPopup() {
