@@ -220,14 +220,65 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                                                             icon:const Icon(
                                                                 Icons.clear
                                                             ),
-                                                            onPressed:(){showPopup(snapshot.data!.docs[index].reference);},
+                                                            onPressed:(){DeleteApp(snapshot.data!.docs[index].reference);},
                                                             color:Color(0xff212435),
                                                             iconSize:24,
                                                           ),
                                                           Align(
                                                             alignment:Alignment.topLeft,
                                                             child:MaterialButton(
-                                                              onPressed:(){},
+                                                              onPressed:(){
+                                                                AlertDialog(
+                                                                  icon: const Icon(Icons.details_outlined,
+                                                                      color: const Color(0xffc51515),
+                                                                      size: 55),
+
+                                                                  content: SingleChildScrollView(
+                                                                    child: ListBody(
+                                                                      children: <Widget>[
+                                                                        Align(alignment : Alignment.centerRight ,
+                                                                          child: Text( "${snap[index]['date']}تاريخ الموعد: " ,
+                                                                              style: TextStyle(fontSize: 20,
+                                                                                  fontFamily: 'Tajwal',
+                                                                                  color: Colors.black)),
+                                                                        ),
+                                                                        Align(alignment : Alignment.centerRight ,
+                                                                          child: Text('${snap[index]['time']}وقت الموعد: ',
+                                                                              style: TextStyle(fontSize: 20,
+                                                                                  fontFamily: 'Tajwal',
+                                                                                  color: Colors.black)),
+                                                                        ),
+                                                                        Align(alignment : Alignment.centerRight ,
+                                                                          child: Text('${snap[index]['service']}رقم هاتف العيادة: ',
+                                                                              style: TextStyle(fontSize: 20,
+                                                                                  fontFamily: 'Tajwal',
+                                                                                  color: Colors.black)),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  actions: <Widget>[
+                                                                    Align(alignment : Alignment.center ,
+                                                                      child: ElevatedButton(
+                                                                          onPressed: () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          style: ButtonStyle(
+                                                                              backgroundColor: MaterialStateProperty.all<Color>(
+                                                                                  Color(0xFFC2D961)),
+                                                                              shape: MaterialStateProperty
+                                                                                  .all<RoundedRectangleBorder>(
+                                                                                  RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(15),
+                                                                                      side: const BorderSide(
+                                                                                        color: Color(0xFFC2D961),
+                                                                                      )))),
+                                                                          child: const Text("حسناً",
+                                                                              style: TextStyle(fontSize: 18,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
                                                               color:Color(0xffffffff),
                                                               elevation:0,
                                                               shape:const RoundedRectangleBorder(
@@ -354,7 +405,9 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
     );
 
   }
-  showPopup(DocumentReference id) {
+
+
+  DeleteApp(DocumentReference id) {
     Alert(
       style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
       closeIcon: Container(),
@@ -383,7 +436,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
             await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
               await myTransaction.delete(id);
               Navigator.pop(context);
-              showPopup2();
+              ConfirmDel();
             });
           }, //to do
           color: Color.fromARGB(255, 200, 62, 62),
@@ -393,7 +446,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
     ).show();
   }
 
-  showPopup2() {
+  ConfirmDel() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
@@ -415,6 +468,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
     ).show();
 
   }
+
 
 }
 
