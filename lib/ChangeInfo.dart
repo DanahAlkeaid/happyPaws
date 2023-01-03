@@ -371,15 +371,15 @@ class _ChangePass extends State<ChangePass> {
 
   String? validationPhoneNumber(String? formPhoneNumber) {
     RegExp regex =
-    RegExp(r'^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$');
+    RegExp(r'^(00966|966|\+966|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{8})$');
     String phone1 = formPhoneNumber!;
 
 
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
-    if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
-    if (formPhoneNumber.length != 12) {
+    else if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
+    else if (formPhoneNumber.length != 12) {
       return "يجب أن يحتوي الرقم على ١٢ خانة";
     }
     return null;
