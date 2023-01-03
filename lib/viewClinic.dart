@@ -4,9 +4,11 @@ import 'package:flutter/widgets.dart';
 
 class viewClinic extends StatefulWidget {
 
-  final title;
-  const viewClinic({Key? key, required this.title}) : super(key: key);
+  // final title;
+  // const viewClinic({Key? key, required this.title}) : super(key: key);
 
+  final String cEmail;
+  const viewClinic(this.cEmail, {super.key});
 
 
 
@@ -19,7 +21,7 @@ class _viewClinicState extends State<viewClinic> {
   static String secondaryFontName = "Tajawal-Regular";
   static String testFont = "AR_GESS"; // لاختبار الخط ينحذف بعدين
 
-  late TextEditingController _emailController = TextEditingController(text:widget.title);
+  late TextEditingController _emailController = TextEditingController(text:widget.cEmail);
 
   var cName='';
   var cPhone;
@@ -56,7 +58,7 @@ class _viewClinicState extends State<viewClinic> {
   clInfo()  {
     FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: '${_emailController}')
+        .where('email', isEqualTo: '${widget.cEmail}')
         .get()
         .then((snapshot) { print(snapshot.docs[0].data());
     var clinicName=snapshot.docs[0].data()['firstname'];
