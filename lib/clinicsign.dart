@@ -541,6 +541,7 @@ String imageURL = '';
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _locationController,
+                          validator: validateLocation,
                           decoration: InputDecoration(
                               hintText: ("الحي، الشارع "),
                               focusedBorder: OutlineInputBorder(
@@ -698,6 +699,17 @@ String imageURL = '';
       return null;
   }
 
+  String? validateLocation(String? formLocation) {
+    final validCharacters = RegExp(r'[!@#<>?":_`~;[\]\/|=+)(*&^%0-9-]');
+
+    if (formLocation == null || formLocation.trim().isEmpty) {
+      return "يرجى إدخال موقع";
+    }  else if ( formLocation.length < 2) {
+      return 'يجب أن يحتوى الموقع على حرفين على الأقل';
+    } else
+      return null;
+  }
+
   String? validationEmail(String? formEmail) {
     if (formEmail == null || formEmail.trim().isEmpty) {
       return "يرجى إدخال بريد إلكتروني";
@@ -727,7 +739,7 @@ String imageURL = '';
 
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
-      return "This fiels is required";
+      return "هذه الخانة مطلوبة";
     }
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';

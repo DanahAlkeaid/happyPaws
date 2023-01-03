@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +46,7 @@ class _addGrooming extends State<addGrooming> {
         await FirebaseFirestore.instance
             .collection('users')
             .doc('${doc_id}').set({
-
-         "خدمات التنظيف والتنزيين" :  FieldValue.arrayUnion([service])
-
+         "services" :  FieldValue.arrayUnion([service])
         });
 
 
