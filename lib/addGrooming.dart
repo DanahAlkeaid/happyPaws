@@ -13,21 +13,21 @@ class addGrooming extends StatefulWidget {
 
 class _addGrooming extends State<addGrooming> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _serviceName = TextEditingController();
+  late TextEditingController _serviceName = TextEditingController();
   final TextEditingController _price = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   var cEmail;
   var doc_id;
-  get sName => _serviceName;
-  get sPrice => _price;
+  var sName;
+  var sPrice;
 
   List<Map> service = [{
-    'الاسم ': 'sName',
-    'السعر ': 'sPrice',
+    'الاسم ': '_serviceName',
+    'السعر ':' sPrice',
   }];
 
 
-  SaveEdit() async {
+  addService() async {
     if (_formKey.currentState!.validate()) {
       try {
         //  uploadimage(profilePic);
@@ -37,7 +37,7 @@ class _addGrooming extends State<addGrooming> {
             .collection('users')
             .where('email', isEqualTo: '${cEmail}')
             .get()
-            .then((value) {
+            .then((value) {print(value);
           value.docs.forEach((element) {
             doc_id = element.id;
             print(doc_id);
@@ -46,7 +46,7 @@ class _addGrooming extends State<addGrooming> {
         await FirebaseFirestore.instance
             .collection('users')
             .doc('${doc_id}').set({
-         "services" :  FieldValue.arrayUnion([service])
+         "خدمات التنظيف والتزيين" :  FieldValue.arrayUnion([service])
         });
 
 
@@ -325,7 +325,7 @@ _price.dispose();
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-    onPressed:(){/*addService();*/}
+    onPressed:(){addService();}
                                                // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),

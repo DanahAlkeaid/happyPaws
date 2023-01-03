@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/viewClinic.dart';
 import 'dart:async';
 import 'clinic_services.dart';
 
@@ -32,6 +33,11 @@ class _ReportStatus extends State<Report> {
         .where('type', isEqualTo: 'clinic')
         .snapshots();
   }
+
+
+
+
+
   rateAve(email){
 
     late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
@@ -51,6 +57,7 @@ class _ReportStatus extends State<Report> {
       if(snapshot.docs.isNotEmpty){
         setState(() {
           numRate=snapshot.docs.length;
+
         });
 
         for(int i=0;i<numRate;i++){
@@ -63,7 +70,7 @@ class _ReportStatus extends State<Report> {
         print(avgRate);
         print(TotalRate);
         print(numRate);
-
+      //  'rate' = avgRate;
       }
       else{
 
@@ -86,7 +93,7 @@ class _ReportStatus extends State<Report> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => clinic_services(/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
+              builder: (context) => viewClinic(title: '',/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
     },
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,8 +120,8 @@ class _ReportStatus extends State<Report> {
           color: Color.fromARGB(255, 252, 163, 77),
           size: 10,
         ),
-        Text(
-          rateAve(data.docs[index]['email'])+"/5",
+        Text(//'.',
+         rateAve(data.docs[index]['email']).toString(),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/addGrooming.dart';
 import 'package:untitled/addMedical.dart';
@@ -7,6 +9,8 @@ import 'package:untitled/editOther.dart';
 import 'package:untitled/editTruck.dart';
 import 'editGrooming.dart';
 import 'editMedical.dart';
+
+
 
 class clinic_services extends StatefulWidget {
   // final String email;
@@ -23,6 +27,57 @@ class _clinic_servicesState extends State<clinic_services> {
   bool show_medical_services = false;
   bool show_truck_services = false;
   bool show_others_services = false;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  late final Stream<QuerySnapshot> _reqStream;
+  var cEmail;
+  var cName='';
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    clName();
+    openCollection();
+
+
+  }
+
+  openCollection() {
+    _reqStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${cEmail}')
+        .snapshots();
+  }
+
+  getCurrentUser()  {
+    final User user = _auth.currentUser! ;
+
+    cEmail = user.email;
+
+    print(cEmail) ;
+
+  }
+
+
+  clName()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${cEmail}')
+        .get()
+        .then((snapshot) { print(snapshot.docs);
+    var clinicName=snapshot.docs[0].data()['firstname'];
+
+
+    setState(() {
+      cName='${clinicName} ';
+
+      print(cName);
+
+      // print(exBio);
+
+
+    });
+
+    }); }
 
   @override
   Widget build(BuildContext context) {
