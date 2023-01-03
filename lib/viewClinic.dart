@@ -1,19 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class viewClinic extends StatefulWidget {
+
+  final title;
   const viewClinic({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
-  final String title;
 
   @override
   State<viewClinic> createState() => _viewClinicState();
@@ -24,11 +19,12 @@ class _viewClinicState extends State<viewClinic> {
   static String secondaryFontName = "Tajawal-Regular";
   static String testFont = "AR_GESS"; // لاختبار الخط ينحذف بعدين
 
-  // العنوان
-  String title = "اسم العيادة";
+  late TextEditingController _emailController = TextEditingController(text:widget.title);
 
-  // العنوان الثاني
-  String subtitle = "وصف العيادة";
+  var cName='';
+  var cPhone;
+  var cLocation;
+  var cPic;
 
   static Color backgroundColor = Color(0xfffaf7f4);
   static Color mainTextColor = Color(0xff034d23);
@@ -47,6 +43,36 @@ class _viewClinicState extends State<viewClinic> {
   TextStyle(color: secondaryTextColor, fontFamily: testFont, fontSize: 15);
 
   String clinic_image_url = 'https://googleflutter.com/sample_image.jpg';
+
+
+
+
+  void initState() {
+    super.initState();
+    //getSelectedClinic();
+    clInfo();
+  }
+
+  clInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${_emailController}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var clinicName=snapshot.docs[0].data()['firstname'];
+    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
+    var clinicLocation=snapshot.docs[0].data()['description'];
+    var profilePic =snapshot.docs[0].data()['profilepic'];
+
+    setState(() {
+      cName='${clinicName} ';
+      cPhone='${clinicPhone} ';
+      cLocation='${clinicLocation}';
+      cPic = '${profilePic}';
+
+    });
+
+    }); }
 
   @override
   Widget build(BuildContext context) {
@@ -104,24 +130,21 @@ class _viewClinicState extends State<viewClinic> {
                 height: 100,
               ),
               Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(clinic_image_url),
-                      fit: BoxFit.fill),
-                ),
+                  child: CircleAvatar(
+                    radius: 55,
+                    backgroundColor: Color(0xfffaf7f4),
+                    // child:borderRadius: BorderRadius.circular(50),
+                    child: Image.network(cPic),)
               ),
               Container(
                 height: 50,
               ),
               Text(
-                'اسم العيادة',
+                '${cName}',
                 style: titleTextStyle,
               ),
               Text(
-                'وصف العيادة',
+                '${cLocation}',
                 style: subTextStyle,
               ),
               Container(

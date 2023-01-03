@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/petOwnerHome.dart';
-import 'PetOwnerFirstScreen.dart';
-import 'main.dart';
-import 'clinicsign.dart';
-import 'petOwnerSignup.dart';
 import 'signupScreen.dart';
-import 'FirstScreen.dart';
 import 'ResetPassword.dart';
-import 'petOwnerHome.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:ui';
