@@ -21,27 +21,8 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
   CollectionReference appointments = FirebaseFirestore.instance.collection('appointments');
   //currentUser info
   var pEmail;
+  var pPhone;
 
-  //Appointment info
-  var petOwner;
-  var petownerPhone;
-  var clinic;
-  var clinicPhone;
-  var bookedService;
-  var appointmentDate;
-  var appointmentTime;
-
-  var numOfAppointments = 0;
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      numOfAppointments++;
-    });
-  }
 
   void initState() {
     super.initState();
@@ -63,13 +44,12 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
         .then((snapshot) { print(snapshot.docs[0].data());
     var petOwnerPhone = snapshot.docs[0].data()['phonenumber'];
     setState(() {
-      petownerPhone ='${petOwnerPhone} ';
+      pPhone ='${petOwnerPhone} ';
     });
     //TEST !!!
     print(pEmail);
-    print(petOwnerPhone);
+    print(pPhone);
     }); }
-
 
   openUsersCollection() {
     _reqStream = FirebaseFirestore.instance
@@ -77,7 +57,6 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
         .where('email', isEqualTo: '${pEmail}')
         .snapshots();
   }
-
 
 
   @override
@@ -157,7 +136,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
 
                   //Get all petOwner appointments and display them as cards
                   StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection("appointments").where('petOwnerPhone', isEqualTo: '${petownerPhone}').snapshots(),
+                    stream: FirebaseFirestore.instance.collection("appointments").where('petOwnerPhone', isEqualTo: '${pPhone}').snapshots(),
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
                       if(snapshot.hasData) {
@@ -228,29 +207,29 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                                                             alignment:Alignment.topLeft,
                                                             child:MaterialButton(
                                                               onPressed:(){
-                                                                AlertDialog(
-                                                                  icon: const Icon(Icons.details_outlined,
-                                                                      color: const Color(0xffc51515),
-                                                                      size: 55),
-
+                                                               showDialog<void>(
+                                                               context: context,
+                                                               barrierDismissible: false, // user must tap button!
+                                                               builder: (BuildContext context) {
+                                                                return AlertDialog(
                                                                   content: SingleChildScrollView(
                                                                     child: ListBody(
                                                                       children: <Widget>[
                                                                         Align(alignment : Alignment.centerRight ,
-                                                                          child: Text( "${snap[index]['date']}تاريخ الموعد: " ,
-                                                                              style: TextStyle(fontSize: 20,
+                                                                          child: Text( "${snap[index]['date']} :تاريخ الموعد" ,
+                                                                              style: TextStyle(fontSize: 18,
                                                                                   fontFamily: 'Tajwal',
                                                                                   color: Colors.black)),
                                                                         ),
                                                                         Align(alignment : Alignment.centerRight ,
-                                                                          child: Text('${snap[index]['time']}وقت الموعد: ',
-                                                                              style: TextStyle(fontSize: 20,
+                                                                          child: Text('${snap[index]['time']} :وقت الموعد',
+                                                                              style: TextStyle(fontSize: 18,
                                                                                   fontFamily: 'Tajwal',
                                                                                   color: Colors.black)),
                                                                         ),
                                                                         Align(alignment : Alignment.centerRight ,
-                                                                          child: Text('${snap[index]['service']}رقم هاتف العيادة: ',
-                                                                              style: TextStyle(fontSize: 20,
+                                                                          child: Text('${snap[index]['clinicPhone']} :رقم هاتف العيادة',
+                                                                              style: TextStyle(fontSize: 18,
                                                                                   fontFamily: 'Tajwal',
                                                                                   color: Colors.black)),
                                                                         ),
@@ -278,6 +257,8 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                                                                     ),
                                                                   ],
                                                                 );
+                                                               },
+                                                               );
                                                               },
                                                               color:Color(0xffffffff),
                                                               elevation:0,
