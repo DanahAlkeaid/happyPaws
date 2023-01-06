@@ -269,7 +269,7 @@ class _addMedical extends State<addMedical> {
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => add_service(_serviceName,_price),
+                                                onPressed: () => add_service(_serviceName.text.trim(),_price.text.trim()),
                                                 // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -284,12 +284,13 @@ class _addMedical extends State<addMedical> {
             ],),),),
     );
   }
-  Future add_service( name, price) async {
+  //{widget.clinicEmail}
+  Future add_service(String name,String price) async {
     await FirebaseFirestore.instance.collection('services').add({
       "clinicEmail": {widget.clinicEmail},
       "type":"medical",
       "name":name,
-      "price":price
+      "price":price,
     });
 
   }
