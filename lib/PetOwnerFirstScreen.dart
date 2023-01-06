@@ -23,10 +23,12 @@ class _ReportStatus extends State<Report> {
   Future<QuerySnapshot>? list;
   String userNameText ='';
 
+
   void initState() {
     super.initState();
     method1();
   }
+
 
   late Stream<QuerySnapshot> _clinicsStream;
   method1() {
@@ -200,13 +202,13 @@ class _ReportStatus extends State<Report> {
           borderSide:
           BorderSide(color: Colors.white)),
         prefixIcon: IconButton(
-              onPressed: () {
-                SearchingPost(userNameText);
-              },
-              icon: Icon(Icons.search,
-                color: Color(0xff194919),
-                size: 25,),
-            ),
+          onPressed: () {
+          SearchingPost(userNameText);
+          },
+          icon: Icon(Icons.search,
+          color: Color(0xff194919),
+          size: 25,),
+          ),
         suffixIcon: IconButton(icon: Icon(
           Icons.tune,
           color: Color(0xff194919),
@@ -284,8 +286,7 @@ class _ReportStatus extends State<Report> {
   SearchingPost(String textEntered) {
     list = FirebaseFirestore.instance
         .collection('usrs')
-        .where('type',isEqualTo: 'clinic')
-        .where('firstname', isGreaterThanOrEqualTo: textEntered)
+        .where(clinicName, isGreaterThanOrEqualTo: textEntered)
         .get();
 
     setState(() {
