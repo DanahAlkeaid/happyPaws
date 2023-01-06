@@ -119,24 +119,26 @@ String imageURL = '';
       'description': location,
       'profilepic': imageURL,
       //'profilepic': Image.network(profilepic),
-      'rate': null,
+      // 'rate': null,
       'StartTime' : formattedStime,
       'EndTime' : formattedEtime,
       /*'services':[[{'خدمات التنظيف والتنزيين'}],
         [{'خدمات علاجية'}],
         [{'خدمات متنقلة'}],
        [ {'أخرى'}]]*/
-      'services': {'خدمات التنظيف والتنزيين': {'null' :['الاسم' , 'السعر']},
-        'خدمات علاجية': {'null' :[null]},
-        'خدمات متنقلة': {'null' :[null]},
-        'أخرى': {'null' :[null]}
-      }
+
+      //هذي اللي تحت هي الصحيحة بس ماعاد لها داعي
+      // 'services': {'خدمات التنظيف والتنزيين': {'null' :['الاسم' , 'السعر']},
+      //   'خدمات علاجية': {'null' :[null]},
+      //   'خدمات متنقلة': {'null' :[null]},
+      //   'أخرى': {'null' :[null]}
+      // }
     /*'services': {[{'خدمات التنظيف والتنزيين': [null],
         'خدمات علاجية': [null],
         'خدمات متنقلة': [null],
         'أخرى': [null]
       }]}*/
-      ,
+      //,
     } );
   }
 
@@ -541,7 +543,6 @@ String imageURL = '';
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _locationController,
-                          validator: validateLocation,
                           decoration: InputDecoration(
                               hintText: ("الحي، الشارع "),
                               focusedBorder: OutlineInputBorder(
@@ -699,17 +700,6 @@ String imageURL = '';
       return null;
   }
 
-  String? validateLocation(String? formLocation) {
-    final validCharacters = RegExp(r'[!@#<>?":_`~;[\]\/|=+)(*&^%0-9-]');
-
-    if (formLocation == null || formLocation.trim().isEmpty) {
-      return "يرجى إدخال موقع";
-    }  else if ( formLocation.length < 2) {
-      return 'يجب أن يحتوى الموقع على حرفين على الأقل';
-    } else
-      return null;
-  }
-
   String? validationEmail(String? formEmail) {
     if (formEmail == null || formEmail.trim().isEmpty) {
       return "يرجى إدخال بريد إلكتروني";
@@ -723,15 +713,15 @@ String imageURL = '';
 
   String? validationPhoneNumber(String? formPhoneNumber) {
     RegExp regex =
-    RegExp(r'^(00966|966|\+966|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{8})$');
+    RegExp(r'^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$');
     String phone1 = formPhoneNumber!;
 
 
     if (formPhoneNumber == null || formPhoneNumber.trim().isEmpty) {
       return "يرجى إدخال رقم هاتف";
     }
-   else if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
-   else  if (formPhoneNumber.length != 12) {
+    if (!regex.hasMatch(phone1)) return" يجب أن يبدأ الرقم بـ 966" ;
+    if (formPhoneNumber.length != 12) {
       return "يجب أن يحتوي الرقم على ١٢ خانة";
     }
     return null;
@@ -739,7 +729,7 @@ String imageURL = '';
 
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
-      return "هذه الخانة مطلوبة";
+      return "This fiels is required";
     }
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
