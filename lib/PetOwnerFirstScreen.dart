@@ -20,13 +20,14 @@ class _ReportStatus extends State<Report> {
   var clinicName;
   var clinicEmail;
 
-  Future<QuerySnapshot>? list;
-  String userNameText ='';
+  TextEditingController _searchController = TextEditingController();
 
   void initState() {
     super.initState();
     method1();
   }
+
+
 
   late Stream<QuerySnapshot> _clinicsStream;
   method1() {
@@ -182,12 +183,6 @@ class _ReportStatus extends State<Report> {
                   color: Colors.grey.withOpacity(0.26))
             ]),
         child: TextField(
-          onChanged: (textEntered){
-            setState(() {
-              userNameText = textEntered;
-            });
-            SearchingPost(textEntered);
-          },
           decoration: InputDecoration(
           hintText: 'ابحث هنا .......',
           hintStyle: TextStyle(color: Colors.grey),
@@ -200,9 +195,7 @@ class _ReportStatus extends State<Report> {
           borderSide:
           BorderSide(color: Colors.white)),
         prefixIcon: IconButton(
-              onPressed: () {
-                SearchingPost(userNameText);
-              },
+              onPressed: () {},
               icon: Icon(Icons.search,
                 color: Color(0xff194919),
                 size: 25,),
@@ -281,18 +274,6 @@ class _ReportStatus extends State<Report> {
     ],
   );
 
-  SearchingPost(String textEntered) {
-    list = FirebaseFirestore.instance
-        .collection('users')
-        .where('type',isEqualTo: 'clinic')
-        .where('firstname', isGreaterThanOrEqualTo: textEntered)
-        .get();
-
-    setState(() {
-      list;
-    });
-
-  }
 
   final topAppBar =  AppBar(
       iconTheme: IconThemeData(color: Color(0xff194919),size: 30),
