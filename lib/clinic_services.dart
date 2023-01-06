@@ -322,7 +322,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         child:Align(
                           alignment:Alignment.center,
                           child: TextButton(
-                            onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context) => addMedical()));},
+                            onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context) => addMedical(cEmail,)));},
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [

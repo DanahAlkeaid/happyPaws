@@ -283,7 +283,7 @@ class _ReportStatus extends State<Report> {
 
   SearchingPost(String textEntered) {
     list = FirebaseFirestore.instance
-        .collection('users')
+        .collection('usrs')
         .where('type',isEqualTo: 'clinic')
         .where('firstname', isGreaterThanOrEqualTo: textEntered)
         .get();

@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+
+
 
 
 class addMedical extends StatefulWidget {
-  const addMedical ({Key? key}) : super (key: key);
+  final clinicEmail;
+  const addMedical(this.clinicEmail, {super.key});
+
+  // const addMedical ({Key? key}) : super (key: key);
 
   @override
   State<addMedical> createState() => _addMedical();
@@ -12,6 +22,7 @@ class _addMedical extends State<addMedical> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _serviceName = TextEditingController();
   final TextEditingController _price = TextEditingController();
+
 
 
   String errorMessage = '';
@@ -258,7 +269,7 @@ class _addMedical extends State<addMedical> {
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => Navigator.pop(context),
+                                                onPressed: () => add_service(_serviceName.text.trim(),_price.text.trim()),
                                                 // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -272,6 +283,16 @@ class _addMedical extends State<addMedical> {
                 ],),
             ],),),),
     );
+  }
+  //{widget.clinicEmail}
+  Future add_service(String name,String price) async {
+    await FirebaseFirestore.instance.collection('services').add({
+      "clinicEmail": {widget.clinicEmail},
+      "type":"medical",
+      "name":name,
+      "price":price,
+    });
+
   }
 }
 
@@ -292,3 +313,4 @@ String? validateService(String? formService) {
 
   return null;
 }
+

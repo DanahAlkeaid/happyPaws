@@ -102,10 +102,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       // var token = data.docs[index]['token'];
       // var pic = data.docs[index]['EXprofilepic'];
 
-     // Navigator.push(
-         // context,
-          //MaterialPageRoute(
-            //  builder: (context) => viewClinic(title: clinicEmail,/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => viewClinic(clinicEmail,/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
     },
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
