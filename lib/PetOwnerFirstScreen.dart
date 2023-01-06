@@ -52,8 +52,8 @@ class _ReportStatus extends State<Report> {
     double TotalRate =0;
     double avgRate=0;
     FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: email)
+        .collection('rating')
+        .where('clinic_email', isEqualTo: email)
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
