@@ -4,18 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/viewClinic.dart';
-import 'main.dart';
-import 'clinicsign.dart';
-import 'petOwnerSignup.dart';
-import 'signupScreen.dart';
-import 'FirstScreen.dart';
 import 'NavigationDrawer.dart';
-import 'gpi_page.dart';
-import 'PetNotification.dart';
-import 'MyAccount.dart';
-import 'loginScreen.dart';
-import 'book_appointment.dart';
-import 'clinic_services.dart';
+
 
 class petOwnerHome extends StatefulWidget {
   const petOwnerHome({Key? key}) : super(key: key);

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/addGrooming.dart';
 import 'package:untitled/addMedical.dart';
 import 'package:untitled/addOther.dart';
@@ -31,14 +32,13 @@ class _clinic_servicesState extends State<clinic_services> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   late final Stream<QuerySnapshot> _reqStream;
   var cEmail;
-  var cName='';
+  var cName = '';
+
   void initState() {
     super.initState();
     getCurrentUser();
     clName();
     openCollection();
-
-
   }
 
   openCollection() {
@@ -48,124 +48,127 @@ class _clinic_servicesState extends State<clinic_services> {
         .snapshots();
   }
 
-  getCurrentUser()  {
-    final User user = _auth.currentUser! ;
+  getCurrentUser() {
+    final User user = _auth.currentUser!;
 
     cEmail = user.email;
 
-    print(cEmail) ;
-
+    print(cEmail);
   }
 
 
-  clName()  {
+  clName() {
     FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: '${cEmail}')
         .get()
-        .then((snapshot) { print(snapshot.docs);
-    var clinicName=snapshot.docs[0].data()['firstname'];
+        .then((snapshot) {
+      print(snapshot.docs);
+      var clinicName = snapshot.docs[0].data()['firstname'];
 
 
-    setState(() {
-      cName='${clinicName} ';
+      setState(() {
+        cName = '${clinicName} ';
 
-      print(cName);
+        print(cName);
 
-      // print(exBio);
+        // print(exBio);
 
 
+      });
     });
-
-    }); }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xfffaf7f4),
+      backgroundColor: const Color(0xfffaf7f4),
 
-        appBar: AppBar(
-            leading: IconButton(
-              icon: (const Icon(Icons.arrow_back_ios)),
-              color: const Color(0xff034d23),
-              iconSize: 36,
-              onPressed: () {
-                Navigator.pop(context);
-              },
+      appBar: AppBar(
+          leading: IconButton(
+            icon: (const Icon(Icons.arrow_back_ios)),
+            color: const Color(0xff034d23),
+            iconSize: 36,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+          , flexibleSpace: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('Assets/App_Header.png'),
+                fit: BoxFit.fill
             )
-            ,flexibleSpace: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('Assets/App_Header.png'),
-                  fit: BoxFit.fill
-              )
-          ),
         ),
-            elevation: 0
-        ),
+      ),
+          elevation: 0
+      ),
 
 
       body:
       Padding(
-        padding:const EdgeInsets.symmetric(vertical: 0,horizontal:16),
-        child:SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+        child: SingleChildScrollView(
           child:
           Column(
-            mainAxisAlignment:MainAxisAlignment.start,
-            crossAxisAlignment:CrossAxisAlignment.center,
-            mainAxisSize:MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
 
               const SizedBox(
-                height:16,
-                width:16,
+                height: 16,
+                width: 16,
               ),
               const Align(
-                alignment:Alignment.centerRight,
-                child:Text(
+                alignment: Alignment.centerRight,
+                child: Text(
                   "الخدمات المقدمة",
                   textAlign: TextAlign.start,
-                  overflow:TextOverflow.clip,
-                  style:TextStyle(
-                    fontWeight:FontWeight.w700,
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
                     fontFamily: "Elmessiri",
-                    fontSize:37,
-                    color:Color(0xff034d23),
+                    fontSize: 37,
+                    color: Color(0xff034d23),
                   ),
                 ),
               ),
 
-             // add service
+              // add service
               const SizedBox(
-                height:16,
-                width:16,
+                height: 16,
+                width: 16,
               ),
 
               //Service categories
 
               //grooming services
               Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
                   Row(
-                    mainAxisAlignment:MainAxisAlignment.start,
-                    crossAxisAlignment:CrossAxisAlignment.center,
-                    mainAxisSize:MainAxisSize.max,
-                    children:[
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
 
                       Padding(
-                        padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child:Align(
-                          alignment:Alignment.center,
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Align(
+                          alignment: Alignment.center,
                           child: TextButton(
-                            onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context) => addGrooming()));},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => addGrooming()));
+                            },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle( fontSize:14,
-                                  fontWeight:FontWeight.w400,
+                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                   fontFamily: "Elmessiri",
                                   color: Color(0xff034d23),
                                 ),), // <-- Text
@@ -174,7 +177,7 @@ class _clinic_servicesState extends State<clinic_services> {
                                 ),
                                 Icon( // <-- Icon
                                   Icons.add,
-                                  color:Color(0xff034d23),
+                                  color: Color(0xff034d23),
                                   size: 20.0,
                                 ),
                               ],
@@ -185,27 +188,28 @@ class _clinic_servicesState extends State<clinic_services> {
 
                     ],),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child:MaterialButton(
-                      onPressed:(){},
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: MaterialButton(
+                      onPressed: () {},
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(16),
-                      child:const Text("خدمات التنظيف والتزيين", style: TextStyle( fontSize:18,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(16),
+                      child: const Text(
+                        "خدمات التنظيف والتزيين", style: TextStyle(fontSize: 18,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:40,
-                      minWidth:140,
+                      textColor: const Color(0xff034d23),
+                      height: 40,
+                      minWidth: 140,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 3, 0),
                     child: IconButton(
                       icon: const Icon(Icons.expand_more),
                       color: Color(0xff034d23),
@@ -219,33 +223,33 @@ class _clinic_servicesState extends State<clinic_services> {
                   ),
                 ],),
               const Divider(
-                color:Color(0xffbda520),
-                height:12,
-                thickness:1,
-                indent:6,
-                endIndent:8,
+                color: Color(0xffbda520),
+                height: 12,
+                thickness: 1,
+                indent: 6,
+                endIndent: 8,
               ),
 
               //secondary grooming services
               Visibility(
                 visible: show_grooming_services,
                 child: Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  crossAxisAlignment:CrossAxisAlignment.center,
-                  mainAxisSize:MainAxisSize.max,
-                  children:[
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
 
                     Padding(
-                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.center,
                         child: TextButton(
-                          onPressed:(){},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle( fontSize:14,
-                                fontWeight:FontWeight.w400,
+                              Text("", style: TextStyle(fontSize: 14,
+                                fontWeight: FontWeight.w400,
                                 fontFamily: "Elmessiri",
                                 color: Color(0xff034d23),
                               ),), // <-- Text
@@ -254,7 +258,7 @@ class _clinic_servicesState extends State<clinic_services> {
                               ),
                               Icon( // <-- Icon
                                 Icons.delete,
-                                color:Color(0xff034d23),
+                                color: Color(0xff034d23),
                                 size: 24.0,
                               ),
                             ],
@@ -264,40 +268,40 @@ class _clinic_servicesState extends State<clinic_services> {
                     ),
 
                     MaterialButton(
-                      onPressed:(){
+                      onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => editGrooming()));
                       },
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(0),
-                      child:const Text("تعديل", style: TextStyle( fontSize:14,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(0),
+                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:10,
-                      minWidth:12,
+                      textColor: const Color(0xff034d23),
+                      height: 10,
+                      minWidth: 12,
                     ),
                     const Padding(
-                      padding:EdgeInsets.fromLTRB(66, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment(0.5, 0.0),
-                        child:Text(
+                      padding: EdgeInsets.fromLTRB(66, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment(0.5, 0.0),
+                        child: Text(
                           "الخدمة الفرعية",
                           textAlign: TextAlign.start,
-                          overflow:TextOverflow.clip,
-                          style:TextStyle(
-                            fontWeight:FontWeight.w400,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
                             fontFamily: "Elmessiri",
-                            fontSize:16,
-                            color:Color(0xff009245),
+                            fontSize: 16,
+                            color: Color(0xff009245),
                           ),
                         ),
                       ),
@@ -307,27 +311,30 @@ class _clinic_servicesState extends State<clinic_services> {
 
               //medical services
               Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
                   Row(
-                    mainAxisAlignment:MainAxisAlignment.start,
-                    crossAxisAlignment:CrossAxisAlignment.center,
-                    mainAxisSize:MainAxisSize.max,
-                    children:[
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
 
                       Padding(
-                        padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child:Align(
-                          alignment:Alignment.center,
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Align(
+                          alignment: Alignment.center,
                           child: TextButton(
-                            onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context) => addMedical(cEmail,)));},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => addMedical(cEmail,)));
+                            },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle( fontSize:14,
-                                  fontWeight:FontWeight.w400,
+                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                   fontFamily: "Elmessiri",
                                   color: Color(0xff034d23),
                                 ),), // <-- Text
@@ -336,7 +343,7 @@ class _clinic_servicesState extends State<clinic_services> {
                                 ),
                                 Icon( // <-- Icon
                                   Icons.add,
-                                  color:Color(0xff034d23),
+                                  color: Color(0xff034d23),
                                   size: 20.0,
                                 ),
                               ],
@@ -346,23 +353,24 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ],),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(52, 0, 0, 0),
-                    child:MaterialButton(
-                      onPressed:(){},
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    padding: const EdgeInsets.fromLTRB(52, 0, 0, 0),
+                    child: MaterialButton(
+                      onPressed: () {},
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(16),
-                      child:const Text("الخدمات العلاجية", style: TextStyle( fontSize:18,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(16),
+                      child: const Text(
+                        "الخدمات العلاجية", style: TextStyle(fontSize: 18,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:40,
-                      minWidth:140,
+                      textColor: const Color(0xff034d23),
+                      height: 40,
+                      minWidth: 140,
                     ),
                   ),
                   IconButton(
@@ -377,33 +385,33 @@ class _clinic_servicesState extends State<clinic_services> {
                   ),
                 ],),
               const Divider(
-                color:Color(0xffbda520),
-                height:12,
-                thickness:1,
-                indent:6,
-                endIndent:8,
+                color: Color(0xffbda520),
+                height: 12,
+                thickness: 1,
+                indent: 6,
+                endIndent: 8,
               ),
 
               //secondary medical services
               Visibility(
                 visible: show_medical_services,
                 child: Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  crossAxisAlignment:CrossAxisAlignment.center,
-                  mainAxisSize:MainAxisSize.max,
-                  children:[
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
 
                     Padding(
-                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.center,
                         child: TextButton(
-                          onPressed:(){},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle( fontSize:14,
-                                fontWeight:FontWeight.w400,
+                              Text("", style: TextStyle(fontSize: 14,
+                                fontWeight: FontWeight.w400,
                                 fontFamily: "Elmessiri",
                                 color: Color(0xff034d23),
                               ),), // <-- Text
@@ -412,7 +420,7 @@ class _clinic_servicesState extends State<clinic_services> {
                               ),
                               Icon( // <-- Icon
                                 Icons.delete,
-                                color:Color(0xff034d23),
+                                color: Color(0xff034d23),
                                 size: 24.0,
                               ),
                             ],
@@ -421,40 +429,40 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ),
                     MaterialButton(
-                      onPressed:(){
+                      onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => editMedical()));
                       },
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(0),
-                      child:const Text("تعديل", style: TextStyle( fontSize:14,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(0),
+                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:10,
-                      minWidth:12,
+                      textColor: const Color(0xff034d23),
+                      height: 10,
+                      minWidth: 12,
                     ),
                     const Padding(
-                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment(0.5, 0.0),
-                        child:Text(
+                      padding: EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment(0.5, 0.0),
+                        child: Text(
                           "الخدمة الفرعية",
                           textAlign: TextAlign.start,
-                          overflow:TextOverflow.clip,
-                          style:TextStyle(
-                            fontWeight:FontWeight.w400,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
                             fontFamily: "Elmessiri",
-                            fontSize:16,
-                            color:Color(0xff009245),
+                            fontSize: 16,
+                            color: Color(0xff009245),
                           ),
                         ),
                       ),
@@ -464,27 +472,30 @@ class _clinic_servicesState extends State<clinic_services> {
 
               //truck services
               Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
                   Row(
-                    mainAxisAlignment:MainAxisAlignment.start,
-                    crossAxisAlignment:CrossAxisAlignment.center,
-                    mainAxisSize:MainAxisSize.max,
-                    children:[
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
 
                       Padding(
-                        padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child:Align(
-                          alignment:Alignment.center,
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Align(
+                          alignment: Alignment.center,
                           child: TextButton(
-                            onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context) => addTruck()));},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => addTruck()));
+                            },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle( fontSize:14,
-                                  fontWeight:FontWeight.w400,
+                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                   fontFamily: "Elmessiri",
                                   color: Color(0xff034d23),
                                 ),), // <-- Text
@@ -493,7 +504,7 @@ class _clinic_servicesState extends State<clinic_services> {
                                 ),
                                 Icon( // <-- Icon
                                   Icons.add,
-                                  color:Color(0xff034d23),
+                                  color: Color(0xff034d23),
                                   size: 20.0,
                                 ),
                               ],
@@ -503,27 +514,28 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ],),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(0, 0, 2, 0),
-                    child:MaterialButton(
-                      onPressed:(){},
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                    child: MaterialButton(
+                      onPressed: () {},
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(16),
-                      child:const Text("خدمات العيادة المتنقلة", style: TextStyle( fontSize:18,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(16),
+                      child: const Text(
+                        "خدمات العيادة المتنقلة", style: TextStyle(fontSize: 18,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:40,
-                      minWidth:140,
+                      textColor: const Color(0xff034d23),
+                      height: 40,
+                      minWidth: 140,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(7, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(7, 0, 0, 0),
                     child: IconButton(
                       icon: const Icon(Icons.expand_more),
                       color: Color(0xff034d23),
@@ -537,43 +549,46 @@ class _clinic_servicesState extends State<clinic_services> {
                   ),
                 ],),
               const Divider(
-                color:Color(0xffbda520),
-                height:12,
-                thickness:1,
-                indent:6,
-                endIndent:8,
+                color: Color(0xffbda520),
+                height: 12,
+                thickness: 1,
+                indent: 6,
+                endIndent: 8,
               ),
 
               //secondary truck services
               Visibility(
                 visible: show_truck_services,
                 child: Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  crossAxisAlignment:CrossAxisAlignment.center,
-                  mainAxisSize:MainAxisSize.max,
-                  children:[
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
 
                     Padding(
-                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.center,
                         child: TextButton(
-                          onPressed:(){},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle( fontSize:14,
-                                fontWeight:FontWeight.w400,
+                              Text("", style: TextStyle(fontSize: 14,
+                                fontWeight: FontWeight.w400,
                                 fontFamily: "Elmessiri",
                                 color: Color(0xff034d23),
                               ),), // <-- Text
                               SizedBox(
                                 height: 2,
                               ),
-                              Icon( // <-- Icon
-                                Icons.delete,
-                                color:Color(0xff034d23),
-                                size: 24.0,
+                              IconButton(
+                                icon:const Icon(
+                                    Icons.delete
+                                ),
+                                onPressed:(){/*DeleteService(snapshot.data!.docs[index].reference);*/},    //بعد ما نسوي ريتريف
+                                color:Color(0xff212435),
+                                iconSize:24,
                               ),
                             ],
                           ),
@@ -581,40 +596,40 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ),
                     MaterialButton(
-                      onPressed:(){
+                      onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => editTruck()));
                       },
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(0),
-                      child:const Text("تعديل", style: TextStyle( fontSize:14,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(0),
+                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:10,
-                      minWidth:12,
+                      textColor: const Color(0xff034d23),
+                      height: 10,
+                      minWidth: 12,
                     ),
                     const Padding(
-                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment(0.5, 0.0),
-                        child:Text(
+                      padding: EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment(0.5, 0.0),
+                        child: Text(
                           "الخدمة الفرعية",
                           textAlign: TextAlign.start,
-                          overflow:TextOverflow.clip,
-                          style:TextStyle(
-                            fontWeight:FontWeight.w400,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
                             fontFamily: "Elmessiri",
-                            fontSize:16,
-                            color:Color(0xff009245),
+                            fontSize: 16,
+                            color: Color(0xff009245),
                           ),
                         ),
                       ),
@@ -624,27 +639,30 @@ class _clinic_servicesState extends State<clinic_services> {
 
               // other services
               Row(
-                mainAxisAlignment:MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.center,
-                mainAxisSize:MainAxisSize.max,
-                children:[
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
                   Row(
-                    mainAxisAlignment:MainAxisAlignment.start,
-                    crossAxisAlignment:CrossAxisAlignment.center,
-                    mainAxisSize:MainAxisSize.max,
-                    children:[
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
 
                       Padding(
-                        padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child:Align(
-                          alignment:Alignment.center,
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Align(
+                          alignment: Alignment.center,
                           child: TextButton(
-                            onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context) => addOther()));},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => addOther()));
+                            },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle( fontSize:14,
-                                  fontWeight:FontWeight.w400,
+                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                   fontFamily: "Elmessiri",
                                   color: Color(0xff034d23),
                                 ),), // <-- Text
@@ -653,7 +671,7 @@ class _clinic_servicesState extends State<clinic_services> {
                                 ),
                                 Icon( // <-- Icon
                                   Icons.add,
-                                  color:Color(0xff034d23),
+                                  color: Color(0xff034d23),
                                   size: 20.0,
                                 ),
                               ],
@@ -663,27 +681,28 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ],),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(51, 0, 0, 0),
-                    child:MaterialButton(
-                      onPressed:(){},
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                    padding: const EdgeInsets.fromLTRB(51, 0, 0, 0),
+                    child: MaterialButton(
+                      onPressed: () {},
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(16),
-                      child:const Text("خدمات أخرى", style: TextStyle( fontSize:18,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(16),
+                      child: const Text(
+                        "خدمات أخرى", style: TextStyle(fontSize: 18,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:40,
-                      minWidth:140,
+                      textColor: const Color(0xff034d23),
+                      height: 40,
+                      minWidth: 140,
                     ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: IconButton(
                       icon: const Icon(Icons.expand_more),
                       color: Color(0xff034d23),
@@ -697,33 +716,33 @@ class _clinic_servicesState extends State<clinic_services> {
                   ),
                 ],),
               const Divider(
-                color:Color(0xffbda520),
-                height:12,
-                thickness:1,
-                indent:6,
-                endIndent:8,
+                color: Color(0xffbda520),
+                height: 12,
+                thickness: 1,
+                indent: 6,
+                endIndent: 8,
               ),
 
               //secondary other services
               Visibility(
                 visible: show_others_services,
                 child: Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  crossAxisAlignment:CrossAxisAlignment.center,
-                  mainAxisSize:MainAxisSize.max,
-                  children:[
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
 
                     Padding(
-                      padding:const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.center,
                         child: TextButton(
-                          onPressed:(){},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle( fontSize:14,
-                                fontWeight:FontWeight.w400,
+                              Text("", style: TextStyle(fontSize: 14,
+                                fontWeight: FontWeight.w400,
                                 fontFamily: "Elmessiri",
                                 color: Color(0xff034d23),
                               ),), // <-- Text
@@ -732,7 +751,7 @@ class _clinic_servicesState extends State<clinic_services> {
                               ),
                               Icon( // <-- Icon
                                 Icons.delete,
-                                color:Color(0xff034d23),
+                                color: Color(0xff034d23),
                                 size: 24.0,
                               ),
                             ],
@@ -741,40 +760,40 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                     ),
                     MaterialButton(
-                      onPressed:(){
+                      onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => editOther()));
                       },
-                      color:const Color(0xfffaf7f4),
-                      elevation:0,
-                      shape:const RoundedRectangleBorder(
-                        borderRadius:BorderRadius.zero,
-                        side:BorderSide(color:Color(0xfffaf7f4),width:1),
+                      color: const Color(0xfffaf7f4),
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
-                      padding:const EdgeInsets.all(0),
-                      child:const Text("تعديل", style: TextStyle( fontSize:14,
-                        fontWeight:FontWeight.w400,
+                      padding: const EdgeInsets.all(0),
+                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
+                        fontWeight: FontWeight.w400,
                         fontFamily: "Elmessiri",
                       ),),
-                      textColor:const Color(0xff034d23),
-                      height:10,
-                      minWidth:12,
+                      textColor: const Color(0xff034d23),
+                      height: 10,
+                      minWidth: 12,
                     ),
                     const Padding(
-                      padding:EdgeInsets.fromLTRB(88, 0, 0, 0),
-                      child:Align(
-                        alignment:Alignment(0.5, 0.0),
-                        child:Text(
+                      padding: EdgeInsets.fromLTRB(88, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment(0.5, 0.0),
+                        child: Text(
                           "الخدمة الفرعية",
                           textAlign: TextAlign.start,
-                          overflow:TextOverflow.clip,
-                          style:TextStyle(
-                            fontWeight:FontWeight.w400,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
                             fontFamily: "Elmessiri",
-                            fontSize:16,
-                            color:Color(0xff009245),
+                            fontSize: 16,
+                            color: Color(0xff009245),
                           ),
                         ),
                       ),
@@ -786,5 +805,66 @@ class _clinic_servicesState extends State<clinic_services> {
             ],),),),
 
     );
+  }
+  DeleteService(DocumentReference id) {
+    Alert(
+      style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
+      closeIcon: Container(),
+      context: context,
+      title: "حذف الخدمة",
+      desc:
+      " هل أنت متأكد من رغبتك بحذف الخدمة؟",
+      buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "إلغاء",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+        ),
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حذف",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          // onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+            await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
+              await myTransaction.delete(id);
+              Navigator.pop(context);
+              ConfirmDel();
+            });
+          }, //to do
+          color: Color.fromARGB(255, 200, 62, 62),
+
+        ),
+      ],
+    ).show();
+  }
+
+  ConfirmDel() {
+    Alert(
+      style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
+      context: context,
+      desc: "تم حذف الخدمة",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+
+        ),
+      ],
+    ).show();
+
   }
 }
