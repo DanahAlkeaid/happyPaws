@@ -23,10 +23,11 @@ class _viewClinicState extends State<viewClinic> {
 
   late TextEditingController _emailController = TextEditingController(text:widget.cEmail);
 
-  var cName='';
+  var firstName='';
   var cPhone;
   var cLocation;
   var cPic;
+  Map<String, dynamic> cServices = Map();
 
   static Color backgroundColor = Color(0xfffaf7f4);
   static Color mainTextColor = Color(0xff034d23);
@@ -55,26 +56,53 @@ class _viewClinicState extends State<viewClinic> {
     clInfo();
   }
 
-  clInfo()  {
+  clInfo() {
+    // Process users
     FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: '${widget.cEmail}')
         .get()
-        .then((snapshot) { print(snapshot.docs[0].data());
-    var clinicName=snapshot.docs[0].data()['firstname'];
-    var clinicPhone=snapshot.docs[0].data()['phonenumber'];
-    var clinicLocation=snapshot.docs[0].data()['description'];
-    var profilePic =snapshot.docs[0].data()['profilepic'];
+        .then((snapshot) {
+          print('#SERVICES#');
+      print(snapshot.docs[0].data());
+      var clinicName = snapshot.docs[0].data()['firstname'];
+      var clinicPhone = snapshot.docs[0].data()['phonenumber'];
+      var clinicLocation = snapshot.docs[0].data()['description'];
+      var profilePic = snapshot.docs[0].data()['profilepic'];
+      Map<String, dynamic> services = snapshot.docs[0].data()['services'];
 
-    setState(() {
-      cName='${clinicName} ';
-      cPhone='${clinicPhone} ';
-      cLocation='${clinicLocation}';
-      cPic = '${profilePic}';
 
+      setState(() {
+        firstName = '${clinicName} ';
+        cPhone = '${clinicPhone} ';
+        cLocation = '${clinicLocation}';
+        cPic = '${profilePic}';
+        cServices = services;
+      });
     });
 
-    }); }
+    // // Process services
+    // FirebaseFirestore.instance
+    //     .collection('services')
+    //     .where('email', isEqualTo: '${widget.cEmail}')
+    //     .get()
+    //     .then((snapshot) {
+    //   print(snapshot.docs[0].data());
+    //   var clinicEmail = snapshot.docs[0].data()['clinicEmail'];
+    //   var clinicType = snapshot.docs[0].data()['type'];
+    //   var clinicName = snapshot.docs[0].data()['name'];
+    //   var price = snapshot.docs[0].data()['price'];
+    //
+    //   setState(() {
+    //     cName = '${clinicEmail} ';
+    //     cType = '${clinicType} ';
+    //     cName = '${clinicName}';
+    //     servicePrice = '${price}';
+    //   });
+    // });
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +170,7 @@ class _viewClinicState extends State<viewClinic> {
                 height: 50,
               ),
               Text(
-                '${cName}',
+                '${firstName}',
                 style: titleTextStyle,
               ),
               Text(
@@ -152,43 +180,91 @@ class _viewClinicState extends State<viewClinic> {
               Container(
                 height: 25,
               ),
-              ExpansionTile(
-                title: Text(
-                  "خدمات االتنظيف والتزيين",
-                  textDirection: TextDirection.rtl,
-                  style: tileHeaderTextStyle,
-                ),
-                children: getCleaningServicesTiles(),
+              Container(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                    itemCount: cServices.length,
+                    itemBuilder: (BuildContext context, index) {
+                        return  ExpansionTile(
+                            title: Text(
+                            cServices.keys.elementAt(index),
+                            textDirection: TextDirection.rtl,
+                            style: tileHeaderTextStyle,
+                        ),
+                        children: getCleaningServicesTiles());
+                      }),
               ),
-              ExpansionTile(
-                title: Text(
-                  "خدمات علاجية",
-                  textDirection: TextDirection.rtl,
-                  style: tileHeaderTextStyle,
-                ),
-                children: getMedicalServicesTiles(),
-              ),
-              ExpansionTile(
-                title: Text(
-                  "خدمات متنقلة",
-                  textDirection: TextDirection.rtl,
-                  style: tileHeaderTextStyle,
-                ),
-                children: getMobileServicesTiles(),
-              ),
-              ExpansionTile(
-                title: Text(
-                  "خدمات اخرى",
-                  textDirection: TextDirection.rtl,
-                  style: tileHeaderTextStyle,
-                ),
-                children: getOtherTiles(),
-              )
+              // ExpansionTile(
+              //   title: Text(
+              //     "خدمات االتنظيف والتزيين",
+              //     textDirection: TextDirection.rtl,
+              //     style: tileHeaderTextStyle,
+              //   ),
+              //   children: getCleaningServicesTiles(),
+              // ),
+              // ExpansionTile(
+              //   title: Text(
+              //     "خدمات علاجية",
+              //     textDirection: TextDirection.rtl,
+              //     style: tileHeaderTextStyle,
+              //   ),
+              //   children: getMedicalServicesTiles(),
+              // ),
+              // ExpansionTile(
+              //   title: Text(
+              //     "خدمات متنقلة",
+              //     textDirection: TextDirection.rtl,
+              //     style: tileHeaderTextStyle,
+              //   ),
+              //   children: getMobileServicesTiles(),
+              // ),
+              // ExpansionTile(
+              //   title: Text(
+              //     "خدمات اخرى",
+              //     textDirection: TextDirection.rtl,
+              //     style: tileHeaderTextStyle,
+              //   ),
+              //   children: getOtherTiles(),
+              // )
             ],
           ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  List<Widget> getAllServicesTiles() {
+    // TODO populate tiles from Firebase
+    // ١. اول خطوة الاتصال بقاعدة البيانات للحصول على الخدمات
+    // ٢. حفظ النتائج الجيسن في مصفوفة لست
+    // ٣. لوب في المصفوفة باستخدام foreach لبناء ودجتس
+    //
+    // مثال
+    // https://stackoverflow.com/a/45456173/2880778
+
+    return <Widget>[
+      Column(
+        children: [
+          ListTile(
+              leading: Text(
+                "٥٠ رس",
+                style: tileTextStyle,
+              ),
+              title: Text('قص أظافر',
+                  textDirection: TextDirection.rtl, style: tileTextStyle)),
+          ListTile(
+              leading: Text(
+                "٤٠ رس",
+                style: tileTextStyle,
+              ),
+              title: Text(
+                'ترويش',
+                textDirection: TextDirection.rtl,
+                style: tileTextStyle,
+              )),
+        ],
+      ),
+    ];
   }
 
   // يتم توليد االقائمة من فايربيس لاحقاً

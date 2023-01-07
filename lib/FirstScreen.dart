@@ -13,6 +13,7 @@ import 'signupScreen.dart';
 import 'loginScreen.dart';
 import 'testScreen.dart';
 import 'petOwnerSignup.dart';
+import 'addMedical.dart';
 
 import 'petOwnerHome.dart';
 import 'clinic_home.dart';
@@ -134,7 +135,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                         builder: (context) => Report()));
+                         builder: (context) => addMedical("gfffgfr@ggggg.ggg")));
                   },
                   child: Text(" test screen",
                       style: TextStyle(fontSize: 20, color: Colors.black)),
