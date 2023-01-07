@@ -302,8 +302,6 @@ class _editMedical extends State<editMedical> {
          await FirebaseFirestore.instance
             .collection('services')
             .doc('${doc_id}').update({
-          "clinicEmail": widget.cEmail,
-          "type":"medical",
           "name":_serviceName.text.trim(),
           "price":_price.text.trim(),
         }

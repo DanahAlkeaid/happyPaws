@@ -299,7 +299,7 @@ class _addMedical extends State<addMedical> {
     showPopup();
   }
 
-  showPopup() {
+  void showPopup() {
     Alert(
       style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
       context: context,
