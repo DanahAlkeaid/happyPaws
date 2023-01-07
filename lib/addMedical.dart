@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 
 
-
+/**/
 
 class addMedical extends StatefulWidget {
   final clinicEmail;
