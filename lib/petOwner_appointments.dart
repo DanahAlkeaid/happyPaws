@@ -196,7 +196,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                                                             icon:const Icon(
                                                                 Icons.clear
                                                             ),
-                                                            onPressed:(){DeleteApp(snapshot.data!.docs[index].reference);},
+                                                            onPressed:(){CancelApp(snapshot.data!.docs[index].reference);},
                                                             color:Color(0xff212435),
                                                             iconSize:24,
                                                           ),
@@ -385,7 +385,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
   }
 
 
-  DeleteApp(DocumentReference id) {
+  CancelApp(DocumentReference index) {
     Alert(
       style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
       closeIcon: Container(),
@@ -412,9 +412,9 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
           // onPressed: () => Navigator.pop(context),
           onPressed: () async {
             await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
-              await myTransaction.delete(id);
+              await myTransaction.delete(index);
               Navigator.pop(context);
-              ConfirmDel();
+              ConfirmCancel();
             });
           }, //to do
           color: Color.fromARGB(255, 200, 62, 62),
@@ -424,7 +424,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
     ).show();
   }
 
-  ConfirmDel() {
+  ConfirmCancel() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
