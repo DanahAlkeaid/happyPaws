@@ -20,8 +20,6 @@ class _ReportStatus extends State<Report> {
   var clinicName;
   var clinicEmail;
 
-  TextEditingController _searchController = TextEditingController();
-
   void initState() {
     super.initState();
     method1();
