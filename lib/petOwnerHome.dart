@@ -21,10 +21,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicName;
   var clinicEmail;
 
-  Future<QuerySnapshot>? list;
-  String userNameText ='';
-
-  TextEditingController textController = TextEditingController();
   var doc_id;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
@@ -174,137 +170,114 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     ),
   );
 
-  makeBody() => SingleChildScrollView(
-    child: Center(
-      child: Column(
-        children:[
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(1, 1),
-                      color: Colors.grey.withOpacity(0.26))
-                ]),
-            child: TextField(
-              onChanged: (textEntered){
-                setState(() {
-                  userNameText = textEntered;
-                });
-                SearchingPost(textEntered);
+  makeBody() => Column(
+    children:[
+      Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 20,
+                  offset: Offset(1, 1),
+                  color: Colors.grey.withOpacity(0.26))
+            ]),
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'ابحث هنا .......',
+            hintStyle: TextStyle(color: Colors.grey),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide:
+                BorderSide(color: Colors.white)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide:
+                BorderSide(color: Colors.white)),
+            prefixIcon: IconButton(
+              onPressed: () {
               },
-              decoration: InputDecoration(
-                hintText: 'ابحث هنا .......',
-                hintStyle: TextStyle(color: Colors.grey),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide:
-                    BorderSide(color: Colors.white)),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide:
-                    BorderSide(color: Colors.white)),
-                prefixIcon: IconButton(
-                  onPressed: () {
-                    SearchingPost(userNameText);
-                  },
-                  icon: Icon(Icons.search,
-                    color: Color(0xff194919),
-                    size: 25,),
-                ),
-                suffixIcon: IconButton(icon: Icon(
-                  Icons.tune,
-                  color: Color(0xff194919),
-                  size: 25,),
-                  onPressed: () {
-                    showModalBottomSheet(
-                        isDismissible: true,
-                        context: context,
-                        builder: (builder){
-                          return Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(vertical: 50),
-                                height: 200,
-                                child: Text(
-                                  'الترتيب',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
-                                  ),
-                                ),
+              icon: Icon(Icons.search,
+                color: Color(0xff194919),
+                size: 25,),
+            ),
+            suffixIcon: IconButton(icon: Icon(
+              Icons.tune,
+              color: Color(0xff194919),
+              size: 25,),
+              onPressed: () {
+                showModalBottomSheet(
+                    isDismissible: true,
+                    context: context,
+                    builder: (builder){
+                      return Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 50),
+                            height: 200,
+                            child: Text(
+                              'الترتيب',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
                               ),
-                              Container(height: 20,),
-                              ElevatedButton(
-                                onPressed: () {/*SortByRate();*/},
-                                child: Text("التقييم",
-                                    style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<Color>(
-                                        Color(0xFFC2D961)),
-                                    shape: MaterialStateProperty
-                                        .all<RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(15),
-                                            side: BorderSide(
-                                              color: Color(0xFFC2D961),
-                                            )))),
-                              ),
-                            ],
-                          );
-                        }
-                    );
-                  },
-                ),
-              ),
+                            ),
+                          ),
+                          Container(height: 20,),
+                          ElevatedButton(
+                            onPressed: () {/*SortByRate();*/},
+                            child: Text("التقييم",
+                                style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    Color(0xFFC2D961)),
+                                shape: MaterialStateProperty
+                                    .all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        side: BorderSide(
+                                          color: Color(0xFFC2D961),
+                                        )))),
+                          ),
+                        ],
+                      );
+                    }
+                );
+              },
             ),
           ),
-          SizedBox(height: 20,),
-          SingleChildScrollView(
-            child: SingleChildScrollView(
-              child: Container(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: _clinicsStream,
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return const Text('حدث خطأ ما!');
-                    }
+        ),
+      ),
+      SizedBox(height: 20,),
+      SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Container(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: _clinicsStream,
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('حدث خطأ ما!');
+                }
 
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text("");
-                    }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Text("");
+                }
 
-                    final data = snapshot.requireData;
+                final data = snapshot.requireData;
 
-                    return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: data.size,
-                      itemBuilder: (BuildContext context, int index) {
-                        return makeCard(data, index);
-                      },
-                    );
+                return ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: data.size,
+                  itemBuilder: (BuildContext context, int index) {
+                    return makeCard(data, index);
                   },
-                )),
-            ),
-          ),
-      ]),
-    ),
-  );
+                );
+              },
+            )),
+        ),
+      ),
+  ]);
 
-  SearchingPost(String textEntered) {
-    list = FirebaseFirestore.instance
-        .collection('users')
-        .where('type',isEqualTo: 'clinic')
-        .where('firstname', isGreaterThanOrEqualTo: textEntered)
-        .get();
-
-    setState(() {
-      list;
-    });
-
-  }
 
   final topAppBar =  AppBar(
       iconTheme: IconThemeData(color: Color(0xff194919),size: 30),
