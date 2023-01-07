@@ -3,6 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/gestures.dart';
+import 'clinicMyAccount.dart';
+
 
 
 
@@ -292,6 +296,22 @@ class _addMedical extends State<addMedical> {
       "name":name,
       "price":price,
     });
+    showPopup();
+  }
+
+  showPopup() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "تم إضافة الخدمة بنجاح",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [],
+    ).show();
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail)));
 
   }
 }

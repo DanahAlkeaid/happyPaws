@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +9,7 @@ import 'package:path/path.dart' as Path;
 import 'package:flutter/gestures.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+
 
 
 
@@ -43,7 +42,6 @@ class _clinicChangeInfo extends State<clinicChangeInfo> {
   String errorMessage = '';
   var loading = false;
 var doc_id;
-var nameValue;
   void dispose() {
     _firstnameController.dispose();
     _emailController.dispose();
@@ -388,9 +386,8 @@ var nameValue;
     if (_formKey.currentState!.validate()) {
       try {
         //  uploadimage(profilePic);
-        setState(() {
-          nameValue = _firstnameController.text;
-        });
+        // setState(() {
+        // });
         await FirebaseFirestore.instance
             .collection('users')
             .where('email', isEqualTo: '${widget.cEmail}')
@@ -424,7 +421,7 @@ var nameValue;
       Alert(
         style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
         context: context,
-        desc: "تم حفط التعديلات بنجاح",
+        desc: "تم حفظ التعديلات بنجاح",
         // desc: "Check your Inbox!",
         closeFunction: null,
         closeIcon: Container(),

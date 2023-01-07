@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'clinic_services.dart';
+
+
+
+
 
 
 class editMedical extends StatefulWidget {
-  const editMedical ({Key? key}) : super (key: key);
+  final cEmail;
+  final sName;
+  const editMedical ( this.cEmail,this.sName,{super.key} );
 
   @override
   State<editMedical> createState() => _editMedical();
@@ -15,6 +24,7 @@ class _editMedical extends State<editMedical> {
 
 
   String errorMessage = '';
+  var doc_id;
   var loading = false;
   void dispose() {
     _serviceName.dispose();
@@ -273,7 +283,58 @@ class _editMedical extends State<editMedical> {
             ],),),),
     );
   }
+  SaveEdit() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        setState(() {
+        });
+        await FirebaseFirestore.instance
+            .collection('services')
+            .where('clinicEmail', isEqualTo: '${widget.cEmail}')
+            .where('name', isEqualTo:'${widget.sName}')
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            doc_id = element.id;
+            print(doc_id);
+          });
+        });
+         await FirebaseFirestore.instance
+            .collection('services')
+            .doc('${doc_id}').update({
+          "clinicEmail": widget.cEmail,
+          "type":"medical",
+          "name":_serviceName.text.trim(),
+          "price":_price.text.trim(),
+        }
+        );
+        Navigator.of(context).pop();
+        showPopup();
+      }
+      catch (error) {
+        print("$error");
+      }
+    } else {
+      print("خطأ في تغيير بيانات الخدمة ");
+    }
+  }
+  showPopup() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "تم حفظ التعديلات بنجاح",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [],
+    ).show();
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => clinic_services(/*راح يكون هنا ايميل العيادة*/)));
+
+  }
 }
+
 
 String? validatePrice(String? formPrice) {
   //String msg = '';
