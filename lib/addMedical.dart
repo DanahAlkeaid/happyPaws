@@ -287,7 +287,7 @@ class _addMedical extends State<addMedical> {
   //{widget.clinicEmail}
   Future add_service(String name,String price) async {
     await FirebaseFirestore.instance.collection('services').add({
-      "clinicEmail": {widget.clinicEmail},
+      "clinicEmail": widget.clinicEmail,
       "type":"medical",
       "name":name,
       "price":price,
