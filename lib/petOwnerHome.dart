@@ -32,6 +32,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   late Stream<QuerySnapshot> _clinicsStream;
 
+
   method1() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
@@ -183,6 +184,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                   color: Colors.grey.withOpacity(0.26))
             ]),
         child: TextField(
+          //onChanged: (value)=> _runFilter(value);
           decoration: InputDecoration(
             hintText: 'ابحث هنا .......',
             hintStyle: TextStyle(color: Colors.grey),
@@ -399,6 +401,9 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 makeBody()
 
   );
+
+ void _runFilter(String enteredKeyboard) {
+ }
 //تحاج اعادة نظر
 //   SortByRate() async {
 //     await FirebaseFirestore.instance
