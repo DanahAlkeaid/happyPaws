@@ -407,8 +407,7 @@ makeBody()
 
   SortByRate() async {
     await FirebaseFirestore.instance
-        .collection('users')
-        .where('type',isEqualTo: 'clinic')
+        .collection('rating')
         .orderBy('rate', descending: true)
         .get()
         .then((value) {

@@ -20,6 +20,8 @@ class _ReportStatus extends State<Report> {
   var clinicName;
   var clinicEmail;
 
+  var doc_id;
+
   void initState() {
     super.initState();
     method1();
@@ -306,4 +308,20 @@ class _ReportStatus extends State<Report> {
       body: makeBody(),
     );
   }
+
+  SortByRate() async {
+    await FirebaseFirestore.instance
+        .collection('rating')
+        .orderBy('rate', descending: true)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        doc_id = element.id;
+        print(doc_id);
+      });
+    });
+  }
+
 }
+
+
