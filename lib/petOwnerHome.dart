@@ -404,19 +404,20 @@ makeBody()
 
  void _runFilter(String enteredKeyboard) {
  }
-//تحاج اعادة نظر
-//   SortByRate() async {
-//     await FirebaseFirestore.instance
-//         .collection('users')
-//         .orderBy('rate', descending: true)
-//         .get()
-//         .then((value) {
-//         value.docs.forEach((element) {
-//         doc_id = element.id;
-//         print(doc_id);
-//       });
-//     });
-//   }
+
+  SortByRate() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('type',isEqualTo: 'clinic')
+        .orderBy('rate', descending: true)
+        .get()
+        .then((value) {
+        value.docs.forEach((element) {
+        doc_id = element.id;
+        print(doc_id);
+      });
+    });
+  }
 
 
 
