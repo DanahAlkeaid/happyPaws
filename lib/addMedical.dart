@@ -307,28 +307,14 @@ class _addMedical extends State<addMedical> {
       // desc: "Check your Inbox!",
       closeFunction: null,
       closeIcon: Container(),
-      buttons: [
-        DialogButton(
-          child: Text(
-            "حسناً",
-            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
-
-
-          ),
-          onPressed: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail))),
-          color: Color(0xFFC2D961),
-          radius: BorderRadius.all(Radius.circular(15)),
-
-        )
-      ],
+      buttons: [],
     ).show();
 
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail)));
+
   }
-
 }
-
-
 
 String? validatePrice(String? formPrice) {
   //String msg = '';

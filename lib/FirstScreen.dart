@@ -129,7 +129,7 @@ class _FirstScreenState extends State<FirstScreen> {
               height: 30,
 
             ),
-            Container(
+         /*   Container(
               child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -151,7 +151,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     color: Color(0xFFC2D963),
                     width: 5,
                   )),
-            ),
+            ),*/
           ]),
         ),
       ),
