@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:untitled/book_appointment.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/viewClinic.dart';
 import 'NavigationDrawer.dart';
@@ -324,7 +325,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => petOwner_appointments()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => book_appointments()));
             },
           )
         ],

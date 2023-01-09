@@ -5,8 +5,6 @@ import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class book_appointments extends StatefulWidget {
   const book_appointments ({Key? key}) : super (key: key);
@@ -48,13 +46,15 @@ class _book_appointmentssState extends State<book_appointments> {
                   Align(alignment : Alignment.centerRight ,
                     child: Text('،العيادة مغلقة في اليوم المحدد',
                         style: TextStyle(fontSize: 20,
-                            fontFamily: 'Tajwal',
+                            fontWeight:FontWeight.w500,
+                            fontFamily: "Almarai",
                             color: Colors.black)),
                   ),
                   Align(alignment : Alignment.centerRight ,
                     child: Text('.الرجاء إختيار يوم أخر',
                         style: TextStyle(fontSize: 20,
-                            fontFamily: 'Tajwal',
+                            fontWeight:FontWeight.w500,
+                            fontFamily: "Almarai",
                             color: Colors.black)),
                   ),
                 ],
@@ -108,13 +108,15 @@ class _book_appointmentssState extends State<book_appointments> {
                   Align(alignment : Alignment.centerRight ,
                     child: Text('،الرجاء التأكد من إدخال جميع',
                         style: TextStyle(fontSize: 20,
-                            fontFamily: 'Tajwal',
+                            fontWeight:FontWeight.w500,
+                            fontFamily: "Almarai",
                             color: Colors.black)),
                   ),
                   Align(alignment : Alignment.centerRight ,
                     child: Text('.المعلومات المطلوبة',
                         style: TextStyle(fontSize: 20,
-                            fontFamily: 'Tajwal',
+                            fontWeight:FontWeight.w500,
+                            fontFamily: "Almarai",
                             color: Colors.black)),
                   ),
                 ],
@@ -197,6 +199,7 @@ class _book_appointmentssState extends State<book_appointments> {
     // Call the user's CollectionReference to add a new user
     return appointments
         .add({
+      'status': "موعد قادم",
       //Data from clinic
       'clinic': null,
       'clinicPhone': null,

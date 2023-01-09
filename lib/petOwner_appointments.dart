@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:status_alert/status_alert.dart';
 
 class petOwner_appointments extends StatefulWidget {
   const petOwner_appointments ({Key? key}) : super (key: key);
@@ -15,7 +16,9 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
 //Get the current petOwner info
   FirebaseAuth _auth = FirebaseAuth.instance;
   late final Stream<QuerySnapshot> _reqStream;
-  CollectionReference appointments = FirebaseFirestore.instance.collection('appointments');
+  CollectionReference appointments = FirebaseFirestore.instance.collection(
+      'appointments');
+
   //currentUser info
   var pEmail;
   var pPhone;
@@ -28,25 +31,27 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
     openUsersCollection();
   }
 
-  getCurrentUser()  {
-    final User user = _auth.currentUser! ;
+  getCurrentUser() {
+    final User user = _auth.currentUser!;
     pEmail = user.email;
   }
 
-  pInfo()  {
+  pInfo() {
     FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: '${pEmail}')
         .get()
-        .then((snapshot) { print(snapshot.docs[0].data());
-    var petOwnerPhone = snapshot.docs[0].data()['phonenumber'];
-    setState(() {
-      pPhone ='${petOwnerPhone} ';
+        .then((snapshot) {
+      print(snapshot.docs[0].data());
+      var petOwnerPhone = snapshot.docs[0].data()['phonenumber'];
+      setState(() {
+        pPhone = '${petOwnerPhone} ';
+      });
+      //TEST !!!
+      print(pEmail);
+      print(pPhone);
     });
-    //TEST !!!
-    print(pEmail);
-    print(pPhone);
-    }); }
+  }
 
   openUsersCollection() {
     _reqStream = FirebaseFirestore.instance
@@ -70,302 +75,467 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
               Navigator.pop(context);
             },
           )
-          ,flexibleSpace: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('Assets/App_Header.png'),
-                    fit: BoxFit.fill
-                )
-            ),
-          ),
+          , flexibleSpace: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('Assets/App_Header.png'),
+                fit: BoxFit.fill
+            )
+        ),
+      ),
           elevation: 0
       ),
 
-      body:Padding(
+      body: Padding(
         //Scrollable page
-        padding:EdgeInsets.symmetric(vertical: 0,horizontal:16),
-        child:SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+        child: SingleChildScrollView(
           child:
           Column(
-            mainAxisAlignment:MainAxisAlignment.start,
-            crossAxisAlignment:CrossAxisAlignment.start,
-            mainAxisSize:MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment:Alignment(0.8, 0.0),
-                child:Row(
-                  mainAxisAlignment:MainAxisAlignment.end,
-                  crossAxisAlignment:CrossAxisAlignment.center,
-                  mainAxisSize:MainAxisSize.max,
-                  children:const [
+                alignment: Alignment(0.8, 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: const [
                     Align(
-                      alignment:Alignment.centerRight,
-                      child:Text(
+                      alignment: Alignment.centerRight,
+                      child: Text(
                         "المواعيد ",
                         textAlign: TextAlign.right,
-                        overflow:TextOverflow.clip,
-                        style:TextStyle(
-                          fontWeight:FontWeight.w700,
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
                           fontFamily: "Almarai",
-                          fontSize:37,
-                          color:Color(0xff034d23),
+                          fontSize: 37,
+                          color: Color(0xff034d23),
                         ),
                       ),
                     ),
                     Align(
-                  alignment:Alignment.centerRight,
-                      child:Icon(
+                      alignment: Alignment.centerRight,
+                      child: Icon(
                         Icons.calendar_today,
-                        color:Color(0xff034d23),
-                        size:33,
+                        color: Color(0xff034d23),
+                        size: 33,
                       ),
                     ),
                   ],),),
 
-          const SizedBox(height: 20)
+              const SizedBox(height: 20)
 
-              ,ListView(
+              , ListView(
                 scrollDirection: Axis.vertical,
-                padding:EdgeInsets.all(0),
-                shrinkWrap:true,
-                physics:ScrollPhysics(),
-                children:[
+                padding: EdgeInsets.all(0),
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                children: [
 
                   //Get all petOwner appointments and display them as cards
                   StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection("appointments").where('petOwnerPhone', isEqualTo: '${pPhone}').snapshots(),
-                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-
-                      if(snapshot.hasData) {
+                    stream: FirebaseFirestore.instance.collection(
+                        "appointments").where(
+                        'petOwnerPhone', isEqualTo: '${pPhone}').snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasData) {
                         final snap = snapshot.data!.docs;
                         return ListView.builder(
                           scrollDirection: Axis.vertical,
-                          physics:ScrollPhysics(),
+                          physics: ScrollPhysics(),
                           shrinkWrap: true,
                           primary: false,
                           itemCount: snap.length,
 
                           itemBuilder: (context, index) {
                             return Card(
-                              margin:EdgeInsets.fromLTRB(0, 0, 0, 16),
-                              color:Color(0xffffffff),
-                              shadowColor:Color(0x4d939393),
-                              elevation:1,
-                              shape:RoundedRectangleBorder(
-                                borderRadius:BorderRadius.circular(4.0),
-                                side: BorderSide(color:Color(0x4d9e9e9e), width:1),
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                              color: Color(0xffffffff),
+                              shadowColor: Color(0x4d939393),
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                                side: BorderSide(
+                                    color: Color(0x4d9e9e9e), width: 1),
                               ),
                               child:
                               Align(
-                                alignment:Alignment(0.8, 0.1),
-                                child:Padding(
-                                  padding:EdgeInsets.all(16),
-                                  child:Row(
-                                    mainAxisAlignment:MainAxisAlignment.start,
-                                    crossAxisAlignment:CrossAxisAlignment.center,
-                                    mainAxisSize:MainAxisSize.max,
-                                    children:[
+                                alignment: Alignment(0.8, 0.1),
+                                child: Padding(
+                                  padding: EdgeInsets.all(16),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
 
                                       Expanded(
                                         flex: 1,
                                         child: Row(
-                                          mainAxisAlignment:MainAxisAlignment.start,
-                                          crossAxisAlignment:CrossAxisAlignment.center,
-                                          mainAxisSize:MainAxisSize.max,
-                                          children:[
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .start,
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .center,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
 
                                             Expanded(
                                               flex: 1,
                                               child: Padding(
-                                                padding:EdgeInsets.symmetric(vertical: 0,horizontal:16),
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 0,
+                                                    horizontal: 16),
                                                 child:
                                                 Column(
-                                                  mainAxisAlignment:MainAxisAlignment.end,
-                                                  crossAxisAlignment:CrossAxisAlignment.start,
-                                                  mainAxisSize:MainAxisSize.max,
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .end,
+                                                  crossAxisAlignment: CrossAxisAlignment
+                                                      .start,
+                                                  mainAxisSize: MainAxisSize
+                                                      .max,
                                                   children: [
                                                     Align(
-                                                      alignment:Alignment(-0.0, 0.0),
-                                                      child:Row(
-                                                        mainAxisAlignment:MainAxisAlignment.start,
-                                                        crossAxisAlignment:CrossAxisAlignment.center,
-                                                        mainAxisSize:MainAxisSize.max,
-                                                        children:[
+                                                      alignment: Alignment(
+                                                          -0.0, 0.0),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisSize: MainAxisSize
+                                                            .max,
+                                                        children: [
 
                                                           IconButton(
-                                                            icon:const Icon(
+                                                            icon: const Icon(
                                                                 Icons.clear
                                                             ),
-                                                            onPressed:(){CancelApp(snapshot.data!.docs[index].reference);},
-                                                            color:Color(0xff212435),
-                                                            iconSize:24,
+                                                            onPressed: () {
+                                                              "${snap[index]['status']}"
+                                                                  .contains(
+                                                                  "موعد ملغى")
+                                                                  ? CancelledApp()
+                                                                  : CancelApp(
+                                                                  snapshot.data!
+                                                                      .docs[index]
+                                                                      .reference);
+                                                            },
+                                                            color: Color(
+                                                                0xff212435),
+                                                            iconSize: 24,
                                                           ),
                                                           Align(
-                                                            alignment:Alignment.topLeft,
-                                                            child:MaterialButton(
-                                                              onPressed:(){
-                                                               showDialog<void>(
-                                                               context: context,
-                                                               barrierDismissible: false, // user must tap button!
-                                                               builder: (BuildContext context) {
-                                                                return AlertDialog(
-                                                                  content: SingleChildScrollView(
-                                                                    child: ListBody(
-                                                                      children: <Widget>[
-                                                                        Align(alignment : Alignment.centerRight ,
-                                                                          child: Text( "${snap[index]['date']} :تاريخ الموعد" ,
-                                                                              style: TextStyle(fontSize: 18,
-                                                                                  fontFamily: 'Tajwal',
-                                                                                  color: Colors.black)),
-                                                                        ),
-                                                                        Align(alignment : Alignment.centerRight ,
-                                                                          child: Text('${snap[index]['time']} :وقت الموعد',
-                                                                              style: TextStyle(fontSize: 18,
-                                                                                  fontFamily: 'Tajwal',
-                                                                                  color: Colors.black)),
-                                                                        ),
-                                                                        Align(alignment : Alignment.centerRight ,
-                                                                          child: Text('${snap[index]['clinicPhone']} :رقم هاتف العيادة',
-                                                                              style: TextStyle(fontSize: 18,
-                                                                                  fontFamily: 'Tajwal',
-                                                                                  color: Colors.black)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
+                                                            alignment: Alignment
+                                                                .topLeft,
+                                                            child: MaterialButton(
+                                                              onPressed: () {
+                                                                Alert(
+                                                                  style: AlertStyle(
+                                                                      titleStyle: TextStyle(
+                                                                          fontSize: 23,
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontFamily: 'Tajawal'),
+                                                                      descStyle: TextStyle(
+                                                                          fontSize: 20,
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontFamily: 'Tajawal')),
+                                                                  closeIcon: Container(),
+                                                                  context: context,
+                                                                  title: "تفاصيل الموعد",
+                                                                  content: Column(
+                                                                    crossAxisAlignment: CrossAxisAlignment
+                                                                        .end,
+                                                                    children: <
+                                                                        Widget>[
+                                                                      const SizedBox(
+                                                                          height: 15),
+
+                                                                      Align(
+                                                                        alignment: Alignment
+                                                                            .topRight,
+                                                                        child: Text(
+                                                                            ":حالة الموعد",
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                fontWeight: FontWeight
+                                                                                    .w700,
+                                                                                fontFamily: "Almarai",
+                                                                                overflow: TextOverflow
+                                                                                    .clip,
+                                                                                color: Colors
+                                                                                    .black)),
+                                                                      ),
+
+                                                                      Align(
+                                                                        alignment: Alignment
+                                                                            .centerRight,
+                                                                        child: Text(
+                                                                            "${snap[index]['status']}",
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                fontWeight: FontWeight
+                                                                                    .w500,
+                                                                                fontFamily: "Almarai",
+                                                                                overflow: TextOverflow
+                                                                                    .clip,
+                                                                                color: Colors
+                                                                                    .black)),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          height: 15),
+
+                                                                      Align(
+                                                                        alignment: Alignment
+                                                                            .topRight,
+                                                                        child: Text(
+                                                                            ":رقم هاتف العيادة",
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                fontWeight: FontWeight
+                                                                                    .w700,
+                                                                                fontFamily: "Almarai",
+                                                                                overflow: TextOverflow
+                                                                                    .clip,
+                                                                                color: Colors
+                                                                                    .black)),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          height: 4),
+                                                                      Align(
+                                                                        alignment: Alignment
+                                                                            .centerRight,
+                                                                        child: Text(
+                                                                            "${snap[index]['clinicPhone']}",
+                                                                            style: TextStyle(
+                                                                                fontSize: 18,
+                                                                                fontWeight: FontWeight
+                                                                                    .w500,
+                                                                                fontFamily: "Almarai",
+                                                                                overflow: TextOverflow
+                                                                                    .clip,
+                                                                                color: Colors
+                                                                                    .black)),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                  actions: <Widget>[
-                                                                    Align(alignment : Alignment.center ,
-                                                                      child: ElevatedButton(
-                                                                          onPressed: () {
-                                                                            Navigator.of(context).pop();
-                                                                          },
-                                                                          style: ButtonStyle(
-                                                                              backgroundColor: MaterialStateProperty.all<Color>(
-                                                                                  Color(0xFFC2D961)),
-                                                                              shape: MaterialStateProperty
-                                                                                  .all<RoundedRectangleBorder>(
-                                                                                  RoundedRectangleBorder(
-                                                                                      borderRadius: BorderRadius.circular(15),
-                                                                                      side: const BorderSide(
-                                                                                        color: Color(0xFFC2D961),
-                                                                                      )))),
-                                                                          child: const Text("حسناً",
-                                                                              style: TextStyle(fontSize: 18,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
+                                                                  buttons: [
+                                                                    DialogButton(
+                                                                      radius: const BorderRadius
+                                                                          .all(
+                                                                          Radius
+                                                                              .circular(
+                                                                              6)),
+                                                                      child: Text(
+                                                                        "حسنا",
+                                                                        style: TextStyle(
+                                                                            fontSize: 20,
+                                                                            color: Colors
+                                                                                .black,
+                                                                            fontFamily: 'Tajawal'),
+                                                                      ),
+                                                                      onPressed: () =>
+                                                                          Navigator
+                                                                              .pop(
+                                                                              context),
+                                                                      color: Color(
+                                                                          0xFFC2D961),
                                                                     ),
                                                                   ],
-                                                                );
-                                                               },
-                                                               );
+                                                                ).show();
                                                               },
-                                                              color:Color(0xffffffff),
-                                                              elevation:0,
-                                                              shape:const RoundedRectangleBorder(
-                                                                borderRadius:BorderRadius.zero,
-                                                                side:BorderSide(color:Color(0xffffffff),width:0),
+                                                              color: Color(
+                                                                  0xffffffff),
+                                                              elevation: 0,
+                                                              shape: const RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .zero,
+                                                                side: BorderSide(
+                                                                    color: Color(
+                                                                        0xffffffff),
+                                                                    width: 0),
                                                               ),
-                                                              padding:EdgeInsets.fromLTRB(12, 1, 16, 1),
-                                                              child:Text("التفاصيل", style: TextStyle( fontSize:16,
-                                                                fontWeight:FontWeight.w400,
-                                                                fontFamily: "Almarai",
-                                                              ),),
-                                                              textColor:Color(0xff034d23),
-                                                              height:9,
-                                                              minWidth:10,
+                                                              padding: EdgeInsets
+                                                                  .fromLTRB(
+                                                                  12, 1, 16, 1),
+                                                              child: Text(
+                                                                "التفاصيل",
+                                                                style: TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontWeight: FontWeight
+                                                                      .w400,
+                                                                  fontFamily: "Almarai",
+                                                                ),),
+                                                              textColor: Color(
+                                                                  0xff034d23),
+                                                              height: 9,
+                                                              minWidth: 10,
                                                             ),
                                                           ),
                                                         ],),),
                                                     Align(
-                                                      alignment:Alignment.centerRight,
-                                                      child:Text(
+                                                      alignment: Alignment
+                                                          .centerRight,
+                                                      child: Text(
                                                         "${snap[index]['service']}",
-                                                        textAlign: TextAlign.start,
-                                                        maxLines:1,
-                                                        overflow:TextOverflow.clip,
-                                                        style:TextStyle(
-                                                          fontWeight:FontWeight.w700,
+                                                        textAlign: TextAlign
+                                                            .start,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .clip,
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .w700,
                                                           fontFamily: "Almarai",
-                                                          fontSize:20,
-                                                          color:Color(0xff034d23),
+                                                          fontSize: 20,
+                                                          color: Color(
+                                                              0xff034d23),
                                                         ),
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:EdgeInsets.symmetric(vertical: 4,horizontal:0),
-                                                      child:Align(
-                                                        alignment:Alignment.centerRight,
-                                                        child:Text(
+                                                      padding: EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 4,
+                                                          horizontal: 0),
+                                                      child: Align(
+                                                        alignment: Alignment
+                                                            .centerRight,
+                                                        child: Text(
                                                           "${snap[index]['clinic']}",
-                                                          textAlign: TextAlign.start,
-                                                          maxLines:1,
-                                                          overflow:TextOverflow.ellipsis,
-                                                          style:TextStyle(
-                                                            fontWeight:FontWeight.w400,
+                                                          textAlign: TextAlign
+                                                              .start,
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight
+                                                                .w600,
                                                             fontFamily: "Almarai",
-                                                            fontSize:18,
-                                                            color:Color(0xff009245),
+                                                            fontSize: 18,
+                                                            color: Color(
+                                                                0xff017339),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    Row(
-                                                      mainAxisAlignment:MainAxisAlignment.start,
-                                                      crossAxisAlignment:CrossAxisAlignment.center,
-                                                      mainAxisSize:MainAxisSize.max,
-                                                      children: [
-
-                                                        Padding(
-                                                          padding:EdgeInsets.fromLTRB(25, 0, 33, 0),
-                                                          child:Text(
-                                                            "${snap[index]['date']}",
-                                                            textAlign: TextAlign.start,
-                                                            overflow:TextOverflow.clip,
-                                                            style:TextStyle(
-                                                              fontWeight:FontWeight.w400,
-                                                              fontFamily: "Almarai",
-                                                              fontSize:17,
-                                                              color:Color(0xff034d23),
-                                                            ),
-                                                          ),
+                                                    Align(
+                                                      alignment: Alignment
+                                                          .centerRight,
+                                                      child: Text(
+                                                        "${snap[index]['status']}",
+                                                        textAlign: TextAlign
+                                                            .start,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .clip,
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .w500,
+                                                          fontFamily: "Almarai",
+                                                          fontSize: 15,
+                                                          color: "${snap[index]['status']}"
+                                                              .contains(
+                                                              "موعد ملغى")
+                                                              ? Color.fromARGB(
+                                                              255, 200, 62, 62)
+                                                              : Color(
+                                                              0xff009245),
                                                         ),
-                                                        Padding(
-                                                          padding:EdgeInsets.fromLTRB(69, 0, 0, 0),
-                                                          child:Align(
-                                                            alignment:Alignment.centerRight,
-                                                            child:Text(
-                                                              "${snap[index]['time']}",
-                                                              textAlign: TextAlign.start,
-                                                              overflow:TextOverflow.clip,
-                                                              style:TextStyle(
-                                                                fontWeight:FontWeight.w400,
+                                                      ),
+                                                    ),
+
+                                                    Padding(
+                                                      padding: EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 6,
+                                                          horizontal: 0),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisSize: MainAxisSize
+                                                            .max,
+                                                        children: [
+
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                25, 0, 33, 0),
+                                                            child: Text(
+                                                              "${snap[index]['date']}",
+                                                              textAlign: TextAlign
+                                                                  .start,
+                                                              overflow: TextOverflow
+                                                                  .clip,
+                                                              style: TextStyle(
+                                                                fontWeight: FontWeight
+                                                                    .w400,
                                                                 fontFamily: "Almarai",
-                                                                fontSize:17,
-                                                                color:Color(0xff034d23),
+                                                                fontSize: 17,
+                                                                color: Color(
+                                                                    0xff034d23),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],),
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                69, 0, 0, 0),
+                                                            child: Align(
+                                                              alignment: Alignment
+                                                                  .centerRight,
+                                                              child: Text(
+                                                                "${snap[index]['time']}",
+                                                                textAlign: TextAlign
+                                                                    .start,
+                                                                overflow: TextOverflow
+                                                                    .clip,
+                                                                style: TextStyle(
+                                                                  fontWeight: FontWeight
+                                                                      .w400,
+                                                                  fontFamily: "Almarai",
+                                                                  fontSize: 17,
+                                                                  color: Color(
+                                                                      0xff034d23),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],),
+                                                    ),
                                                   ],),),),
                                           ],),),
                                       Container(
-                                        alignment:Alignment.center,
-                                        margin:EdgeInsets.all(0),
-                                        padding:EdgeInsets.all(10),
-                                        width:50,
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.all(0),
+                                        padding: EdgeInsets.all(10),
+                                        width: 50,
                                         decoration: BoxDecoration(
-                                          color:Color(0xfffaf7f4),
-                                          shape:BoxShape.circle,
-                                          border:Border.all(color:Color(0xff034d23),width:1),
+                                          color: Color(0xfffaf7f4),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: Color(0xff034d23),
+                                              width: 1),
                                         ),
                                         child:
                                         const Align(
-                                          alignment:Alignment(0.1, 0.0),
+                                          alignment: Alignment(0.1, 0.0),
                                           child:
                                           Image(
-                                            image:AssetImage("Assets/Pet_House.png"),
-                                            height:50,
-                                            width:266,
-                                            fit:BoxFit.contain,
+                                            image: AssetImage(
+                                                "Assets/Pet_House.png"),
+                                            height: 50,
+                                            width: 266,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
                                       ),
@@ -381,24 +551,25 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                 ],),
             ],),),),
     );
-
   }
-
-
   CancelApp(DocumentReference index) {
     Alert(
-      style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
+      style: AlertStyle(titleStyle: TextStyle(
+          fontSize: 23, color: Colors.black, fontFamily: 'Tajawal'),
+          descStyle: TextStyle(
+              fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
       closeIcon: Container(),
       context: context,
-      title: "حذف الموعد",
+      title: "إلغاء الموعد",
       desc:
-      " هل أنت متأكد من رغبتك بحذف الموعد؟",
+      " هل أنت متأكد من رغبتك بإلغاء الموعد؟",
       buttons: [
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
-            "إلغاء",
-            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+            "لا",
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
           ),
           onPressed: () => Navigator.pop(context),
           color: Color(0xFFC2D961),
@@ -406,29 +577,40 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
-            "حذف",
-            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+            "نعم",
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
           ),
-          // onPressed: () => Navigator.pop(context),
           onPressed: () async {
-            await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
-              await myTransaction.delete(index);
+            await FirebaseFirestore.instance.runTransaction((
+                Transaction myTransaction) async {
+              await myTransaction.update(
+                  index, { "status": "موعد ملغى من قبل المربي"});
               Navigator.pop(context);
               ConfirmCancel();
             });
-          }, //to do
+          },
           color: Color.fromARGB(255, 200, 62, 62),
 
         ),
       ],
     ).show();
   }
-
   ConfirmCancel() {
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 2),
+      title: 'تم إلغاء الموعد بنجاح',
+      configuration: IconConfiguration(icon: Icons.done),
+      maxWidth: 280,
+    );
+  }
+
+  CancelledApp() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
-      desc: "تم حذف الموعد",
+      desc: "الموعد ملغى",
       closeFunction: null,
       closeIcon: Container(),
       buttons: [
@@ -446,7 +628,6 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
     ).show();
 
   }
-
 
 }
 
