@@ -162,7 +162,7 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addGrooming()));
+                                  builder: (context) => addGrooming(cEmail)));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -433,7 +433,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => editMedical()));
+                                builder: (context) => editMedical(cEmail, 'تطعيم')));
                       },
                       color: const Color(0xfffaf7f4),
                       elevation: 0,
@@ -489,7 +489,7 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addTruck()));
+                                  builder: (context) => addTruck(cEmail)));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -656,7 +656,7 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addOther()));
+                                  builder: (context) => addOther(cEmail)));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
