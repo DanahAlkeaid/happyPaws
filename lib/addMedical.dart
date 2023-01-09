@@ -296,6 +296,7 @@ class _addMedical extends State<addMedical> {
       "name":name,
       "price":price,
     });
+    Navigator.of(context).pop();
     showPopup();
   }
 

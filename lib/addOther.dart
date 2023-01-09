@@ -285,10 +285,11 @@ class _addOther extends State<addOther> {
   Future add_service(String name,String price) async {
     await FirebaseFirestore.instance.collection('services').add({
       "clinicEmail": widget.clinicEmail,
-      "type":"medical",
+      "type":"others",
       "name":name,
       "price":price,
     });
+    Navigator.of(context).pop();
     showPopup();
   }
   void showPopup() {
