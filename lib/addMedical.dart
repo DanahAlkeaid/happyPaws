@@ -296,7 +296,6 @@ class _addMedical extends State<addMedical> {
       "name":name,
       "price":price,
     });
-    Navigator.of(context).pop();
     showPopup();
   }
 
@@ -308,11 +307,21 @@ class _addMedical extends State<addMedical> {
       // desc: "Check your Inbox!",
       closeFunction: null,
       closeIcon: Container(),
-      buttons: [],
-    ).show();
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail)));
+
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+      ],
+    ).show();
 
   }
 }

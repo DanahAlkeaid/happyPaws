@@ -288,7 +288,6 @@ class _addTruck extends State<addTruck> {
       "name":name,
       "price":price,
     });
-    Navigator.of(context).pop();
     showPopup();
   }
   void showPopup() {
@@ -307,8 +306,7 @@ class _addTruck extends State<addTruck> {
 
 
           ),
-          onPressed: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail))),
+          onPressed: () => Navigator.of(context).pop(),
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 

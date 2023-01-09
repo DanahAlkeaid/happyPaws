@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'clinic_services.dart';
+import 'clinicMyAccount.dart';
 
 
 
@@ -268,7 +268,7 @@ class _editMedical extends State<editMedical> {
                                                   "حفظ التغييرات",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => Navigator.pop(context),
+                                                onPressed: () => SaveEdit(_serviceName.text.trim(),_price.text.trim()),
                                                 // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -283,11 +283,11 @@ class _editMedical extends State<editMedical> {
             ],),),),
     );
   }
-  SaveEdit() async {
+  SaveEdit(String name,String price) async {
     if (_formKey.currentState!.validate()) {
       try {
-        setState(() {
-        });
+        // setState(() {
+        // });
         await FirebaseFirestore.instance
             .collection('services')
             .where('clinicEmail', isEqualTo: '${widget.cEmail}')
@@ -302,11 +302,10 @@ class _editMedical extends State<editMedical> {
          await FirebaseFirestore.instance
             .collection('services')
             .doc('${doc_id}').update({
-          "name":_serviceName.text.trim(),
-          "price":_price.text.trim(),
+          "name":name,
+          "price":price,
         }
         );
-        Navigator.of(context).pop();
         showPopup();
       }
       catch (error) {
@@ -316,7 +315,7 @@ class _editMedical extends State<editMedical> {
       print("خطأ في تغيير بيانات الخدمة ");
     }
   }
-  showPopup() {
+  void showPopup() {
     Alert(
       style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
       context: context,
@@ -324,11 +323,21 @@ class _editMedical extends State<editMedical> {
       // desc: "Check your Inbox!",
       closeFunction: null,
       closeIcon: Container(),
-      buttons: [],
-    ).show();
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => clinic_services(/*راح يكون هنا ايميل العيادة*/)));
+
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+      ],
+    ).show();
 
   }
 }
