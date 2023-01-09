@@ -326,39 +326,6 @@ class _addMedical extends State<addMedical> {
 
   }
 
-  void ShowAlert() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        content: Container(
-          height: 60,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              color: Colors.deepOrange.shade800,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: Stack(children: [
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    "هذا البريد الالكتروني غير مسجل مسبقاً",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Tajawal'),
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-            ),
-            //IconButton(icon:  ,onPressed: ,)
-          ]),
-        )
-    ));
-  }
 }
 
 
