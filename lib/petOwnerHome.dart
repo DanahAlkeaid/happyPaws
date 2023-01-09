@@ -29,10 +29,14 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   void initState() {
     super.initState();
+    _foundClinics = _clinicsStream as List;
     method1();
   }
 
   late Stream<QuerySnapshot> _clinicsStream;
+
+  List _foundClinics =[];
+
 
 
   method1() {
@@ -187,7 +191,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                   color: Colors.grey.withOpacity(0.26))
             ]),
         child: TextField(
-          //onChanged: (value)=> _runFilter(value);
+          // onChanged: (value)=> _runFilter(value),
           decoration: InputDecoration(
             hintText: 'ابحث هنا .......',
             hintStyle: TextStyle(color: Colors.grey),
@@ -335,78 +339,25 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           elevation: 0
       ),
       drawer: const NavigationDrawer(),
-      body:
-        /* Column(
-             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AnimSearchBar(width: 335,
-                    textController: textController,
-                    color: Color(0xFFC2D961),
-                    onSuffixTap: () {
-                      setState(() {
-                        textController.clear();
-                      });
-                    },
-                    helpText: "ابحث هنا.....",
-                    closeSearchOnSuffixTap: true, onSubmitted: (String ) {  },
-                  ),
-                  IconButton(icon: Icon(
-                    Icons.tune,
-                    color: Color(0xff194919),
-                    size: 30,),
-                    onPressed: () {
-                    showModalBottomSheet(
-                      isDismissible: true,
-                        context: context,
-                        builder: (builder){
-                        return Column(
-                          children: [
-                            Container(
-                             padding: EdgeInsets.symmetric(vertical: 50),
-                              height: 200,
-                              child: Text(
-                                  'الترتيب',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
-                                ),
-                              ),
-                            ),
-                            Container(height: 20,),
-                            ElevatedButton(
-                              onPressed: () {*//*SortByRate();*//*},
-                              child: Text("التقييم",
-                                  style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Color(0xFFC2D961)),
-                                  shape: MaterialStateProperty
-                                      .all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                          side: BorderSide(
-                                            color: Color(0xFFC2D961),
-                                          )))),
-                            ),
-                          ],
-                        );
-                        }
-                    );
-                    },
-                  ),
-                ],
-              ),
-
-
-            ],
-          ),*/
-makeBody()
+      body: makeBody(),
 
   );
 
- void _runFilter(String enteredKeyboard) {
- }
+ // void _runFilter(String enteredKeyboard) {
+ //   List results=[];
+ //   if(enteredKeyboard.isEmpty){
+ //     results = _clinicsStream as List;
+ //   }
+ //   else{
+ //     results = _clinicsStream
+ //         .where((clinic) =>
+ //         clinic['firstname'].toLowerCase().contains(enteredKeyboard.toLowerCase()))
+ //         .toList();
+ //   }
+ //   setState(() {
+ //     _foundClinics = results;
+ //   });
+ // }
 
   SortByRate() async {
     await FirebaseFirestore.instance
