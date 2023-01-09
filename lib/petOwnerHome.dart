@@ -44,18 +44,19 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   rateAve(email){
 
-    late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
-        .collection('rating')
-        .where('clinic_email', isEqualTo: email)
-        .orderBy('date', descending: true)
-        .snapshots();
+    // late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
+    //     .collection('rating')
+    //     .where('clinic_email', isEqualTo: email)
+    //     .where('status',isEqualTo: 'rated')
+    //     .snapshots();
 
     int numRate=0;
     double TotalRate =0;
     double avgRate=0;
     FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: email)
+        .collection('rating')
+        .where('clinic_email', isEqualTo: email)
+        .where('status',isEqualTo: 'rated')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){

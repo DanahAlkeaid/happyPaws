@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'dart:io';
+
 
 
 class rating extends StatefulWidget {
   final  PetOwner_email;
   final  Clinic_email;
-  final  appointment_ID;
 
-  const rating(this.PetOwner_email, this.Clinic_email, this.appointment_ID,  {super.key});
+
+
+  const rating(this.PetOwner_email, this.Clinic_email , {super.key});
 
 
   @override
@@ -22,12 +22,11 @@ class rating extends StatefulWidget {
 
 class _ratingState extends State<rating> {
   late double RatingClinic=0;
-  late TextEditingController _reviewTextController = TextEditingController();
   late bool RatedBefore = false;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  var name = "";
+  var nameClinic = "";
   var namePetOwner ="";
 
   var profilePic = "";
@@ -35,7 +34,7 @@ class _ratingState extends State<rating> {
   void initState() {
     super.initState();
     Profilepic();
-    Name();
+    NameClinic();
     NamePetOwner();
   }
 
@@ -83,7 +82,7 @@ class _ratingState extends State<rating> {
 
                         alignment: Alignment.center,
                         child: Text(
-                          name,
+                          nameClinic,
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w900,
@@ -268,7 +267,8 @@ class _ratingState extends State<rating> {
 
         if(formKey.currentState!.validate()){
 
-          addRating( RatingClinic, widget.Clinic_email, widget.PetOwner_email,  widget.appointment_ID , namePetOwner);
+          //هنا بنادي ميثود الايديت
+          // addRating( RatingClinic);
           Navigator.pop(context);
           showPopup();
         } }
@@ -276,33 +276,34 @@ class _ratingState extends State<rating> {
       print(error);
     }
   }
-  Future addRating(double rate, String clinic_email, String petOwner_email,String appointmentID,String namePetOwner) async {
-    Timestamp date = Timestamp.now();
-    try{
-      await FirebaseFirestore.instance.collection('rating').add({
-        'rate': rate,
-        'clinic_email':clinic_email ,
-        'petOwner_email': petOwner_email,
-        'appointment_Id':appointmentID,
-        'date': date,
-        'petOwner_Name': namePetOwner
-      });
 
-
-      //مررااااااااجججعععععهههه
-
-      // var test2 = await FirebaseFirestore.instance
-      //     .collection('OfferPrice')
-      //     .doc('${doc_id}');
-      // test2.update({'rated': true ,
-      // });}catch(error){
-      // print(error);
-
-    }catch(error){
-      print(error);
-    }
-
-  }
+  //هذي الميثود بيكون مكانها ايديت ريتنق
+  // Future addRating(double rate) async {
+  //   try{
+  //     await FirebaseFirestore.instance.collection('rating').add({
+  //       'rate': rate,
+  //       'clinic_email':widget.Clinic_email ,
+  //       'petOwner_email': widget.PetOwner_email,
+  //       'clinic_name':widget.Clinic_name,
+  //       'clinic_pic':widget.Clinic_pic,
+  //       'status':'rated',
+  //     });
+  //
+  //
+  //     //مررااااااااجججعععععهههه
+  //
+  //     // var test2 = await FirebaseFirestore.instance
+  //     //     .collection('OfferPrice')
+  //     //     .doc('${doc_id}');
+  //     // test2.update({'rated': true ,
+  //     // });}catch(error){
+  //     // print(error);
+  //
+  //   }catch(error){
+  //     print(error);
+  //   }
+  //
+  // }
   showPopup() {
     Alert(
       style:  AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
@@ -312,37 +313,61 @@ class _ratingState extends State<rating> {
       closeFunction: null,
       closeIcon: Container(),
       buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () =>null,
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
       ],
     ).show();
 
   }
-  showPopup2() {
+  void showPopup2() {
     Alert(
       style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
       context: context,
-
       desc: "تقييمك يهمنا",
+      // desc: "Check your Inbox!",
       closeFunction: null,
       closeIcon: Container(),
       buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () =>null,
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
       ],
     ).show();
 
   }
 
-  Name() {
+  NameClinic() {
     FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: widget.Clinic_email)
         .get()
         .then((snapshot) {
       setState(() {
-        name = snapshot.docs[0].data()['firstname'];
+        nameClinic = snapshot.docs[0].data()['firstname'];
       });
 
-      print(name);
+      print(nameClinic);
     });
-    print(Name);
+    print(NameClinic);
   }
   NamePetOwner()  {
     FirebaseFirestore.instance
