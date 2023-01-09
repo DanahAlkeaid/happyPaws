@@ -408,21 +408,17 @@ makeBody()
  void _runFilter(String enteredKeyboard) {
  }
 
- List<String> docID = [];
-
   SortByRate() async {
     await FirebaseFirestore.instance
         .collection('rating')
         .orderBy('rate', descending: true)
         .get()
-        .then((value) =>
-        value.docs.forEach((element) {
-          docID.add(document.referrer);
-        //doc_id = element.id;
-       // print(doc_id);
-      }
-      ),
-    );
+        .then((value) {
+      value.docs.forEach((element) {
+        doc_id = element.id;
+        print(doc_id);
+      });
+    });
   }
 
 
