@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -405,17 +407,21 @@ makeBody()
  void _runFilter(String enteredKeyboard) {
  }
 
+ List<String> docID = [];
+
   SortByRate() async {
     await FirebaseFirestore.instance
         .collection('rating')
         .orderBy('rate', descending: true)
         .get()
-        .then((value) {
+        .then((value) =>
         value.docs.forEach((element) {
-        doc_id = element.id;
-        print(doc_id);
-      });
-    });
+          docID.add(document.referrer);
+        //doc_id = element.id;
+       // print(doc_id);
+      }
+      ),
+    );
   }
 
 
