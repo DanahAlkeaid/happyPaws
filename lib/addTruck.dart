@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/gestures.dart';
+import 'clinicMyAccount.dart';
 
 
 class addTruck extends StatefulWidget {
-  const addTruck ({Key? key}) : super (key: key);
+  final clinicEmail;
+  const addTruck(this.clinicEmail, {super.key});
 
   @override
   State<addTruck> createState() => _addTruck();
@@ -258,7 +266,7 @@ class _addTruck extends State<addTruck> {
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => Navigator.pop(context),
+                                                onPressed: () => add_service(_serviceName.text.trim(),_price.text.trim()),
                                                 // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -272,6 +280,41 @@ class _addTruck extends State<addTruck> {
                 ],),
             ],),),),
     );
+  }
+  Future add_service(String name,String price) async {
+    await FirebaseFirestore.instance.collection('services').add({
+      "clinicEmail": widget.clinicEmail,
+      "type":"medical",
+      "name":name,
+      "price":price,
+    });
+    showPopup();
+  }
+  void showPopup() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "تم إضافة الخدمة بنجاح",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail))),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+      ],
+    ).show();
+
   }
 }
 

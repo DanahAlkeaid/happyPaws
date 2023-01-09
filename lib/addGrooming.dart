@@ -1,11 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/gestures.dart';
+import 'clinicMyAccount.dart';
 
 
 class addGrooming extends StatefulWidget {
-  const addGrooming ({Key? key}) : super (key: key);
+  final clinicEmail;
+  const addGrooming(this.clinicEmail, {super.key});
 
   @override
   State<addGrooming> createState() => _addGrooming();
@@ -13,79 +18,15 @@ class addGrooming extends StatefulWidget {
 
 class _addGrooming extends State<addGrooming> {
   final _formKey = GlobalKey<FormState>();
-  late TextEditingController _serviceName = TextEditingController();
+  final TextEditingController _serviceName = TextEditingController();
   final TextEditingController _price = TextEditingController();
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  var cEmail;
-  var doc_id;
-  var sName;
-  var sPrice;
-
-  List<Map> service = [{
-    'الاسم ': '_serviceName',
-    'السعر ':' sPrice',
-  }];
-
-
-  addService() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        //  uploadimage(profilePic);
-        setState(() {
-        });
-        await FirebaseFirestore.instance
-            .collection('users')
-            .where('email', isEqualTo: '${cEmail}')
-            .get()
-            .then((value) {print(value);
-          value.docs.forEach((element) {
-            doc_id = element.id;
-            print(doc_id);
-          });
-        });
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc('${doc_id}').set({
-         "خدمات التنظيف والتزيين" :  FieldValue.arrayUnion([service])
-        });
-
-
-        Navigator.of(context).pop();
-        showPopup();
-      }
-      catch (error) {
-        print("$error");
-      }
-    } else {
-      print("خطأ في تغيير المعلومات الشخصية ");
-    }
-  }
-
-
-  showPopup() {
-    Alert(
-      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
-      context: context,
-      desc: "تم إضافة الخدمة ",
-      // desc: "Check your Inbox!",
-      closeFunction: null,
-      closeIcon: Container(),
-      buttons: [],
-    ).show();
-
-  }
-
-  getCurrentUser()  {
-    final User user = _auth.currentUser! ;
-    cEmail = user.email;
-  }
 
 
   String errorMessage = '';
   var loading = false;
   void dispose() {
     _serviceName.dispose();
-_price.dispose();
+    _price.dispose();
     super.dispose();
   }
 
@@ -268,7 +209,7 @@ _price.dispose();
                                               autovalidateMode:
                                               AutovalidateMode.onUserInteraction,
                                               controller: _price,
-                                               validator: validatePrice,
+                                              validator: validatePrice,
                                               decoration: InputDecoration(
                                                   hintText: (" "),
                                                   focusedBorder: OutlineInputBorder(
@@ -311,22 +252,22 @@ _price.dispose();
                                               SizedBox(width: 20,),
                                               ElevatedButton(
                                                 //radius: const BorderRadius.all(Radius.circular(6)),
-                                            style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all<Color>(
-                                                Color(0xFFC2D961)),
-                                        shape: MaterialStateProperty
-                                            .all<RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(15),
-                                                side: BorderSide(
-                                                  color: Color(0xFFC2D961),
-                                                )))),
+                                                style: ButtonStyle(
+                                                    backgroundColor: MaterialStateProperty.all<Color>(
+                                                        Color(0xFFC2D961)),
+                                                    shape: MaterialStateProperty
+                                                        .all<RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(15),
+                                                            side: BorderSide(
+                                                              color: Color(0xFFC2D961),
+                                                            )))),
                                                 child: Text(
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-    onPressed:(){addService();}
-                                               // color: Color(0xFFC2D961),
+                                                onPressed: () => add_service(_serviceName.text.trim(),_price.text.trim()),
+                                                // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
 
@@ -339,6 +280,41 @@ _price.dispose();
                 ],),
             ],),),),
     );
+  }
+  Future add_service(String name,String price) async {
+    await FirebaseFirestore.instance.collection('services').add({
+      "clinicEmail": widget.clinicEmail,
+      "type":"medical",
+      "name":name,
+      "price":price,
+    });
+    showPopup();
+  }
+  void showPopup() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "تم إضافة الخدمة بنجاح",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => clinicMyAccount(widget.clinicEmail))),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+      ],
+    ).show();
+
   }
 }
 
@@ -359,4 +335,3 @@ String? validateService(String? formService) {
 
   return null;
 }
-
