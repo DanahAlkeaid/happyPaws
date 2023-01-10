@@ -433,7 +433,7 @@ class _clinic_servicesState extends State<clinic_services> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => editMedical(cEmail, 'تطعيم')));
+                                builder: (context) => editMedical(cEmail, 'علاجية')));
                       },
                       color: const Color(0xfffaf7f4),
                       elevation: 0,

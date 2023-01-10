@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
-import 'package:untitled/book_appointment.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/viewClinic.dart';
 import 'NavigationDrawer.dart';
@@ -30,14 +29,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   void initState() {
     super.initState();
-    _foundClinics = _clinicsStream as List;
     method1();
   }
 
   late Stream<QuerySnapshot> _clinicsStream;
-
-  List _foundClinics =[];
-
 
 
   method1() {
@@ -192,7 +187,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                   color: Colors.grey.withOpacity(0.26))
             ]),
         child: TextField(
-          // onChanged: (value)=> _runFilter(value),
+          //onChanged: (value)=> _runFilter(value);
           decoration: InputDecoration(
             hintText: 'ابحث هنا .......',
             hintStyle: TextStyle(color: Colors.grey),
@@ -325,7 +320,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => book_appointments()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => petOwner_appointments()));
             },
           )
         ],
@@ -340,37 +335,94 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           elevation: 0
       ),
       drawer: const NavigationDrawer(),
-      body: makeBody(),
+      body:
+        /* Column(
+             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AnimSearchBar(width: 335,
+                    textController: textController,
+                    color: Color(0xFFC2D961),
+                    onSuffixTap: () {
+                      setState(() {
+                        textController.clear();
+                      });
+                    },
+                    helpText: "ابحث هنا.....",
+                    closeSearchOnSuffixTap: true, onSubmitted: (String ) {  },
+                  ),
+                  IconButton(icon: Icon(
+                    Icons.tune,
+                    color: Color(0xff194919),
+                    size: 30,),
+                    onPressed: () {
+                    showModalBottomSheet(
+                      isDismissible: true,
+                        context: context,
+                        builder: (builder){
+                        return Column(
+                          children: [
+                            Container(
+                             padding: EdgeInsets.symmetric(vertical: 50),
+                              height: 200,
+                              child: Text(
+                                  'الترتيب',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
+                                ),
+                              ),
+                            ),
+                            Container(height: 20,),
+                            ElevatedButton(
+                              onPressed: () {*//*SortByRate();*//*},
+                              child: Text("التقييم",
+                                  style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                      Color(0xFFC2D961)),
+                                  shape: MaterialStateProperty
+                                      .all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                          side: BorderSide(
+                                            color: Color(0xFFC2D961),
+                                          )))),
+                            ),
+                          ],
+                        );
+                        }
+                    );
+                    },
+                  ),
+                ],
+              ),
+
+
+            ],
+          ),*/
+makeBody()
 
   );
 
- // void _runFilter(String enteredKeyboard) {
- //   List results=[];
- //   if(enteredKeyboard.isEmpty){
- //     results = _clinicsStream as List;
- //   }
- //   else{
- //     results = _clinicsStream
- //         .where((clinic) =>
- //         clinic['firstname'].toLowerCase().contains(enteredKeyboard.toLowerCase()))
- //         .toList();
- //   }
- //   setState(() {
- //     _foundClinics = results;
- //   });
- // }
+ void _runFilter(String enteredKeyboard) {
+ }
+
+ List<String> docID = [];
 
   SortByRate() async {
     await FirebaseFirestore.instance
         .collection('rating')
         .orderBy('rate', descending: true)
         .get()
-        .then((value) {
-      value.docs.forEach((element) {
-        doc_id = element.id;
-        print(doc_id);
-      });
-    });
+        .then((value) =>
+        value.docs.forEach((element) {
+          docID.add(document.referrer);
+        //doc_id = element.id;
+       // print(doc_id);
+      }
+      ),
+    );
   }
 
 
