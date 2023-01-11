@@ -539,7 +539,7 @@ class _petOwnerSignup extends State<petOwnerSignup> {
 
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
-      return "This fiels is required";
+      return "هذه الخانة مطلوبة";
     }
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';

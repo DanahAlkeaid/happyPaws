@@ -691,7 +691,7 @@ else
 
     String pattern = r'\w+@\w+\.\w+';
     RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(formEmail)) return 'يرج إدخال عنوان بريد صحيح';
+    if (!regex.hasMatch(formEmail)) return 'يرجى إدخال عنوان بريد صحيح';
     return null;
   }
 
@@ -713,7 +713,7 @@ else
 
   String? validationPassword(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
-      return "This fiels is required";
+      return "هذه الخانة مطلوبة";
     }
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
