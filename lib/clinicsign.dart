@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -84,7 +85,9 @@ String imageURL = '';
   }
 
   Future signUp() async {
-
+if (imageURL == '')
+  showPopup11();
+else
     if (_formKey.currentState!.validate()) {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -118,27 +121,8 @@ String imageURL = '';
       'type': 'clinic',
       'description': location,
       'profilepic': imageURL,
-      //'profilepic': Image.network(profilepic),
-      // 'rate': null,
       'StartTime' : formattedStime,
       'EndTime' : formattedEtime,
-      /*'services':[[{'خدمات التنظيف والتنزيين'}],
-        [{'خدمات علاجية'}],
-        [{'خدمات متنقلة'}],
-       [ {'أخرى'}]]*/
-
-      //هذي اللي تحت هي الصحيحة بس ماعاد لها داعي
-      // 'services': {'خدمات التنظيف والتنزيين': {'null' :['الاسم' , 'السعر']},
-      //   'خدمات علاجية': {'null' :[null]},
-      //   'خدمات متنقلة': {'null' :[null]},
-      //   'أخرى': {'null' :[null]}
-      // }
-    /*'services': {[{'خدمات التنظيف والتنزيين': [null],
-        'خدمات علاجية': [null],
-        'خدمات متنقلة': [null],
-        'أخرى': [null]
-      }]}*/
-      //,
     } );
   }
 
@@ -811,6 +795,32 @@ String imageURL = '';
     } catch (e) {
       print('error occured');
     }
+  }
+
+  void showPopup11() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "يرجى إضافة صورة للعيادة",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+      ],
+    ).show();
+
   }
 
 }
