@@ -7,7 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/gestures.dart';
 import 'clinic_services.dart';
 
-
+//
 class addOther extends StatefulWidget {
   final clinicEmail;
   const addOther(this.clinicEmail, {super.key});

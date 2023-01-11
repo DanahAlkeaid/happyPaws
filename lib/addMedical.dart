@@ -326,7 +326,7 @@ class _addMedical extends State<addMedical> {
 
   }
 }
-
+//
 String? validatePrice(String? formPrice) {
   //String msg = '';
   if (formPrice == null || formPrice.trim().isEmpty) {
