@@ -221,6 +221,10 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                                                                   .contains(
                                                                   "موعد ملغى")
                                                                   ? CancelledApp()
+                                                                  :"${snap[index]['status']}"
+                                                                  .contains(
+                                                                  "موعد مكتمل")
+                                                                  ? CompletedApp()
                                                                   : CancelApp(
                                                                   snapshot.data!
                                                                       .docs[index]
@@ -611,6 +615,29 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
       style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
       desc: "الموعد ملغى",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+
+        ),
+      ],
+    ).show();
+
+  }
+
+  CompletedApp() {
+    Alert(
+      style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
+      context: context,
+      desc: "الموعد مكتمل",
       closeFunction: null,
       closeIcon: Container(),
       buttons: [
