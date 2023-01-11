@@ -11,6 +11,7 @@ import 'FirstScreen.dart';
 import 'MyAccount.dart';
 import 'clinic_appointments.dart';
 import 'clinic_services.dart';
+import 'package:flutter/src/rendering/box.dart';
 
 
 class clinic_home extends StatefulWidget {
@@ -96,8 +97,8 @@ class _clinic_homeState extends State<clinic_home> {
 
         body:
         SafeArea(
-          child: SingleChildScrollView(
-            child: Column(children: [
+          child: ListView(
+            children:[ Column(children: [
 
               // App Logo
               Container(
@@ -339,8 +340,8 @@ class _clinic_homeState extends State<clinic_home> {
 
 //هذا المفروض ايقونات تويتر وايميل لكن يضبط ويخرب بمزاجه
 
-/*Row(children:
-[SizedBox(width: 150,),
+/*
+SizedBox(width: 150,),
   Expanded(child: Container(
 
     child: Link(
@@ -365,22 +366,45 @@ Expanded(child: Container(
     },
   ),
 ) ,)
-
-,SizedBox(width: 150,)
-],),*/
-
-/*Row(mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-
-
-
-
-
-],),*/
+*/
 
 
             ],),
-          ),
+              Row(
+
+                  children:[
+                    SizedBox(width: 150,),
+                    Container(
+width: 30,
+                      child: Link(
+                        target: LinkTarget.blank,
+                        uri: Uri.parse('https://twitter.com/Happypaws_app'),
+                        builder: (context, followLink)=>ListTile(
+
+                          leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
+                          onTap: followLink,
+                        ),
+                      ),),
+                    SizedBox(width: 10,),
+                    Container(
+                      width: 30,
+                      child:  ListTile(
+                        title: const Text('',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
+                        leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
+                        onTap: () async{
+                          final toEmail='HappyPawsApp@hotmail.com';
+                          final url='mailto:$toEmail';
+                          if(await canLaunch (url)){
+                            await launch(url);
+                          }
+                        },
+                      ),
+                    )
+
+                  ]
+              ),
+
+          ]),
         )
     );
   }
