@@ -1,9 +1,9 @@
 //import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:untitled/Search.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/viewClinic.dart';
 import 'NavigationDrawer.dart';
@@ -176,81 +176,61 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   makeBody() => Column(
     children:[
-      Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 20,
-                  offset: Offset(1, 1),
-                  color: Colors.grey.withOpacity(0.26))
-            ]),
-        child: TextField(
-          //onChanged: (value)=> _runFilter(value);
-          decoration: InputDecoration(
-            hintText: 'ابحث هنا .......',
-            hintStyle: TextStyle(color: Colors.grey),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide:
-                BorderSide(color: Colors.white)),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide:
-                BorderSide(color: Colors.white)),
-            prefixIcon: IconButton(
-              onPressed: () {
-              },
-              icon: Icon(Icons.search,
-                color: Color(0xff194919),
-                size: 25,),
-            ),
-            suffixIcon: IconButton(icon: Icon(
-              Icons.tune,
-              color: Color(0xff194919),
-              size: 25,),
-              onPressed: () {
-                showModalBottomSheet(
-                    isDismissible: true,
-                    context: context,
-                    builder: (builder){
-                      return Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 50),
-                            height: 200,
-                            child: Text(
-                              'الترتيب',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
-                              ),
+      Row(
+        children: [
+          IconButton(icon: Icon(Icons.search,
+            color: Color(0xff194919),
+            size: 25,
+          ),
+            onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
+            },
+          ),
+          IconButton(icon: Icon(
+            Icons.tune,
+            color: Color(0xff194919),
+            size: 25,),
+            onPressed: () {
+              showModalBottomSheet(
+                  isDismissible: true,
+                  context: context,
+                  builder: (builder){
+                    return Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 50),
+                          height: 200,
+                          child: Text(
+                            'الترتيب',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
                             ),
                           ),
-                          Container(height: 20,),
-                          ElevatedButton(
-                            onPressed: () {/*SortByRate();*/},
-                            child: Text("التقييم",
-                                style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    Color(0xFFC2D961)),
-                                shape: MaterialStateProperty
-                                    .all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        side: BorderSide(
-                                          color: Color(0xFFC2D961),
-                                        )))),
-                          ),
-                        ],
-                      );
-                    }
-                );
-              },
-            ),
+                        ),
+                        Container(height: 20,),
+                        ElevatedButton(
+                          onPressed: () {/*SortByRate();*/},
+                          child: Text("التقييم",
+                              style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xFFC2D961)),
+                              shape: MaterialStateProperty
+                                  .all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(
+                                        color: Color(0xFFC2D961),
+                                      )))),
+                        ),
+                      ],
+                    );
+                  }
+              );
+            },
           ),
-        ),
+        ],
+
       ),
       SizedBox(height: 20,),
       SingleChildScrollView(
