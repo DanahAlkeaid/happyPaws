@@ -11,12 +11,10 @@ import 'package:untitled/editTruck.dart';
 import 'editGrooming.dart';
 import 'editMedical.dart';
 
-
-
 class clinic_services extends StatefulWidget {
   // final String email;
   // const clinic_services(this.email, {super.key});
-  const clinic_services ({Key? key}) : super (key: key);
+  const clinic_services({Key? key}) : super(key: key);
 
   @override
   State<clinic_services> createState() => _clinic_servicesState();
@@ -56,7 +54,6 @@ class _clinic_servicesState extends State<clinic_services> {
     print(cEmail);
   }
 
-
   clName() {
     FirebaseFirestore.instance
         .collection('users')
@@ -66,15 +63,12 @@ class _clinic_servicesState extends State<clinic_services> {
       print(snapshot.docs);
       var clinicName = snapshot.docs[0].data()['firstname'];
 
-
       setState(() {
         cName = '${clinicName} ';
 
         print(cName);
 
         // print(exBio);
-
-
       });
     });
   }
@@ -83,7 +77,6 @@ class _clinic_servicesState extends State<clinic_services> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfffaf7f4),
-
       appBar: AppBar(
           leading: IconButton(
             icon: (const Icon(Icons.arrow_back_ios)),
@@ -92,30 +85,22 @@ class _clinic_servicesState extends State<clinic_services> {
             onPressed: () {
               Navigator.pop(context);
             },
-          )
-          , flexibleSpace: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('Assets/App_Header.png'),
-                fit: BoxFit.fill
-            )
-        ),
-      ),
-          elevation: 0
-      ),
-
-
-      body:
-      Padding(
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('Assets/App_Header.png'),
+                    fit: BoxFit.fill)),
+          ),
+          elevation: 0),
+      body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
         child: SingleChildScrollView(
-          child:
-          Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-
               const SizedBox(
                 height: 16,
                 width: 16,
@@ -154,28 +139,35 @@ class _clinic_servicesState extends State<clinic_services> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Align(
                           alignment: Alignment.center,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addGrooming(cEmail)));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          addGrooming(cEmail)));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "Elmessiri",
-                                  color: Color(0xff034d23),
-                                ),), // <-- Text
+                                Text(
+                                  "أضف خدمة",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Elmessiri",
+                                    color: Color(0xff034d23),
+                                  ),
+                                ), // <-- Text
                                 SizedBox(
                                   height: 2,
                                 ),
-                                Icon( // <-- Icon
+                                Icon(
+                                  // <-- Icon
                                   Icons.add,
                                   color: Color(0xff034d23),
                                   size: 20.0,
@@ -185,8 +177,8 @@ class _clinic_servicesState extends State<clinic_services> {
                           ),
                         ),
                       ),
-
-                    ],),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: MaterialButton(
@@ -199,10 +191,13 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                       padding: const EdgeInsets.all(16),
                       child: const Text(
-                        "خدمات التنظيف والتزيين", style: TextStyle(fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                        "خدمات التنظيف والتزيين",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 40,
                       minWidth: 140,
@@ -221,7 +216,8 @@ class _clinic_servicesState extends State<clinic_services> {
                       },
                     ),
                   ),
-                ],),
+                ],
+              ),
               const Divider(
                 color: Color(0xffbda520),
                 height: 12,
@@ -238,7 +234,6 @@ class _clinic_servicesState extends State<clinic_services> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Align(
@@ -248,15 +243,20 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle(fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Elmessiri",
-                                color: Color(0xff034d23),
-                              ),), // <-- Text
+                              Text(
+                                "",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "Elmessiri",
+                                  color: Color(0xff034d23),
+                                ),
+                              ), // <-- Text
                               SizedBox(
                                 height: 2,
                               ),
-                              Icon( // <-- Icon
+                              Icon(
+                                // <-- Icon
                                 Icons.delete,
                                 color: Color(0xff034d23),
                                 size: 24.0,
@@ -266,7 +266,6 @@ class _clinic_servicesState extends State<clinic_services> {
                         ),
                       ),
                     ),
-
                     MaterialButton(
                       onPressed: () {
                         Navigator.push(
@@ -281,10 +280,14 @@ class _clinic_servicesState extends State<clinic_services> {
                         side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
                       padding: const EdgeInsets.all(0),
-                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                      child: const Text(
+                        "تعديل",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 10,
                       minWidth: 12,
@@ -306,7 +309,8 @@ class _clinic_servicesState extends State<clinic_services> {
                         ),
                       ),
                     ),
-                  ],),
+                  ],
+                ),
               ),
 
               //medical services
@@ -320,28 +324,36 @@ class _clinic_servicesState extends State<clinic_services> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Align(
                           alignment: Alignment.center,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addMedical(cEmail,)));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => addMedical(
+                                            cEmail,
+                                          )));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "Elmessiri",
-                                  color: Color(0xff034d23),
-                                ),), // <-- Text
+                                Text(
+                                  "أضف خدمة",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Elmessiri",
+                                    color: Color(0xff034d23),
+                                  ),
+                                ), // <-- Text
                                 SizedBox(
                                   height: 2,
                                 ),
-                                Icon( // <-- Icon
+                                Icon(
+                                  // <-- Icon
                                   Icons.add,
                                   color: Color(0xff034d23),
                                   size: 20.0,
@@ -351,7 +363,8 @@ class _clinic_servicesState extends State<clinic_services> {
                           ),
                         ),
                       ),
-                    ],),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(52, 0, 0, 0),
                     child: MaterialButton(
@@ -364,10 +377,13 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                       padding: const EdgeInsets.all(16),
                       child: const Text(
-                        "الخدمات العلاجية", style: TextStyle(fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                        "الخدمات العلاجية",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 40,
                       minWidth: 140,
@@ -383,7 +399,8 @@ class _clinic_servicesState extends State<clinic_services> {
                       });
                     },
                   ),
-                ],),
+                ],
+              ),
               const Divider(
                 color: Color(0xffbda520),
                 height: 12,
@@ -400,7 +417,6 @@ class _clinic_servicesState extends State<clinic_services> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Align(
@@ -410,15 +426,20 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle(fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Elmessiri",
-                                color: Color(0xff034d23),
-                              ),), // <-- Text
+                              Text(
+                                "",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "Elmessiri",
+                                  color: Color(0xff034d23),
+                                ),
+                              ), // <-- Text
                               SizedBox(
                                 height: 2,
                               ),
-                              Icon( // <-- Icon
+                              Icon(
+                                // <-- Icon
                                 Icons.delete,
                                 color: Color(0xff034d23),
                                 size: 24.0,
@@ -433,7 +454,8 @@ class _clinic_servicesState extends State<clinic_services> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => editMedical(cEmail, 'علاجية','140')));
+                                builder: (context) =>
+                                    editMedical(cEmail, 'علاجية', '140')));
                       },
                       color: const Color(0xfffaf7f4),
                       elevation: 0,
@@ -442,10 +464,14 @@ class _clinic_servicesState extends State<clinic_services> {
                         side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
                       padding: const EdgeInsets.all(0),
-                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                      child: const Text(
+                        "تعديل",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 10,
                       minWidth: 12,
@@ -467,7 +493,8 @@ class _clinic_servicesState extends State<clinic_services> {
                         ),
                       ),
                     ),
-                  ],),
+                  ],
+                ),
               ),
 
               //truck services
@@ -481,28 +508,34 @@ class _clinic_servicesState extends State<clinic_services> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Align(
                           alignment: Alignment.center,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addTruck(cEmail)));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => addTruck(cEmail)));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "Elmessiri",
-                                  color: Color(0xff034d23),
-                                ),), // <-- Text
+                                Text(
+                                  "أضف خدمة",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Elmessiri",
+                                    color: Color(0xff034d23),
+                                  ),
+                                ), // <-- Text
                                 SizedBox(
                                   height: 2,
                                 ),
-                                Icon( // <-- Icon
+                                Icon(
+                                  // <-- Icon
                                   Icons.add,
                                   color: Color(0xff034d23),
                                   size: 20.0,
@@ -512,7 +545,8 @@ class _clinic_servicesState extends State<clinic_services> {
                           ),
                         ),
                       ),
-                    ],),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
                     child: MaterialButton(
@@ -525,10 +559,13 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                       padding: const EdgeInsets.all(16),
                       child: const Text(
-                        "خدمات العيادة المتنقلة", style: TextStyle(fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                        "خدمات العيادة المتنقلة",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 40,
                       minWidth: 140,
@@ -547,7 +584,8 @@ class _clinic_servicesState extends State<clinic_services> {
                       },
                     ),
                   ),
-                ],),
+                ],
+              ),
               const Divider(
                 color: Color(0xffbda520),
                 height: 12,
@@ -564,7 +602,6 @@ class _clinic_servicesState extends State<clinic_services> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Align(
@@ -574,21 +611,25 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle(fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Elmessiri",
-                                color: Color(0xff034d23),
-                              ),), // <-- Text
+                              Text(
+                                "",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "Elmessiri",
+                                  color: Color(0xff034d23),
+                                ),
+                              ), // <-- Text
                               SizedBox(
                                 height: 2,
                               ),
                               IconButton(
-                                icon:const Icon(
-                                    Icons.delete
-                                ),
-                                onPressed:(){/*DeleteService(snapshot.data!.docs[index].reference);*/},    //بعد ما نسوي ريتريف
-                                color:Color(0xff212435),
-                                iconSize:24,
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {
+                                  /*DeleteService(snapshot.data!.docs[index].reference);*/
+                                }, //بعد ما نسوي ريتريف
+                                color: Color(0xff212435),
+                                iconSize: 24,
                               ),
                             ],
                           ),
@@ -609,10 +650,14 @@ class _clinic_servicesState extends State<clinic_services> {
                         side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
                       padding: const EdgeInsets.all(0),
-                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                      child: const Text(
+                        "تعديل",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 10,
                       minWidth: 12,
@@ -634,7 +679,8 @@ class _clinic_servicesState extends State<clinic_services> {
                         ),
                       ),
                     ),
-                  ],),
+                  ],
+                ),
               ),
 
               // other services
@@ -648,28 +694,34 @@ class _clinic_servicesState extends State<clinic_services> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Align(
                           alignment: Alignment.center,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => addOther(cEmail)));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => addOther(cEmail)));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("أضف خدمة", style: TextStyle(fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "Elmessiri",
-                                  color: Color(0xff034d23),
-                                ),), // <-- Text
+                                Text(
+                                  "أضف خدمة",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Elmessiri",
+                                    color: Color(0xff034d23),
+                                  ),
+                                ), // <-- Text
                                 SizedBox(
                                   height: 2,
                                 ),
-                                Icon( // <-- Icon
+                                Icon(
+                                  // <-- Icon
                                   Icons.add,
                                   color: Color(0xff034d23),
                                   size: 20.0,
@@ -679,7 +731,8 @@ class _clinic_servicesState extends State<clinic_services> {
                           ),
                         ),
                       ),
-                    ],),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(51, 0, 0, 0),
                     child: MaterialButton(
@@ -692,10 +745,13 @@ class _clinic_servicesState extends State<clinic_services> {
                       ),
                       padding: const EdgeInsets.all(16),
                       child: const Text(
-                        "خدمات أخرى", style: TextStyle(fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                        "خدمات أخرى",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 40,
                       minWidth: 140,
@@ -714,7 +770,8 @@ class _clinic_servicesState extends State<clinic_services> {
                       },
                     ),
                   ),
-                ],),
+                ],
+              ),
               const Divider(
                 color: Color(0xffbda520),
                 height: 12,
@@ -731,7 +788,6 @@ class _clinic_servicesState extends State<clinic_services> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Align(
@@ -741,15 +797,20 @@ class _clinic_servicesState extends State<clinic_services> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("", style: TextStyle(fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Elmessiri",
-                                color: Color(0xff034d23),
-                              ),), // <-- Text
+                              Text(
+                                "",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "Elmessiri",
+                                  color: Color(0xff034d23),
+                                ),
+                              ), // <-- Text
                               SizedBox(
                                 height: 2,
                               ),
-                              Icon( // <-- Icon
+                              Icon(
+                                // <-- Icon
                                 Icons.delete,
                                 color: Color(0xff034d23),
                                 size: 24.0,
@@ -773,10 +834,14 @@ class _clinic_servicesState extends State<clinic_services> {
                         side: BorderSide(color: Color(0xfffaf7f4), width: 1),
                       ),
                       padding: const EdgeInsets.all(0),
-                      child: const Text("تعديل", style: TextStyle(fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "Elmessiri",
-                      ),),
+                      child: const Text(
+                        "تعديل",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Elmessiri",
+                        ),
+                      ),
                       textColor: const Color(0xff034d23),
                       height: 10,
                       minWidth: 12,
@@ -798,28 +863,34 @@ class _clinic_servicesState extends State<clinic_services> {
                         ),
                       ),
                     ),
-                  ],),
+                  ],
+                ),
               ),
-
-
-            ],),),),
-
+            ],
+          ),
+        ),
+      ),
     );
   }
+
   DeleteService(DocumentReference id) {
     Alert(
-      style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
+      style: AlertStyle(
+          titleStyle: TextStyle(
+              fontSize: 23, color: Colors.black, fontFamily: 'Tajawal'),
+          descStyle: TextStyle(
+              fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
       closeIcon: Container(),
       context: context,
       title: "حذف الخدمة",
-      desc:
-      " هل أنت متأكد من رغبتك بحذف الخدمة؟",
+      desc: " هل أنت متأكد من رغبتك بحذف الخدمة؟",
       buttons: [
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
             "إلغاء",
-            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
           ),
           onPressed: () => Navigator.pop(context),
           color: Color(0xFFC2D961),
@@ -828,18 +899,19 @@ class _clinic_servicesState extends State<clinic_services> {
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
             "حذف",
-            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
           ),
           // onPressed: () => Navigator.pop(context),
           onPressed: () async {
-            await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
+            await FirebaseFirestore.instance
+                .runTransaction((Transaction myTransaction) async {
               await myTransaction.delete(id);
               Navigator.pop(context);
               ConfirmDel();
             });
           }, //to do
           color: Color.fromARGB(255, 200, 62, 62),
-
         ),
       ],
     ).show();
@@ -847,7 +919,8 @@ class _clinic_servicesState extends State<clinic_services> {
 
   ConfirmDel() {
     Alert(
-      style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
+      style:
+          AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
       desc: "تم حذف الخدمة",
       closeFunction: null,
@@ -857,14 +930,13 @@ class _clinic_servicesState extends State<clinic_services> {
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
             "حسناً",
-            style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
           ),
           onPressed: () => Navigator.pop(context),
           color: Color(0xFFC2D961),
-
         ),
       ],
     ).show();
-
   }
 }

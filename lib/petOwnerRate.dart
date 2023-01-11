@@ -37,7 +37,7 @@ class _petOwnerRateStatus extends State<petOwnerRate> {
   //       'petOwner_email': widget.PetOwner_email,
   //       'clinic_name':widget.Clinic_name,
   //       'clinic_pic':widget.Clinic_pic,
-  //       'status':'rated',
+  //       'status':'yet',
   //     });
   //
   //   }catch(error){
@@ -50,7 +50,7 @@ class _petOwnerRateStatus extends State<petOwnerRate> {
   method1() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('rating')
-        .where('petOwner_email', isEqualTo: '${widget.petOwner_email}').where('status', isEqualTo:'موعد مكتمل')
+        .where('petOwner_email', isEqualTo: '${widget.petOwner_email}').where('status', isEqualTo:'yet')
         .snapshots();
   }
 
@@ -129,6 +129,10 @@ class _petOwnerRateStatus extends State<petOwnerRate> {
 
   makeBody() => Column(
     children: [
+      Text(
+        ' تقييم العيادات ',
+        style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900,color: Color(0xff194919),fontFamily: 'ElMessiri'),
+      ),
       SizedBox(height: 20,),
   SingleChildScrollView(
   child: SingleChildScrollView(
