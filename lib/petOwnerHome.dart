@@ -405,8 +405,6 @@ makeBody()
 
   );
 
- void _runFilter(String enteredKeyboard) {
- }
 /*
 
  List<String> docID = [];
