@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/viewClinic.dart';
 import 'dart:async';
-import 'clinic_services.dart';
 import 'NavigationDrawer.dart';
 import 'rating.dart';
 
@@ -52,7 +50,7 @@ class _petOwnerRateStatus extends State<petOwnerRate> {
   method1() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('rating')
-        .where('petOwner_email', isEqualTo: '${widget.petOwner_email}').where('status', isEqualTo:'yet')
+        .where('petOwner_email', isEqualTo: '${widget.petOwner_email}').where('status', isEqualTo:'موعد مكتمل')
         .snapshots();
   }
 

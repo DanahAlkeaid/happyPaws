@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'clinic_services.dart';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 
 
@@ -11,7 +17,8 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class editMedical extends StatefulWidget {
   final cEmail;
   final sName;
-  const editMedical ( this.cEmail,this.sName,{super.key} );
+  final sPrice;
+  const editMedical ( this.cEmail,this.sName,this.sPrice,{super.key} );
 
   @override
   State<editMedical> createState() => _editMedical();
@@ -19,8 +26,8 @@ class editMedical extends StatefulWidget {
 
 class _editMedical extends State<editMedical> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _serviceName = TextEditingController();
-  final TextEditingController _price = TextEditingController();
+  late TextEditingController _serviceName = TextEditingController(text: widget.sName);
+  late TextEditingController _price = TextEditingController(text: widget.sPrice);
 
 
   String errorMessage = '';
@@ -268,7 +275,7 @@ class _editMedical extends State<editMedical> {
                                                   "حفظ التغييرات",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => SaveEdit(_serviceName.text.trim(),_price.text.trim()),
+                                                onPressed: () => SaveEdit(),
                                                 // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -283,11 +290,18 @@ class _editMedical extends State<editMedical> {
             ],),),),
     );
   }
-  SaveEdit(String name,String price) async {
+  var newname,newprice;
+  SaveEdit() async {
+    print('in saveedit method');
     if (_formKey.currentState!.validate()) {
       try {
         // setState(() {
+        //   newname=_serviceName.text;
+        //   newprice=_price.text;
         // });
+
+        print('in try ');
+        var doc_id;
         await FirebaseFirestore.instance
             .collection('services')
             .where('clinicEmail', isEqualTo: '${widget.cEmail}')
@@ -299,14 +313,17 @@ class _editMedical extends State<editMedical> {
             print(doc_id);
           });
         });
+        print('finished doc_id');
          await FirebaseFirestore.instance
             .collection('services')
             .doc('${doc_id}').update({
-          "name":name,
-          "price":price,
+          "name":_serviceName.text.trim(),
+          "price":_price.text.trim(),
         }
         );
+        print('finished edit info');
         showPopup();
+        print('called method popup');
       }
       catch (error) {
         print("$error");
@@ -331,7 +348,8 @@ class _editMedical extends State<editMedical> {
 
 
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => MaterialPageRoute(
+              builder: (context) => clinic_services(/*المفروض يتغير وينرسل له ايميل الكلينك*/)),
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 

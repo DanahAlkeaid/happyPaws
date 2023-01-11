@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/gestures.dart';
-import 'clinicMyAccount.dart';
+import 'clinic_services.dart';
 
 
 class addGrooming extends StatefulWidget {
@@ -306,7 +306,8 @@ class _addGrooming extends State<addGrooming> {
 
 
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => MaterialPageRoute(
+              builder: (context) => clinic_services(/*المفروض يتغير وينرسل له ايميل الكلينك*/)),
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 
