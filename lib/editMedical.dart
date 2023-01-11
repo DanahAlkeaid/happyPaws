@@ -66,11 +66,7 @@ class _editMedical extends State<editMedical> {
             height: MediaQuery.of(context).size.height - 50,
             width: double.infinity,
               child:SingleChildScrollView(
-                child:
-                Column(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  crossAxisAlignment:CrossAxisAlignment.start,
-                  mainAxisSize:MainAxisSize.max,
+                child: Column(
                   children: [
 
                     Column(
