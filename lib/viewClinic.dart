@@ -3,105 +3,158 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class viewClinic extends StatefulWidget {
-
   // final title;
   // const viewClinic({Key? key, required this.title}) : super(key: key);
 
   final String cEmail;
+
   const viewClinic(this.cEmail, {super.key});
-
-
 
   @override
   State<viewClinic> createState() => _viewClinicState();
 }
 
 class _viewClinicState extends State<viewClinic> {
-  static String mainFontName = "ElMessiri-VariableFont_wght";
-  static String secondaryFontName = "Tajawal-Regular";
-  static String testFont = "AR_GESS"; // لاختبار الخط ينحذف بعدين
+  static String mainFontName = "ElMessiri";
+  static String secondaryFontName = "Tajawal";
 
-  late TextEditingController _emailController = TextEditingController(text:widget.cEmail);
+  late TextEditingController _emailController =
+  TextEditingController(text: widget.cEmail);
 
-  var firstName='';
-  var cPhone;
-  var cLocation;
-  var cPic;
+  var EndTime = '';
+  var StartTime = '';
+  var description = '';
+  var email = '';
+  var firstName = '';
+  var phonenumber = '';
+  var profilepic = '';
+  var type = '';
+
   Map<String, dynamic> cServices = Map();
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> mServices =
+  []; // Medical services
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> mGrooming =
+  []; // Grooming services
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> mTruck =
+  []; // Truck services
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> mOthers =
+  []; // others services
 
   static Color backgroundColor = Color(0xfffaf7f4);
   static Color mainTextColor = Color(0xff034d23);
   static Color secondaryTextColor = Color(0xff489f6d);
 
   static TextStyle titleTextStyle =
-  TextStyle(color: mainTextColor, fontFamily: testFont, fontSize: 30);
+  TextStyle(color: mainTextColor, fontFamily: mainFontName, fontSize: 30);
   static TextStyle subTextStyle =
-  TextStyle(color: secondaryTextColor, fontFamily: testFont, fontSize: 22);
+  TextStyle(color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 22);
   static TextStyle tileHeaderTextStyle = TextStyle(
       color: mainTextColor,
-      fontFamily: testFont,
+      fontFamily: mainFontName,
       fontSize: 16,
       fontWeight: FontWeight.bold);
   static TextStyle tileTextStyle =
-  TextStyle(color: secondaryTextColor, fontFamily: testFont, fontSize: 15);
+  TextStyle(color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 15);
 
   String clinic_image_url = 'https://googleflutter.com/sample_image.jpg';
-
-
-
 
   void initState() {
     super.initState();
     //getSelectedClinic();
+    email = '${widget.cEmail}';
     clInfo();
   }
 
-  clInfo() {
+  clInfo() async {
     // Process users
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: '${widget.cEmail}')
+        .where('email', isEqualTo: this.email)
         .get()
         .then((snapshot) {
-          print('#SERVICES#');
       print(snapshot.docs[0].data());
-      var clinicName = snapshot.docs[0].data()['firstname'];
-      var clinicPhone = snapshot.docs[0].data()['phonenumber'];
-      var clinicLocation = snapshot.docs[0].data()['description'];
-      var profilePic = snapshot.docs[0].data()['profilepic'];
-      Map<String, dynamic> services = snapshot.docs[0].data()['services'];
-
 
       setState(() {
-        firstName = '${clinicName} ';
-        cPhone = '${clinicPhone} ';
-        cLocation = '${clinicLocation}';
-        cPic = '${profilePic}';
-        cServices = services;
+        EndTime = snapshot.docs[0].data()['EndTime'];
+        StartTime = snapshot.docs[0].data()['StartTime'];
+        description = snapshot.docs[0].data()['description'];
+        firstName = snapshot.docs[0].data()['firstname'];
+        phonenumber = snapshot.docs[0].data()['phonenumber'];
+        profilepic = snapshot.docs[0].data()['profilepic'];
+        type = snapshot.docs[0].data()['type'];
       });
     });
 
-    // // Process services
-    // FirebaseFirestore.instance
-    //     .collection('services')
-    //     .where('email', isEqualTo: '${widget.cEmail}')
-    //     .get()
-    //     .then((snapshot) {
-    //   print(snapshot.docs[0].data());
-    //   var clinicEmail = snapshot.docs[0].data()['clinicEmail'];
-    //   var clinicType = snapshot.docs[0].data()['type'];
-    //   var clinicName = snapshot.docs[0].data()['name'];
-    //   var price = snapshot.docs[0].data()['price'];
-    //
-    //   setState(() {
-    //     cName = '${clinicEmail} ';
-    //     cType = '${clinicType} ';
-    //     cName = '${clinicName}';
-    //     servicePrice = '${price}';
-    //   });
-    // });
+    // Services lists section
+    // After collecting services,
+    // Process services
+    // Build list of services by medical
+    await FirebaseFirestore.instance
+        .collection('services')
+        .where('type', isEqualTo: 'medical')
+        .where('clinicEmail', isEqualTo: this.email)
+        .get()
+        .then((snapshot) {
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> medicalServices =
+          snapshot.docs;
+      print(medicalServices);
 
+      // Do this for others
+      setState(() {
+        mServices = medicalServices;
+      });
+    });
 
+    // Process services
+    // Build list of services by grooming
+    await FirebaseFirestore.instance
+        .collection('services')
+        .where('type', isEqualTo: 'grooming')
+        .where('clinicEmail', isEqualTo: this.email)
+        .get()
+        .then((snapshot) {
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> grooming =
+          snapshot.docs;
+      print(grooming);
+
+      setState(() {
+        mGrooming = grooming;
+      });
+    });
+
+    // Process services
+    // Build list of services by truck
+    await FirebaseFirestore.instance
+        .collection('services')
+        .where('type', isEqualTo: 'truck')
+        .where('clinicEmail', isEqualTo: this.email)
+        .get()
+        .then((snapshot) {
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> truckServices =
+          snapshot.docs;
+      print(truckServices);
+
+      setState(() {
+        mTruck = truckServices;
+      });
+    });
+
+    // Process services
+    // Build list of services by others
+    await FirebaseFirestore.instance
+        .collection('services')
+        .where('type', isEqualTo: 'others')
+        .where('clinicEmail', isEqualTo: this.email)
+        .get()
+        .then((snapshot) {
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> othersServices =
+          snapshot.docs;
+      print(othersServices);
+
+      setState(() {
+        mOthers = othersServices;
+      });
+    });
   }
 
   @override
@@ -123,17 +176,14 @@ class _viewClinicState extends State<viewClinic> {
             onPressed: () {
               Navigator.pop(context);
             },
-          )
-          ,flexibleSpace: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('Assets/App_Header.png'),
-                fit: BoxFit.fill
-            )
-        ),
-      ),
-          elevation: 0
-      ), // appBar
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('Assets/App_Header.png'),
+                    fit: BoxFit.fill)),
+          ),
+          elevation: 0), // appBar
 
       body: SingleChildScrollView(
         child: Center(
@@ -164,8 +214,8 @@ class _viewClinicState extends State<viewClinic> {
                     radius: 55,
                     backgroundColor: Color(0xfffaf7f4),
                     // child:borderRadius: BorderRadius.circular(50),
-                    child: Image.network(cPic),)
-              ),
+                    child: Image.network(profilepic),
+                  )),
               Container(
                 height: 50,
               ),
@@ -174,245 +224,124 @@ class _viewClinicState extends State<viewClinic> {
                 style: titleTextStyle,
               ),
               Text(
-                '${cLocation}',
+                '${description}',
                 style: subTextStyle,
               ),
               Container(
                 height: 25,
               ),
-              Container(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                    itemCount: cServices.length,
-                    itemBuilder: (BuildContext context, index) {
-                        return  ExpansionTile(
-                            title: Text(
-                            cServices.keys.elementAt(index),
-                            textDirection: TextDirection.rtl,
-                            style: tileHeaderTextStyle,
-                        ),
-                        children: getCleaningServicesTiles());
-                      }),
+              ExpansionTile(
+                title: Text(
+                  "خدمات االتنظيف والتزيين",
+                  textDirection: TextDirection.rtl,
+                  style: tileHeaderTextStyle,
+                ),
+                children: getGroomingServicesTiles(),
               ),
-              // ExpansionTile(
-              //   title: Text(
-              //     "خدمات االتنظيف والتزيين",
-              //     textDirection: TextDirection.rtl,
-              //     style: tileHeaderTextStyle,
-              //   ),
-              //   children: getCleaningServicesTiles(),
-              // ),
-              // ExpansionTile(
-              //   title: Text(
-              //     "خدمات علاجية",
-              //     textDirection: TextDirection.rtl,
-              //     style: tileHeaderTextStyle,
-              //   ),
-              //   children: getMedicalServicesTiles(),
-              // ),
-              // ExpansionTile(
-              //   title: Text(
-              //     "خدمات متنقلة",
-              //     textDirection: TextDirection.rtl,
-              //     style: tileHeaderTextStyle,
-              //   ),
-              //   children: getMobileServicesTiles(),
-              // ),
-              // ExpansionTile(
-              //   title: Text(
-              //     "خدمات اخرى",
-              //     textDirection: TextDirection.rtl,
-              //     style: tileHeaderTextStyle,
-              //   ),
-              //   children: getOtherTiles(),
-              // )
+              ExpansionTile(
+                title: Text(
+                  "خدمات علاجية",
+                  textDirection: TextDirection.rtl,
+                  style: tileHeaderTextStyle,
+                ),
+                children: getMedicalServicesTiles(),
+              ),
+              ExpansionTile(
+                title: Text(
+                  "خدمات متنقلة",
+                  textDirection: TextDirection.rtl,
+                  style: tileHeaderTextStyle,
+                ),
+                children: getMobileServicesTiles(),
+              ),
+              ExpansionTile(
+                title: Text(
+                  "خدمات اخرى",
+                  textDirection: TextDirection.rtl,
+                  style: tileHeaderTextStyle,
+                ),
+                children: getOtherTiles(),
+              )
             ],
           ),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 
-  List<Widget> getAllServicesTiles() {
-    // TODO populate tiles from Firebase
-    // ١. اول خطوة الاتصال بقاعدة البيانات للحصول على الخدمات
-    // ٢. حفظ النتائج الجيسن في مصفوفة لست
-    // ٣. لوب في المصفوفة باستخدام foreach لبناء ودجتس
-    //
-    // مثال
-    // https://stackoverflow.com/a/45456173/2880778
+  List<Widget> getGroomingServicesTiles() {
+    List<Widget> services = [];
 
-    return <Widget>[
-      Column(
-        children: [
-          ListTile(
-              leading: Text(
-                "٥٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text('قص أظافر',
-                  textDirection: TextDirection.rtl, style: tileTextStyle)),
-          ListTile(
-              leading: Text(
-                "٤٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'ترويش',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-        ],
-      ),
-    ];
+    mGrooming.forEach((element) {
+      services.add(
+        ListTile(
+            leading: Text(
+              element.data()['price'] + 'رس ',
+              textDirection: TextDirection.rtl,
+              style: tileTextStyle,
+            ),
+            title: Text(element.data()['name'],
+                textDirection: TextDirection.rtl, style: tileTextStyle)),
+      );
+    });
+
+    return services;
   }
 
-  // يتم توليد االقائمة من فايربيس لاحقاً
-  List<Widget> getCleaningServicesTiles() {
-    // TODO populate tiles from Firebase
-    // ١. اول خطوة الاتصال بقاعدة البيانات للحصول على الخدمات
-    // ٢. حفظ النتائج الجيسن في مصفوفة لست
-    // ٣. لوب في المصفوفة باستخدام foreach لبناء ودجتس
-    //
-    // مثال
-    // https://stackoverflow.com/a/45456173/2880778
-
-    return <Widget>[
-      Column(
-        children: [
-          ListTile(
-              leading: Text(
-                "٥٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text('قص أظافر',
-                  textDirection: TextDirection.rtl, style: tileTextStyle)),
-          ListTile(
-              leading: Text(
-                "٤٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'ترويش',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-        ],
-      ),
-    ];
-  }
-
-  // يتم توليد االقائمة من فايربيس لاحقاً
   List<Widget> getMedicalServicesTiles() {
-    // TODO populate tiles from Firebase
-    // ١. اول خطوة الاتصال بقاعدة البيانات للحصول على الخدمات
-    // ٢. حفظ النتائج الجيسن في مصفوفة لست
-    // ٣. لوب في المصفوفة باستخدام foreach لبناء ودجتس
-    //
-    // مثال
-    // https://stackoverflow.com/a/45456173/2880778
+    List<Widget> services = [];
 
-    return <Widget>[
-      Column(
-        children: [
-          ListTile(
-              leading: Text(
-                "١٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'TBD',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-          ListTile(
-              leading: Text(
-                "١٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'TBD',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-        ],
-      ),
-    ];
+    mServices.forEach((element) {
+      services.add(
+        ListTile(
+            leading: Text(
+              element.data()['price'] + ' رس',
+              textDirection: TextDirection.rtl,
+              style: tileTextStyle,
+            ),
+            title: Text(element.data()['name'],
+                textDirection: TextDirection.rtl, style: tileTextStyle)),
+      );
+    });
+
+    return services;
   }
 
-  // يتم توليد االقائمة من فايربيس لاحقاً
   List<Widget> getMobileServicesTiles() {
-    // TODO populate tiles from Firebase
-    // ١. اول خطوة الاتصال بقاعدة البيانات للحصول على الخدمات
-    // ٢. حفظ النتائج الجيسن في مصفوفة لست
-    // ٣. لوب في المصفوفة باستخدام foreach لبناء ودجتس
-    //
-    // مثال
-    // https://stackoverflow.com/a/45456173/2880778
+    List<Widget> services = [];
 
-    return <Widget>[
-      Column(
-        children: [
-          ListTile(
-              leading: Text(
-                "١٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'TBD',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-          ListTile(
-              leading: Text(
-                "١٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'TBD',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-        ],
-      ),
-    ];
+    mTruck.forEach((element) {
+      services.add(
+        ListTile(
+            leading: Text(
+              element.data()['price'] + 'رس ',
+              textDirection: TextDirection.rtl,
+              style: tileTextStyle,
+            ),
+            title: Text(element.data()['name'],
+                textDirection: TextDirection.rtl, style: tileTextStyle)),
+      );
+    });
+
+    return services;
   }
 
-  // يتم توليد االقائمة من فايربيس لاحقاً
   List<Widget> getOtherTiles() {
-    // TODO populate tiles from Firebase
-    // ١. اول خطوة الاتصال بقاعدة البيانات للحصول على الخدمات
-    // ٢. حفظ النتائج الجيسن في مصفوفة لست
-    // ٣. لوب في المصفوفة باستخدام foreach لبناء ودجتس
-    //
-    // مثال
-    // https://stackoverflow.com/a/45456173/2880778
+    List<Widget> services = [];
 
-    return <Widget>[
-      Column(
-        children: [
-          ListTile(
-              leading: Text(
-                "١٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'TBD',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-          ListTile(
-              leading: Text(
-                "١٠ رس",
-                style: tileTextStyle,
-              ),
-              title: Text(
-                'TBD',
-                textDirection: TextDirection.rtl,
-                style: tileTextStyle,
-              )),
-        ],
-      ),
-    ];
+    mOthers.forEach((element) {
+      services.add(
+        ListTile(
+            leading: Text(
+              element.data()['price'] + ' رس',
+              textDirection: TextDirection.rtl,
+              style: tileTextStyle,
+            ),
+            title: Text(element.data()['name'],
+                textDirection: TextDirection.rtl, style: tileTextStyle)),
+      );
+    });
+
+    return services;
   }
 }
