@@ -176,61 +176,65 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   makeBody() => Column(
     children:[
-      Row(
+      Column(
         children: [
-          IconButton(icon: Icon(Icons.search,
-            color: Color(0xff194919),
-            size: 25,
-          ),
-            onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
-            },
-          ),
-          IconButton(icon: Icon(
-            Icons.tune,
-            color: Color(0xff194919),
-            size: 25,),
-            onPressed: () {
-              showModalBottomSheet(
-                  isDismissible: true,
-                  context: context,
-                  builder: (builder){
-                    return Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 50),
-                          height: 200,
-                          child: Text(
-                            'الترتيب',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
+          Row(
+            children: [
+              IconButton(icon: Icon(Icons.search,
+                color: Color(0xff194919),
+                size: 25,
+              ),
+                onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Search()));
+                },
+              ),
+              IconButton(icon: Icon(
+                Icons.tune,
+                color: Color(0xff194919),
+                size: 25,),
+                onPressed: () {
+                  showModalBottomSheet(
+                      isDismissible: true,
+                      context: context,
+                      builder: (builder){
+                        return Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 50),
+                              height: 200,
+                              child: Text(
+                                'الترتيب',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Container(height: 20,),
-                        ElevatedButton(
-                          onPressed: () {/*SortByRate();*/},
-                          child: Text("التقييم",
-                              style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xFFC2D961)),
-                              shape: MaterialStateProperty
-                                  .all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                      side: BorderSide(
-                                        color: Color(0xFFC2D961),
-                                      )))),
-                        ),
-                      ],
-                    );
-                  }
-              );
-            },
+                            Container(height: 20,),
+                            ElevatedButton(
+                              onPressed: () {/*SortByRate();*/},
+                              child: Text("التقييم",
+                                  style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                      Color(0xFFC2D961)),
+                                  shape: MaterialStateProperty
+                                      .all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                          side: BorderSide(
+                                            color: Color(0xFFC2D961),
+                                          )))),
+                            ),
+                          ],
+                        );
+                      }
+                  );
+                },
+              ),
+            ],
+
           ),
         ],
-
       ),
       SizedBox(height: 20,),
       SingleChildScrollView(
