@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:status_alert/status_alert.dart';
+
 
 class clinic_appointments extends StatefulWidget {
   const clinic_appointments ({Key? key}) : super (key: key);
@@ -599,5 +601,27 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
     ).show();
 
   }
+
+  getInfo(DocumentReference index) async{
+    await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
+      await myTransaction.get(index).printInfo ;
+    });
+  }
+
+  /*Future addRating(DocumentReference index) async {
+    // Timestamp date = Timestamp.now();
+    try{
+      await FirebaseFirestore.instance.collection('rating').add({
+        'rate': 0,
+        //'clinic_email':widget.Clinic_email ,
+        //'petOwner_email': widget.PetOwner_email,
+       // 'clinic_name':widget.Clinic_name,
+        //'clinic_pic':widget.Clinic_pic,
+       // 'status':'yet',
+      });
+
+    }catch(error){
+      print(error);}
+    } */
 
 }

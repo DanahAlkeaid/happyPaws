@@ -202,10 +202,12 @@ class _book_appointmentssState extends State<book_appointments> {
       'status': "موعد قادم",
       //Data from clinic
       'clinic': null,
+      'clinicEmail': null,
       'clinicPhone': null,
       'service': null,
       //Data from petOwner
       'petOwner': pName,
+      'petOwnerEmail': pEmail,
       'petOwnerPhone': pPhone,
       'date': formattedDate,
       'time': formattedTime,
