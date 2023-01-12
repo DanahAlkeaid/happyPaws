@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:untitled/book_appointment.dart';
 
 class viewClinic extends StatefulWidget {
   // final title;
@@ -46,15 +47,15 @@ class _viewClinicState extends State<viewClinic> {
 
   static TextStyle titleTextStyle =
   TextStyle(color: mainTextColor, fontFamily: mainFontName, fontSize: 30);
-  static TextStyle subTextStyle =
-  TextStyle(color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 22);
+  static TextStyle subTextStyle = TextStyle(
+      color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 22);
   static TextStyle tileHeaderTextStyle = TextStyle(
       color: mainTextColor,
       fontFamily: mainFontName,
       fontSize: 16,
       fontWeight: FontWeight.bold);
-  static TextStyle tileTextStyle =
-  TextStyle(color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 15);
+  static TextStyle tileTextStyle = TextStyle(
+      color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 15);
 
   String clinic_image_url = 'https://googleflutter.com/sample_image.jpg';
 
@@ -275,6 +276,7 @@ class _viewClinicState extends State<viewClinic> {
     mGrooming.forEach((element) {
       services.add(
         ListTile(
+            onTap: () => navigateToAppointment(element.data()['name']),
             leading: Text(
               element.data()['price'] + 'رس ',
               textDirection: TextDirection.rtl,
@@ -294,6 +296,7 @@ class _viewClinicState extends State<viewClinic> {
     mServices.forEach((element) {
       services.add(
         ListTile(
+            onTap: () => navigateToAppointment(element.data()['name']),
             leading: Text(
               element.data()['price'] + ' رس',
               textDirection: TextDirection.rtl,
@@ -313,6 +316,7 @@ class _viewClinicState extends State<viewClinic> {
     mTruck.forEach((element) {
       services.add(
         ListTile(
+            onTap: () => navigateToAppointment(element.data()['name']),
             leading: Text(
               element.data()['price'] + 'رس ',
               textDirection: TextDirection.rtl,
@@ -332,6 +336,7 @@ class _viewClinicState extends State<viewClinic> {
     mOthers.forEach((element) {
       services.add(
         ListTile(
+            onTap: () => navigateToAppointment(element.data()['name']),
             leading: Text(
               element.data()['price'] + ' رس',
               textDirection: TextDirection.rtl,
@@ -343,5 +348,13 @@ class _viewClinicState extends State<viewClinic> {
     });
 
     return services;
+  }
+
+  void navigateToAppointment(serviceName) {
+    // مثال: اليف، الحمرا
+    var clinicNameWithArea = firstName + '، ' + description;
+    Future.delayed(Duration.zero, () {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => book_appointments(clinicNameWithArea, serviceName),));
+    });
   }
 }

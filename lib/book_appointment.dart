@@ -7,7 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class book_appointments extends StatefulWidget {
-  const book_appointments ({Key? key}) : super (key: key);
+  final String clinicNameWithArea, serviceName; //  edit
+
+  const book_appointments (this.clinicNameWithArea, this.serviceName, {Key? key}) : super (key: key); // edit
 
   @override
   State<book_appointments> createState() => _book_appointmentssState();
@@ -202,12 +204,10 @@ class _book_appointmentssState extends State<book_appointments> {
       'status': "موعد قادم",
       //Data from clinic
       'clinic': null,
-      'clinicEmail': null,
       'clinicPhone': null,
       'service': null,
       //Data from petOwner
       'petOwner': pName,
-      'petOwnerEmail': pEmail,
       'petOwnerPhone': pPhone,
       'date': formattedDate,
       'time': formattedTime,
@@ -276,8 +276,8 @@ class _book_appointmentssState extends State<book_appointments> {
                   color:Color(0xff034d23),
                 ),
               ),
-              const Text(
-                "اسم العيادة",
+              Text(
+                '${widget.clinicNameWithArea}', // edit
                 textAlign: TextAlign.start,
                 overflow:TextOverflow.clip,
                 style:TextStyle(
@@ -320,11 +320,11 @@ class _book_appointmentssState extends State<book_appointments> {
                 mainAxisAlignment:MainAxisAlignment.end,
                 crossAxisAlignment:CrossAxisAlignment.center,
                 mainAxisSize:MainAxisSize.max,
-                children:const [
+                children: [
                   Align(
                     alignment:Alignment.centerRight,
                     child:Text(
-                      "اسم الخدمة",
+                      '${widget.serviceName}',
                       textAlign: TextAlign.start,
                       overflow:TextOverflow.clip,
                       style:TextStyle(
