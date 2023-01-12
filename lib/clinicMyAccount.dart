@@ -385,7 +385,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => clinicChangeInfo(
-                              cName, cLocation,cPhone, cEmail, cPic)),
+                              cName, cLocation,cPhone, cEmail, cPic, cStart, cEnd)),
                     ).then((value) => _stateUpdate());
                   },
                   child: Text("تعديل المعلومات",

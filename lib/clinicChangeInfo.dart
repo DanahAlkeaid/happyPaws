@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,13 +25,34 @@ class clinicChangeInfo extends StatefulWidget{
   final cPhonenumber;
   final cEmail;
   final cPic;
-  const clinicChangeInfo(this.cName, this.cLocation, this.cPhonenumber, this.cEmail, this.cPic, {super.key} );
+  final cStart;
+  final cEnd;
+  const clinicChangeInfo(this.cName, this.cLocation, this.cPhonenumber, this.cEmail, this.cPic, this.cStart, this.cEnd, {super.key} );
 
   @override
   State<clinicChangeInfo> createState() => _clinicChangeInfo();
 }
 
 class _clinicChangeInfo extends State<clinicChangeInfo> {
+
+  TimeOfDay start_time = TimeOfDay.now();
+  String formattedStime = "";
+  void SonTimeChanged(TimeOfDay newTime) {
+    setState(() {
+      start_time = newTime;
+      formattedStime = start_time.toString().replaceAll("(", "").replaceAll(")", "").replaceAll("TimeOfDay", "");
+    });
+  }
+  //End time formatters
+  TimeOfDay end_time = TimeOfDay.now();
+  String formattedEtime = "";
+  void EonTimeChanged(TimeOfDay newTime) {
+    setState(() {
+      end_time = newTime;
+      formattedEtime = end_time.toString().replaceAll("(", "").replaceAll(")", "").replaceAll("TimeOfDay", "");
+    });
+  }
+
   File? _photo ;
   final ImagePicker _picker = ImagePicker();
   String imageURL = '';
@@ -287,6 +310,66 @@ var doc_id;
                     ),
                 ]
               ),
+
+
+                Container(
+                  height: 20,
+                ),
+
+                Align(alignment : Alignment.centerRight ,
+                  child: Text(
+                      "وقت بداية العمل",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Tajawal')),
+                )
+                ,Container(
+                  child: createInlinePicker(
+                      elevation: 1,
+                      value: start_time,
+                      onChange: SonTimeChanged,
+                      minuteInterval: MinuteInterval.THIRTY,
+                      iosStylePicker: true,
+                      is24HrFormat: true,
+                      //Set start and end time
+                      maxMinute:30,
+                      //Styling
+                      isOnChangeValueMode: true,
+                      displayHeader: false,
+                      accentColor: Colors.black,
+                      barrierColor: Color(0xfffaf7f4),
+                      wheelHeight: 50
+                  ),
+                )
+
+                //End time picker
+                ,Align(alignment : Alignment.centerRight ,
+                  child: Text(
+                      "وقت نهاية العمل",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Tajawal')),
+                )
+                ,Container(
+                  child: createInlinePicker(
+                      elevation: 1,
+                      value: end_time,
+                      onChange: EonTimeChanged,
+                      minuteInterval: MinuteInterval.THIRTY,
+                      iosStylePicker: true,
+                      is24HrFormat: true,
+                      //Set start and end time
+                      maxMinute:30,
+                      //Styling
+                      isOnChangeValueMode: true,
+                      displayHeader: false,
+                      accentColor: Colors.black,
+                      barrierColor: Color(0xfffaf7f4),
+                      wheelHeight: 50
+                  ),
+                ),
 
                 Container(
                   height: 20,

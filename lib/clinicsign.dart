@@ -735,14 +735,14 @@ else
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Gallery'),
+                      title: new Text('ألبوم الكاميرا'),
                       onTap: () {
                         imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('الكاميرا'),
                     onTap: () {
                       imgFromCamera();
                       Navigator.of(context).pop();
