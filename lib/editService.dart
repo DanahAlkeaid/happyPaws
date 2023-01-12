@@ -14,17 +14,17 @@ import 'package:flutter/src/widgets/framework.dart';
 
 
 
-class editMedical extends StatefulWidget {
+class editService extends StatefulWidget {
   final cEmail;
   final sName;
   final sPrice;
-  const editMedical ( this.cEmail,this.sName,this.sPrice,{super.key} );
+  const editService ( this.cEmail,this.sName,this.sPrice,{super.key} );
 
   @override
-  State<editMedical> createState() => _editMedical();
+  State<editService> createState() => _editService();
 }
 
-class _editMedical extends State<editMedical> {
+class _editService extends State<editService> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _serviceName = TextEditingController(text: widget.sName);
   late TextEditingController _price = TextEditingController(text: widget.sPrice);
@@ -539,7 +539,6 @@ class _editMedical extends State<editMedical> {
   }
   // var newname,newprice;
   SaveEdit() async {
-    print('in saveedit method');
     if (_formKey.currentState!.validate()) {
       try {
         // setState(() {
@@ -547,7 +546,6 @@ class _editMedical extends State<editMedical> {
         //   newprice=_price.text;
         // });
 
-        print('in try ');
         await FirebaseFirestore.instance
             .collection('services')
             .where('clinicEmail', isEqualTo: '${widget.cEmail}')
@@ -559,7 +557,6 @@ class _editMedical extends State<editMedical> {
             print(doc_id);
           });
         });
-        print('finished doc_id');
          await FirebaseFirestore.instance
             .collection('services')
             .doc('${doc_id}').update({
@@ -567,9 +564,7 @@ class _editMedical extends State<editMedical> {
           "price":_price.text.trim(),
         }
         );
-        print('finished edit info');
         showPopup();
-        print('called method popup');
       }
       catch (error) {
         print("$error");
