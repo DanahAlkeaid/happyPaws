@@ -106,9 +106,11 @@ else
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => clinic_home())); //MeterialHomePageRoute
       } on FirebaseAuthException catch (error) {
-        errorMessage = error.message!;
+        if(error.message!  == "auth/email-already-in-use"){
+          errorMessage ="هذا البريد الالكتروني موجود مسبقاً";
+        }
       }
-      setState(() {});
+      // setState(() {});
     }
   }
 
