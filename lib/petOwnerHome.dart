@@ -115,6 +115,19 @@ class _petOwnerHomeState extends State<petOwnerHome> {
             ),
           ),
         ),
+        SizedBox(height: 5,),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Align(alignment: Alignment.centerRight,
+            child: Text(
+              data.docs[index]['description'],
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                  fontFamily: 'Tajawal'),
+            ),
+          ),
+        ),
         SizedBox(
           height: 10,
         )
