@@ -141,15 +141,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ));
             },
           ),
-          const Divider(color: Colors.black54,),
-          ListTile(
-            leading: const Icon(Icons.star,color: Color(0xff194919),size: 30,),
-            title: const Text('تقييم العيادات',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const petOwnerRate('renad.aldhayan@gmail.com'),
-              ));
-            },
-          ),
+          // const Divider(color: Colors.black54,),
+          // ListTile(
+          //   leading: const Icon(Icons.star,color: Color(0xff194919),size: 30,),
+          //   title: const Text('تقييم العيادات',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
+          //   onTap: (){
+          //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const petOwnerRate('renad.aldhayan@gmail.com'),
+          //     ));
+          //   },
+          // ),
           const Divider(color: Colors.black54,),
           ListTile(
             leading: const Icon(Icons.logout,color: Color(0xff194919),size: 30,),

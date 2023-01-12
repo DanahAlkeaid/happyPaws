@@ -22,7 +22,7 @@ class rating extends StatefulWidget {
 
 class _ratingState extends State<rating> {
   late double RatingClinic=0;
-  late bool RatedBefore = false;
+
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -62,13 +62,13 @@ class _ratingState extends State<rating> {
               children: [
                 //pic
 
-                //SvgPicture.asset('img/reviews.svg',width: w*0.5,),
+
                 SizedBox(height: h*0.08,),
                 // SizedBox(height: 50,),
                 Container(
                   height: h*0.52,
 
-                  decoration: BoxDecoration(color: Color.fromARGB(255, 255, 255, 255),
+                  decoration: BoxDecoration(color: Color(0xfffaf7f4),
                     borderRadius:  BorderRadius.only(
                       topRight: Radius.circular(30),
                       topLeft: Radius.circular(30),
@@ -84,8 +84,9 @@ class _ratingState extends State<rating> {
                         child: Text(
                           nameClinic,
                           style: TextStyle(
-                              fontSize: 25,
+                              fontSize: 30,
                               fontWeight: FontWeight.w900,
+                              color:Color(0xff034d23),
                               fontFamily: 'ElMessiri'),
                         ),
                       ),
@@ -93,12 +94,13 @@ class _ratingState extends State<rating> {
 
                       Container(
                         padding: EdgeInsets.only(left: 20),
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.center,
                         child: Text(
                           'كيف كانت تجربتك؟',
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
+                              color: Colors.black,
                               fontFamily: 'Tajawal'),
                         ),
                       ),
@@ -120,13 +122,12 @@ class _ratingState extends State<rating> {
                               itemCount: 5,
                               itemSize: 50,
                               unratedColor:
-                              Color.fromARGB(255, 96, 95, 99),
+                              Colors.grey,
                               //itemPadding: EdgeInsets.only(horizontal: 4.0),
                               itemBuilder: (context, _) => Icon(
 
                                 Icons.star_rate_rounded,
-                                color: Color.fromARGB(
-                                    255, 252, 162, 77),
+                                color: Color.fromARGB(255, 252, 163, 77),
 
                               ),
                               //ignoreGestures: true,
@@ -148,8 +149,9 @@ class _ratingState extends State<rating> {
                           height: 60,
                           child: RatingClinic>0.5?
                           ElevatedButton(
-                              onPressed:(() =>Ratebtn() ),
-
+                              onPressed: () {
+                                Ratebtn();
+                              },
 
                               style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(
@@ -194,7 +196,7 @@ class _ratingState extends State<rating> {
               ],
             ),      Container(
 
-              color: Color.fromARGB(0, 255, 255, 255),
+              color: Color(0xfffaf7f4),
               child: Container(
 
                   width: w * 0.36,
@@ -205,11 +207,17 @@ class _ratingState extends State<rating> {
 
                   child: CircleAvatar(
                       backgroundColor:
-                      Color.fromARGB(255, 255, 255, 255),
+                      Color(0xfffaf7f4),
                       backgroundImage: profilePic == " "
                           ? null
                           : NetworkImage(profilePic),
                       radius: 200.0),
+
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Color(0xfffaf7f4),
+                    borderRadius: BorderRadius.circular(500),
+                  )),
 
 
                   // child: CircleAvatar(
@@ -237,11 +245,7 @@ class _ratingState extends State<rating> {
                   //     ),
                   //   ),)
 
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(500),
-                  )),
+
             ),
           ],
         ),
@@ -260,50 +264,39 @@ class _ratingState extends State<rating> {
 
   Ratebtn(){
     try{
+      print('at Ratebtn method');
       if(RatingClinic<1){
         showPopup2();
       }else{
 
 
         if(formKey.currentState!.validate()){
+          print('at iiiiffff Ratebtn method');
 
-          //هنا بنادي ميثود الايديت
-          // addRating( RatingClinic);
+          addRating(RatingClinic);
           Navigator.pop(context);
           showPopup();
+          print('finished Ratebtn method');
         } }
     }catch(error){
       print(error);
     }
   }
 
-  //هذي الميثود بيكون مكانها ايديت ريتنق
-  // Future addRating(double rate) async {
-  //   try{
-  //     await FirebaseFirestore.instance.collection('rating').add({
-  //       'rate': rate,
-  //       'clinic_email':widget.Clinic_email ,
-  //       'petOwner_email': widget.PetOwner_email,
-  //       'clinic_name':widget.Clinic_name,
-  //       'clinic_pic':widget.Clinic_pic,
-  //       'status':'rated',
-  //     });
-  //
-  //
-  //     //مررااااااااجججعععععهههه
-  //
-  //     // var test2 = await FirebaseFirestore.instance
-  //     //     .collection('OfferPrice')
-  //     //     .doc('${doc_id}');
-  //     // test2.update({'rated': true ,
-  //     // });}catch(error){
-  //     // print(error);
-  //
-  //   }catch(error){
-  //     print(error);
-  //   }
-  //
-  // }
+
+  Future addRating(rate) async {
+    try{
+      print('at addRating method');
+      await FirebaseFirestore.instance.collection('rating').add({
+        'rate': rate,
+        'clinic_email':widget.Clinic_email
+      });
+      print('finished adding at addRating method');
+    }catch(error){
+      print(error);
+    }
+
+  }
   showPopup() {
     Alert(
       style:  AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
@@ -320,7 +313,7 @@ class _ratingState extends State<rating> {
 
 
           ),
-          onPressed: () =>null,
+          onPressed: () =>Navigator.pop(context),
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 
@@ -345,7 +338,7 @@ class _ratingState extends State<rating> {
 
 
           ),
-          onPressed: () =>null,
+          onPressed: () =>Navigator.pop(context),
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 
