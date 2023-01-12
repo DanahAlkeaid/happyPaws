@@ -58,7 +58,9 @@ class _petOwnerSignup extends State<petOwnerSignup> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => petOwnerHome())); //MeterialHomePageRoute
       } on FirebaseAuthException catch (error) {
-        errorMessage = error.message!;
+        if(error.message!  == "auth/email-already-in-use"){
+          errorMessage ="هذا البريد الالكتروني موجود مسبقاً";
+        }
       }
       setState(() {});
     }

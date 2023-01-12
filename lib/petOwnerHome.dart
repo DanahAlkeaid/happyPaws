@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/Search.dart';
 import 'package:untitled/petOwner_appointments.dart';
+import 'package:untitled/rating.dart';
 import 'package:untitled/viewClinic.dart';
 import 'NavigationDrawer.dart';
 
@@ -22,7 +23,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   var clinicName;
   var clinicEmail;
-
+  var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
   var doc_id;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
@@ -30,6 +31,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   void initState() {
     super.initState();
     method1();
+    rate();
   }
 
   late Stream<QuerySnapshot> _clinicsStream;
@@ -41,6 +43,44 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .where('type', isEqualTo: 'clinic')
         .snapshots();
   }
+
+  rate(){
+    int numRate=0;
+    FirebaseFirestore.instance
+        .collection('appointments')
+        .where('petOwnerEmail', isEqualTo: petOwnerEmail)
+        .where('status',isEqualTo: 'موعد مكتمل')
+        .get()
+        .then((snapshot){
+      if(snapshot.docs.isNotEmpty){
+        setState(() {
+          numRate=snapshot.docs.length;
+
+        });
+        var clinicE;
+        for(int i=0;i<numRate;i++){
+          clinicE= snapshot.docs[i].data()['clinicEmail'];
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => rating(petOwnerEmail,clinicE)));
+
+          };
+
+        /* print(avgRate);
+        print(TotalRate);
+        print(numRate);*/
+        //  'rate' = avgRate;
+      }
+      else{
+
+      }
+    });
+
+
+
+  }
+
 
   rateAve(email){
 
@@ -56,7 +96,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     FirebaseFirestore.instance
         .collection('rating')
         .where('clinic_email', isEqualTo: email)
-        .where('status',isEqualTo: 'rated')
+        // .where('status',isEqualTo: 'rated')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
