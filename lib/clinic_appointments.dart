@@ -140,7 +140,7 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
 
                   //Get all clinic appointments and display them as cards
                   StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection("appointments").where('clinicPhone', isEqualTo: '${cPhone}').snapshots(),
+                    stream: FirebaseFirestore.instance.collection("appointments").where('clinicEmail', isEqualTo: '${cEmail}').snapshots(),
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
                       if(snapshot.hasData) {

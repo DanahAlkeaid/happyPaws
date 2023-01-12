@@ -140,7 +140,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance.collection(
                         "appointments").where(
-                        'petOwnerPhone', isEqualTo: '${pPhone}').snapshots(),
+                        'petOwnerEmail', isEqualTo: '${pEmail}').snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasData) {
