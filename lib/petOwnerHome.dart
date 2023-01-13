@@ -220,7 +220,7 @@ var document;
           size: 10,
         ),
         Text(//'.',
-          rateAve(data[index]['email']),
+          rateAve(data[index]['email']).toString(),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
