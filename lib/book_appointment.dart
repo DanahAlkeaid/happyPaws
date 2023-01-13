@@ -198,16 +198,18 @@ class _book_appointmentssState extends State<book_appointments> {
 
 //Storing the appointment at the cloud firestore
   Future<void> addAppointment() {
-    // Call the user's CollectionReference to add a new user
     return appointments
         .add({
       'status': "موعد قادم",
       //Data from clinic
       'clinic': null,
+      'clinicEmail': null,
       'clinicPhone': null,
       'service': null,
+      'servicePrice': null,
       //Data from petOwner
       'petOwner': pName,
+      'petOwnerEmail': pEmail,
       'petOwnerPhone': pPhone,
       'date': formattedDate,
       'time': formattedTime,
@@ -284,14 +286,14 @@ class _book_appointmentssState extends State<book_appointments> {
                 style:TextStyle(
                   fontWeight:FontWeight.w400,
                   fontFamily: "Almarai",
-                  fontSize:23,
+                  fontSize:20,
                   color:Color(0xff009245),
                 ),
               ),
 
               const Divider(
                 color:Color(0xffbda520),
-                height:10,
+                height:14,
                 thickness:1,
                 indent:0,
                 endIndent:0,
@@ -329,14 +331,56 @@ class _book_appointmentssState extends State<book_appointments> {
                       textAlign: TextAlign.start,
                       overflow:TextOverflow.clip,
                       style:TextStyle(
-                        fontWeight:FontWeight.w400,
+                        fontWeight:FontWeight.w500,
                         fontFamily: "Almarai",
                         fontSize:20,
-                        color:Color(0xff034d23),
+                        color:Color(0xff009245),
                       ),
                     ),
                   ),
                 ],),
+
+              const SizedBox(
+                height:12,
+                width:16,
+              ),
+              const Align(
+                alignment:Alignment(1.0, 0.0),
+                child:Text(
+                  ":سعر الخدمة",
+                  textAlign: TextAlign.start,
+                  overflow:TextOverflow.clip,
+                  style:TextStyle(
+                    fontWeight:FontWeight.w400,
+                    fontFamily: "Almarai",
+                    fontSize:20,
+                    color:Color(0xff034d23),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 10)
+              ,Row(
+                mainAxisAlignment:MainAxisAlignment.end,
+                crossAxisAlignment:CrossAxisAlignment.center,
+                mainAxisSize:MainAxisSize.max,
+                children: [
+                  Align(
+                    alignment:Alignment.centerRight,
+                    child:Text(
+                      'السعر ',
+                      textAlign: TextAlign.start,
+                      overflow:TextOverflow.clip,
+                      style:TextStyle(
+                        fontWeight:FontWeight.w500,
+                        fontFamily: "Almarai",
+                        fontSize:20,
+                        color:Color(0xff009245),
+                      ),
+                    ),
+                  ),
+                ],),
+
               const SizedBox(height: 10)
               ,const Divider(
                 color:Color(0xffbda520),

@@ -41,8 +41,8 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
               children: [
                 const Image(
                   image:AssetImage("Assets/appointment_confirmed.png"),
-                  height:270,
-                  width:270,
+                  height:240,
+                  width:240,
                   fit:BoxFit.cover,
                 ),
                 const Padding(
@@ -54,7 +54,7 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
                     style:TextStyle(
                       fontWeight:FontWeight.w700,
                       fontFamily: "Almarai",
-                      fontSize:37,
+                      fontSize:32,
                       color:Color(0xff034d23),
                     ),
                   ),
@@ -66,7 +66,7 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
                   style:TextStyle(
                     fontWeight:FontWeight.w400,
                     fontFamily: "Almarai",
-                    fontSize:25,
+                    fontSize:21,
                     color:Color(0xff009245),
                   ),
                 ),
@@ -90,7 +90,7 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
                                     color: Color(0xFFC2D961),
                                   )))),
                       child: const Text(" المواعيد",
-                          style: TextStyle(fontSize: 20, color: Color(0xFF034D23)))),
+                          style: TextStyle(fontSize: 25, color: Color(0xFF034D23)))),
                 )
 
             ,Padding(
@@ -113,7 +113,7 @@ class _appointment_confirmedState extends State<appointment_confirmed> {
                                     color: Color(0xFFC2D961),
                                   )))),
                       child: const Text(" الصفحة الرئيسية",
-                          style: TextStyle(fontSize: 20, color: Color(0xFF034D23)))),
+                          style: TextStyle(fontSize: 25, color: Color(0xFF034D23)))),
             ),
               ],),),),),
 
