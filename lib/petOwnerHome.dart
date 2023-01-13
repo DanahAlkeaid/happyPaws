@@ -186,7 +186,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           size: 10,
         ),
         Text(//'.',
-          rateAve(data[index]['email']).toString(),
+          rateAve(data[index]['email']),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
