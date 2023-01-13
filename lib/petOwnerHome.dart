@@ -28,6 +28,9 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
 
+  TextEditingController search = TextEditingController();
+  String searchValue = '';
+
   void initState() {
     super.initState();
     method1();
@@ -126,12 +129,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     return avgRate;
   }
 
-  makeListTile(QuerySnapshot<Object?> data, int index) => (ListTile(
+  makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     leading: Icon(Icons.keyboard_arrow_left,
         color: Colors.white24, size: 40.0),
     onTap: () {
-      clinicEmail = data.docs[index]['email'];
+      clinicEmail = data[index]['email'];
       //the rest of info needed for class clinic details
 
       // var token = data.docs[index]['token'];
@@ -149,7 +152,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           padding: const EdgeInsets.only(top: 10),
           child: Align(alignment: Alignment.centerRight,
             child: Text(
-              data.docs[index]['firstname'],
+              data[index]['firstname'],
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w900,
@@ -162,7 +165,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           padding: const EdgeInsets.only(top: 10),
           child: Align(alignment: Alignment.centerRight,
             child: Text(
-              data.docs[index]['description'],
+              data[index]['description'],
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w900,
@@ -183,7 +186,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           size: 10,
         ),
         Text(//'.',
-          rateAve(data.docs[index]['email']).toString(),
+          rateAve(data[index]['email']).toString(),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
@@ -203,12 +206,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         radius: 55,
         backgroundColor: Color(0xfffaf7f4),
         // child:borderRadius: BorderRadius.circular(50),
-        child: Image.network(data.docs[index]['profilepic']),)
+        child: Image.network(data[index]['profilepic']),)
     ),
 
   ));
 
-  makeCard(QuerySnapshot<Object?> d, int index) => Card(
+  makeCard(List<QueryDocumentSnapshot<Object?>> d, int index) => Card(
     elevation: 8.0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(25),
@@ -243,6 +246,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                 ]
             ),
               child: TextField(
+                controller: search,
+                onChanged: (value) {
+                  setState(() {
+                    searchValue = value;
+                  });
+                },
                 decoration: InputDecoration(
                   hintText: 'ابحث هنا .......',
                   hintStyle: TextStyle(color: Colors.grey),
@@ -320,14 +329,23 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                   return const Text("");
                 }
 
-                final data = snapshot.requireData;
+                var documents = snapshot.data!.docs;
+            //filter clinics depending on searchVaule
+            if (searchValue.length > 0) {
+            documents = documents.where((element)
+            {
+             return element
+            .get('firstname')
+            .contains(searchValue);
+            }).toList();
+            }
 
                 return ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: data.size,
+                  itemCount: documents.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return makeCard(data, index);
+                    return makeCard(documents, index);
                   },
                 );
               },
