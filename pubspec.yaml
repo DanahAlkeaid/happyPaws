@@ -49,6 +49,7 @@ dependencies:
   status_alert: ^1.0.1
   get: ^4.6.5
   day_night_time_picker: ^1.1.4
+  timeago: ^3.3.0
 
 dev_dependencies:
   flutter_test:
