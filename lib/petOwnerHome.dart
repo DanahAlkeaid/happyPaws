@@ -43,12 +43,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
   method1() {
-    setState(() {
+    // setState(() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .snapshots();
-    });
+    // });
   }
 
   rate(){
@@ -324,10 +324,10 @@ var document;
                                 ),
                                 Container(height: 20,),
                                 ElevatedButton(
-                                  onPressed: () {
-                                    {sorted? {method1() , sorted=false}:
-                                    {SortByRate(), sorted=true};}
-                                    makeBody();
+                                  onPressed: () { SortByRate();
+                                    // {sorted? {method1() , sorted=false}:
+                                    // {SortByRate(), sorted=true};}
+                                    // makeBody();
                                     print('finished calling meth. makeBody again');
                                     },
                                   child: Text("التقييم",
@@ -520,13 +520,13 @@ makeBody()
 
 
   SortByRate() async {
-    setState(() {
+    // setState(() {
       _clinicsStream = FirebaseFirestore.instance
           .collection('users')
           .where('type', isEqualTo: 'clinic')
           .orderBy('rate', descending: false)
           .snapshots();
-    });
+    // });
     print('got in method sortbyrate');
   }
 
