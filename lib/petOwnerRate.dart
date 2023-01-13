@@ -61,10 +61,10 @@ class _petOwnerRateStatus extends State<petOwnerRate> {
     leading: Icon(Icons.keyboard_arrow_left,
         color: Colors.white24, size: 40.0),
     onTap: () {
-      clinicEmail = data.docs[index]['clinic_email'];
+     // clinicEmail = data.docs[index]['clinic_email'];
 
-      MaterialPageRoute(
-      builder: (context) => rating(widget.petOwner_email,clinicEmail));
+      //MaterialPageRoute(
+      //builder: (context) => rating(widget.petOwner_email,clinicEmail));
 
 
       //the rest of info needed for class clinic details

@@ -100,6 +100,8 @@ flutter:
     - Assets/appointment_confirmed.png
     - Assets/appointment_failed.png
     - Assets/green.webp
+    - Assets/sun.png
+    - Assets/moon.png
 
 
 
