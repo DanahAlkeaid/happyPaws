@@ -211,6 +211,7 @@ class _book_appointmentssState extends State<book_appointments> {
       'petOwnerPhone': pPhone,
       'date': formattedDate,
       'time': formattedTime,
+      'rated': 'yet',
     })
         .then((value) => print("Appointment Added"))
         .catchError((error) => print("Failed to add appointment: $error"));

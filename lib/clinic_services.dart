@@ -9,7 +9,7 @@ import 'package:untitled/addTruck.dart';
 import 'package:untitled/editOther.dart';
 import 'package:untitled/editTruck.dart';
 import 'editGrooming.dart';
-import 'editMedical.dart';
+import 'editService.dart';
 
 class clinic_services extends StatefulWidget {
   // final String email;
@@ -455,7 +455,7 @@ class _clinic_servicesState extends State<clinic_services> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    editMedical(cEmail, 'علاجية', '140')));
+                                    editService(cEmail, 'علاجية', '140')));
                       },
                       color: const Color(0xfffaf7f4),
                       elevation: 0,

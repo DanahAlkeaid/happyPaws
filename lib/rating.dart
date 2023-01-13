@@ -4,16 +4,16 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:untitled/petOwnerHome.dart';
 
 
 
 class rating extends StatefulWidget {
   final  PetOwner_email;
   final  Clinic_email;
+  final serviceName;
 
-
-
-  const rating(this.PetOwner_email, this.Clinic_email , {super.key});
+  const rating(this.PetOwner_email, this.Clinic_email, this.serviceName , {super.key});
 
 
   @override
@@ -76,6 +76,55 @@ class _ratingState extends State<rating> {
                   child: Column(
 
                     children: [
+
+                      Container(
+
+                        color: Color(0xfffaf7f4),
+                        child: Container(
+                            width: w * 0.36,
+                            height: w * 0.36,
+                            child: CircleAvatar(
+                                backgroundColor:
+                                Color(0xfffaf7f4),
+                                backgroundImage: profilePic == " "
+                                    ? null
+                                    : NetworkImage(profilePic),
+                                radius: 200.0),
+
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Color(0xfffaf7f4),
+                              borderRadius: BorderRadius.circular(500),
+                            )),
+
+
+                        // child: CircleAvatar(
+                        //   radius: 55,
+                        //   backgroundColor: Color(0xfffaf7f4),
+                        //   child: _photo != null
+                        //       ? ClipRRect(
+                        //     borderRadius: BorderRadius.circular(50),
+                        //     child: Image.file(
+                        //       _photo!,
+                        //       width: 100,
+                        //       height: 100,
+                        //       fit: BoxFit.fitHeight,
+                        //     ),
+                        //   )
+                        //       : Container(
+                        //     decoration: BoxDecoration(
+                        //         color: Colors.grey[200],
+                        //         borderRadius: BorderRadius.circular(50)),
+                        //     width: 100,
+                        //     height: 100,
+                        //     child: Icon(
+                        //       Icons.camera_alt,
+                        //       color: Colors.grey[800],
+                        //     ),
+                        //   ),)
+
+
+                      ),
 
                       Container(
                         padding: EdgeInsets.only(top: 70),
@@ -194,58 +243,6 @@ class _ratingState extends State<rating> {
 
 
               ],
-            ),      Container(
-
-              color: Color(0xfffaf7f4),
-              child: Container(
-
-                  width: w * 0.36,
-                  height: w * 0.36,
-
-
-                  //أحتاج اخذ صورة العيادة
-
-                  child: CircleAvatar(
-                      backgroundColor:
-                      Color(0xfffaf7f4),
-                      backgroundImage: profilePic == " "
-                          ? null
-                          : NetworkImage(profilePic),
-                      radius: 200.0),
-
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xfffaf7f4),
-                    borderRadius: BorderRadius.circular(500),
-                  )),
-
-
-                  // child: CircleAvatar(
-                  //   radius: 55,
-                  //   backgroundColor: Color(0xfffaf7f4),
-                  //   child: _photo != null
-                  //       ? ClipRRect(
-                  //     borderRadius: BorderRadius.circular(50),
-                  //     child: Image.file(
-                  //       _photo!,
-                  //       width: 100,
-                  //       height: 100,
-                  //       fit: BoxFit.fitHeight,
-                  //     ),
-                  //   )
-                  //       : Container(
-                  //     decoration: BoxDecoration(
-                  //         color: Colors.grey[200],
-                  //         borderRadius: BorderRadius.circular(50)),
-                  //     width: 100,
-                  //     height: 100,
-                  //     child: Icon(
-                  //       Icons.camera_alt,
-                  //       color: Colors.grey[800],
-                  //     ),
-                  //   ),)
-
-
             ),
           ],
         ),
@@ -264,19 +261,13 @@ class _ratingState extends State<rating> {
 
   Ratebtn(){
     try{
-      print('at Ratebtn method');
       if(RatingClinic<1){
         showPopup2();
       }else{
-
-
         if(formKey.currentState!.validate()){
-          print('at iiiiffff Ratebtn method');
-
-          addRating(RatingClinic);
           Navigator.pop(context);
+          addRating(RatingClinic);
           showPopup();
-          print('finished Ratebtn method');
         } }
     }catch(error){
       print(error);
@@ -286,17 +277,39 @@ class _ratingState extends State<rating> {
 
   Future addRating(rate) async {
     try{
-      print('at addRating method');
       await FirebaseFirestore.instance.collection('rating').add({
         'rate': rate,
         'clinic_email':widget.Clinic_email
       });
-      print('finished adding at addRating method');
+      updateAppointment();
     }catch(error){
       print(error);
     }
 
   }
+
+  Future updateAppointment() async {
+    var doc_id;
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .where('clinicEmail', isEqualTo: widget.Clinic_email)
+        .where('petOwnerEmail', isEqualTo: widget.PetOwner_email)
+        .where('service', isEqualTo: widget.serviceName)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        doc_id = element.id;
+        print(doc_id);
+      });
+    });
+    await FirebaseFirestore.instance
+        .collection('appointments')
+        .doc('${doc_id}').update({
+      'rated':'rated',
+    }
+    );
+  }
+
   showPopup() {
     Alert(
       style:  AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
@@ -313,7 +326,10 @@ class _ratingState extends State<rating> {
 
 
           ),
-          onPressed: () =>Navigator.pop(context),
+          onPressed: () => {Navigator.push(
+          context,
+          MaterialPageRoute(
+          builder: (context) => petOwnerHome()))},
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 

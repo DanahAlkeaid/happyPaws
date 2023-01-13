@@ -50,6 +50,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .collection('appointments')
         .where('petOwnerEmail', isEqualTo: petOwnerEmail)
         .where('status',isEqualTo: 'موعد مكتمل')
+        .where('rate',isEqualTo: 'yet')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
@@ -58,12 +59,14 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
         });
         var clinicE;
+        var serviceName;
         for(int i=0;i<numRate;i++){
           clinicE= snapshot.docs[i].data()['clinicEmail'];
+          serviceName= snapshot.docs[i].data()['service'];
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => rating(petOwnerEmail,clinicE)));
+                  builder: (context) => rating(petOwnerEmail,clinicE,serviceName)));
 
           };
 
@@ -96,7 +99,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     FirebaseFirestore.instance
         .collection('rating')
         .where('clinic_email', isEqualTo: email)
-        // .where('status',isEqualTo: 'rated')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
