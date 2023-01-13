@@ -64,7 +64,7 @@ class _petOwnerRateStatus extends State<petOwnerRate> {
       clinicEmail = data.docs[index]['clinic_email'];
 
       MaterialPageRoute(
-      builder: (context) => rating(widget.petOwner_email,clinicEmail));
+      builder: (context) => rating(widget.petOwner_email,clinicEmail, ''));
 
 
       //the rest of info needed for class clinic details

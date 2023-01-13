@@ -57,7 +57,7 @@ late String formattedEtime = widget.cEnd;
 
   File? _photo ;
   final ImagePicker _picker = ImagePicker();
-  String imageURL = '';
+  late String imageURL = widget.cPic;
 
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _firstnameController = TextEditingController(text:widget.cName);
