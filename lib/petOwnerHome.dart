@@ -92,7 +92,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   }
 
 
-  rateAve(email){
+ rateAve(email) async{
 
     // late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
     //     .collection('rating')
@@ -120,6 +120,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         setState(() {
           avgRate=TotalRate/numRate;
         });
+        print('in ratAve method');
         changeRate(avgRate , email);
        /* print(avgRate);
         print(TotalRate);
@@ -133,13 +134,13 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     return avgRate;
   }
 var document;
-  changeRate(rate , email) async {
+changeRate(rate , email) async {
       try {
         // setState(() {
         //   newname=_serviceName.text;
         //   newprice=_price.text;
         // });
-
+        print('in changeRate method');
         await FirebaseFirestore.instance
             .collection('users')
             .where('email', isEqualTo: email)
@@ -150,12 +151,12 @@ var document;
           });
         });
         await FirebaseFirestore.instance
-            .collection('services')
+            .collection('users')
             .doc('${document}').update({
           "rate": rate,
         }
         );
-
+        print('finished ratAve method');
       }
       catch (error) {
         print("$error");
@@ -213,6 +214,7 @@ var document;
       ],
     ),
     subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      rateAve(data[index]['email']),
       Row(children: [
         Icon(
           Icons.star,
@@ -220,7 +222,8 @@ var document;
           size: 10,
         ),
         Text(//'.',
-          rateAve(data[index]['email']).toString(),
+          data[index]['rate'],
+          // rateAve(data[index]['email']),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
