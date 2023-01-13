@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/Search.dart';
+import 'package:untitled/clinic_Rate.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/rating.dart';
 import 'package:untitled/viewClinic.dart';
@@ -25,6 +26,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicEmail;
   var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
   var doc_id;
+  var sorted = false;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
 
@@ -41,10 +43,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
   method1() {
+    setState(() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .snapshots();
+    });
   }
 
   rate(){
@@ -69,7 +73,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => rating(petOwnerEmail,clinicE,serviceName)));
+                  builder: (context) => clinic_Rate(petOwnerEmail,clinicE,serviceName)));
 
           };
 
@@ -116,7 +120,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         setState(() {
           avgRate=TotalRate/numRate;
         });
-
+        changeRate(avgRate , email);
        /* print(avgRate);
         print(TotalRate);
         print(numRate);*/
@@ -127,6 +131,36 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       }
     });
     return avgRate;
+  }
+var document;
+  changeRate(rate , email) async {
+      try {
+        // setState(() {
+        //   newname=_serviceName.text;
+        //   newprice=_price.text;
+        // });
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: email)
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            document = element.id;
+          });
+        });
+        await FirebaseFirestore.instance
+            .collection('services')
+            .doc('${document}').update({
+          "rate": rate,
+        }
+        );
+
+      }
+      catch (error) {
+        print("$error");
+      }
+
   }
 
   makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
@@ -290,7 +324,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                                 ),
                                 Container(height: 20,),
                                 ElevatedButton(
-                                  onPressed: () {/*SortByRate();*/},
+                                  onPressed: () {
+                                    {sorted? {method1() , sorted=false}:
+                                    {SortByRate(), sorted=true};}
+                                    makeBody();
+                                    print('finished calling meth. makeBody again');
+                                    },
                                   child: Text("التقييم",
                                       style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                   style: ButtonStyle(
@@ -476,25 +515,21 @@ makeBody()
 
   );
 
-/*
 
- List<String> docID = [];
+
+
 
   SortByRate() async {
-    await FirebaseFirestore.instance
-        .collection('rating')
-        .orderBy('rate', descending: true)
-        .get()
-        .then((value) =>
-        value.docs.forEach((element) {
-          docID.add(document.referrer);
-        //doc_id = element.id;
-       // print(doc_id);
-      }
-      ),
-    );
+    setState(() {
+      _clinicsStream = FirebaseFirestore.instance
+          .collection('users')
+          .where('type', isEqualTo: 'clinic')
+          .orderBy('rate', descending: false)
+          .snapshots();
+    });
+    print('got in method sortbyrate');
   }
-*/
+
 
 
 

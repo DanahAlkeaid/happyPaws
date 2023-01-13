@@ -125,6 +125,7 @@ else
       'profilepic': imageURL,
       'StartTime' : formattedStime,
       'EndTime' : formattedEtime,
+      'rate' : 0,
     } );
   }
 
