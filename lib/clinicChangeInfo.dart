@@ -35,8 +35,10 @@ class clinicChangeInfo extends StatefulWidget{
 
 class _clinicChangeInfo extends State<clinicChangeInfo> {
 
+
+   //late var cstime = widget.cStart;
   TimeOfDay start_time = TimeOfDay.now();
-  String formattedStime = "";
+ late String formattedStime = widget.cStart;
   void SonTimeChanged(TimeOfDay newTime) {
     setState(() {
       start_time = newTime;
@@ -45,7 +47,7 @@ class _clinicChangeInfo extends State<clinicChangeInfo> {
   }
   //End time formatters
   TimeOfDay end_time = TimeOfDay.now();
-  String formattedEtime = "";
+late String formattedEtime = widget.cEnd;
   void EonTimeChanged(TimeOfDay newTime) {
     setState(() {
       end_time = newTime;
@@ -489,6 +491,8 @@ var doc_id;
           'firstname': _firstnameController.text.trim(),
           'phonenumber': _phonenumberController.text.trim(),
           'profilepic' :imageURL,
+          'StartTime' : formattedStime,
+          'EndTime' : formattedEtime,
         }
         );
         Navigator.of(context).pop();
