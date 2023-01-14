@@ -92,7 +92,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   }
 
 
- rateAve(email) async{
+ rateAve(email) {
 
     // late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
     //     .collection('rating')
@@ -134,14 +134,14 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     return avgRate;
   }
 var document;
-changeRate(rate , email) async {
+changeRate(rate , email)  {
       try {
         // setState(() {
         //   newname=_serviceName.text;
         //   newprice=_price.text;
         // });
         print('in changeRate method');
-        await FirebaseFirestore.instance
+         FirebaseFirestore.instance
             .collection('users')
             .where('email', isEqualTo: email)
             .get()
@@ -150,7 +150,7 @@ changeRate(rate , email) async {
             document = element.id;
           });
         });
-        await FirebaseFirestore.instance
+         FirebaseFirestore.instance
             .collection('users')
             .doc('${document}').update({
           "rate": rate,
