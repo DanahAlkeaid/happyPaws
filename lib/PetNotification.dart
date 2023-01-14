@@ -52,18 +52,26 @@ class _AlertState extends State<Alert> {
               right: BorderSide(width: 1.0, color: Color(0xFFd6cdfe)))),
         child:IconButton(icon: Icon(
           Icons.notifications_active,
-          color: Color(0xff194919),
+          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff194919):
+          (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? Color.fromARGB(255, 200, 62, 62):
+          Color(0xff194919),
           size: 30,
         ),
           onPressed: (){},
         )
     ),
     title: Text(
-      'موعد جديد',
+        (data.docs[index]['status'] == "موعد قادم")? 'موعد قادم':
+        (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? 'موعد ملغى لعدم الحضور':
+        'موعد مكتمل',
       style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.w900,
-          fontFamily: 'Tajawal'),
+          fontFamily: 'Tajawal',
+          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff009245):
+                 (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? Color.fromARGB(255, 200, 62, 62):
+                 Color(0xff009245),
+      ),
     ),
     subtitle: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

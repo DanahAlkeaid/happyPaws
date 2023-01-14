@@ -463,7 +463,7 @@ class _userChangePassState extends State<userChangePass> {
       style: AlertStyle(titleStyle: TextStyle(fontFamily: 'Tajawal',fontSize: 23,fontWeight: FontWeight.bold),descStyle: TextStyle(fontFamily: 'Tajawal',fontSize: 20,)),
       context: context,
       image: SvgPicture.asset("img/check.svg", width: 50),
-      desc: "Password is changed successfully",
+      desc: "تم تغيير كلمة المرور بنجاح",
       closeFunction: null,
       closeIcon: Container(),
       buttons: [],
