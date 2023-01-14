@@ -24,16 +24,9 @@ class _ChangePass extends State<ChangePass> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phonenumberController = TextEditingController();
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  late final Stream<QuerySnapshot> _reqStream;
-  var pName='';
-  var pEmail;
-  var pPhone;
-
   String errorMessage = '';
   var loading = false;
   var doc_id;
-  var nameValue;
 
 
   void dispose() {
@@ -41,42 +34,6 @@ class _ChangePass extends State<ChangePass> {
     _emailController.dispose();
     _phonenumberController.dispose();
     super.dispose();
-  }
-
-  void initState() {
-    super.initState();
-    getCurrentUser();
-    pInfo();
-    openCollection();
-  }
-
-  openCollection() {
-    _reqStream = FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: '${pEmail}')
-        .snapshots();
-  }
-
-  getCurrentUser()  {
-    final User user = _auth.currentUser! ;
-    pEmail = user.email;
-  }
-
-  pInfo()  {
-    FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: '${pEmail}')
-        .get()
-        .then((snapshot) { print(snapshot.docs[0].data());
-    var PetOwnerName=snapshot.docs[0].data()['firstname'];
-    var PetOwnerPhone=snapshot.docs[0].data()['phonenumber'];
-
-    setState(() {
-      pName='${PetOwnerName} ';
-      pPhone='${PetOwnerPhone} ';
-    });
-
-    });
   }
 
   @override
@@ -153,7 +110,6 @@ class _ChangePass extends State<ChangePass> {
                         AutovalidateMode.onUserInteraction,
                         controller: _firstnameController,
                         validator: validateFirstname,
-                        initialValue: '$pName',
                         decoration: InputDecoration(
                             hintText: (" "),
                             focusedBorder: OutlineInputBorder(
@@ -206,7 +162,6 @@ class _ChangePass extends State<ChangePass> {
                         AutovalidateMode.onUserInteraction,
                         controller: _emailController,
                         validator: validationEmail,
-                        initialValue: '$pEmail',
                         decoration: InputDecoration(
                             hintText: ("Example@gmail.com"),
                             focusedBorder: OutlineInputBorder(
@@ -266,7 +221,6 @@ class _ChangePass extends State<ChangePass> {
                         keyboardType: TextInputType.number,
                         controller: _phonenumberController,
                         validator: validationPhoneNumber,
-                        initialValue: '$pPhone',
                         decoration: InputDecoration(
                             hintText: ("9665********"),
                             focusedBorder: OutlineInputBorder(
@@ -388,9 +342,8 @@ class _ChangePass extends State<ChangePass> {
   SaveEdit() async {
     if (_formKey.currentState!.validate()) {
       try {
-        setState(() {
-          nameValue = _firstnameController.text;
-        });
+        // setState(() {
+        // });
         await FirebaseFirestore.instance
             .collection('users')
             .where('email', isEqualTo: '${widget.pEmail}')
