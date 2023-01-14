@@ -214,7 +214,6 @@ changeRate(rate , email) async {
       ],
     ),
     subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      rateAve(data[index]['email']),
       Row(children: [
         Icon(
           Icons.star,
@@ -222,7 +221,7 @@ changeRate(rate , email) async {
           size: 10,
         ),
         Text(//'.',
-          data[index]['rate'],
+          rateAve(data[index]['email']).toString(),
           // rateAve(data[index]['email']),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
@@ -327,7 +326,8 @@ changeRate(rate , email) async {
                                 ),
                                 Container(height: 20,),
                                 ElevatedButton(
-                                  onPressed: () { SortByRate();
+                                  onPressed: () {
+                                    // SortByRate();
                                     // {sorted? {method1() , sorted=false}:
                                     // {SortByRate(), sorted=true};}
                                     // makeBody();
@@ -522,16 +522,16 @@ makeBody()
 
 
 
-  SortByRate() async {
-    // setState(() {
-      _clinicsStream = FirebaseFirestore.instance
-          .collection('users')
-          .where('type', isEqualTo: 'clinic')
-          .orderBy('rate', descending: false)
-          .snapshots();
-    // });
-    print('got in method sortbyrate');
-  }
+  // SortByRate() async {
+  //   // setState(() {
+  //     _clinicsStream = FirebaseFirestore.instance
+  //         .collection('users')
+  //         .where('type', isEqualTo: 'clinic')
+  //         .orderBy('rate', descending: false)
+  //         .snapshots();
+  //   // });
+  //   print('got in method sortbyrate');
+  // }
 
 
 
