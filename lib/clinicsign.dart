@@ -85,6 +85,11 @@ String imageURL = '';
   }
 
   Future signUp() async {
+    var times = int.parse(formattedStime.substring(0,2));
+    var timee = int.parse(formattedEtime.substring(0,2));
+    if (timee <= times)
+      showPopup12();
+    else
 if (imageURL == '')
   showPopup11();
 else
@@ -674,6 +679,15 @@ else
     );
   }
 
+  bool? validateWorkingHours(String? stime, etime){
+  var times = int.parse(stime!.substring(0,2));
+  var timee = int.parse(etime!.substring(0,2));
+  if (timee <= times)
+  return false;
+  else return true;
+
+  }
+
   String? validateFirstname(String? formFullname) {
     final validCharacters = RegExp(r'[!@#<>?":_`~;[\]\/|=+)(*&^%0-9-]');
 
@@ -686,6 +700,7 @@ else
     } else
       return null;
   }
+
 
   String? validationEmail(String? formEmail) {
     if (formEmail == null || formEmail.trim().isEmpty) {
@@ -805,6 +820,32 @@ else
       style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
       context: context,
       desc: "يرجى إضافة صورة للعيادة",
+      // desc: "Check your Inbox!",
+      closeFunction: null,
+      closeIcon: Container(),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+      ],
+    ).show();
+
+  }
+
+  void showPopup12() {
+    Alert(
+      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      context: context,
+      desc: "يجب أن يكون وقت بداية العمل قبل وقت نهاية العمل",
       // desc: "Check your Inbox!",
       closeFunction: null,
       closeIcon: Container(),
