@@ -159,7 +159,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                               shadowColor: Color(0x4d939393),
                               elevation: 1,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0),
+                                borderRadius: BorderRadius.circular(25),
                                 side: BorderSide(
                                     color: Color(0x4d9e9e9e), width: 1),
                               ),
@@ -167,7 +167,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
                               Align(
                                 alignment: Alignment(0.8, 0.1),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(12),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment
