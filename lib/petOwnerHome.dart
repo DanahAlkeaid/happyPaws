@@ -60,7 +60,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .collection('appointments')
         .where('petOwnerEmail', isEqualTo: petOwnerEmail)
         .where('status',isEqualTo: 'موعد مكتمل')
-        .where('rate',isEqualTo: 'yet')
+        .where('rated',isEqualTo: 'yet')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
