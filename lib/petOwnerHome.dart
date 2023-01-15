@@ -25,12 +25,14 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicEmail;
   var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
   var doc_id;
+  var clinicsNo;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
 
   void initState() {
     super.initState();
     method1();
+    rateAverage();
     rate();
   }
 
@@ -42,6 +44,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .snapshots();
+    clinicsNo= _clinicsStream.length;
   }
 
   rate(){
@@ -58,12 +61,14 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
         });
         var clinicE;
+        var serviceName;
         for(int i=0;i<numRate;i++){
           clinicE= snapshot.docs[i].data()['clinicEmail'];
-          //Navigator.push(
-              //context,
-              //MaterialPageRoute(
-                  //builder: (context) => rating(petOwnerEmail,clinicE)));
+          serviceName= snapshot.docs[i].data()['service'];
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => rating(petOwnerEmail,clinicE,serviceName)));
 
           };
 
@@ -81,6 +86,61 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   }
 
+rateAverage(){
+ var email;
+ FirebaseFirestore.instance
+     .collection('users')
+     .where('type', isEqualTo: 'clinic').get()
+     .then((snapshot){
+   if(snapshot.docs.isNotEmpty){
+     snapshot.docs.forEach((element) {
+       doc_id = element.id;
+       print(doc_id);
+     });
+     setState(() {
+       clinicsNo=snapshot.docs.length;
+
+     });
+
+     for (int j=0; j<clinicsNo;j++){
+       email= snapshot.docs[j]['email'];
+       int numRate=0;
+       double TotalRate =0;
+       double avgRate=0;
+       FirebaseFirestore.instance
+           .collection('rating')
+           .where('clinic_email', isEqualTo: email)
+       // .where('status',isEqualTo: 'rated')
+           .get()
+           .then((snapshot){
+         if(snapshot.docs.isNotEmpty){
+           setState(() {
+             numRate=snapshot.docs.length;
+
+           });
+
+           for(int i=0;i<numRate;i++){
+
+             TotalRate += snapshot.docs[i].data()['rate'];}
+
+           avgRate=TotalRate/numRate;
+           setState(() async {
+             await FirebaseFirestore.instance
+                 .collection('users')
+                 .doc('${doc_id}').update({
+               "rate":avgRate,
+             }
+             );
+           });
+         }
+         else{
+         }
+       });
+     }
+   }
+   else{}
+ });
+}
 
   rateAve(email){
 
@@ -181,7 +241,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           size: 10,
         ),
         Text(//'.',
-          rateAve(data.docs[index]['email']).toString(),
+          data.docs[index]['rate'].toString(),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
