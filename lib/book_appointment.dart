@@ -7,9 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class book_appointments extends StatefulWidget {
-  final String clinicNameWithArea, serviceName; //  edit
+  final Map<String, String> clinicInfo; //  edit
 
-  const book_appointments (this.clinicNameWithArea, this.serviceName, {Key? key}) : super (key: key); // edit
+  const book_appointments (this.clinicInfo, {Key? key}) : super (key: key); // edit
 
   @override
   State<book_appointments> createState() => _book_appointmentssState();
@@ -21,6 +21,12 @@ class _book_appointmentssState extends State<book_appointments> {
   String formattedTime = "";
   DateTime _date = DateTime.now();
   String formattedDate = "";
+
+  late String clinicName = '${widget.clinicInfo['clinicEmail']}';
+  late String clinicEmail = '${widget.clinicInfo['clinicEmail']}';
+  late String clinicPhone = '${widget.clinicInfo['clinicPhone']}';
+  late String clinicServiceName = '${widget.clinicInfo['clinicServiceName']}';
+  late String clinicServicePrice = '${widget.clinicInfo['clinicServicePrice']}';
 
 //A method to format the appointment time
   void onTimeChanged(TimeOfDay newTime) {
@@ -202,11 +208,11 @@ class _book_appointmentssState extends State<book_appointments> {
         .add({
       'status': "موعد قادم",
       //Data from clinic
-      'clinic': null,
-      'clinicEmail': null,
-      'clinicPhone': null,
-      'service': null,
-      'servicePrice': null,
+      'clinic': clinicName,
+      'clinicEmail': clinicEmail,
+      'clinicPhone': clinicPhone,
+      'service': clinicServiceName,
+      'servicePrice': clinicServicePrice,
       //Data from petOwner
       'petOwner': pName,
       'petOwnerEmail': pEmail,
@@ -280,7 +286,7 @@ class _book_appointmentssState extends State<book_appointments> {
                 ),
               ),
               Text(
-                '${widget.clinicNameWithArea}', // edit
+                clinicName, // edit
                 textAlign: TextAlign.start,
                 overflow:TextOverflow.clip,
                 style:TextStyle(
@@ -327,7 +333,7 @@ class _book_appointmentssState extends State<book_appointments> {
                   Align(
                     alignment:Alignment.centerRight,
                     child:Text(
-                      '${widget.serviceName}',
+                      clinicServiceName,
                       textAlign: TextAlign.start,
                       overflow:TextOverflow.clip,
                       style:TextStyle(
@@ -368,8 +374,9 @@ class _book_appointmentssState extends State<book_appointments> {
                   Align(
                     alignment:Alignment.centerRight,
                     child:Text(
-                      'السعر ',
+                      clinicServicePrice + ' رس',
                       textAlign: TextAlign.start,
+                      textDirection: TextDirection.rtl,
                       overflow:TextOverflow.clip,
                       style:TextStyle(
                         fontWeight:FontWeight.w500,

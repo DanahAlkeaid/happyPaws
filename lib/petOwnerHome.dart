@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/Search.dart';
-import 'package:untitled/clinic_Rate.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/rating.dart';
 import 'package:untitled/viewClinic.dart';
@@ -26,12 +25,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicEmail;
   var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
   var doc_id;
-  var sorted = false;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
-
-  TextEditingController search = TextEditingController();
-  String searchValue = '';
 
   void initState() {
     super.initState();
@@ -43,12 +38,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
   method1() {
-    // setState(() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .snapshots();
-    // });
   }
 
   rate(){
@@ -57,7 +50,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .collection('appointments')
         .where('petOwnerEmail', isEqualTo: petOwnerEmail)
         .where('status',isEqualTo: 'موعد مكتمل')
-        .where('rate',isEqualTo: 'yet')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
@@ -66,14 +58,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
         });
         var clinicE;
-        var serviceName;
         for(int i=0;i<numRate;i++){
           clinicE= snapshot.docs[i].data()['clinicEmail'];
-          serviceName= snapshot.docs[i].data()['service'];
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => clinic_Rate(petOwnerEmail,clinicE,serviceName)));
+                  builder: (context) => rating(petOwnerEmail,clinicE)));
 
           };
 
@@ -92,7 +82,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   }
 
 
- rateAve(email) {
+  rateAve(email){
 
     // late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
     //     .collection('rating')
@@ -106,6 +96,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     FirebaseFirestore.instance
         .collection('rating')
         .where('clinic_email', isEqualTo: email)
+        // .where('status',isEqualTo: 'rated')
         .get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
@@ -120,8 +111,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         setState(() {
           avgRate=TotalRate/numRate;
         });
-        print('in ratAve method');
-        changeRate(avgRate , email);
+
        /* print(avgRate);
         print(TotalRate);
         print(numRate);*/
@@ -133,43 +123,13 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     });
     return avgRate;
   }
-var document;
-changeRate(rate , email)  {
-      try {
-        // setState(() {
-        //   newname=_serviceName.text;
-        //   newprice=_price.text;
-        // });
-        print('in changeRate method');
-         FirebaseFirestore.instance
-            .collection('users')
-            .where('email', isEqualTo: email)
-            .get()
-            .then((value) {
-          value.docs.forEach((element) {
-            document = element.id;
-          });
-        });
-         FirebaseFirestore.instance
-            .collection('users')
-            .doc('${document}').update({
-          "rate": rate,
-        }
-        );
-        print('finished ratAve method');
-      }
-      catch (error) {
-        print("$error");
-      }
 
-  }
-
-  makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
+  makeListTile(QuerySnapshot<Object?> data, int index) => (ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     leading: Icon(Icons.keyboard_arrow_left,
         color: Colors.white24, size: 40.0),
     onTap: () {
-      clinicEmail = data[index]['email'];
+      clinicEmail = data.docs[index]['email'];
       //the rest of info needed for class clinic details
 
       // var token = data.docs[index]['token'];
@@ -187,7 +147,7 @@ changeRate(rate , email)  {
           padding: const EdgeInsets.only(top: 10),
           child: Align(alignment: Alignment.centerRight,
             child: Text(
-              data[index]['firstname'],
+              data.docs[index]['firstname'],
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w900,
@@ -200,7 +160,7 @@ changeRate(rate , email)  {
           padding: const EdgeInsets.only(top: 10),
           child: Align(alignment: Alignment.centerRight,
             child: Text(
-              data[index]['description'],
+              data.docs[index]['description'],
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w900,
@@ -221,8 +181,7 @@ changeRate(rate , email)  {
           size: 10,
         ),
         Text(//'.',
-          rateAve(data[index]['email']).toString(),
-          // rateAve(data[index]['email']),
+          rateAve(data.docs[index]['email']).toString(),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
@@ -242,12 +201,12 @@ changeRate(rate , email)  {
         radius: 55,
         backgroundColor: Color(0xfffaf7f4),
         // child:borderRadius: BorderRadius.circular(50),
-        child: Image.network(data[index]['profilepic']),)
+        child: Image.network(data.docs[index]['profilepic']),)
     ),
 
   ));
 
-  makeCard(List<QueryDocumentSnapshot<Object?>> d, int index) => Card(
+  makeCard(QuerySnapshot<Object?> d, int index) => Card(
     elevation: 8.0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(25),
@@ -282,12 +241,6 @@ changeRate(rate , email)  {
                 ]
             ),
               child: TextField(
-                controller: search,
-                onChanged: (value) {
-                  setState(() {
-                    searchValue = value;
-                  });
-                },
                 decoration: InputDecoration(
                   hintText: 'ابحث هنا .......',
                   hintStyle: TextStyle(color: Colors.grey),
@@ -326,13 +279,7 @@ changeRate(rate , email)  {
                                 ),
                                 Container(height: 20,),
                                 ElevatedButton(
-                                  onPressed: () {
-                                    // SortByRate();
-                                    // {sorted? {method1() , sorted=false}:
-                                    // {SortByRate(), sorted=true};}
-                                    // makeBody();
-                                    print('finished calling meth. makeBody again');
-                                    },
+                                  onPressed: () {/*SortByRate();*/},
                                   child: Text("التقييم",
                                       style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                   style: ButtonStyle(
@@ -371,23 +318,14 @@ changeRate(rate , email)  {
                   return const Text("");
                 }
 
-                var documents = snapshot.data!.docs;
-            //filter clinics depending on searchVaule
-            if (searchValue.length > 0) {
-            documents = documents.where((element)
-            {
-             return element
-            .get('firstname')
-            .contains(searchValue);
-            }).toList();
-            }
+                final data = snapshot.requireData;
 
                 return ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: documents.length,
+                  itemCount: data.size,
                   itemBuilder: (BuildContext context, int index) {
-                    return makeCard(documents, index);
+                    return makeCard(data, index);
                   },
                 );
               },
@@ -518,21 +456,25 @@ makeBody()
 
   );
 
+/*
 
+ List<String> docID = [];
 
-
-
-  // SortByRate() async {
-  //   // setState(() {
-  //     _clinicsStream = FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('type', isEqualTo: 'clinic')
-  //         .orderBy('rate', descending: false)
-  //         .snapshots();
-  //   // });
-  //   print('got in method sortbyrate');
-  // }
-
+  SortByRate() async {
+    await FirebaseFirestore.instance
+        .collection('rating')
+        .orderBy('rate', descending: true)
+        .get()
+        .then((value) =>
+        value.docs.forEach((element) {
+          docID.add(document.referrer);
+        //doc_id = element.id;
+       // print(doc_id);
+      }
+      ),
+    );
+  }
+*/
 
 
 

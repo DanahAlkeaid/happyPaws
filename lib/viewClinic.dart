@@ -4,8 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:untitled/book_appointment.dart';
 
 class viewClinic extends StatefulWidget {
-  // final title;
-  // const viewClinic({Key? key, required this.title}) : super(key: key);
+
 
   final String cEmail;
 
@@ -45,17 +44,21 @@ class _viewClinicState extends State<viewClinic> {
   static Color mainTextColor = Color(0xff034d23);
   static Color secondaryTextColor = Color(0xff489f6d);
 
+
+  static double fontScale = 6;
+
   static TextStyle titleTextStyle =
-  TextStyle(color: mainTextColor, fontFamily: mainFontName, fontSize: 30);
+  TextStyle(color: mainTextColor, fontFamily: mainFontName, fontSize: 30 + fontScale);
   static TextStyle subTextStyle = TextStyle(
-      color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 22);
+      color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 22 + fontScale);
   static TextStyle tileHeaderTextStyle = TextStyle(
       color: mainTextColor,
       fontFamily: mainFontName,
-      fontSize: 16,
+      fontSize: 16 + fontScale,
       fontWeight: FontWeight.bold);
+
   static TextStyle tileTextStyle = TextStyle(
-      color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 15);
+      color: secondaryTextColor, fontFamily: secondaryFontName, fontSize: 15 + fontScale);
 
   String clinic_image_url = 'https://googleflutter.com/sample_image.jpg';
 
@@ -100,7 +103,7 @@ class _viewClinicState extends State<viewClinic> {
           snapshot.docs;
       print(medicalServices);
 
-      // Do this for others
+
       setState(() {
         mServices = medicalServices;
       });
@@ -160,12 +163,7 @@ class _viewClinicState extends State<viewClinic> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
     return Scaffold(
       backgroundColor: backgroundColor,
 
@@ -188,23 +186,9 @@ class _viewClinicState extends State<viewClinic> {
 
       body: SingleChildScrollView(
         child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
+
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
+
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
@@ -214,7 +198,6 @@ class _viewClinicState extends State<viewClinic> {
                   child: CircleAvatar(
                     radius: 55,
                     backgroundColor: Color(0xfffaf7f4),
-                    // child:borderRadius: BorderRadius.circular(50),
                     child: Image.network(profilepic),
                   )),
               Container(
@@ -276,7 +259,7 @@ class _viewClinicState extends State<viewClinic> {
     mGrooming.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
             leading: Text(
               element.data()['price'] + 'رس ',
               textDirection: TextDirection.rtl,
@@ -296,7 +279,7 @@ class _viewClinicState extends State<viewClinic> {
     mServices.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
             leading: Text(
               element.data()['price'] + ' رس',
               textDirection: TextDirection.rtl,
@@ -316,7 +299,7 @@ class _viewClinicState extends State<viewClinic> {
     mTruck.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
             leading: Text(
               element.data()['price'] + 'رس ',
               textDirection: TextDirection.rtl,
@@ -336,7 +319,7 @@ class _viewClinicState extends State<viewClinic> {
     mOthers.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
             leading: Text(
               element.data()['price'] + ' رس',
               textDirection: TextDirection.rtl,
@@ -350,11 +333,18 @@ class _viewClinicState extends State<viewClinic> {
     return services;
   }
 
-  void navigateToAppointment(serviceName) {
-    // مثال: اليف، الحمرا
-    var clinicNameWithArea = firstName + '، ' + description;
+  void navigateToAppointment(serviceName, servicePrice) {
+    String clinicNameWithArea = firstName + '، ' + description;
+
+    Map<String, String> clinicInfo = Map();
+    clinicInfo["clinicName"] = clinicNameWithArea;
+    clinicInfo["clinicEmail"] = email;
+    clinicInfo["clinicPhone"] = phonenumber;
+    clinicInfo["clinicServiceName"] = serviceName;
+    clinicInfo["clinicServicePrice"] = servicePrice;
+
     Future.delayed(Duration.zero, () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => book_appointments(clinicNameWithArea, serviceName),));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => book_appointments(clinicInfo),));
     });
   }
 }
