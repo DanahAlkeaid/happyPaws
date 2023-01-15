@@ -329,133 +329,144 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     ),
   );
 
-  makeBody() => Column(
-      children:[
-        Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 20,
-                    offset: Offset(1, 1),
-                    color: Colors.grey.withOpacity(0.26))
-              ]
-          ),
-          child: TextField(
-            controller: search,
-            onChanged: (value) {
-              setState(() {
-                searchValue = value;
-              });
-            },
-            decoration: InputDecoration(
-              hintText: 'ابحث هنا .......',
-              hintStyle: TextStyle(color: Colors.grey),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide:
-                  BorderSide(color: Colors.white)),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide:
-                  BorderSide(color: Colors.white)),
-              prefixIcon:Icon(Icons.search,
-                color: Color(0xff194919),
-                size: 25,
-              ),
-              suffixIcon:IconButton(icon: Icon(
-                Icons.tune,
-                color: Color(0xff194919),
-                size: 25,),
-                onPressed: () {
-                  showModalBottomSheet(
-                      isDismissible: true,
-                      context: context,
-                      builder: (builder){
-                        return Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(vertical: 50),
-                              height: 200,
-                              child: Text(
-                                'الترتيب',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
+  makeBody() => SingleChildScrollView(
+    child: Column(
+        children:[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 20,
+                      offset: Offset(1, 1),
+                      color: Colors.grey.withOpacity(0.26))
+                ]
+            ),
+            child: TextField(
+              controller: search,
+              onChanged: (value) {
+                setState(() {
+                  searchValue = value;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: 'ابحث هنا .......',
+                hintStyle: TextStyle(color: Colors.grey),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide:
+                    BorderSide(color: Colors.white)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide:
+                    BorderSide(color: Colors.white)),
+                prefixIcon:Icon(Icons.search,
+                  color: Color(0xff194919),
+                  size: 25,
+                ),
+                suffixIcon:IconButton(icon: Icon(
+                  Icons.tune,
+                  color: Color(0xff194919),
+                  size: 25,),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        isDismissible: true,
+                        context: context,
+                        builder: (builder){
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 50),
+                                height: 200,
+                                child: Text(
+                                  'الترتيب',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(height: 20,),
-                            ElevatedButton(
-                              onPressed: () {
-                                // SortByRate();
-                                // {sorted? {method1() , sorted=false}:
-                                // {SortByRate(), sorted=true};}
-                                // makeBody();
-                                print('finished calling meth. makeBody again');
-                              },
-                              child: Text("التقييم",
-                                  style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Color(0xFFC2D961)),
-                                  shape: MaterialStateProperty
-                                      .all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                          side: BorderSide(
-                                            color: Color(0xFFC2D961),
-                                          )))),
-                            ),
-                          ],
-                        );
-                      }
-                  );
-                },
+                              Container(height: 20,),
+                              ElevatedButton(
+                                onPressed: () {
+                                  // SortByRate();
+                                  // {sorted? {method1() , sorted=false}:
+                                  // {SortByRate(), sorted=true};}
+                                  // makeBody();
+                                  print('finished calling meth. makeBody again');
+                                },
+                                child: Text("التقييم",
+                                    style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(
+                                        Color(0xFFC2D961)),
+                                    shape: MaterialStateProperty
+                                        .all<RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(15),
+                                            side: BorderSide(
+                                              color: Color(0xFFC2D961),
+                                            )))),
+                              ),
+                            ],
+                          );
+                        }
+                    );
+                  },
+                ),
               ),
             ),
           ),
-        ),
 
-        SizedBox(height: 20,),
-        SingleChildScrollView(
-          child: SingleChildScrollView(
-            child: Container(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: _clinicsStream,
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return const Text('حدث خطأ ما!');
-                    }
+          SizedBox(height: 20,),
+          SingleChildScrollView(
+            child: SingleChildScrollView(
+              child: Container(
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
 
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text("");
-                    }
+                  children: [ StreamBuilder<QuerySnapshot>(
+                      stream: _clinicsStream,
+                      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return const Text('حدث خطأ ما!');
+                        }
 
-                    var documents = snapshot.data!.docs;
-                    //filter clinics depending on searchVaule
-                    if (searchValue.length > 0) {
-                      documents = documents.where((element)
-                      {
-                        return element
-                            .get('firstname')
-                            .contains(searchValue);
-                      }).toList();
-                    }
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Text("");
+                        }
 
-                    return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: documents.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return makeCard(documents, index);
+                        var documents = snapshot.data!.docs;
+                        //filter clinics depending on searchVaule
+                        if (searchValue.length > 0) {
+                          documents = documents.where((element)
+                          {
+                            return element
+                                .get('firstname')
+                                .contains(searchValue);
+                          }).toList();
+                        }
+
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          primary: false,
+                          physics: ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: documents.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return makeCard(documents, index);
+                          },
+                        );
                       },
-                    );
-                  },
-                )),
+                    ),
+                  ],)),
+            ),
           ),
-        ),
-      ]);
+        ]),
+  );
 
 
   final topAppBar =  AppBar(
