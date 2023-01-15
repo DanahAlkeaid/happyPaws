@@ -60,10 +60,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         var clinicE;
         for(int i=0;i<numRate;i++){
           clinicE= snapshot.docs[i].data()['clinicEmail'];
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => rating(petOwnerEmail,clinicE)));
+          //Navigator.push(
+              //context,
+              //MaterialPageRoute(
+                  //builder: (context) => rating(petOwnerEmail,clinicE)));
 
           };
 
