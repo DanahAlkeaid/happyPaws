@@ -45,7 +45,7 @@ class _ratingState extends State<rating> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Container(
-      color: Colors.transparent,
+      color: Color(0xfffaf7f4),
       padding: EdgeInsets.all(0),
       height: h*0.6,
       child: Form(
@@ -63,16 +63,16 @@ class _ratingState extends State<rating> {
                 //pic
 
 
-                SizedBox(height: h*0.08,),
+                SizedBox(height: 20,),
                 // SizedBox(height: 50,),
                 Container(
                   height: h*0.52,
 
-                  decoration: BoxDecoration(color: Color(0xfffaf7f4),
-                    borderRadius:  BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      topLeft: Radius.circular(30),
-                    ),),
+                  // decoration: BoxDecoration(color: Color(0xfffaf7f4),
+                  //   borderRadius: BorderRadius.only(
+                  //     topRight: Radius.circular(30),
+                  //     topLeft: Radius.circular(30),
+                  //   ),),
                   child: Column(
 
                     children: [
