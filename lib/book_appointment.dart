@@ -22,7 +22,7 @@ class _book_appointmentssState extends State<book_appointments> {
   DateTime _date = DateTime.now();
   String formattedDate = "";
 
-  late String clinicName = '${widget.clinicInfo['clinicEmail']}';
+  late String clinicName = '${widget.clinicInfo['clinicName']}';
   late String clinicEmail = '${widget.clinicInfo['clinicEmail']}';
   late String clinicPhone = '${widget.clinicInfo['clinicPhone']}';
   late String clinicServiceName = '${widget.clinicInfo['clinicServiceName']}';
