@@ -127,7 +127,7 @@ class _ratingState extends State<rating> {
                       ),
 
                       Container(
-                        padding: EdgeInsets.only(top: 70),
+                        padding: EdgeInsets.only(top: 30),
 
                         alignment: Alignment.center,
                         child: Text(
