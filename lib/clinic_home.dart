@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'PetNotification.dart';
 import 'FirstScreen.dart';
 import 'MyAccount.dart';
+import 'clinicServices.dart';
 import 'clinic_appointments.dart';
 import 'clinic_services.dart';
 
@@ -156,7 +157,7 @@ class _clinic_homeState extends State<clinic_home> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => clinicServices()));
+                              builder: (context) => clinicServices(cEmail)));
                     },
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(

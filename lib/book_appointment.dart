@@ -25,6 +25,8 @@ class _book_appointmentssState extends State<book_appointments> {
   late String clinicName = '${widget.clinicInfo['clinicName']}';
   late String clinicEmail = '${widget.clinicInfo['clinicEmail']}';
   late String clinicPhone = '${widget.clinicInfo['clinicPhone']}';
+  late String startTime = '${widget.clinicInfo['StartTime']}';
+  late String endTime = '${widget.clinicInfo['EndTime']}';
   late String clinicServiceName = '${widget.clinicInfo['clinicServiceName']}';
   late String clinicServicePrice = '${widget.clinicInfo['clinicServicePrice']}';
 
@@ -35,6 +37,24 @@ class _book_appointmentssState extends State<book_appointments> {
       formattedTime = _time.toString().replaceAll("(", "").replaceAll(")", "").replaceAll("TimeOfDay", "");
     });
   }
+
+//A method to get clinic start_time in the time picker
+  double getClinicStartTime(String start) {
+    String starttime =
+        startTime.substring(
+            0,startTime.indexOf(
+            ":"));
+    double clinic_startTime = double.parse(starttime);
+      return clinic_startTime ;}
+
+//A method to get clinic end_time in the time picker
+  double getClinicEndTime(String end) {
+    String endtime =
+    endTime.substring(
+        0,endTime.indexOf(
+        ":"));
+    double clinic_endTime = double.parse(endtime);
+    return clinic_endTime ;}
 
 //A method to check if the chosen appointment day is a weekday
   bool isWorkday() {
@@ -173,6 +193,8 @@ class _book_appointmentssState extends State<book_appointments> {
     getCurrentUser();
     pInfo();
     openCollection();
+    print(startTime);
+    print(endTime);
   }
 
   getCurrentUser()  {
@@ -466,9 +488,9 @@ class _book_appointmentssState extends State<book_appointments> {
                     minuteInterval: MinuteInterval.THIRTY,
                     iosStylePicker: true,
                     is24HrFormat: true,
-                    //Set start and end time
-                    minHour: 9,
-                    maxHour: 21,
+                    //Set time picker start and end time
+                    minHour: getClinicStartTime(startTime),
+                    maxHour: getClinicEndTime(endTime),
                     maxMinute:30,
                     //Styling
                     sunAsset: Image.asset("Assets/sun.png"),

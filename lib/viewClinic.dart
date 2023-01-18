@@ -343,6 +343,8 @@ class _viewClinicState extends State<viewClinic> {
     clinicInfo["clinicPhone"] = phonenumber;
     clinicInfo["clinicServiceName"] = serviceName;
     clinicInfo["clinicServicePrice"] = servicePrice;
+    clinicInfo["StartTime"] = StartTime;
+    clinicInfo["EndTime"] = EndTime;
 
     Future.delayed(Duration.zero, () {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => book_appointments(clinicInfo),));
