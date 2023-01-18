@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/gestures.dart';
+import 'clinicServices.dart';
 import 'clinic_services.dart';
 
 
@@ -315,8 +316,13 @@ class _addMedical extends State<addMedical> {
 
 
           ),
-          onPressed: () => MaterialPageRoute(
-              builder: (context) => clinic_services(/*المفروض يتغير وينرسل له ايميل الكلينك*/)),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        clinicServices(widget.clinicEmail)));
+          },
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 

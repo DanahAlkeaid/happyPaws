@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'clinicServices.dart';
 import 'clinic_services.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -117,7 +118,7 @@ class _editService extends State<editService> {
 
 
                                                       const Padding(
-                                                        padding:EdgeInsets.fromLTRB(170, 0, 0, 0),
+                                                        padding:EdgeInsets.fromLTRB(130, 0, 0, 0),
                                                         child:Text(
                                                           "تفاصيل الخدمة",
                                                           textAlign: TextAlign.right,
@@ -236,7 +237,7 @@ class _editService extends State<editService> {
                                                 SizedBox(height: 20,),
                                                 Center(
                                                   child: Row(children: [
-                                                    SizedBox(width: 40,),
+                                                    SizedBox(height: 40,),
                                                     ElevatedButton(
                                                       //radius: const BorderRadius.all(Radius.circular(6)),
                                                       style: ButtonStyle(
@@ -278,7 +279,7 @@ class _editService extends State<editService> {
                                                       onPressed: () => SaveEdit(),
                                                       // color: Color(0xFFC2D961),
                                                     ),
-                                                    SizedBox(width: 20,),
+                                                    
 
                                                   ]),
                                                 ),
@@ -590,8 +591,13 @@ class _editService extends State<editService> {
 
 
           ),
-          onPressed: () => MaterialPageRoute(
-              builder: (context) => clinic_services(/*المفروض يتغير وينرسل له ايميل الكلينك*/)),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        clinicServices(widget.cEmail)));
+          },
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 
