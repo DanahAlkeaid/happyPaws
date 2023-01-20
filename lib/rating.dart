@@ -314,7 +314,7 @@ class _ratingState extends State<rating> {
     Alert(
       style:  AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
       context: context,
-      title: "شكراً لك!",
+      title: "!شكراً لك",
       desc: "تقييمك محل تقدير",
       closeFunction: null,
       closeIcon: Container(),
@@ -326,7 +326,9 @@ class _ratingState extends State<rating> {
 
 
           ),
-          onPressed: () => {Navigator.push(
+          onPressed: () => {
+            Navigator.pop(context),
+            Navigator.push(
           context,
           MaterialPageRoute(
           builder: (context) => petOwnerHome()))},

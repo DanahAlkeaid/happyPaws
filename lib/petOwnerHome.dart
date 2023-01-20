@@ -26,7 +26,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicEmail;
   var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
   var doc_id;
-  var sorted = false;
+  var sorted;
   var clinicsNo;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
@@ -45,13 +45,14 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
   method1() {
-    // setState(() {
+     setState(() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .snapshots();
     clinicsNo=_clinicsStream.length;
-    // });
+     });
+     sorted = false;
   }
 
   rate(){
@@ -390,9 +391,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                               ElevatedButton(
                                 onPressed: () {
                                   // SortByRate();
-                                  // {sorted? {method1() , sorted=false}:
-                                  // {SortByRate(), sorted=true};}
-                                  // makeBody();
+                                  sorted? method1(): SortByRate();
+                                  makeBody();
                                   print('finished calling meth. makeBody again');
                                 },
                                 child: Text("التقييم",
@@ -521,69 +521,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       ),
       drawer: const NavigationDrawer(),
       body:
-      /* Column(
-             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AnimSearchBar(width: 335,
-                    textController: textController,
-                    color: Color(0xFFC2D961),
-                    onSuffixTap: () {
-                      setState(() {
-                        textController.clear();
-                      });
-                    },
-                    helpText: "ابحث هنا.....",
-                    closeSearchOnSuffixTap: true, onSubmitted: (String ) {  },
-                  ),
-                  IconButton(icon: Icon(
-                    Icons.tune,
-                    color: Color(0xff194919),
-                    size: 30,),
-                    onPressed: () {
-                    showModalBottomSheet(
-                      isDismissible: true,
-                        context: context,
-                        builder: (builder){
-                        return Column(
-                          children: [
-                            Container(
-                             padding: EdgeInsets.symmetric(vertical: 50),
-                              height: 200,
-                              child: Text(
-                                  'الترتيب',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
-                                ),
-                              ),
-                            ),
-                            Container(height: 20,),
-                            ElevatedButton(
-                              onPressed: () {*//*SortByRate();*//*},
-                              child: Text("التقييم",
-                                  style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Color(0xFFC2D961)),
-                                  shape: MaterialStateProperty
-                                      .all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                          side: BorderSide(
-                                            color: Color(0xFFC2D961),
-                                          )))),
-                            ),
-                          ],
-                        );
-                        }
-                    );
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),*/
       makeBody()
 
   );
@@ -592,16 +529,17 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
 
-// SortByRate() async {
-//   // setState(() {
-//     _clinicsStream = FirebaseFirestore.instance
-//         .collection('users')
-//         .where('type', isEqualTo: 'clinic')
-//         .orderBy('rate', descending: false)
-//         .snapshots();
-//   // });
-//   print('got in method sortbyrate');
-// }
+SortByRate() async {
+  setState(() {
+    _clinicsStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('type', isEqualTo: 'clinic')
+        .orderBy('rate', descending: false)
+        .snapshots();
+  });
+  sorted=true;
+  print('got in method sortbyrate');
+}
 
 
 }
