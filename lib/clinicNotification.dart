@@ -38,7 +38,7 @@ class _clinicNotification extends State<clinicNotification>{
     _appointmentStream = FirebaseFirestore.instance
         .collection('appointments')
         .where('clinicEmail', isEqualTo: '$uemail')
-        .where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 7)))
+        //.where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 7)))
         .orderBy('date', descending: true)
         .snapshots();
   }

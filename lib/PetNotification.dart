@@ -38,7 +38,7 @@ class _AlertState extends State<Alert> {
     _appointmentStream = FirebaseFirestore.instance
         .collection('appointments')
         .where('petOwnerEmail', isEqualTo: '$uemail')
-        .where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 7)))
+        //.where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 7)))
         .orderBy('date', descending: true)
         .snapshots();
   }
@@ -54,6 +54,7 @@ class _AlertState extends State<Alert> {
           Icons.notifications_active,
           color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff194919):
           (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? Color.fromARGB(255, 200, 62, 62):
+          (data.docs[index]['status'] == "موعد ملغى من قبل العياده")? Color.fromARGB(255, 200, 62, 62):
           Color(0xff194919),
           size: 30,
         ),
@@ -63,6 +64,7 @@ class _AlertState extends State<Alert> {
     title: Text(
         (data.docs[index]['status'] == "موعد قادم")? 'موعد قادم':
         (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? 'موعد ملغى لعدم الحضور':
+        (data.docs[index]['status'] == "موعد ملغى من قبل العياده")?'موعد ملغى من قبل العياده':
         'موعد مكتمل',
       style: TextStyle(
           fontSize: 25,
@@ -70,6 +72,7 @@ class _AlertState extends State<Alert> {
           fontFamily: 'Tajawal',
           color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff009245):
                  (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? Color.fromARGB(255, 200, 62, 62):
+                 (data.docs[index]['status'] == "موعد ملغى من قبل العياده")? Color.fromARGB(255, 200, 62, 62):
                  Color(0xff009245),
       ),
     ),
