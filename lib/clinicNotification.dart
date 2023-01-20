@@ -38,7 +38,7 @@ class _clinicNotification extends State<clinicNotification>{
     _appointmentStream = FirebaseFirestore.instance
         .collection('appointments')
         .where('clinicEmail', isEqualTo: '$uemail')
-        //.where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 7)))
+        .where('status', isEqualTo: 'موعد ملغى من قبل المربي')
         .orderBy('date', descending: true)
         .snapshots();
   }
@@ -52,24 +52,18 @@ class _clinicNotification extends State<clinicNotification>{
                 right: BorderSide(width: 1.0, color: Color(0xFFd6cdfe)))),
         child:IconButton(icon: Icon(
           Icons.notifications_active,
-          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff194919):
-          (data.docs[index]['status'] == "موعد ملغى من قبل المربي")? Color.fromARGB(255, 200, 62, 62):
-          Color(0xff194919),
+          color: Color.fromARGB(255, 200, 62, 62),
           size: 30,
         ),
           onPressed: (){},
         )
     ),
-    title: Text((data.docs[index]['status'] == "موعد قادم")? 'موعد قادم':
-    (data.docs[index]['status'] == "موعد ملغى من قبل المربي")? 'موعد ملغى من قبل المربي':
-      'موعد مكتمل',
+    title: Text('${data.docs[index]['status']}',
       style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.w900,
         fontFamily: 'Tajawal',
-        color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff009245):
-          (data.docs[index]['status'] == "موعد ملغى من قبل المربي")? Color.fromARGB(255, 200, 62, 62):
-          Color(0xff009245),
+        color:  Color.fromARGB(255, 200, 62, 62),
           ),
     ),
     subtitle: Column(
