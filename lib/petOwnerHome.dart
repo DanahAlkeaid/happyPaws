@@ -45,13 +45,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
   method1() {
-     setState(() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .snapshots();
     clinicsNo=_clinicsStream.length;
-     });
+
      sorted = false;
   }
 
@@ -530,13 +529,13 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
 
 SortByRate() async {
-  setState(() {
+
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .orderBy('rate', descending: false)
         .snapshots();
-  });
+
   sorted=true;
   print('got in method sortbyrate');
 }
