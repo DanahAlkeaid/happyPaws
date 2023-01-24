@@ -569,7 +569,7 @@ else
                 iosStylePicker: true,
                 is24HrFormat: true,
                 //Set start and end time
-                maxMinute:00,
+                maxMinute:30,
                 //Styling
                 isOnChangeValueMode: true,
                 displayHeader: false,
@@ -597,7 +597,7 @@ else
                             iosStylePicker: true,
                             is24HrFormat: true,
                             //Set start and end time
-                            maxMinute:00,
+                            maxMinute:30,
                             //Styling
                             isOnChangeValueMode: true,
                             displayHeader: false,

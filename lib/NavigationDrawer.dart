@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:untitled/FirstScreen.dart';
+import 'package:untitled/clinic_Rate.dart';
 import 'package:untitled/gpi_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:untitled/petOwnerRate.dart';
@@ -141,6 +142,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ));
             },
           ),
+
           // const Divider(color: Colors.black54,),
           // ListTile(
           //   leading: const Icon(Icons.star,color: Color(0xff194919),size: 30,),
