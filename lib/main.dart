@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/PetNotification.dart';
+import 'package:untitled/clinicNotification.dart';
 import 'clinicsign.dart';
 import 'petOwnerSignup.dart';
 import 'signupScreen.dart';
@@ -36,6 +38,34 @@ Future main() async {
   runApp(MaterialApp(home: FirstScreen()));
 
 }
+
+// class MyApp extends StatelessWidget{
+//   @override
+//   Widget build(BuildContext context){
+//     return MaterialApp(
+//       navigatorKey: NavigationService.navigatorKey, // set propert
+//       debugShowCheckedModeBanner: false,
+//       title: 'Flutter Firebase Demo',
+//       theme: ThemeData(),
+//
+//     onGenerateRoute: ((settings){
+//       if (settings.name == '/clinic_appointments') {
+//         final args = settings.arguments as RemoteMessage;
+//         return MaterialPageRoute(
+//             builder: (context) => clinicNotification());
+//       }
+//       else if (settings.name == '/petOwner_appointments') {
+//         final args = settings.arguments as RemoteMessage;
+//         return MaterialPageRoute(
+//             builder: (context) => Alert());
+//       }
+//
+//       assert(false, 'Need to impements ${settings.name}');
+//       return null;
+//     }),
+//     );
+//   }
+// }
 
 
 

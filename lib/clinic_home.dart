@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:untitled/clinicMyAccount.dart';
+import 'package:untitled/clinicNotification.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -223,7 +224,7 @@ class _clinic_homeState extends State<clinic_home> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Alert()));
+                              builder: (context) => clinicNotification()));
                     },
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
