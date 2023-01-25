@@ -187,7 +187,7 @@ class _AlertState extends State<Alert> {
   }
 
   @override
-  Widget build(BuildContext) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
     backgroundColor: Color(0xfffaf7f4),
     appBar: AppBar(
         leading: IconButton(

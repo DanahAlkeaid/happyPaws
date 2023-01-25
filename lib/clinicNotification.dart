@@ -184,7 +184,7 @@ class _clinicNotification extends State<clinicNotification>{
   }
 
   @override
-  Widget build(BuildContext) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
     backgroundColor: Color(0xfffaf7f4),
     appBar: AppBar(
         leading: IconButton(
