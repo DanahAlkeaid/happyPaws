@@ -76,10 +76,7 @@ class SuccessReset extends StatelessWidget {
                             )))),
                 child: Text(
                   'تسجيل الدخول',
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Tajawal'),
+                  style:  TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                 )),
           ),
         ]),

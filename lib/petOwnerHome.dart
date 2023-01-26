@@ -1,10 +1,9 @@
-//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:untitled/Search.dart';
-import 'package:untitled/clinic_Rate.dart';
 import 'package:untitled/petOwner_appointments.dart';
 import 'package:untitled/rating.dart';
 import 'package:untitled/viewClinic.dart';
@@ -26,7 +25,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicEmail;
   var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
   var doc_id;
-  var sorted;
+  var sorted=false;
   var clinicsNo;
   //var clinicEmail;
   late Stream<QuerySnapshot> _clinics;
@@ -34,14 +33,17 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   TextEditingController search = TextEditingController();
   String searchValue = '';
 
+
   void initState() {
     super.initState();
     method1();
+    SortByRate();
     rateAverage();
     rate();
   }
 
   late Stream<QuerySnapshot> _clinicsStream;
+  late Stream<QuerySnapshot> _sortedclinics;
 
 
   method1() {
@@ -50,8 +52,16 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .where('type', isEqualTo: 'clinic')
         .snapshots();
     clinicsNo=_clinicsStream.length;
+  }
 
-     sorted = false;
+  SortByRate() async {
+
+    _sortedclinics = FirebaseFirestore.instance
+        .collection('users')
+        .where('type', isEqualTo: 'clinic')
+        .orderBy('rate', descending: false)
+        .snapshots();
+    print('got in method sortbyrate');
   }
 
   rate(){
@@ -239,7 +249,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => viewClinic(clinicEmail,/*المفروض يتغير الكنستركتر تبع كلينك سيرفسس*/)));
+              builder: (context) => viewClinic(clinicEmail)));
     },
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -389,9 +399,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                               Container(height: 20,),
                               ElevatedButton(
                                 onPressed: () {
+                                  setState(() {
+                                    sorted=!sorted;
+                                  });
                                   // SortByRate();
-                                  sorted? method1(): SortByRate();
-                                  makeBody();
+                                  // sorted? method1(): SortByRate();
+                                  // makeBody();
                                   print('finished calling meth. makeBody again');
                                 },
                                 child: Text("التقييم",
@@ -426,12 +439,11 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                     padding: EdgeInsets.all(0),
                     shrinkWrap: true,
                     physics: ScrollPhysics(),
-
                   children: [ StreamBuilder<QuerySnapshot>(
-                      stream: _clinicsStream,
+                      stream: sorted? _sortedclinics : _clinicsStream ,
                       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {
-                          return const Text('حدث خطأ ما!');
+                          return const Text('!حدث خطأ ما');
                         }
 
                         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -523,22 +535,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       makeBody()
 
   );
-
-
-
-
-
-SortByRate() async {
-
-    _clinicsStream = FirebaseFirestore.instance
-        .collection('users')
-        .where('type', isEqualTo: 'clinic')
-        .orderBy('rate', descending: false)
-        .snapshots();
-
-  sorted=true;
-  print('got in method sortbyrate');
-}
 
 
 }
