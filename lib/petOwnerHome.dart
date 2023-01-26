@@ -36,6 +36,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   void initState() {
     super.initState();
+    getCurrentUser();
     method1();
     SortByRate();
     rateAverage();
@@ -296,7 +297,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           size: 10,
         ),
         Text(//'.',
-            data[index]['rate'].toString(),
+            data[index]['rate'].toString().substring(0,4),
           // rateAve(data[index]['email']),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
