@@ -20,10 +20,10 @@ class petOwnerHome extends StatefulWidget {
 
 class _petOwnerHomeState extends State<petOwnerHome> {
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   var clinicName;
   var clinicEmail;
-  var petOwnerEmail='renad.aldhayan@gmail.com'; //راح ينحذف بعد ما نغير الكنستركتر
+  var petOwnerEmail;
   var doc_id;
   var sorted=false;
   var clinicsNo;
@@ -42,9 +42,13 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     rate();
   }
 
+  getCurrentUser()  {
+    final User user = FirebaseAuth.instance.currentUser! ;
+    petOwnerEmail = user.email;
+  }
+
   late Stream<QuerySnapshot> _clinicsStream;
   late Stream<QuerySnapshot> _sortedclinics;
-
 
   method1() {
     _clinicsStream = FirebaseFirestore.instance
