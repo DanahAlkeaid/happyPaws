@@ -38,6 +38,7 @@ class _clinicNotification extends State<clinicNotification>{
     _appointmentStream = FirebaseFirestore.instance
         .collection('appointments')
         .where('clinicEmail', isEqualTo: '$uemail')
+        .where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 1)))
         .where('status', isEqualTo: 'موعد ملغى من قبل المربي')
         .orderBy('date', descending: true)
         .snapshots();
@@ -184,7 +185,7 @@ class _clinicNotification extends State<clinicNotification>{
   }
 
   @override
-  Widget build(BuildContext) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
     backgroundColor: Color(0xfffaf7f4),
     appBar: AppBar(
         leading: IconButton(

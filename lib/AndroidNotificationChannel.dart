@@ -46,13 +46,14 @@ class NotificationService{
     //   Navigator.pushNamed(
     //       NavigationService.navigatorKey.currentContext!, '/mloffers',
     //       arguments: message);
-    // } else if (message.data["type"] == "expert1") {
-    //   Navigator.pushNamed(
-    //       NavigationService.navigatorKey.currentContext!, '/exaccept', arguments: message);
-    // }else if (message.data["type"] == "expert2") {
-    //   Navigator.pushNamed(
-    //       NavigationService.navigatorKey.currentContext!, '/exdecline' , arguments: message);
-    // }
+    // } else
+    if (message.data["type"] == "clinic") {
+      Navigator.pushNamed(
+          NavigationService.navigatorKey.currentContext!, '/clinic_appointments', arguments: message);
+    }else if (message.data["type"] == "petOwner") {
+      Navigator.pushNamed(
+          NavigationService.navigatorKey.currentContext!, '/petOwner_appointments' , arguments: message);
+    }
   }
   Future<void> showNotification(
       {required RemoteNotification notification,
