@@ -250,7 +250,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
             child: Text(
               data[index]['firstname'],
               style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 22,
                   fontWeight: FontWeight.w900,
                   fontFamily: 'Tajawal'),
             ),
@@ -263,7 +263,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
             child: Text(
               data[index]['description'],
               style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.w900,
                   fontFamily: 'Tajawal'),
             ),
