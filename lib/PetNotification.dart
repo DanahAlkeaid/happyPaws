@@ -39,7 +39,7 @@ class _AlertState extends State<Alert> {
         .collection('appointments')
         .where('petOwnerEmail', isEqualTo: '$uemail')
         .where('date', isGreaterThan: DateTime.now().subtract(Duration(days: 1)))
-        .where('status',whereIn: ['موعد قادم','موعد ملغى من قبل العياده'])
+        //.where('status',whereIn: ['موعد قادم','موعد ملغى من قبل العياده'])
         .orderBy('date', descending: true)
         .snapshots();
   }
@@ -53,20 +53,28 @@ class _AlertState extends State<Alert> {
               right: BorderSide(width: 1.0, color: Color(0xFFd6cdfe)))),
         child:IconButton(icon: Icon(
           Icons.notifications_active,
-          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff194919): Color.fromARGB(255, 200, 62, 62),
+          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff194919):
+          (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? Color.fromARGB(255, 200, 62, 62):
+          (data.docs[index]['status'] == "موعد ملغى من قبل العياده")? Color.fromARGB(255, 200, 62, 62):
+          Color(0xff194919),
           size: 30,
         ),
           onPressed: (){},
         )
     ),
     title: Text(
-        (data.docs[index]['status'] == "موعد قادم")?
-        'موعد قادم': 'موعد ملغى من قبل العياده',
+      (data.docs[index]['status'] == "موعد قادم")? 'موعد قادم':
+      (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? 'موعد ملغى لعدم الحضور':
+      (data.docs[index]['status'] == "موعد ملغى من قبل العياده")?'موعد ملغى من قبل العياده':
+      'موعد مكتمل',
       style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.w900,
           fontFamily: 'Tajawal',
-          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff194919): Color.fromARGB(255, 200, 62, 62),
+          color: (data.docs[index]['status'] == "موعد قادم")? Color(0xff009245):
+          (data.docs[index]['status'] == "موعد ملغى لعدم الحضور")? Color.fromARGB(255, 200, 62, 62):
+          (data.docs[index]['status'] == "موعد ملغى من قبل العياده")? Color.fromARGB(255, 200, 62, 62):
+          Color(0xff009245),
       ),
     ),
     subtitle: Column(
