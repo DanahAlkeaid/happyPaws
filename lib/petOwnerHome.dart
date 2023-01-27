@@ -26,8 +26,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var doc_id;
   var sorted=false;
   var clinicsNo;
-  //var clinicEmail;
-  late Stream<QuerySnapshot> _clinics;
+
 
   TextEditingController search = TextEditingController();
   String searchValue = '';
@@ -296,7 +295,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           size: 10,
         ),
         Text(//'.',
-            data[index]['rate'].toString().substring(0,4),
+            data[index]['rate'].toStringAsFixed(2),
           // rateAve(data[index]['email']),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
