@@ -364,7 +364,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                 });
               },
               decoration: InputDecoration(
-                hintText: 'ابحث هنا .......',
+                hintText: '....... ابحث هنا',
                 hintStyle: TextStyle(color: Colors.grey),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
