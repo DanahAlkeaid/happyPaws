@@ -93,10 +93,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
         };
 
-        /* print(avgRate);
-        print(TotalRate);
-        print(numRate);*/
-        //  'rate' = avgRate;
       }
       else{
 
@@ -168,12 +164,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   rateAve(email) {
 
-    // late  Stream<QuerySnapshot> _clinicRate = FirebaseFirestore.instance
-    //     .collection('rating')
-    //     .where('clinic_email', isEqualTo: email)
-    //     .where('status',isEqualTo: 'rated')
-    //     .snapshots();
-
     int numRate=0;
     double TotalRate =0;
     double avgRate=0;
@@ -196,10 +186,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         });
         print('in ratAve method');
         changeRate(avgRate , email);
-        /* print(avgRate);
-        print(TotalRate);
-        print(numRate);*/
-        //  'rate' = avgRate;
+
       }
       else{
 
@@ -210,10 +197,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var document;
   changeRate(rate , email)  {
     try {
-      // setState(() {
-      //   newname=_serviceName.text;
-      //   newprice=_price.text;
-      // });
       print('in changeRate method');
       FirebaseFirestore.instance
           .collection('users')
@@ -236,6 +219,12 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       print("$error");
     }
 
+  }
+
+  void changesorted() async{
+    setState(() {
+      sorted=!sorted;
+    });
   }
 
   makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
@@ -294,9 +283,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
           color: Color.fromARGB(255, 252, 163, 77),
           size: 10,
         ),
-        Text(//'.',
+        Text(
             data[index]['rate'].toStringAsFixed(2),
-          // rateAve(data[index]['email']),
           style:
           TextStyle(color: Colors.grey, fontSize: 10),
         ),
@@ -402,13 +390,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                               Container(height: 20,),
                               ElevatedButton(
                                 onPressed: () {
-                                  setState(() {
-                                    sorted=!sorted;
-                                  });
-                                  // SortByRate();
-                                  // sorted? method1(): SortByRate();
-                                  // makeBody();
-                                  print('finished calling meth. makeBody again');
+                                  changesorted();
+                                  // setState(() {
+                                  //   sorted=!sorted;
+                                  // });
                                 },
                                 child: Text("التقييم",
                                     style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
