@@ -463,7 +463,7 @@ var sortedDocs;
                         }
 
                         if(sorted){
-                          document=sortedDocs;
+                          documents=sortedDocs;
                         }
 
                         return ListView.builder(
