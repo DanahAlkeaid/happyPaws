@@ -222,9 +222,9 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   }
 
   void changesorted() async{
-    setState(() {
+    // setState(() {
       sorted=!sorted;
-    });
+    // });
   }
 
   makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
