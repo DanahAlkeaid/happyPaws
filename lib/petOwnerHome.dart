@@ -36,8 +36,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     super.initState();
     getCurrentUser();
     method1();
-    SortByRate();
     rateAverage();
+    SortByRate();
     rate();
   }
 
@@ -65,15 +65,13 @@ var sortedDocs;
     //     .orderBy('rate', descending: false)
     //     .snapshots();
 
-    sortedDocs=FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
         .orderBy('rate', descending: false).get()
         .then((snapshot) {
       if (snapshot.docs.isNotEmpty) {
-        snapshot.docs.forEach((element) {
-          doc_id = element.id;
-        });
+        sortedDocs=snapshot.docs;
     }
         });
     print('got in method sortbyrate');
@@ -115,6 +113,7 @@ var sortedDocs;
 
   }
 
+  var noclinics;
   rateAverage(){
     var email;
     FirebaseFirestore.instance
@@ -122,50 +121,89 @@ var sortedDocs;
         .where('type', isEqualTo: 'clinic').get()
         .then((snapshot){
       if(snapshot.docs.isNotEmpty){
+        noclinics=snapshot.docs.length;
         snapshot.docs.forEach((element) {
-          doc_id = element.id;
-          print(doc_id);
-        });
-        setState(() {
-          clinicsNo=snapshot.docs.length;
+          email=element['email'];
+          // email=element.data()['email'];
 
-        });
-
-        for (int j=0; j<clinicsNo;j++){
-          email= snapshot.docs[j]['email'];
           int numRate=0;
           double TotalRate =0;
           double avgRate=0;
           FirebaseFirestore.instance
               .collection('rating')
               .where('clinic_email', isEqualTo: email)
-          // .where('status',isEqualTo: 'rated')
               .get()
               .then((snapshot){
             if(snapshot.docs.isNotEmpty){
-              setState(() {
                 numRate=snapshot.docs.length;
 
-              });
-
               for(int i=0;i<numRate;i++){
-
+                //هنا شاكه بداتا
                 TotalRate += snapshot.docs[i].data()['rate'];}
 
               avgRate=TotalRate/numRate;
+              print(avgRate);
               setState(() async {
-                await FirebaseFirestore.instance
-                    .collection('users')
-                    .doc('${doc_id}').update({
-                  "rate":avgRate,
-                }
-                );
+                await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
+                  await myTransaction.update(element.reference, { "rate":avgRate }) ;
+                });
+
+
+                // await FirebaseFirestore.instance
+                //     .collection('users')
+                //     .doc('${doc_id}').update({
+                //   "rate":avgRate,
+                // }
+                // );
               });
             }
             else{
             }
           });
-        }
+
+
+
+
+          ////////////
+        });
+
+
+        // clinicsNo=snapshot.docs.length;
+        // for (int j=0; j<clinicsNo;j++){
+        //
+        //   email= snapshot.docs[j]['email'];
+        //   int numRate=0;
+        //   double TotalRate =0;
+        //   double avgRate=0;
+        //   FirebaseFirestore.instance
+        //       .collection('rating')
+        //       .where('clinic_email', isEqualTo: email)
+        //       .get()
+        //       .then((snapshot){
+        //     if(snapshot.docs.isNotEmpty){
+        //       setState(() {
+        //         numRate=snapshot.docs.length;
+        //
+        //       });
+        //
+        //       for(int i=0;i<numRate;i++){
+        //
+        //         TotalRate += snapshot.docs[i].data()['rate'];}
+        //
+        //       avgRate=TotalRate/numRate;
+        //       setState(() async {
+        //         await FirebaseFirestore.instance
+        //             .collection('users')
+        //             .doc('${doc_id}').update({
+        //           "rate":avgRate,
+        //         }
+        //         );
+        //       });
+        //     }
+        //     else{
+        //     }
+        //   });
+        // }
       }
       else{}
     });
