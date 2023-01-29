@@ -71,7 +71,8 @@ var sortedDocs;
         .orderBy('rate', descending: false).get()
         .then((snapshot) {
       if (snapshot.docs.isNotEmpty) {
-        sortedDocs=snapshot.docs;
+        sortedDocs = snapshot.docs.toList();
+        // sortedDocs=snapshot.docs;
     }
         });
     print('got in method sortbyrate');
