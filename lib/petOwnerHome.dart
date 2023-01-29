@@ -441,7 +441,9 @@ var sortedDocs;
                               Container(height: 20,),
                               ElevatedButton(
                                 onPressed: () {
-                                  sorted=!sorted;
+                                  setState((){
+                                    sorted=!sorted;
+                                  });
                                   // changesorted();
                                   // setState(() {
                                   //   sorted=!sorted;
@@ -502,7 +504,10 @@ var sortedDocs;
                         }
 
                         if(sorted){
-                          documents=sortedDocs;
+
+                          documents.sort((a, b) => a.get('rate').compareTo(b.get('rate')));
+
+                          // documents=sortedDocs;
                         }
 
                         return ListView.builder(
