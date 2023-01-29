@@ -56,14 +56,26 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .snapshots();
     clinicsNo=_clinicsStream.length;
   }
-
+var sortedDocs;
   SortByRate() async {
 
-    _sortedclinics = FirebaseFirestore.instance
+    // _sortedclinics = FirebaseFirestore.instance
+    //     .collection('users')
+    //     .where('type', isEqualTo: 'clinic')
+    //     .orderBy('rate', descending: false)
+    //     .snapshots();
+
+    sortedDocs=FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic')
-        .orderBy('rate', descending: false)
-        .snapshots();
+        .orderBy('rate', descending: false).get()
+        .then((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        snapshot.docs.forEach((element) {
+          doc_id = element.id;
+        });
+    }
+        });
     print('got in method sortbyrate');
   }
 
@@ -221,11 +233,11 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   }
 
-  void changesorted() async{
-    // setState(() {
-      sorted=!sorted;
-    // });
-  }
+  // void changesorted() async{
+  //   // setState(() {
+  //     sorted=!sorted;
+  //   // });
+  // }
 
   makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -390,7 +402,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                               Container(height: 20,),
                               ElevatedButton(
                                 onPressed: () {
-                                  changesorted();
+                                  sorted=!sorted;
+                                  // changesorted();
                                   // setState(() {
                                   //   sorted=!sorted;
                                   // });
@@ -428,7 +441,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                     shrinkWrap: true,
                     physics: ScrollPhysics(),
                   children: [ StreamBuilder<QuerySnapshot>(
-                      stream: sorted? _sortedclinics : _clinicsStream ,
+                      stream: _clinicsStream ,
                       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {
                           return const Text('!حدث خطأ ما');
@@ -447,6 +460,10 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                                 .get('firstname')
                                 .contains(searchValue);
                           }).toList();
+                        }
+
+                        if(sorted){
+                          document=sortedDocs;
                         }
 
                         return ListView.builder(
