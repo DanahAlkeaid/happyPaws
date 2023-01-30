@@ -25,6 +25,8 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var petOwnerEmail;
   var doc_id;
   var sorted=false;
+  bool isSortedalpha = true;
+  bool bottom_sheet = false;
   var clinicsNo;
 
 
@@ -52,10 +54,35 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   method1() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
-        .where('type', isEqualTo: 'clinic')
+        .where('type', isEqualTo: 'clinic').orderBy('firstname')
         .snapshots();
     clinicsNo=_clinicsStream.length;
   }
+
+  sort() {
+    if(isSortedalpha) {
+      sortAlph();
+    }
+    else {
+      sortRate();
+    }
+  }
+
+  sortAlph() {
+    _clinicsStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('type', isEqualTo: 'clinic').orderBy('firstname')
+        .snapshots();
+  }
+
+  sortRate() {
+    _clinicsStream = FirebaseFirestore.instance
+        .collection('users')
+        .where('type', isEqualTo: 'clinic').orderBy('rate',descending: true)
+        .snapshots();
+  }
+
+
 var sortedDocs;
   SortByRate() async {
 
@@ -442,14 +469,12 @@ var sortedDocs;
                               ElevatedButton(
                                 onPressed: () {
                                   setState((){
-                                    sorted=!sorted;
+                                    isSortedalpha = !isSortedalpha;
+                                    sort();
+                                    Navigator.pop(context);
                                   });
-                                  // changesorted();
-                                  // setState(() {
-                                  //   sorted=!sorted;
-                                  // });
                                 },
-                                child: Text("التقييم",
+                                child: Text(isSortedalpha? "التقييم" : "أبجدياً",
                                     style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -501,13 +526,6 @@ var sortedDocs;
                                 .get('firstname')
                                 .contains(searchValue);
                           }).toList();
-                        }
-
-                        if(sorted){
-
-                          documents.sort((a, b) => a.get('rate').compareTo(b.get('rate')));
-
-                          // documents=sortedDocs;
                         }
 
                         return ListView.builder(
