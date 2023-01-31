@@ -273,7 +273,7 @@ class _viewClinicState extends State<viewClinic> {
     mGrooming.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price'],element.data()['availability']),
             leading: Text(
               element.data()['price'] + 'رس ',
               textDirection: TextDirection.rtl,
@@ -293,7 +293,7 @@ class _viewClinicState extends State<viewClinic> {
     mServices.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price'],element.data()['availability']),
             leading: Text(
               element.data()['price'] + ' رس',
               textDirection: TextDirection.rtl,
@@ -313,7 +313,7 @@ class _viewClinicState extends State<viewClinic> {
     mTruck.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price'],element.data()['availability']),
             leading: Text(
               element.data()['price'] + 'رس ',
               textDirection: TextDirection.rtl,
