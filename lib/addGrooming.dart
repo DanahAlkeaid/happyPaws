@@ -233,7 +233,25 @@ class _addGrooming extends State<addGrooming> {
                                             child:Align(
                                               alignment:Alignment.centerRight,
                                               child:Text(
-                                                "عدد العملاء الممكن خدمتهم /n في ذات الوقت",
+                                                "عدد العملاء الممكن خدمتهم في ذات الوقت",
+                                                textAlign: TextAlign.start,
+                                                maxLines:1,
+                                                overflow:TextOverflow.ellipsis,
+                                                style:TextStyle(
+                                                  fontWeight:FontWeight.w500,
+                                                  fontFamily: "Almarai",
+                                                  fontSize:18,
+                                                  color:Color(0xff034d23),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const Padding(
+                                            padding:EdgeInsets.symmetric(vertical: 4,horizontal:0),
+                                            child:Align(
+                                              alignment:Alignment.centerRight,
+                                              child:Text(
+                                                "في ذات الوقت",
                                                 textAlign: TextAlign.start,
                                                 maxLines:1,
                                                 overflow:TextOverflow.ellipsis,
