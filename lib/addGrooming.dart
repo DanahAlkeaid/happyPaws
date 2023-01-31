@@ -233,7 +233,7 @@ class _addGrooming extends State<addGrooming> {
                                             child:Align(
                                               alignment:Alignment.centerRight,
                                               child:Text(
-                                                "عدد العملاء الممكن خدمتهم في ذات الوقت",
+                                                "عدد العملاء الممكن خدمتهم",
                                                 textAlign: TextAlign.start,
                                                 maxLines:1,
                                                 overflow:TextOverflow.ellipsis,
