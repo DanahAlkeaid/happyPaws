@@ -32,11 +32,11 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   TextEditingController search = TextEditingController();
   String searchValue = '';
 
-
+  
   void initState() {
     super.initState();
     getCurrentUser();
-    method1();
+    sortAlpha();
     rateAverage();
     rate();
   }
@@ -48,27 +48,21 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   late Stream<QuerySnapshot> _clinicsStream;
 
-  method1() {
-    _clinicsStream = FirebaseFirestore.instance
-        .collection('users')
-        .where('type', isEqualTo: 'clinic').orderBy('firstname')
-        .snapshots();
-    clinicsNo=_clinicsStream.length;
-  }
-
   sort() {
     if(isSortedalpha) {
-      sortAlph();
+      sortAlpha();
     }
     else {
       sortRate();
     }
   }
-  sortAlph() {
+
+  sortAlpha() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
         .where('type', isEqualTo: 'clinic').orderBy('firstname')
         .snapshots();
+    clinicsNo = _clinicsStream.length;
   }
 
   sortRate() {
@@ -77,7 +71,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .where('type', isEqualTo: 'clinic').orderBy('rate',descending: true)
         .snapshots();
   }
-
 
   rate(){
     int numRate=0;
@@ -315,7 +308,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                               Container(height: 20,),
                               ElevatedButton(
                                 onPressed: () {
-                                  setState(() async{
+                                  setState(() {
                                     isSortedalpha = !isSortedalpha;
                                     sort();
                                     Navigator.pop(context);
