@@ -24,7 +24,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   var clinicEmail;
   var petOwnerEmail;
   var doc_id;
-  var sorted=false;
   bool isSortedalpha = true;
   bool bottom_sheet = false;
   var clinicsNo;
@@ -39,7 +38,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     getCurrentUser();
     method1();
     rateAverage();
-    SortByRate();
     rate();
   }
 
@@ -49,7 +47,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
   }
 
   late Stream<QuerySnapshot> _clinicsStream;
-  late Stream<QuerySnapshot> _sortedclinics;
 
   method1() {
     _clinicsStream = FirebaseFirestore.instance
@@ -67,7 +64,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
       sortRate();
     }
   }
-
   sortAlph() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
@@ -82,28 +78,6 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .snapshots();
   }
 
-
-var sortedDocs;
-  SortByRate() async {
-
-    // _sortedclinics = FirebaseFirestore.instance
-    //     .collection('users')
-    //     .where('type', isEqualTo: 'clinic')
-    //     .orderBy('rate', descending: false)
-    //     .snapshots();
-
-    FirebaseFirestore.instance
-        .collection('users')
-        .where('type', isEqualTo: 'clinic')
-        .orderBy('rate', descending: false).get()
-        .then((snapshot) {
-      if (snapshot.docs.isNotEmpty) {
-        sortedDocs = snapshot.docs.toList();
-        // sortedDocs=snapshot.docs;
-    }
-        });
-    print('got in method sortbyrate');
-  }
 
   rate(){
     int numRate=0;
@@ -152,8 +126,6 @@ var sortedDocs;
         noclinics=snapshot.docs.length;
         snapshot.docs.forEach((element) {
           email=element['email'];
-          // email=element.data()['email'];
-
           int numRate=0;
           double TotalRate =0;
           double avgRate=0;
@@ -166,144 +138,23 @@ var sortedDocs;
                 numRate=snapshot.docs.length;
 
               for(int i=0;i<numRate;i++){
-                //هنا شاكه بداتا
                 TotalRate += snapshot.docs[i].data()['rate'];}
 
               avgRate=TotalRate/numRate;
-              print(avgRate);
               setState(() async {
                 await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
                   await myTransaction.update(element.reference, { "rate":avgRate }) ;
                 });
-
-
-                // await FirebaseFirestore.instance
-                //     .collection('users')
-                //     .doc('${doc_id}').update({
-                //   "rate":avgRate,
-                // }
-                // );
               });
             }
             else{
             }
           });
-
-
-
-
-          ////////////
         });
-
-
-        // clinicsNo=snapshot.docs.length;
-        // for (int j=0; j<clinicsNo;j++){
-        //
-        //   email= snapshot.docs[j]['email'];
-        //   int numRate=0;
-        //   double TotalRate =0;
-        //   double avgRate=0;
-        //   FirebaseFirestore.instance
-        //       .collection('rating')
-        //       .where('clinic_email', isEqualTo: email)
-        //       .get()
-        //       .then((snapshot){
-        //     if(snapshot.docs.isNotEmpty){
-        //       setState(() {
-        //         numRate=snapshot.docs.length;
-        //
-        //       });
-        //
-        //       for(int i=0;i<numRate;i++){
-        //
-        //         TotalRate += snapshot.docs[i].data()['rate'];}
-        //
-        //       avgRate=TotalRate/numRate;
-        //       setState(() async {
-        //         await FirebaseFirestore.instance
-        //             .collection('users')
-        //             .doc('${doc_id}').update({
-        //           "rate":avgRate,
-        //         }
-        //         );
-        //       });
-        //     }
-        //     else{
-        //     }
-        //   });
-        // }
       }
       else{}
     });
   }
-
-
-
-
-  rateAve(email) {
-
-    int numRate=0;
-    double TotalRate =0;
-    double avgRate=0;
-    FirebaseFirestore.instance
-        .collection('rating')
-        .where('clinic_email', isEqualTo: email)
-        .get()
-        .then((snapshot){
-      if(snapshot.docs.isNotEmpty){
-        setState(() {
-          numRate=snapshot.docs.length;
-
-        });
-
-        for(int i=0;i<numRate;i++){
-
-          TotalRate += snapshot.docs[i].data()['rate'];}
-        setState(() {
-          avgRate=TotalRate/numRate;
-        });
-        print('in ratAve method');
-        changeRate(avgRate , email);
-
-      }
-      else{
-
-      }
-    });
-    return avgRate;
-  }
-  var document;
-  changeRate(rate , email)  {
-    try {
-      print('in changeRate method');
-      FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: email)
-          .get()
-          .then((value) {
-        value.docs.forEach((element) {
-          document = element.id;
-        });
-      });
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc('${document}').update({
-        "rate": rate,
-      }
-      );
-      print('finished ratAve method');
-    }
-    catch (error) {
-      print("$error");
-    }
-
-  }
-
-  // void changesorted() async{
-  //   // setState(() {
-  //     sorted=!sorted;
-  //   // });
-  // }
 
   makeListTile(List<QueryDocumentSnapshot<Object?>> data, int index) => (ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -311,10 +162,6 @@ var sortedDocs;
         color: Colors.white24, size: 40.0),
     onTap: () {
       clinicEmail = data[index]['email'];
-      //the rest of info needed for class clinic details
-
-      // var token = data.docs[index]['token'];
-      // var pic = data.docs[index]['EXprofilepic'];
 
       Navigator.push(
           context,
@@ -468,7 +315,7 @@ var sortedDocs;
                               Container(height: 20,),
                               ElevatedButton(
                                 onPressed: () {
-                                  setState((){
+                                  setState(() async{
                                     isSortedalpha = !isSortedalpha;
                                     sort();
                                     Navigator.pop(context);
