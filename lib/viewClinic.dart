@@ -333,7 +333,7 @@ class _viewClinicState extends State<viewClinic> {
     mOthers.forEach((element) {
       services.add(
         ListTile(
-            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price']),
+            onTap: () => navigateToAppointment(element.data()['name'], element.data()['price'],element.data()['availability']),
             leading: Text(
               element.data()['price'] + ' رس',
               textDirection: TextDirection.rtl,
@@ -347,7 +347,7 @@ class _viewClinicState extends State<viewClinic> {
     return services;
   }
 
-  void navigateToAppointment(serviceName, servicePrice) {
+  void navigateToAppointment(serviceName, servicePrice,availability) {
     String clinicNameWithArea = firstName + '، ' + description;
 
     Map<String, String> clinicInfo = Map();
@@ -356,6 +356,7 @@ class _viewClinicState extends State<viewClinic> {
     clinicInfo["clinicPhone"] = phonenumber;
     clinicInfo["clinicServiceName"] = serviceName;
     clinicInfo["clinicServicePrice"] = servicePrice;
+    clinicInfo["availability"] = availability;
     clinicInfo["StartTime"] = StartTime;
     clinicInfo["EndTime"] = EndTime;
 

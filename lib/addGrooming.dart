@@ -359,7 +359,7 @@ class _addGrooming extends State<addGrooming> {
       "type":"grooming",
       "name":name,
       "price":price,
-      "availibity":availability,
+      "availability":availability,
     });
     showPopup();
   }

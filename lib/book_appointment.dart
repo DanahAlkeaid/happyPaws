@@ -29,6 +29,7 @@ class _book_appointmentssState extends State<book_appointments> {
   late String endTime = '${widget.clinicInfo['EndTime']}';
   late String clinicServiceName = '${widget.clinicInfo['clinicServiceName']}';
   late String clinicServicePrice = '${widget.clinicInfo['clinicServicePrice']}';
+  late String ServiceAvailability = '${widget.clinicInfo['availability']}';
 
 //A method to format the appointment time
   void onTimeChanged(TimeOfDay newTime) {
@@ -79,7 +80,7 @@ class _book_appointmentssState extends State<book_appointments> {
                             color: Colors.black)),
                   ),
                   Align(alignment : Alignment.centerRight ,
-                    child: Text('.الرجاء إختيار يوم أخر',
+                    child: Text('.الرجاء إختيار يوم آخر',
                         style: TextStyle(fontSize: 20,
                             fontWeight:FontWeight.w500,
                             fontFamily: "Almarai",
@@ -224,6 +225,81 @@ class _book_appointmentssState extends State<book_appointments> {
         .where('email', isEqualTo: '${pEmail}')
         .snapshots();
   }
+  late final Stream<QuerySnapshot> _noAppointments;
+  var serviceAppNo;
+
+  //A method to check if the chosen time of appointment is a acceptable by clinic
+  bool checkAvailability() {
+    _noAppointments=appointments
+        .where('clinicEmail', isEqualTo: '${clinicEmail}')
+        .where('service', isEqualTo: '${clinicServiceName}')
+        .where('date', isEqualTo: '${formattedDate}')
+        .where('time', isEqualTo: '${formattedTime}')
+        .snapshots();
+    serviceAppNo = _noAppointments.length;
+
+    var limit=int.parse(ServiceAvailability);
+
+    if (limit>=serviceAppNo) {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            icon: const Icon(Icons.error_outline_rounded,
+                color: const Color(0xffc51515),
+                size: 55),
+
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Align(alignment : Alignment.centerRight ,
+                    child: Text('،الخدمة غير متوفرة في الوقت المحدد',
+                        style: TextStyle(fontSize: 20,
+                            fontWeight:FontWeight.w500,
+                            fontFamily: "Almarai",
+                            color: Colors.black)),
+                  ),
+                  Align(alignment : Alignment.centerRight ,
+                    child: Text('.الرجاء إختيار وقت آخر',
+                        style: TextStyle(fontSize: 20,
+                            fontWeight:FontWeight.w500,
+                            fontFamily: "Almarai",
+                            color: Colors.black)),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              Align(alignment : Alignment.center ,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFFC2D961)),
+                        shape: MaterialStateProperty
+                            .all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                side: const BorderSide(
+                                  color: Color(0xFFC2D961),
+                                )))),
+                    child: const Text("حسناً",
+                        style: TextStyle(fontSize: 18,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
+              ),
+            ],
+          );
+        },
+      );
+      return false;
+    }
+    else
+    {
+      return true;}
+  }
+
 
 //Storing the appointment at the cloud firestore
   Future<void> addAppointment() {
@@ -506,7 +582,7 @@ class _book_appointmentssState extends State<book_appointments> {
               ,ElevatedButton(
                   onPressed: () {
                     //Check if the chosen day is a workday and check information completion
-                    if (isWorkday() && isComplete()) {
+                    if (isWorkday() && isComplete() && checkAvailability()) {
                       addAppointment();
                       Navigator.push(
                           context,

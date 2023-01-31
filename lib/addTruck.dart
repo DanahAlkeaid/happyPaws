@@ -358,7 +358,7 @@ class _addTruck extends State<addTruck> {
       "type":"truck",
       "name":name,
       "price":price,
-      "availibity":availability,
+      "availability":availability,
     });
     showPopup();
   }

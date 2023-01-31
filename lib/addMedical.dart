@@ -368,7 +368,7 @@ class _addMedical extends State<addMedical> {
       "type":"medical",
       "name":name,
       "price":price,
-      "availibity":availability,
+      "availability":availability,
     });
     showPopup();
   }

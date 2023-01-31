@@ -360,7 +360,7 @@ class _addOther extends State<addOther> {
       "type":"others",
       "name":name,
       "price":price,
-      "availibity":availability,
+      "availability":availability,
     });
     showPopup();
   }
