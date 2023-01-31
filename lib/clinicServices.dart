@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:untitled/clinic_home.dart';
 import 'package:untitled/addGrooming.dart';
 import 'package:untitled/addMedical.dart';
 import 'package:untitled/addOther.dart';
@@ -181,7 +182,8 @@ class _clinicServicesState extends State<clinicServices> {
             color: const Color(0xff034d23),
             iconSize: 36,
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => clinic_home()));
             },
           ),
           flexibleSpace: Container(
