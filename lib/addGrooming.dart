@@ -21,6 +21,7 @@ class _addGrooming extends State<addGrooming> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _serviceName = TextEditingController();
   final TextEditingController _price = TextEditingController();
+  final TextEditingController _availability = TextEditingController();
 
 
   String errorMessage = '';
@@ -225,6 +226,58 @@ class _addGrooming extends State<addGrooming> {
                                                       borderRadius: BorderRadius.circular(15))),
                                             ),
                                           ),
+
+                                          SizedBox(height: 20,),
+                                          const Padding(
+                                            padding:EdgeInsets.symmetric(vertical: 4,horizontal:0),
+                                            child:Align(
+                                              alignment:Alignment.centerRight,
+                                              child:Text(
+                                                "عدد العملاء الممكن خدمتهم في ذات الوقت",
+                                                textAlign: TextAlign.start,
+                                                maxLines:1,
+                                                overflow:TextOverflow.ellipsis,
+                                                style:TextStyle(
+                                                  fontWeight:FontWeight.w500,
+                                                  fontFamily: "Almarai",
+                                                  fontSize:18,
+                                                  color:Color(0xff034d23),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10,),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(20),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      blurRadius: 20,
+                                                      offset: Offset(1, 1),
+                                                      color: Colors.grey.withOpacity(0.26))
+                                                ]),
+                                            child: TextFormField(
+                                              autovalidateMode:
+                                              AutovalidateMode.onUserInteraction,
+                                              controller: _availability,
+                                              validator: validatePrice,
+                                              decoration: InputDecoration(
+                                                  hintText: (" "),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      borderSide:
+                                                      BorderSide(color: Colors.white)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      borderSide:
+                                                      BorderSide(color: Colors.white)),
+                                                  border: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(15))),
+                                            ),
+                                          ),
+
+
                                           SizedBox(height: 20,),
                                           Center(
                                             child: Row(children: [
@@ -267,7 +320,7 @@ class _addGrooming extends State<addGrooming> {
                                                   "إضافة",
                                                   style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
                                                 ),
-                                                onPressed: () => add_service(_serviceName.text.trim(),_price.text.trim()),
+                                                onPressed: () => add_service(_serviceName.text.trim(),_price.text.trim(),_availability.text.trim()),
                                                 // color: Color(0xFFC2D961),
                                               ),
                                               SizedBox(width: 20,),
@@ -282,12 +335,13 @@ class _addGrooming extends State<addGrooming> {
             ],),),),
     );
   }
-  Future add_service(String name,String price) async {
+  Future add_service(String name,String price, String availability) async {
     await FirebaseFirestore.instance.collection('services').add({
       "clinicEmail": widget.clinicEmail,
       "type":"grooming",
       "name":name,
       "price":price,
+      "availibity":availability,
     });
     showPopup();
   }
