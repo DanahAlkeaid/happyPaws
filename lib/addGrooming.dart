@@ -233,7 +233,7 @@ class _addGrooming extends State<addGrooming> {
                                             child:Align(
                                               alignment:Alignment.centerRight,
                                               child:Text(
-                                                "عدد العملاء الممكن خدمتهم",
+                                                "عدد العملاء الممكن خدمتهم في ",
                                                 textAlign: TextAlign.start,
                                                 maxLines:1,
                                                 overflow:TextOverflow.ellipsis,
@@ -251,7 +251,7 @@ class _addGrooming extends State<addGrooming> {
                                             child:Align(
                                               alignment:Alignment.centerRight,
                                               child:Text(
-                                                "في ذات الوقت",
+                                                "  ذات الوقت",
                                                 textAlign: TextAlign.start,
                                                 maxLines:1,
                                                 overflow:TextOverflow.ellipsis,
