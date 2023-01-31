@@ -115,12 +115,24 @@ class _clinicMyAccount extends State<clinicMyAccount> {
               ),
 
               Container(
-                  child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Color(0xfffaf7f4),
-                   // child:borderRadius: BorderRadius.circular(50),
-                child: Image.network(cPic),)
-              ),
+                  width: 120.0,
+                  height: 120.0,
+                  decoration: new BoxDecoration(
+                    // border: Border.all(width: 0.5, color: Colors.black),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      image: new DecorationImage(
+                          fit: BoxFit.fill,
+                          image: new NetworkImage(cPic)
+                      )
+                  )),
 
               Container(
                 height: 30,

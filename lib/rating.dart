@@ -78,53 +78,24 @@ class _ratingState extends State<rating> {
                     children: [
 
                       Container(
-
-                        color: Color(0xfffaf7f4),
-                        child: Container(
-                            width: w * 0.36,
-                            height: w * 0.36,
-                            child: CircleAvatar(
-                                backgroundColor:
-                                Color(0xfffaf7f4),
-                                backgroundImage: profilePic == " "
-                                    ? null
-                                    : NetworkImage(profilePic),
-                                radius: 200.0),
-
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Color(0xfffaf7f4),
-                              borderRadius: BorderRadius.circular(500),
-                            )),
-
-
-                        // child: CircleAvatar(
-                        //   radius: 55,
-                        //   backgroundColor: Color(0xfffaf7f4),
-                        //   child: _photo != null
-                        //       ? ClipRRect(
-                        //     borderRadius: BorderRadius.circular(50),
-                        //     child: Image.file(
-                        //       _photo!,
-                        //       width: 100,
-                        //       height: 100,
-                        //       fit: BoxFit.fitHeight,
-                        //     ),
-                        //   )
-                        //       : Container(
-                        //     decoration: BoxDecoration(
-                        //         color: Colors.grey[200],
-                        //         borderRadius: BorderRadius.circular(50)),
-                        //     width: 100,
-                        //     height: 100,
-                        //     child: Icon(
-                        //       Icons.camera_alt,
-                        //       color: Colors.grey[800],
-                        //     ),
-                        //   ),)
-
-
-                      ),
+                          width: 120.0,
+                          height: 120.0,
+                          decoration: new BoxDecoration(
+                            // border: Border.all(width: 0.5, color: Colors.black),
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3), // changes position of shadow
+                                ),
+                              ],
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: new NetworkImage(profilePic)
+                              )
+                          )),
 
                       Container(
                         padding: EdgeInsets.only(top: 30),

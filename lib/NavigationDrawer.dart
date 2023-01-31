@@ -92,13 +92,28 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     child: Column(
       children: [
         SizedBox(height: 10),
-        CircleAvatar(
-          backgroundColor: Colors.white70,
-          radius: 50,
-          child: Icon(
-            Icons.person,
-            color: Color(0xff194919),
-            size: 90,
+        Container(
+          decoration: new BoxDecoration(
+            shape: BoxShape.circle,
+
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: CircleAvatar(
+
+            backgroundColor: Colors.white70,
+            radius: 50,
+            child: Icon(
+              Icons.person,
+              color: Color(0xff194919),
+              size: 90,
+            ),
           ),
         ),
         SizedBox(height: 10),

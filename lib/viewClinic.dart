@@ -193,16 +193,29 @@ class _viewClinicState extends State<viewClinic> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: 100,
+                height: 50,
               ),
               Container(
-                  child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Color(0xfffaf7f4),
-                    child: Image.network(profilepic),
+                  width: 120.0,
+                  height: 120.0,
+                  decoration: new BoxDecoration(
+                     // border: Border.all(width: 0.5, color: Colors.black),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      image: new DecorationImage(
+                          fit: BoxFit.fill,
+                          image: new NetworkImage(profilepic)
+                      )
                   )),
               Container(
-                height: 50,
+                height: 5,
               ),
               Text(
                 '${firstName}',
@@ -217,7 +230,7 @@ class _viewClinicState extends State<viewClinic> {
               ),
               ExpansionTile(
                 title: Text(
-                  "خدمات االتنظيف والتزيين",
+                  "خدمات التنظيف والتزيين",
                   textDirection: TextDirection.rtl,
                   style: tileHeaderTextStyle,
                 ),

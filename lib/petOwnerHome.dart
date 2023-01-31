@@ -217,12 +217,31 @@ class _petOwnerHomeState extends State<petOwnerHome> {
             border: Border(
                 right: BorderSide(width: 1.0, color: Color(0xFFd6cdfe)))),
 
-        //here the clinics pic
-        child: CircleAvatar(
-          radius: 55,
-          backgroundColor: Color(0xfffaf7f4),
-          // child:borderRadius: BorderRadius.circular(50),
-          child: Image.network(data[index]['profilepic']),)
+      //here the clinics pic
+        child: Container(
+            width: 55.0,
+            height: 55.0,
+            decoration: new BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+                shape: BoxShape.circle,
+                image: new DecorationImage(
+                    fit: BoxFit.fill,
+                    image: new NetworkImage(data[index]['profilepic'])
+                )
+            )),
+
+        // child: CircleAvatar(
+        //   radius: 55,
+        //   backgroundColor: Color(0xfffaf7f4),
+        //   // child:borderRadius: BorderRadius.circular(50),
+        //   child: Image.network(data[index]['profilepic']),)
     ),
 
   ));

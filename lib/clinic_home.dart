@@ -27,6 +27,7 @@ class _clinic_homeState extends State<clinic_home> {
   late final Stream<QuerySnapshot> _reqStream;
   var cEmail;
   var cName='';
+  var profilepic1 ;
  // var requestID;
  // late String category;
  // late FirebaseMessaging messaging;
@@ -64,7 +65,7 @@ class _clinic_homeState extends State<clinic_home> {
         .get()
         .then((snapshot) { print(snapshot.docs);
       var clinicName=snapshot.docs[0].data()['firstname'];
-
+profilepic1 = snapshot.docs[0].data()['profilepic'];
 
       setState(() {
         cName='${clinicName} ';
@@ -100,20 +101,30 @@ class _clinic_homeState extends State<clinic_home> {
         SafeArea(
           child: SingleChildScrollView(
             child: Column(children: [
-
+SizedBox(height: 10,),
               // App Logo
-              Container(
-                  child: const Image(alignment: Alignment.center
-                      ,fit: BoxFit.contain
-                      ,image: AssetImage("Assets/App_Logo.png"
+                Container(
+                width: 120.0,
+                height: 120.0,
+                decoration: new BoxDecoration(
+                  // border: Border.all(width: 0.5, color: Colors.black),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
                       ),
-                    width: 110,
-                    height: 110,
-                  )
-              )
+                    ],
+                    image: new DecorationImage(
+                        fit: BoxFit.fill,
+                        image: new NetworkImage(profilepic1)
+                    )
+                )),
 
               //Greetings
-              ,Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
 
@@ -275,38 +286,6 @@ class _clinic_homeState extends State<clinic_home> {
 
               ,const SizedBox(height: 15)
 
-              /*,Container(
-                height: 60,
-                width: 270,
-                decoration: BoxDecoration(
-                    color: Color(0xFFC2D961),
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      color: Color(0xFFC2D963),
-                      width: 1,
-                    )),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FirstScreen()));
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFFC2D961)),
-                        shape: MaterialStateProperty
-                            .all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                side: const BorderSide(
-                                  color: Color(0xFFC2D961),
-                                )))),
-                    child: const Text(" تواصل معنا",
-                        style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
-              )*/
-
-             /* ,const SizedBox(height: 15)*/
 
               ,Container(
                 height: 60,
@@ -338,6 +317,53 @@ class _clinic_homeState extends State<clinic_home> {
                     child: const Text(" تسجيل الخروج",
                         style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
               ),
+          Row(children: [
+            SizedBox(
+              width: 150,
+            ),
+            Container(
+              width: 30,
+              child: Link(
+                target: LinkTarget.blank,
+                uri: Uri.parse('https://twitter.com/Happypaws_app'),
+                builder: (context, followLink) => ListTile(
+                  leading: const Icon(
+                    FontAwesomeIcons.twitter,
+                    color: Color(0xff194919),
+                    size: 30,
+                  ),
+                  onTap: followLink,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              width: 30,
+              child: ListTile(
+                title: const Text(
+                  '',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xff194919),
+                      fontFamily: 'Tajawal'),
+                ),
+                leading: const Icon(
+                  Icons.mail,
+                  color: Color(0xff194919),
+                  size: 30,
+                ),
+                onTap: () async {
+                  final toEmail = 'HappyPawsApp@hotmail.com';
+                  final url = 'mailto:$toEmail';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
+                },
+              ),
+            )
+          ]
 
 //هذا المفروض ايقونات تويتر وايميل لكن يضبط ويخرب بمزاجه
 
@@ -381,7 +407,7 @@ Expanded(child: Container(
 ],),*/
 
 
-            ],),
+          )],),
           ),
         )
     );
