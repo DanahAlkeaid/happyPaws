@@ -244,7 +244,7 @@ class _book_appointmentssState extends State<book_appointments> {
         .snapshots();
   }
   late Stream<QuerySnapshot> _noAppointments;
-  int serviceAppNo=0;
+  late int serviceAppNo;
 
 
   //A method to check if the chosen time of appointment is a acceptable by clinic
@@ -254,11 +254,9 @@ class _book_appointmentssState extends State<book_appointments> {
         .where('clinicEmail', isEqualTo: '${clinicEmail}')
         .where('service', isEqualTo: '${clinicServiceName}')
         .where('date', isEqualTo: '${formattedDate}')
-        .where('time', isEqualTo: '${formattedTime}').get().then((value) => serviceAppNo = value.docs.length
-
-
-
-
+        .where('time', isEqualTo: '${formattedTime}').get().then((value) =>
+            setState(() {
+        serviceAppNo = value.docs.length;  })
         );
         // .snapshots();
     // serviceAppNo = _noAppointments.length;
