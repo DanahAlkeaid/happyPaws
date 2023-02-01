@@ -263,7 +263,7 @@ class _book_appointmentssState extends State<book_appointments> {
 
     var limit=int.parse(ServiceAvailability);
 
-    if (limit>=serviceAppNo) {
+    if (limit<=serviceAppNo) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
