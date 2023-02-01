@@ -279,7 +279,7 @@ class _addOther extends State<addOther> {
                                               autovalidateMode:
                                               AutovalidateMode.onUserInteraction,
                                               controller: _availability,
-                                              validator: validatePrice,
+                                              validator: validateAvailability,
                                               decoration: InputDecoration(
                                                   hintText: (" "),
                                                   focusedBorder: OutlineInputBorder(
@@ -402,6 +402,11 @@ String? validatePrice(String? formPrice) {
   if (formPrice == null || formPrice.trim().isEmpty) {
     return "يرجى إدخال قيمة";
   }
+  try{
+    double.parse(formPrice);
+  }catch(e){
+    return "يرجى إدخال رقم للسعر";
+  }
 
   return null;
 }
@@ -410,6 +415,20 @@ String? validateService(String? formService) {
   //String msg = '';
   if (formService == null || formService.trim().isEmpty) {
     return "يرجى إدخال اسم الخدمة";
+  }
+
+  return null;
+}
+
+  String? validateAvailability(String? formAvailability) {
+  //String msg = '';
+  if (formAvailability == null || formAvailability.trim().isEmpty) {
+    return "يرجى إدخال السعة الاستيعابية للخدمة";
+  }
+  try{
+    int.parse(formAvailability);
+  }catch(e){
+    return "يرجى إدخال رقم صحيح للسعة الاستيعابية";
   }
 
   return null;
