@@ -256,12 +256,14 @@ class _book_appointmentssState extends State<book_appointments> {
         .where('date', isEqualTo: '${formattedDate}')
         .where('time', isEqualTo: '${formattedTime}').get().then((value) =>
             setState(() {
-        serviceAppNo = value.docs.length;  })
+        serviceAppNo = value.docs.length;})
         );
         // .snapshots();
     // serviceAppNo = _noAppointments.length;
 
     var limit=int.parse(ServiceAvailability);
+    print(limit);
+        print(serviceAppNo);
 
     if (limit<=serviceAppNo) {
       showDialog<void>(
