@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'AndroidNotificationChannel.dart';
+import 'package:flutter/rendering.dart';
 
 //hello world
 //الووووووو
@@ -24,6 +25,10 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 
 Future main() async {
+ ErrorWidget.builder = (FlutterErrorDetails details) => Scaffold(
+   backgroundColor: const Color(0xfffaf7f4),
+   body: Center(child: CircularProgressIndicator() ,)
+ );
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 

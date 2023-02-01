@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:day_picker/day_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
@@ -20,8 +21,33 @@ class clinicsign extends StatefulWidget {
 }
 
 
-
 class _clinicsign extends State<clinicsign> {
+  late List<String> clinicOffDays;
+
+  List<DayInWeek> _days = [
+    DayInWeek(
+      "7",
+    ),
+    DayInWeek(
+      "6",
+        isSelected: true
+    ),
+    DayInWeek(
+      "5",
+    ),
+    DayInWeek(
+      "4",
+    ),
+    DayInWeek(
+      "3",
+    ),
+    DayInWeek(
+      "2",
+    ),
+    DayInWeek(
+      "1",
+    ),
+  ];
 
   //Start time formatters
   TimeOfDay start_time = TimeOfDay.now();
@@ -131,6 +157,7 @@ else
       'StartTime' : formattedStime,
       'EndTime' : formattedEtime,
       'rate' : 0,
+      'offDays': clinicOffDays
     } );
   }
 
@@ -142,14 +169,22 @@ else
       resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xfffaf7f4),
       appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('Assets/App_Header.png'),
-                    fit: BoxFit.fill
-                )
-            ),
-          ),
+          leading: IconButton(
+            icon: (const Icon(Icons.arrow_back_ios)),
+            color: const Color(0xff034d23),
+            iconSize: 36,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+          ,flexibleSpace: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('Assets/App_Header.png'),
+                fit: BoxFit.fill
+            )
+        ),
+      ),
           elevation: 0
       ),
       body: Form(
@@ -607,10 +642,47 @@ else
                         ),
                       ),
 
+                      Align( alignment : Alignment.centerRight ,
+                        child: Text(
+                          "أيام الإجازة",
+                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, fontFamily: 'Tajawal'),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SelectWeekDays(
+                            fontSize:15,
+                            fontWeight: FontWeight.w500,
+                            days: _days,
+                            border: false,
+                            boxDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.0),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                colors: [const Color(0xffD5E694), const Color(0xff034d23)],
+                                tileMode:
+                                TileMode.repeated, // repeats the gradient over the canvas
+                              ),
+                            ),
+                            onSelect: (values) { // <== Callback to handle the selected days
+                              print(values);
+                              clinicOffDays = (values);
+                            },
+                          ),
+                        ),
+                      )
+
+                      ,SizedBox(height: 25,)
                       //Sign Up Buttons
-                      Container(
+                      ,Container(
                         child: ElevatedButton(
                             onPressed: () {
+                              print(clinicOffDays);
                               signUp();
                             },
                             style: ButtonStyle(

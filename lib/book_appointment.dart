@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class book_appointments extends StatefulWidget {
-  final Map<String, String> clinicInfo; //  edit
+  final Map<String, String> clinicInfo;
 
   const book_appointments (this.clinicInfo, {Key? key}) : super (key: key); // edit
 
@@ -59,7 +59,9 @@ class _book_appointmentssState extends State<book_appointments> {
 
 //A method to check if the chosen appointment day is a weekday
   bool isWorkday() {
-    if (_date.weekday == DateTime.friday) {
+    var offDays = clinicOffDays.toString();
+    print(offDays);
+    if (offDays.contains(_date.weekday.toString())) {
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -188,21 +190,37 @@ class _book_appointmentssState extends State<book_appointments> {
   var pEmail;
   var pName='';
   var pPhone;
+  var clinicOffDays;
+  var clinicProfilePic;
+
 
   void initState() {
     super.initState();
+    cInfo();
     getCurrentUser();
     pInfo();
     openCollection();
-    print(startTime);
-    print(endTime);
   }
+  cInfo()  {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: '${widget.clinicInfo['clinicEmail']}')
+        .get()
+        .then((snapshot) { print(snapshot.docs[0].data());
+    var off = snapshot.docs[0].data()['offDays'].toString();
+    var pic = snapshot.docs[0].data()['profilepic'];
+    setState(() {
+      clinicOffDays = '${off}';
+      clinicProfilePic ='${pic} ';
+    });
+    print(clinicOffDays);
+    print(clinicProfilePic);
+    }); }
 
   getCurrentUser()  {
     final User user = _auth.currentUser! ;
     pEmail = user.email;
   }
-
 
   pInfo()  {
     FirebaseFirestore.instance
@@ -227,6 +245,7 @@ class _book_appointmentssState extends State<book_appointments> {
   }
   late final Stream<QuerySnapshot> _noAppointments;
   var serviceAppNo;
+
 
   //A method to check if the chosen time of appointment is a acceptable by clinic
   bool checkAvailability() {
@@ -363,15 +382,28 @@ class _book_appointmentssState extends State<book_appointments> {
                 height:16,
                 width:16,
               ),
-              const Padding(
-                padding:EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child:
-                Image(
-                  image:AssetImage("Assets/Pet_House.png"),
-                  height:60,
-                  width:60,
-                  fit:BoxFit.contain,
-                ),
+              Container(
+                  width: 120.0,
+                  height: 120.0,
+                  decoration: new BoxDecoration(
+                    // border: Border.all(width: 0.5, color: Colors.black),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      image: new DecorationImage(
+                          fit: BoxFit.fill,
+                          image: new NetworkImage(clinicProfilePic)
+                      )
+                  )),
+              const SizedBox(
+                height:12,
+                width:16,
               ),
               const Text(
                 "اكمل الحجز",
@@ -530,8 +562,9 @@ class _book_appointmentssState extends State<book_appointments> {
                       onDateChange: (date) {
                         // New date selected
                         setState(() {
-                          _date = date;
-                          formattedDate = _date.toString().replaceAll("00:00:00.000", "");
+                          _date = date.add(Duration(days: 1));
+                          formattedDate = date.toString().replaceAll("00:00:00.000", "");
+                          print(formattedDate);
                         });
                       },
                     ),
@@ -581,7 +614,7 @@ class _book_appointmentssState extends State<book_appointments> {
               const SizedBox(height: 5)
               ,ElevatedButton(
                   onPressed: () {
-                    //Check if the chosen day is a workday and check information completion
+                    //Check if the chosen day is a workday and check information completion and check the service availability
                     if (isWorkday() && isComplete() && checkAvailability()) {
                       addAppointment();
                       Navigator.push(
