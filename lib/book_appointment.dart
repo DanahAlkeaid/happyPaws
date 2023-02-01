@@ -632,7 +632,8 @@ class _book_appointmentssState extends State<book_appointments> {
                       print(formattedTime);
                       print(_date);
                       print(formattedDate);
-                      print(DateTime.friday);}
+                      print(DateTime.friday);
+                    print(serviceAppNo);}
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
