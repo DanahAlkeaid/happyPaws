@@ -243,7 +243,7 @@ class _book_appointmentssState extends State<book_appointments> {
         .where('email', isEqualTo: '${pEmail}')
         .snapshots();
   }
-  late final Stream<QuerySnapshot> _noAppointments;
+  late Stream<QuerySnapshot> _noAppointments;
   var serviceAppNo;
 
 
