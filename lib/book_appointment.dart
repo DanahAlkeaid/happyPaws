@@ -254,7 +254,12 @@ class _book_appointmentssState extends State<book_appointments> {
         .where('clinicEmail', isEqualTo: '${clinicEmail}')
         .where('service', isEqualTo: '${clinicServiceName}')
         .where('date', isEqualTo: '${formattedDate}')
-        .where('time', isEqualTo: '${formattedTime}').get().then((value) => serviceAppNo = value.docs.length);
+        .where('time', isEqualTo: '${formattedTime}').get().then((value) => serviceAppNo = value.docs.length
+
+
+
+
+        );
         // .snapshots();
     // serviceAppNo = _noAppointments.length;
 
@@ -274,14 +279,14 @@ class _book_appointmentssState extends State<book_appointments> {
               child: ListBody(
                 children: const <Widget>[
                   Align(alignment : Alignment.centerRight ,
-                    child: Text('،الخدمة غير متوفرة في الوقت المحدد',
+                    child: Text('الخدمة غير متوفرة بالوقت المحدد',
                         style: TextStyle(fontSize: 20,
                             fontWeight:FontWeight.w500,
                             fontFamily: "Almarai",
                             color: Colors.black)),
                   ),
                   Align(alignment : Alignment.centerRight ,
-                    child: Text('.الرجاء إختيار وقت آخر',
+                    child: Text('.،الرجاء إختيار وقت آخر',
                         style: TextStyle(fontSize: 20,
                             fontWeight:FontWeight.w500,
                             fontFamily: "Almarai",
