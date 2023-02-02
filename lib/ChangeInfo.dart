@@ -8,8 +8,8 @@ import 'PetChangePass.dart';
 
 class ChangePass extends StatefulWidget{
   final pName;
-  final pPhoneNum;
   final pEmail;
+  final pPhoneNum;
 
   const ChangePass(this.pName, this.pEmail, this.pPhoneNum, {super.key} );
 
@@ -20,9 +20,9 @@ class ChangePass extends StatefulWidget{
 class _ChangePass extends State<ChangePass> {
 
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstnameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phonenumberController = TextEditingController();
+  late TextEditingController _firstnameController = TextEditingController(text:widget.pName);
+  late TextEditingController _emailController = TextEditingController(text:widget.pEmail);
+  late TextEditingController _phonenumberController = TextEditingController(text:widget.pPhoneNum);
 
   String errorMessage = '';
   var loading = false;
@@ -67,7 +67,7 @@ class _ChangePass extends State<ChangePass> {
           height: MediaQuery.of(context).size.height - 50,
           width: double.infinity,
             child:SingleChildScrollView(
-            child: Column(
+              child: Column(
               children: [
                 Text(
                     ' تعديل معلومات الحساب ',
@@ -357,8 +357,9 @@ class _ChangePass extends State<ChangePass> {
         var update = await FirebaseFirestore.instance
             .collection('Users')
             .doc('${doc_id}').update({
-          'firstname': _firstnameController.text.trim(),
-          'phonenumber': _phonenumberController.text.trim()
+           'firstname': _firstnameController.text.trim(),
+           'phonenumber': _phonenumberController.text.trim(),
+           'email': _emailController.text.trim(),
         }
         );
         Navigator.of(context).pop();
