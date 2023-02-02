@@ -130,6 +130,60 @@ class _ChangePass extends State<ChangePass> {
                   ],
                 ),
 
+                //Phone number
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "رقم الهاتف",
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Tajawal'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 20,
+                                offset: Offset(1, 1),
+                                color: Colors.grey.withOpacity(0.26))
+                          ]),
+                      child: new TextFormField(
+                        maxLength: 12,
+                        autovalidateMode:
+                        AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.number,
+                        controller: _phonenumberController,
+                        validator: validationPhoneNumber,
+                        decoration: InputDecoration(
+                            hintText: ("9665********"),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                BorderSide(color: Colors.white)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                BorderSide(color: Colors.white)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
+
                 //EMAIL
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,60 +237,6 @@ class _ChangePass extends State<ChangePass> {
                       child: Text(
                         errorMessage,
                       ),
-                    )
-                  ],
-                ),
-
-                //PHONE NUMBER
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "رقم الهاتف",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 20,
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.26))
-                          ]),
-                      child: new TextFormField(
-                        maxLength: 12,
-                        autovalidateMode:
-                        AutovalidateMode.onUserInteraction,
-                        keyboardType: TextInputType.number,
-                        controller: _phonenumberController,
-                        validator: validationPhoneNumber,
-                        decoration: InputDecoration(
-                            hintText: ("9665********"),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                BorderSide(color: Colors.white)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                BorderSide(color: Colors.white)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
                     )
                   ],
                 ),
