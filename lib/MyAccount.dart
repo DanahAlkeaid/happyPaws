@@ -107,19 +107,31 @@ class _MyAccountState extends State<MyAccount> {
 
               Column(
                 children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: CircleAvatar(
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: CircleAvatar(
+
                       backgroundColor: Colors.white70,
                       radius: 50,
-
                       child: Icon(
                         Icons.person,
                         color: Color(0xff194919),
                         size: 90,
                       ),
+                    ),
                   ),
-                ),
                 ],
                 ),
 
@@ -157,8 +169,8 @@ class _MyAccountState extends State<MyAccount> {
                                   color: Colors.grey.withOpacity(0.26))
                             ]),
                         child:Align(
-                        child: Text(
-                          '$pName',
+                          child: Text(
+                          '${pName}',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 25,
@@ -202,7 +214,7 @@ class _MyAccountState extends State<MyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            '$pEmail',
+                            '${pEmail}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
@@ -245,7 +257,7 @@ class _MyAccountState extends State<MyAccount> {
                             ]),
                         child:Align(
                           child: Text(
-                            '$pPhone',
+                            '${pPhone}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 25,
@@ -347,11 +359,8 @@ class _MyAccountState extends State<MyAccount> {
             "حذف",
             style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
           ),
-          // onPressed: () => Navigator.pop(context),
           onPressed: () async {
             await DeleteAcc();
-
-
 
           }, //to do
           color: Color.fromARGB(255, 200, 62, 62),
@@ -368,23 +377,15 @@ class _MyAccountState extends State<MyAccount> {
     showPopup2();
     showPopup2();
 
-    /*final String uid;
-
-    MyAccount({this.uid});
-
-    final CollectionReference userCollection =
-    Firestore.instance.collection('users');
-    return userCollection.document(uid).delete();*/
   }
 
   showPopup2() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(fontSize: 22, fontFamily: 'Tajawal')),
       context: context,
-      //عيت تشتغل الصوره
       image: Image( width: 70,
         image: AssetImage("Assets/green.webp"),
-      ),       /*SvgPicture.asset("gs://happypaws-49d3d.appspot.com/green.webp",width: 70,) ,*/
+      ),
       desc: "تم حذف الحساب",
       closeFunction: null,
       closeIcon: Container(),
@@ -395,12 +396,9 @@ class _MyAccountState extends State<MyAccount> {
             "حسناً",
             style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
           ),
-          // onPressed: () => Navigator.pop(context),
           onPressed: () async {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => FirstScreen()));
-
-
 
           }, //to do
           color: Color(0xFFC2D961),
