@@ -649,6 +649,13 @@ else
                         ),
                       ),
 
+                      Align( alignment : Alignment.centerRight ,
+                        child: Text(
+                          "(واحد هو يوم الأحد وهكذا)",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'Tajawal'),
+                        ),
+                      ),
+
                       SizedBox(
                         height: 5,
                       ),
