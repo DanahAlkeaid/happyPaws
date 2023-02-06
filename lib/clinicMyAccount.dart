@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:untitled/clinicServices.dart';
 import 'clinic_home.dart';
 import 'FirstScreen.dart';
-import 'clinic_services.dart';
 import 'clinicChangeInfo.dart';
 
 class clinicMyAccount extends StatefulWidget{
@@ -368,7 +368,7 @@ class _clinicMyAccount extends State<clinicMyAccount> {
               Container(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>clinic_services()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>clinicServices(cEmail)));
                   },
                   child: Text("الخدمات المقدمة",
                       style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')

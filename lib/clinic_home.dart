@@ -127,9 +127,10 @@ SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
+                  const SizedBox(height: 20)
 
                   //Heading
-                  Text("! مرحبًا  "
+                  ,Text("! مرحبًا  "
                       ,style:TextStyle(
                         fontFamily: "Elmessiri",
                         fontSize: 35,
@@ -139,8 +140,10 @@ SizedBox(height: 10,),
                   )
                 ],),
 
+              const SizedBox(height: 25)
+
               //ClinicName
-              Container(child: Row(
+              ,Container(child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:  [
                   Text(' عيادة ${cName}' //Get Clinic Name From DB
@@ -155,7 +158,7 @@ SizedBox(height: 10,),
 
               //Menu Headings
               ,Container(
-                height: 60,
+                height: 70,
                 width: 270,
                 decoration: BoxDecoration(
                     color: Color(0xFFC2D961),
@@ -188,7 +191,7 @@ SizedBox(height: 10,),
               ,const SizedBox(height: 15)
 
               ,Container(
-                height: 60,
+                height: 70,
                 width: 270,
                 decoration: BoxDecoration(
                     color: Color(0xFFC2D961),
@@ -220,41 +223,9 @@ SizedBox(height: 10,),
 
               ,const SizedBox(height: 15)
 
-              ,Container(
-                height: 60,
-                width: 270,
-                decoration: BoxDecoration(
-                    color: Color(0xFFC2D961),
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(
-                      color: Color(0xFFC2D963),
-                      width: 1,
-                    )),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => clinicNotification()));
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFFC2D961)),
-                        shape: MaterialStateProperty
-                            .all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                side: const BorderSide(
-                                  color: Color(0xFFC2D961),
-                                )))),
-                    child: const Text(" التنبيهات",
-                        style: TextStyle(fontSize: 28,fontFamily: 'Tajawal', color: Color(0xFF034D23)))),
-              )
-
-              ,const SizedBox(height: 15)
 
               ,Container(
-                height: 60,
+                height: 70,
                 width: 270,
                 decoration: BoxDecoration(
                     color: Color(0xFFC2D961),
@@ -288,7 +259,7 @@ SizedBox(height: 10,),
 
 
               ,Container(
-                height: 60,
+                height: 70,
                 width: 270,
                 decoration: BoxDecoration(
                     color: Color(0xFFC2D961),
@@ -320,9 +291,11 @@ SizedBox(height: 10,),
           Row(children: [
             SizedBox(
               width: 150,
+              height:25 ,
             ),
             Container(
               width: 30,
+              height:25 ,
               child: Link(
                 target: LinkTarget.blank,
                 uri: Uri.parse('https://twitter.com/Happypaws_app'),
@@ -341,6 +314,7 @@ SizedBox(height: 10,),
             ),
             Container(
               width: 30,
+              height:25 ,
               child: ListTile(
                 title: const Text(
                   '',
