@@ -608,20 +608,5 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
     });
   }
 
-  /*Future addRating(DocumentReference index) async {
-    // Timestamp date = Timestamp.now();
-    try{
-      await FirebaseFirestore.instance.collection('rating').add({
-        'rate': 0,
-        //'clinic_email':widget.Clinic_email ,
-        //'petOwner_email': widget.PetOwner_email,
-       // 'clinic_name':widget.Clinic_name,
-        //'clinic_pic':widget.Clinic_pic,
-       // 'status':'yet',
-      });
-
-    }catch(error){
-      print(error);}
-    } */
 
 }

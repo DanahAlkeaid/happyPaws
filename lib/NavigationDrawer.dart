@@ -139,15 +139,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ));
             },
           ),
-          const Divider(color: Colors.black54,),
-          ListTile(
-            leading: const Icon(Icons.notifications_active,color: Color(0xff194919),size: 30,),
-            title: const Text('تنبيهات',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const Alert(),
-              ));
-            },
-          ),
+
           const Divider(color: Colors.black54,),
           ListTile(
             leading: const Icon(Icons.medical_information,color: Color(0xff194919),size: 30,),
@@ -158,15 +150,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             },
           ),
 
-          // const Divider(color: Colors.black54,),
-          // ListTile(
-          //   leading: const Icon(Icons.star,color: Color(0xff194919),size: 30,),
-          //   title: const Text('تقييم العيادات',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-          //   onTap: (){
-          //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const petOwnerRate('renad.aldhayan@gmail.com'),
-          //     ));
-          //   },
-          // ),
           const Divider(color: Colors.black54,),
           ListTile(
             leading: const Icon(Icons.logout,color: Color(0xff194919),size: 30,),
@@ -179,28 +162,57 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           const Divider(color: Colors.black54,),
           Text('تواصل معنا',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
 
-          Link(
-            target: LinkTarget.blank,
-            uri: Uri.parse('https://twitter.com/Happypaws_app'),
-            builder: (context, followLink)=>ListTile(
-            title: const Text('@HappyPaws_App',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-            leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
-            onTap: followLink,
-            ),
-          ),
-
-          ListTile(
-            title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-            leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
-            onTap: () async{
-              final toEmail='HappyPawsApp@hotmail.com';
-              final url='mailto:$toEmail';
-              if(await canLaunch (url)){
-                await launch(url);
-              }
-            },
-          )
-        ],
+  Row(children: [
+  SizedBox(
+  width: 5,
+  height:10 ,
+  ),
+  Container(
+  width: 30,
+  height:15 ,
+  child: Link(
+  target: LinkTarget.blank,
+  uri: Uri.parse('https://twitter.com/Happypaws_app'),
+  builder: (context, followLink) => ListTile(
+  leading: const Icon(
+  FontAwesomeIcons.twitter,
+  color: Color(0xff194919),
+  size: 30,
+  ),
+  onTap: followLink,
+  ),
+  ),
+  ),
+  SizedBox(
+  width: 20,
+  ),
+  Container(
+  width: 30,
+  height:15 ,
+  child: ListTile(
+  title: const Text(
+  '',
+  style: TextStyle(
+  fontSize: 20,
+  color: Color(0xff194919),
+  fontFamily: 'Tajawal'),
+  ),
+  leading: const Icon(
+  Icons.mail,
+  color: Color(0xff194919),
+  size: 30,
+  ),
+  onTap: () async {
+  final toEmail = 'HappyPawsApp@hotmail.com';
+  final url = 'mailto:$toEmail';
+  if (await canLaunch(url)) {
+  await launch(url);
+  }
+},
+),
+)
+]
+  )],
       ),
   );
 }

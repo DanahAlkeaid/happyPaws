@@ -318,7 +318,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                                 padding: EdgeInsets.symmetric(vertical: 50),
                                 height: 200,
                                 child: Text(
-                                  'الترتيب',
+                                  '..... الترتيب حسب ',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 25,color: Color(0xff194919),fontFamily: 'Tajawal',fontWeight: FontWeight.w400
                                   ),
@@ -333,7 +333,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
                                     Navigator.pop(context);
                                   });
                                 },
-                                child: Text(isSortedalpha? "التقييم" : "أبجدياً",
+                                child: Text(isSortedalpha? "التقييم" : "الأبجدية",
                                     style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all<Color>(

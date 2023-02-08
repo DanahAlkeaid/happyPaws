@@ -270,8 +270,7 @@ class _ChangePass extends State<ChangePass> {
                 ),
 
                 Container(
-                  child: ElevatedButton(
-                      onPressed: () { SaveEdit(); },
+                  child: ElevatedButton(onPressed: () { SaveEdit(); },
                       child: Text("حفظ التعديلات",
                           style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
                     style: ButtonStyle(
@@ -355,14 +354,13 @@ class _ChangePass extends State<ChangePass> {
           });
         });
         var update = await FirebaseFirestore.instance
-            .collection('Users')
+            .collection('users')
             .doc('${doc_id}').update({
            'firstname': _firstnameController.text.trim(),
            'phonenumber': _phonenumberController.text.trim(),
            'email': _emailController.text.trim(),
         }
         );
-        Navigator.of(context).pop();
         showPopup();
       }
       catch (error) {
@@ -380,7 +378,26 @@ class _ChangePass extends State<ChangePass> {
       desc: "تم حفط التعديلات بنجاح",
       closeFunction: null,
       closeIcon: Container(),
-      buttons: [],
+      buttons: [
+        DialogButton(
+          child: Text(
+            "حسناً",
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+          ),
+          onPressed: () {  Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MyAccount(widget.pEmail)));
+          },
+          color: Color(0xFFC2D961),
+          radius: BorderRadius.all(Radius.circular(15)),
+
+        )
+
+      ],
     ).show();
   }
 

@@ -77,8 +77,9 @@ class _gpi_pageState extends State<gpi_page> {
                   ),
                 ],
               )
-              ,const SizedBox(height: 20)
-
+              ,const SizedBox(height: 15),
+            const Divider(color: Colors.black54,)
+            ,const SizedBox(height: 15)
               ,Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -105,8 +106,9 @@ class _gpi_pageState extends State<gpi_page> {
                   ),
                 ],
               )
-              ,const SizedBox(height: 20)
-
+              ,const SizedBox(height: 15),
+              const Divider(color: Colors.black54,)
+              ,const SizedBox(height: 15)
               ,Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -133,8 +135,9 @@ class _gpi_pageState extends State<gpi_page> {
                   ),
                 ],
               )
-              ,const SizedBox(height: 20)
-
+              ,const SizedBox(height: 15),
+              const Divider(color: Colors.black54,)
+              ,const SizedBox(height: 15)
               ,Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -161,8 +164,9 @@ class _gpi_pageState extends State<gpi_page> {
                   ),
                 ],
               )
-              ,const SizedBox(height: 20)
-
+              ,const SizedBox(height: 15),
+              const Divider(color: Colors.black54,)
+              ,const SizedBox(height: 15)
               ,Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -189,8 +193,9 @@ class _gpi_pageState extends State<gpi_page> {
                   ),
                 ],
               )
-              ,const SizedBox(height: 20)
-
+              ,const SizedBox(height: 15),
+              const Divider(color: Colors.black54,)
+              ,const SizedBox(height: 15)
               ,Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [

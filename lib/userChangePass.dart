@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:status_alert/status_alert.dart';
 
 
 class userChangePass extends StatefulWidget {
@@ -282,39 +283,32 @@ class _userChangePassState extends State<userChangePass> {
                   Text("تحتوي على حرف كبير واحد على الأقل",style: TextStyle(fontFamily: 'Tajawal'),),
 
                   SizedBox(
-                    width: 10,
+                    width: 12.5,
                   ),
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: hasUpperChar ? Colors.green : Colors.transparent,
+                        border: hasUpperChar
+                            ? Border.all(color: Colors.transparent)
+                            : Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                ]),
+              SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
-                    width: w * 0.4,
-                    height: 45,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(
-                          context,
-                        ).pop();
-                      },
-                      child: Text(
-                        'إلغاء',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'Tajawal'),
-                      ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFFC2D961)),
-                            shape: MaterialStateProperty
-                                .all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    side: BorderSide(
-                                      color: Color(0xFFC2D961),
-                                    )))),
-                    ),
-                  ),
+
                   SizedBox(
                     width: w * 0.4,
                     height: 45,
@@ -325,6 +319,7 @@ class _userChangePassState extends State<userChangePass> {
                       },
                       child: Text('تغيير',
                           style: TextStyle(
+                              color: Colors.black,
                               fontSize: 25,
                               fontWeight: FontWeight.w900,
                               fontFamily: 'Tajawal')),
@@ -342,7 +337,6 @@ class _userChangePassState extends State<userChangePass> {
                   ),
                 ],
               ),
-            ]),
   ]),
         ),
       ),
@@ -352,7 +346,7 @@ class _userChangePassState extends State<userChangePass> {
   String? validationCurrent(String? formPassword) {
     if (formPassword == null || formPassword.trim().isEmpty) {
       error2 = false;
-      return "مطلوب";
+      return "هذا الحقل مطلوب";
     }
     if (error2) {
       error2 = false;
@@ -424,7 +418,7 @@ class _userChangePassState extends State<userChangePass> {
 
   String? ValidateEmpty(value) {
     if (value != null && value.isEmpty) {
-      return "مطلوب";
+      return "هذا الحقل مطلوب";
     } else {
       InputDecoration(
         errorBorder: UnderlineInputBorder(
@@ -459,14 +453,12 @@ class _userChangePassState extends State<userChangePass> {
   }
 
   showPopup() {
-    Alert(
-      style: AlertStyle(titleStyle: TextStyle(fontFamily: 'Tajawal',fontSize: 23,fontWeight: FontWeight.bold),descStyle: TextStyle(fontFamily: 'Tajawal',fontSize: 20,)),
-      context: context,
-      image: SvgPicture.asset("img/check.svg", width: 50),
-      desc: "تم تغيير كلمة المرور بنجاح",
-      closeFunction: null,
-      closeIcon: Container(),
-      buttons: [],
-    ).show();
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 2),
+      title: 'تم تغيير كلمة المرور بنجاح',
+      configuration: IconConfiguration(icon: Icons.done),
+      maxWidth: 280,
+    );
   }
 }

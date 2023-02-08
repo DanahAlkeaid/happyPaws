@@ -281,7 +281,7 @@ class _MyAccountState extends State<MyAccount> {
               Container(
                 child: ElevatedButton(
                     onPressed: () async {
-                      await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass(pName, pPhone, pEmail)),
+                      await Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePass(pName, pEmail, pPhone)),
                       ).then((value) => _stateUpdate());
                     },
                     child: Text("تعديل المعلومات",

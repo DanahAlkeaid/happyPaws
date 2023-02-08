@@ -365,30 +365,9 @@ class _clinicMyAccount extends State<clinicMyAccount> {
                 height: 30,
               ),
 
-              Container(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>clinicServices(cEmail)));
-                  },
-                  child: Text("الخدمات المقدمة",
-                      style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')
-                  ),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color(0xFFC2D961)),
-                      shape: MaterialStateProperty
-                          .all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              side: BorderSide(
-                                color: Color(0xFFC2D961),
-                              )))),
-                ),
-              ),
 
-              Container(
-                height: 20,
-              ),
+
+             
 
               Container(
                 child: ElevatedButton(

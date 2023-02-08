@@ -339,46 +339,6 @@ SizedBox(height: 10,),
             )
           ]
 
-//هذا المفروض ايقونات تويتر وايميل لكن يضبط ويخرب بمزاجه
-
-/*Row(children:
-[SizedBox(width: 150,),
-  Expanded(child: Container(
-
-    child: Link(
-      target: LinkTarget.blank,
-      uri: Uri.parse('https://twitter.com/Happypaws_app'),
-      builder: (context, followLink)=>ListTile(
-
-        leading: const Icon(FontAwesomeIcons.twitter,color: Color(0xff194919),size: 30,),
-        onTap: followLink,
-      ),
-    ),)),
-Expanded(child: Container(
-  child:  ListTile(
-    title: const Text('HappyPawsApp@hotmail.com',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-    leading: const Icon(Icons.mail,color: Color(0xff194919),size: 30,),
-    onTap: () async{
-      final toEmail='HappyPawsApp@hotmail.com';
-      final url='mailto:$toEmail';
-      if(await canLaunch (url)){
-        await launch(url);
-      }
-    },
-  ),
-) ,)
-
-,SizedBox(width: 150,)
-],),*/
-
-/*Row(mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-
-
-
-
-
-],),*/
 
 
           )],),

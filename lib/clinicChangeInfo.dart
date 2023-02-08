@@ -5,12 +5,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:untitled/clinicMyAccount.dart';
 import 'package:untitled/userChangePass.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
 import 'package:flutter/gestures.dart';
 import 'dart:io';
-//import 'dart:html';
 import 'package:firebase_storage/firebase_storage.dart';
 
 
@@ -36,7 +36,6 @@ class clinicChangeInfo extends StatefulWidget{
 class _clinicChangeInfo extends State<clinicChangeInfo> {
 
 
-   //late var cstime = widget.cStart;
   TimeOfDay start_time = TimeOfDay.now();
  late String formattedStime = widget.cStart;
   void SonTimeChanged(TimeOfDay newTime) {
@@ -45,7 +44,7 @@ class _clinicChangeInfo extends State<clinicChangeInfo> {
       formattedStime = start_time.toString().replaceAll("(", "").replaceAll(")", "").replaceAll("TimeOfDay", "");
     });
   }
-  //End time formatters
+
   TimeOfDay end_time = TimeOfDay.now();
 late String formattedEtime = widget.cEnd;
   void EonTimeChanged(TimeOfDay newTime) {
@@ -495,7 +494,7 @@ var doc_id;
           'EndTime' : formattedEtime,
         }
         );
-        Navigator.of(context).pop();
+
         showPopup();
       }
       catch (error) {
@@ -513,7 +512,27 @@ var doc_id;
         // desc: "Check your Inbox!",
         closeFunction: null,
         closeIcon: Container(),
-        buttons: [],
+        buttons: [
+          DialogButton(
+            child: Text(
+              "حسناً",
+              style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+
+
+            ),
+            onPressed: () {  Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        clinicMyAccount(widget.cEmail)));
+            },
+            color: Color(0xFFC2D961),
+            radius: BorderRadius.all(Radius.circular(15)),
+
+          )
+
+
+        ],
       ).show();
 
     }
@@ -584,10 +603,6 @@ var doc_id;
 
       Reference ref = FirebaseStorage.instance.refFromURL(widget.cPic);
 
-      //  var firebase_storage;
-      // Reference ref = firebase_storage.FirebaseStorage.instance
-      //     .ref(destination)
-      //     .child('file/');
        await ref.putFile(_photo!);
        imageURL = await ref.getDownloadURL();
     } catch (e) {
