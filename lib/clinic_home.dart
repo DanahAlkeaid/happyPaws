@@ -35,9 +35,7 @@ class _clinic_homeState extends State<clinic_home> {
   var cEmail;
   var cName='';
   var profilepic1 ;
- // var requestID;
- // late String category;
- // late FirebaseMessaging messaging;
+
   @override
   void initState() {
     super.initState();

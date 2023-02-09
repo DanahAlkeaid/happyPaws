@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:status_alert/status_alert.dart';
 
@@ -140,7 +139,6 @@ class _userChangePassState extends State<userChangePass> {
                 ),
               ),
               Container(
-                // padding: EdgeInsets.only(left:40, right: 40,),
                 alignment: Alignment.centerRight,
                 child: Text(
                   'كلمة المرور الجديدة',
@@ -154,7 +152,6 @@ class _userChangePassState extends State<userChangePass> {
                 height: 15,
               ),
               SizedBox(
-                // alignment: Alignment.center,
                 width: w * 0.9,
                 height: h * 0.1,
                 child: TextFormField(
@@ -192,7 +189,6 @@ class _userChangePassState extends State<userChangePass> {
                 height: 5,
               ),
               Container(
-                //  padding: EdgeInsets.only(left:40, right: 40,),
                 alignment: Alignment.centerRight,
                 child: Text(
                   'تأكيد كلمة المرور',
@@ -203,7 +199,6 @@ class _userChangePassState extends State<userChangePass> {
                 ),
               ),
               SizedBox(
-                // alignment: Alignment.center,
                 width: w * 0.9,
                 height: h * 0.1,
                 child: TextFormField(
@@ -273,7 +268,7 @@ class _userChangePassState extends State<userChangePass> {
                   ),
                 ],
               ),
-            ),  //has 8 characters
+            ),
             SizedBox(
               height: 10,
             ),
@@ -361,13 +356,11 @@ class _userChangePassState extends State<userChangePass> {
         User user = await FirebaseAuth.instance.currentUser!;
         final cred = await EmailAuthProvider.credential(
             email: user.email!, password: currentPassword);
-        // proceed with password change
         await user.reauthenticateWithCredential(cred).then((value) async {
           Alert(
             style: AlertStyle(titleStyle: TextStyle(fontFamily: 'Tajawal',fontSize: 23,fontWeight: FontWeight.bold),descStyle: TextStyle(fontFamily: 'Tajawal',fontSize: 20,)),
             closeIcon: Container(),
             context: context,
-            //image: SvgPicture.asset("img/Q.svg",width: 50,),
             title: "تغيير كلمة المرور",
             desc: "هل أنت متأكد من رغبتك بتغيير كلمة المرور؟",
             buttons: [
@@ -409,7 +402,6 @@ class _userChangePassState extends State<userChangePass> {
           print(err);
         });
       } on FirebaseAuthException catch (e) {
-        //handle if reauthenticatation was not successful
       }
     } else {
       print("not validated");

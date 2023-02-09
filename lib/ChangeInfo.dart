@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/userChangePass.dart';
 import 'MyAccount.dart';
-import 'PetChangePass.dart';
 
 class ChangePass extends StatefulWidget{
   final pName;
