@@ -82,7 +82,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
   logout(){
     _auth.signOut();
-    Navigator.popUntil(context, (route) => false);
+    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => FirstScreen()));
 
   }
 

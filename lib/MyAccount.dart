@@ -397,9 +397,7 @@ class _MyAccountState extends State<MyAccount> {
             style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
           ),
           onPressed: () async {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FirstScreen()));
-
+            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => FirstScreen()));
           }, //to do
           color: Color(0xFFC2D961),
 

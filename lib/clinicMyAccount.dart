@@ -473,13 +473,6 @@ class _clinicMyAccount extends State<clinicMyAccount> {
     showPopup2();
     showPopup2();
 
-    /*final String uid;
-
-    MyAccount({this.uid});
-
-    final CollectionReference userCollection =
-    Firestore.instance.collection('users');
-    return userCollection.document(uid).delete();*/
   }
 
   showPopup2() {
@@ -502,8 +495,8 @@ class _clinicMyAccount extends State<clinicMyAccount> {
           ),
           // onPressed: () => Navigator.pop(context),
           onPressed: () async {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FirstScreen()));
+            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => FirstScreen()));
+
 
 
 

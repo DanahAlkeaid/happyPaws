@@ -86,7 +86,7 @@ profilepic1 = snapshot.docs[0].data()['profilepic'];
 
   logout(){
     _auth.signOut();
-    Navigator.popUntil(context, (route) => false);
+    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => FirstScreen()));
 
   }
 
