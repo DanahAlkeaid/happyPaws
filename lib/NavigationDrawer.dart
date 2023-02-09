@@ -16,6 +16,16 @@ import 'package:flutter/src/services/platform_channel.dart';
 import 'package:url_launcher/src/link.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:untitled/gpi_page.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'MyAccount.dart';
+import 'PetNotification.dart';
 
 class NavigationDrawer extends StatefulWidget{
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -69,6 +79,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     });
 
     }); }
+
+  logout(){
+    _auth.signOut();
+    Navigator.popUntil(context, (route) => false);
+
+  }
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -154,10 +170,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ListTile(
             leading: const Icon(Icons.logout,color: Color(0xff194919),size: 30,),
             title: const Text('تسجيل خروج',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const FirstScreen(),
-              ));
-            },
+            onTap: ()   => logout(),
           ),
           const Divider(color: Colors.black54,),
           Text('تواصل معنا',style: TextStyle(fontSize: 20,color: Color(0xff194919),fontFamily: 'Tajawal'),),

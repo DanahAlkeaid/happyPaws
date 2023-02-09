@@ -6,7 +6,14 @@ import 'package:untitled/clinicMyAccount.dart';
 import 'package:untitled/clinicNotification.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:untitled/clinicMyAccount.dart';
+import 'package:untitled/clinicNotification.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'PetNotification.dart';
 import 'FirstScreen.dart';
 import 'MyAccount.dart';
@@ -78,6 +85,12 @@ profilepic1 = snapshot.docs[0].data()['profilepic'];
       });
 
     }); }
+
+  logout(){
+    _auth.signOut();
+    Navigator.popUntil(context, (route) => false);
+
+  }
 
   @override
 
@@ -269,12 +282,8 @@ SizedBox(height: 10,),
                       width: 1,
                     )),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FirstScreen()));
-                    },
+                    onPressed: ()  => logout(),
+
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFFC2D961)),
