@@ -14,7 +14,8 @@ class editService extends StatefulWidget {
   final cEmail;
   final sName;
   final sPrice;
-  const editService ( this.cEmail,this.sName,this.sPrice,{super.key} );
+  final sAvailablity;
+  const editService ( this.cEmail,this.sName,this.sPrice,this.sAvailablity,{super.key} );
 
   @override
   State<editService> createState() => _editService();
@@ -22,22 +23,27 @@ class editService extends StatefulWidget {
 
 class _editService extends State<editService> {
   final _formKey = GlobalKey<FormState>();
-  late TextEditingController _serviceName = TextEditingController(text: widget.sName);
-  late TextEditingController _price = TextEditingController(text: widget.sPrice);
+  late TextEditingController _serviceName = TextEditingController( text: widget.sName);
+  late TextEditingController _price = TextEditingController( text: widget.sPrice);
+  late TextEditingController _availability = TextEditingController( text: widget.sAvailablity);
 
 
   String errorMessage = '';
   var doc_id;
   var loading = false;
+  bool valServise = false;
+  bool valPrice = false;
+  bool valAvailablility = false;
+
   void dispose() {
     _serviceName.dispose();
     _price.dispose();
+    _availability.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color(0xfffaf7f4),
 
@@ -54,244 +60,390 @@ class _editService extends State<editService> {
       ),
 
 
-      body:Form(
+      body: Form(
         key: _formKey,
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 40),
-            height: MediaQuery.of(context).size.height - 50,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height - 50,
             width: double.infinity,
-              child:SingleChildScrollView(
-                child: Column(
-                  children: [
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
 
-                    Column(
+                  Column(
 
-                      children:[
-
-
-                        Container(
-                          margin:const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                    children: [
 
 
-                          child:
-                          Align(
-                            alignment:const Alignment(0.8, 0.1),
-                            child:Padding(
-                              padding:const EdgeInsets.all(16),
-                              child:Row(
-                                mainAxisAlignment:MainAxisAlignment.start,
-                                crossAxisAlignment:CrossAxisAlignment.center,
-                                mainAxisSize:MainAxisSize.max,
-                                children:[
-
-                                  Expanded(
-                                    flex: 1,
-                                    child: Row(
-                                      mainAxisAlignment:MainAxisAlignment.start,
-                                      crossAxisAlignment:CrossAxisAlignment.center,
-                                      mainAxisSize:MainAxisSize.max,
-                                      children:[
-
-                                        Expanded(
-                                          flex: 1,
-                                          child: Padding(
-                                            padding:const EdgeInsets.symmetric(vertical: 0,horizontal:16),
-                                            child:
-                                            Column(
-                                              mainAxisAlignment:MainAxisAlignment.start,
-                                              crossAxisAlignment:CrossAxisAlignment.start,
-                                              mainAxisSize:MainAxisSize.max,
-                                              children: [
-                                                Align(
-                                                  alignment:Alignment.center,
-                                                  child:Row(
-                                                    mainAxisAlignment:MainAxisAlignment.start,
-                                                    crossAxisAlignment:CrossAxisAlignment.center,
-                                                    mainAxisSize:MainAxisSize.max,
-                                                    children:[
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 16),
 
 
-                                                      const Padding(
-                                                        padding:EdgeInsets.fromLTRB(130, 0, 0, 0),
-                                                        child:Text(
-                                                          "تفاصيل الخدمة",
-                                                          textAlign: TextAlign.right,
-                                                          overflow:TextOverflow.clip,
-                                                          style:TextStyle(
-                                                            fontWeight:FontWeight.w600,
-                                                            fontFamily: "Almarai",
-                                                            fontSize:19,
-                                                            color:Color(0xff034d23),
-                                                          ),
+                        child:
+                        Align(
+                          alignment: const Alignment(0.8, 0.1),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+
+                                Expanded(
+                                  flex: 1,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+
+                                      Expanded(
+                                        flex: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 16),
+                                          child:
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .start,
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .start,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .start,
+                                                  crossAxisAlignment: CrossAxisAlignment
+                                                      .center,
+                                                  mainAxisSize: MainAxisSize
+                                                      .max,
+                                                  children: [
+
+
+                                                    const Padding(
+                                                      padding: EdgeInsets
+                                                          .fromLTRB(
+                                                          130, 0, 0, 0),
+                                                      child: Text(
+                                                        "تفاصيل الخدمة",
+                                                        textAlign: TextAlign
+                                                            .right,
+                                                        overflow: TextOverflow
+                                                            .clip,
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .w600,
+                                                          fontFamily: "Almarai",
+                                                          fontSize: 19,
+                                                          color: Color(
+                                                              0xff034d23),
                                                         ),
                                                       ),
-                                                    ],),),
-                                                const Divider(
-                                                  color:Color(0xff5f5d5d),
-                                                  height:13,
-                                                  thickness:0,
-                                                  indent:0,
-                                                  endIndent:0,
+                                                    ),
+                                                  ],),),
+                                              const Divider(
+                                                color: Color(0xff5f5d5d),
+                                                height: 13,
+                                                thickness: 0,
+                                                indent: 0,
+                                                endIndent: 0,
+                                              ),
+                                              SizedBox(height: 20,),
+                                              const Align(
+                                                alignment: Alignment
+                                                    .centerRight,
+                                                child: Text(
+                                                  "اسم الخدمة",
+                                                  textAlign: TextAlign.start,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.clip,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: "Almarai",
+                                                    fontSize: 18,
+                                                    color: Color(0xff034d23),
+                                                  ),
                                                 ),
-                                                SizedBox(height: 20,),
-                                                const Align(
-                                                  alignment:Alignment.centerRight,
-                                                  child:Text(
-                                                    "اسم الخدمة",
+                                              ),
+                                              SizedBox(height: 10,),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius
+                                                        .circular(20),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          blurRadius: 20,
+                                                          offset: Offset(1, 1),
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                              0.26))
+                                                    ]),
+                                                child: TextFormField(
+                                                  autovalidateMode:
+                                                  AutovalidateMode
+                                                      .onUserInteraction,
+                                                  controller: _serviceName,
+                                                  validator: validateService,
+                                                  decoration: InputDecoration(
+                                                      hintText: (" "),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15),
+                                                          borderSide:
+                                                          BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15),
+                                                          borderSide:
+                                                          BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15))),
+                                                ),
+                                              ),
+                                              SizedBox(height: 20,),
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 4, horizontal: 0),
+                                                child: Align(
+                                                  alignment: Alignment
+                                                      .centerRight,
+                                                  child: Text(
+                                                    "السعر",
                                                     textAlign: TextAlign.start,
-                                                    maxLines:1,
-                                                    overflow:TextOverflow.clip,
-                                                    style:TextStyle(
-                                                      fontWeight:FontWeight.w500,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow
+                                                        .ellipsis,
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight
+                                                          .w500,
                                                       fontFamily: "Almarai",
-                                                      fontSize:18,
-                                                      color:Color(0xff034d23),
+                                                      fontSize: 18,
+                                                      color: Color(0xff034d23),
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(height: 10,),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius: BorderRadius.circular(20),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            blurRadius: 20,
-                                                            offset: Offset(1, 1),
-                                                            color: Colors.grey.withOpacity(0.26))
-                                                      ]),
-                                                  child: TextFormField(
-                                                    autovalidateMode:
-                                                    AutovalidateMode.onUserInteraction,
-                                                    controller: _serviceName,
-                                                    validator: validateService,
-                                                    decoration: InputDecoration(
-                                                        hintText: (" "),
-                                                        focusedBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(15),
-                                                            borderSide:
-                                                            BorderSide(color: Colors.white)),
-                                                        enabledBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(15),
-                                                            borderSide:
-                                                            BorderSide(color: Colors.white)),
-                                                        border: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(15))),
-                                                  ),
+                                              ),
+                                              SizedBox(height: 10,),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius
+                                                        .circular(20),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          blurRadius: 20,
+                                                          offset: Offset(1, 1),
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                              0.26))
+                                                    ]),
+                                                child: TextFormField(
+                                                  autovalidateMode:
+                                                  AutovalidateMode
+                                                      .onUserInteraction,
+                                                  controller: _price,
+                                                  validator: validatePrice,
+                                                  decoration: InputDecoration(
+                                                      hintText: (" "),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15),
+                                                          borderSide:
+                                                          BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15),
+                                                          borderSide:
+                                                          BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15))),
                                                 ),
-                                                SizedBox(height: 20,),
-                                                const Padding(
-                                                  padding:EdgeInsets.symmetric(vertical: 4,horizontal:0),
-                                                  child:Align(
-                                                    alignment:Alignment.centerRight,
-                                                    child:Text(
-                                                      "السعر",
-                                                      textAlign: TextAlign.start,
-                                                      maxLines:1,
-                                                      overflow:TextOverflow.ellipsis,
-                                                      style:TextStyle(
-                                                        fontWeight:FontWeight.w500,
-                                                        fontFamily: "Almarai",
-                                                        fontSize:18,
-                                                        color:Color(0xff034d23),
-                                                      ),
+                                              ),
+                                              SizedBox(height: 20,),
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 4, horizontal: 0),
+                                                child: Align(
+                                                  alignment: Alignment
+                                                      .centerRight,
+                                                  child: Text(
+                                                    "عدد العملاء الممكن خدمتهم في ",
+                                                    textAlign: TextAlign.start,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow
+                                                        .ellipsis,
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight
+                                                          .w500,
+                                                      fontFamily: "Almarai",
+                                                      fontSize: 18,
+                                                      color: Color(0xff034d23),
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(height: 10,),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius: BorderRadius.circular(20),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            blurRadius: 20,
-                                                            offset: Offset(1, 1),
-                                                            color: Colors.grey.withOpacity(0.26))
-                                                      ]),
-                                                  child: TextFormField(
-                                                    autovalidateMode:
-                                                    AutovalidateMode.onUserInteraction,
-                                                    controller: _price,
-                                                    validator: validatePrice,
-                                                    decoration: InputDecoration(
-                                                        hintText: (" "),
-                                                        focusedBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(15),
-                                                            borderSide:
-                                                            BorderSide(color: Colors.white)),
-                                                        enabledBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(15),
-                                                            borderSide:
-                                                            BorderSide(color: Colors.white)),
-                                                        border: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(15))),
+                                              ),
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 4, horizontal: 0),
+                                                child: Align(
+                                                  alignment: Alignment
+                                                      .centerRight,
+                                                  child: Text(
+                                                    "  ذات الوقت",
+                                                    textAlign: TextAlign.start,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow
+                                                        .ellipsis,
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight
+                                                          .w500,
+                                                      fontFamily: "Almarai",
+                                                      fontSize: 18,
+                                                      color: Color(0xff034d23),
+                                                    ),
                                                   ),
                                                 ),
-                                                SizedBox(height: 20,),
-                                                Center(
-                                                  child: Row(children: [
-                                                    SizedBox(height: 40,),
-                                                    ElevatedButton(
-                                                      //radius: const BorderRadius.all(Radius.circular(6)),
-                                                      style: ButtonStyle(
-                                                          backgroundColor: MaterialStateProperty.all<Color>(
-                                                              Colors.red),
-                                                          shape: MaterialStateProperty
-                                                              .all<RoundedRectangleBorder>(
-                                                              RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(15),
-                                                                  side: BorderSide(
-                                                                    color: Colors.red,
-                                                                  )))),
-                                                      child: Text(
-                                                        "إلغاء",
-                                                        style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
-                                                      ),
-                                                      // onPressed: () => Navigator.pop(context),
-                                                      onPressed: () => Navigator.pop(context),//to do
-                                                      // color: Color.fromARGB(255, 200, 62, 62),
+                                              ),
+                                              SizedBox(height: 10,),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius
+                                                        .circular(20),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          blurRadius: 20,
+                                                          offset: Offset(1, 1),
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                              0.26))
+                                                    ]),
+                                                child: TextFormField(
+                                                  autovalidateMode:
+                                                  AutovalidateMode
+                                                      .onUserInteraction,
+                                                  controller: _availability,
+                                                  validator: validateAvailability,
+                                                  decoration: InputDecoration(
+                                                      hintText: (" "),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15),
+                                                          borderSide:
+                                                          BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15),
+                                                          borderSide:
+                                                          BorderSide(
+                                                              color: Colors
+                                                                  .white)),
+                                                      border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius
+                                                              .circular(15))),
+                                                ),
+                                              ),
 
+                                              SizedBox(height: 20,),
+                                              Center(
+                                                child: Row(children: [
+                                                  SizedBox(height: 40,),
+                                                  ElevatedButton(
+                                                    //radius: const BorderRadius.all(Radius.circular(6)),
+                                                    style: ButtonStyle(
+                                                        backgroundColor: MaterialStateProperty
+                                                            .all<Color>(
+                                                            Colors.red),
+                                                        shape: MaterialStateProperty
+                                                            .all<
+                                                            RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                side: BorderSide(
+                                                                  color: Colors
+                                                                      .red,
+                                                                )))),
+                                                    child: Text(
+                                                      "إلغاء",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.black,
+                                                          fontFamily: 'Tajawal'),
                                                     ),
-                                                    SizedBox(width: 20,),
-                                                    ElevatedButton(
-                                                      //radius: const BorderRadius.all(Radius.circular(6)),
-                                                      style: ButtonStyle(
-                                                          backgroundColor: MaterialStateProperty.all<Color>(
-                                                              Color(0xFFC2D961)),
-                                                          shape: MaterialStateProperty
-                                                              .all<RoundedRectangleBorder>(
-                                                              RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(15),
-                                                                  side: BorderSide(
-                                                                    color: Color(0xFFC2D961),
-                                                                  )))),
-                                                      child: Text(
-                                                        "حفظ التغييرات",
-                                                        style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
-                                                      ),
-                                                      onPressed: () => SaveEdit(),
-                                                      // color: Color(0xFFC2D961),
-                                                    ),
-                                                    
+                                                    // onPressed: () => Navigator.pop(context),
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            context), //to do
+                                                    // color: Color.fromARGB(255, 200, 62, 62),
 
-                                                  ]),
-                                                ),
-                                              ],),),),
-                                      ],),),
-                                ],),),),
-                        ),
-                      ],),
-                  ],),),),
-          ),
+                                                  ),
+                                                  SizedBox(width: 20,),
+                                                  ElevatedButton(
+                                                    //radius: const BorderRadius.all(Radius.circular(6)),
+                                                    style: ButtonStyle(
+                                                        backgroundColor: MaterialStateProperty
+                                                            .all<Color>(
+                                                            Color(0xFFC2D961)),
+                                                        shape: MaterialStateProperty
+                                                            .all<
+                                                            RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                side: BorderSide(
+                                                                  color: Color(
+                                                                      0xFFC2D961),
+                                                                )))),
+                                                    child: Text(
+                                                      "حفظ التغييرات",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.black,
+                                                          fontFamily: 'Tajawal'),
+                                                    ),
+                                                    onPressed: () =>{
+                                                      if(valPrice && valServise && valAvailablility){SaveEdit(),}}
+                                                    // color: Color(0xFFC2D961),
+                                                  ),
+
+
+                                                ]),
+                                              ),
+                                            ],),),),
+                                    ],),),
+                              ],),),),
+                      ),
+                    ],),
+                ],),),),
         ),
-      );
-
-
-
-
+      ),
+    );
   }
+
   // var newname,newprice;
   SaveEdit() async {
     if (_formKey.currentState!.validate()) {
@@ -304,7 +456,7 @@ class _editService extends State<editService> {
         await FirebaseFirestore.instance
             .collection('services')
             .where('clinicEmail', isEqualTo: '${widget.cEmail}')
-            .where('name', isEqualTo:'${widget.sName}')
+            .where('name', isEqualTo: '${widget.sName}')
             .get()
             .then((value) {
           value.docs.forEach((element) {
@@ -312,11 +464,12 @@ class _editService extends State<editService> {
             print(doc_id);
           });
         });
-         await FirebaseFirestore.instance
+        await FirebaseFirestore.instance
             .collection('services')
             .doc('${doc_id}').update({
-          "name":_serviceName.text.trim(),
-          "price":_price.text.trim(),
+          "name": _serviceName.text.trim(),
+          "price": _price.text.trim(),
+          "availability": _availability.text.trim(),
         }
         );
         showPopup();
@@ -328,10 +481,12 @@ class _editService extends State<editService> {
       print("خطأ في تغيير بيانات الخدمة ");
     }
   }
+
   //
   void showPopup() {
     Alert(
-      style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
+      style: AlertStyle(descStyle: TextStyle(
+          fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
       context: context,
       desc: "تم حفظ التعديلات بنجاح",
       // desc: "Check your Inbox!",
@@ -341,7 +496,8 @@ class _editService extends State<editService> {
         DialogButton(
           child: Text(
             "حسناً",
-            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
 
 
           ),
@@ -358,25 +514,49 @@ class _editService extends State<editService> {
         )
       ],
     ).show();
-
-  }
-}
-
-
-String? validatePrice(String? formPrice) {
-  //String msg = '';
-  if (formPrice == null || formPrice.trim().isEmpty) {
-    return "يرجى إدخال قيمة";
   }
 
-  return null;
-}
 
-String? validateService(String? formService) {
-  //String msg = '';
-  if (formService == null || formService.trim().isEmpty) {
-    return "يرجى إدخال اسم الخدمة";
+  String? validatePrice(String? formPrice) {
+    //String msg = '';
+    if (formPrice == null || formPrice
+        .trim()
+        .isEmpty) {
+      return "يرجى إدخال قيمة";
+    }
+    try {
+      double.parse(formPrice);
+    } catch (e) {
+      return "يرجى إدخال رقم للسعر";
+    }
+    valPrice=true;
+    return null;
   }
 
-  return null;
+  String? validateService(String? formService) {
+    //String msg = '';
+    if (formService == null || formService
+        .trim()
+        .isEmpty) {
+      return "يرجى إدخال اسم الخدمة";
+    }
+    valServise=true;
+    return null;
+  }
+
+  String? validateAvailability(String? formAvailability) {
+
+    if (formAvailability == null || formAvailability
+        .trim()
+        .isEmpty) {
+      return "يرجى إدخال السعة الاستيعابية للخدمة";
+    }
+    try {
+      int.parse(formAvailability);
+    } catch (e) {
+      return "يرجى إدخال رقم صحيح للسعة الاستيعابية";
+    }
+    valAvailablility=true;
+    return null;
+  }
 }

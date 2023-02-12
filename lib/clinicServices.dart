@@ -8,8 +8,6 @@ import 'package:untitled/addMedical.dart';
 import 'package:untitled/addOther.dart';
 import 'package:untitled/addTruck.dart';
 import 'package:untitled/book_appointment.dart';
-import 'package:untitled/editGrooming.dart';
-
 import 'editService.dart';
 
 class clinicServices extends StatefulWidget {
@@ -345,7 +343,7 @@ class _clinicServicesState extends State<clinicServices> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'])));                        },
+                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'],element.data()['availability'])));                        },
                       ),
                       IconButton(
                         icon: Icon(
@@ -406,7 +404,7 @@ class _clinicServicesState extends State<clinicServices> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'])));                        },
+                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'],element.data()['availability'])));                        },
                       ),
                       IconButton(
                         icon: Icon(
@@ -467,7 +465,7 @@ class _clinicServicesState extends State<clinicServices> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'])));                        },
+                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'],element.data()['availability'])));                        },
                       ),
                       IconButton(
                         icon: Icon(
@@ -528,7 +526,7 @@ class _clinicServicesState extends State<clinicServices> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'])));                        },
+                                  builder: (context) => editService(email, element.data()['name'], element.data()['price'],element.data()['availability'])));                        },
                       ),
                       IconButton(
                         icon: Icon(
