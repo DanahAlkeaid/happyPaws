@@ -17,6 +17,9 @@ import 'MyAccount.dart';
 import 'clinicServices.dart';
 import 'clinic_appointments.dart';
 
+import 'package:flutter/widgets.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 
 class clinic_home extends StatefulWidget {
@@ -81,10 +84,43 @@ profilepic1 = snapshot.docs[0].data()['profilepic'];
 
     }); }
 
-  logout(){
-    _auth.signOut();
-    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => FirstScreen()));
-
+  logout() {
+    Alert(
+      style: AlertStyle(
+          titleStyle: TextStyle(
+              fontSize: 23, color: Colors.black, fontFamily: 'Tajawal'),
+          descStyle: TextStyle(
+              fontSize: 20, color: Colors.black, fontFamily: 'Tajawal')),
+      closeIcon: Container(),
+      context: context,
+      title: "تسجيل الخروج",
+      desc: " هل أنت متأكد من رغبتك بتسجيل الخروج؟",
+      buttons: [
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "إلغاء",
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xFFC2D961),
+        ),
+        DialogButton(
+          radius: const BorderRadius.all(Radius.circular(6)),
+          child: Text(
+            "تسجيل خروج",
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
+          ),
+          onPressed: () async {
+            _auth.signOut();
+            Navigator.popUntil(context, ModalRoute.withName('/'));
+          }, //to do
+          color: Color.fromARGB(255, 200, 62, 62),
+        ),
+      ],
+    ).show();
   }
 
   @override
