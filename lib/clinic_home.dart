@@ -19,7 +19,7 @@ import 'FirstScreen.dart';
 import 'MyAccount.dart';
 import 'clinicServices.dart';
 import 'clinic_appointments.dart';
-import 'clinic_services.dart';
+
 
 
 class clinic_home extends StatefulWidget {

@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/gestures.dart';
 import 'clinicServices.dart';
-import 'clinic_services.dart';
 
 //
 class addOther extends StatefulWidget {

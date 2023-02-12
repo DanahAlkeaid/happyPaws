@@ -3,14 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/viewClinic.dart';
 import 'dart:async';
-import 'clinic_services.dart';
 import 'NavigationDrawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/viewClinic.dart';
 import 'dart:async';
-import 'clinic_services.dart';
 import 'NavigationDrawer.dart' as NV;
 
 

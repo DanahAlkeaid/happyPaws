@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'clinic_services.dart';
+
 
 class editOther extends StatefulWidget {
   const editOther ({Key? key}) : super (key: key);

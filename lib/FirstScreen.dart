@@ -6,7 +6,6 @@ import 'package:untitled/petOwnerHome.dart';
 import 'package:untitled/rating.dart';
 import 'PetOwnerFirstScreen.dart';
 import 'book_appointment.dart';
-import 'clinic_services.dart';
 import 'clinicsign.dart';
 import 'main.dart';
 import 'signupScreen.dart';
