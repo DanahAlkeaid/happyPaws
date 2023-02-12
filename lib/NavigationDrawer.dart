@@ -7,7 +7,6 @@ import 'package:untitled/petOwnerRate.dart';
 import 'package:url_launcher/link.dart';
 import 'petOwnerHome.dart';
 import 'MyAccount.dart';
-import 'PetNotification.dart';
 import 'gpi_page.dart';
 import 'FirstScreen.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +22,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:untitled/gpi_page.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'MyAccount.dart';
-import 'PetNotification.dart';
+
 
 class NavigationDrawer extends StatefulWidget{
   const NavigationDrawer({Key? key}) : super(key: key);
