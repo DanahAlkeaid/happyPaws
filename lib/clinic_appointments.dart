@@ -501,6 +501,7 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
 
   }
 
+  //A method for the clinic to update the appointment status to completed/cancelled
   UpdateStatus(DocumentReference index) {
     Alert(
       style: AlertStyle(titleStyle: TextStyle(fontSize: 23, color: Colors.black,  fontFamily: 'Tajawal'),descStyle: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal')),
@@ -508,15 +509,15 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
       context: context,
       title: "إنهاء الموعد",
       desc:
-      " هل تم الموعد بحضور المربي بنجاح؟",
+      " هل تم الموعد بحضور المربي بنجاح؟", //Update appointment status after the appointment time is ended
       buttons: [
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
-            "لا",
+            "لا", //Pet owner did not attend the appointment
             style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
           ),
-          onPressed: () async {
+          onPressed: () async { //Update the status on firebase
             await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
               await myTransaction.update(index, { "status": "موعد ملغى لعدم الحضور" }) ;
               Navigator.pop(context);
@@ -528,10 +529,10 @@ class _clinic_appointmentsState extends State<clinic_appointments> {
         DialogButton(
           radius: const BorderRadius.all(Radius.circular(6)),
           child: Text(
-            "نعم",
+            "نعم", //pet owner attended tha appointment
             style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: 'Tajawal'),
           ),
-          onPressed: () async {
+          onPressed: () async { //Update the status on firebase
             await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
               await myTransaction.update(index, { "status": "موعد مكتمل" }) ;
               Navigator.pop(context);

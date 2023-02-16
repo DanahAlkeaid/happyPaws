@@ -109,7 +109,7 @@ class _clinicServicesState extends State<clinicServices> {
       List<QueryDocumentSnapshot<Map<String, dynamic>>> medicalServices =
           snapshot.docs;
       print(medicalServices);
-      
+
       setState(() {
         mServices = medicalServices;
       });

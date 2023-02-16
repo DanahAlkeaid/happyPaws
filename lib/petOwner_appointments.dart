@@ -557,6 +557,8 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
             ],),),),
     );
   }
+
+  //A method to cancel the pet owner appointment
   CancelApp(DocumentReference index) {
     Alert(
       style: AlertStyle(titleStyle: TextStyle(
@@ -586,7 +588,7 @@ class _petOwner_appointmentsState extends State<petOwner_appointments> {
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontFamily: 'Tajawal'),
           ),
-          onPressed: () async {
+          onPressed: () async { //Update the status on firebase
             await FirebaseFirestore.instance.runTransaction((
                 Transaction myTransaction) async {
               await myTransaction.update(

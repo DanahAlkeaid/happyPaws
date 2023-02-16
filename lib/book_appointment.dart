@@ -59,10 +59,10 @@ class _book_appointmentssState extends State<book_appointments> {
 
 //A method to check if the chosen appointment day is a weekday
   bool isWorkday() {
-    var offDays = clinicOffDays.toString();
+    var offDays = clinicOffDays.toString(); //Get the clinic's off days
     print(offDays);
-    if (offDays.contains(_date.weekday.toString())) {
-      showDialog<void>(
+    if (offDays.contains(_date.weekday.toString())) { //Check if the chosen day is an off day
+      showDialog<void>( //Show error message
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
@@ -114,17 +114,17 @@ class _book_appointmentssState extends State<book_appointments> {
           );
         },
       );
-      return false;
+      return false; //The appointment is not added
     }
     else
     {
-      return true;}
+      return true;} //The appointment is added
   }
 
 //A method to check if all the information are complete before booking the appointment
   bool isComplete() {
-    if (formattedTime == "" || formattedDate == "") {
-      showDialog<void>(
+    if (formattedTime == "" || formattedDate == "") { //Check if the user did not select a time or a date
+      showDialog<void>( //Show error message
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
@@ -176,11 +176,11 @@ class _book_appointmentssState extends State<book_appointments> {
           );
         },
       );
-      return false;
+      return false; //The appointment is not added
     }
     else
     {
-      return true;}
+      return true;} //The appointment is added
   }
 
 //Get the current petOwner info
@@ -247,7 +247,7 @@ class _book_appointmentssState extends State<book_appointments> {
   late int serviceAppNo;
 
 
-  //A method to check if the chosen time of appointment is a acceptable by clinic
+  //A method to check the service availability at the selected date and time
   bool checkAvailability() {
     // _noAppointments=
         appointments
@@ -318,11 +318,11 @@ class _book_appointmentssState extends State<book_appointments> {
           );
         },
       );
-      return false;
+      return false; //The appointment is not added
     }
     else
     {
-      return true;}
+      return true;} //The appointment is added
   }
 
 
