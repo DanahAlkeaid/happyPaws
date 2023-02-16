@@ -425,9 +425,9 @@ class _editService extends State<editService> {
                                                           fontFamily: 'Tajawal'),
                                                     ),
                                                     onPressed: () =>{
-                                                    //  if(valPrice && valServise && valAvailablility){
-                                                        SaveEdit(),}
-                                                    // color: Color(0xFFC2D961),
+                                                     if(valPrice && valServise && valAvailablility){
+                                                       // method saveEdit() will not be called until making sure every entry is valid
+                                                        SaveEdit(),}}
                                                   ),
 
 
@@ -444,15 +444,10 @@ class _editService extends State<editService> {
     );
   }
 
-  // var newname,newprice;
+  // SaveEdit() saves the new data to firebase
   SaveEdit() async {
     if (_formKey.currentState!.validate()) {
       try {
-        // setState(() {
-        //   newname=_serviceName.text;
-        //   newprice=_price.text;
-        // });
-
         await FirebaseFirestore.instance
             .collection('services')
             .where('clinicEmail', isEqualTo: '${widget.cEmail}')
@@ -482,7 +477,7 @@ class _editService extends State<editService> {
     }
   }
 
-  //
+  //appears when edit is saved successfully
   void showPopup() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(
@@ -516,9 +511,8 @@ class _editService extends State<editService> {
     ).show();
   }
 
-
+//making sure the entered price isnt empty, is number
   String? validatePrice(String? formPrice) {
-    //String msg = '';
     if (formPrice == null || formPrice
         .trim()
         .isEmpty) {
@@ -533,8 +527,8 @@ class _editService extends State<editService> {
     return null;
   }
 
+  //making sure the entered service name isnt empty
   String? validateService(String? formService) {
-    //String msg = '';
     if (formService == null || formService
         .trim()
         .isEmpty) {
@@ -544,6 +538,7 @@ class _editService extends State<editService> {
     return null;
   }
 
+  //making sure the entered availability isnt empty, is number
   String? validateAvailability(String? formAvailability) {
 
     if (formAvailability == null || formAvailability

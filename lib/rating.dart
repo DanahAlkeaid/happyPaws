@@ -233,6 +233,7 @@ class _ratingState extends State<rating> {
   Ratebtn(){
     try{
       if(RatingClinic<1){
+        //if user didnt rate we will show popup msg asking her/him kindly to do
         showPopup2();
       }else{
         if(formKey.currentState!.validate()){
@@ -245,7 +246,7 @@ class _ratingState extends State<rating> {
     }
   }
 
-
+//adds rating to to rating collection in firebase cloud
   Future addRating(rate) async {
     try{
       await FirebaseFirestore.instance.collection('rating').add({
@@ -259,6 +260,7 @@ class _ratingState extends State<rating> {
 
   }
 
+  //updates rating status in appointment to rated
   Future updateAppointment() async {
     var doc_id;
     await FirebaseFirestore.instance
@@ -281,6 +283,7 @@ class _ratingState extends State<rating> {
     );
   }
 
+  //thank user after rating
   showPopup() {
     Alert(
       style:  AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
@@ -311,6 +314,8 @@ class _ratingState extends State<rating> {
     ).show();
 
   }
+
+  //asking user for taring
   void showPopup2() {
     Alert(
       style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
@@ -337,6 +342,7 @@ class _ratingState extends State<rating> {
 
   }
 
+  //the method that retrieves clinics name
   NameClinic() {
     FirebaseFirestore.instance
         .collection('users')
@@ -351,6 +357,7 @@ class _ratingState extends State<rating> {
     });
     print(NameClinic);
   }
+  //the method that retrieves pet owners name
   NamePetOwner()  {
     FirebaseFirestore.instance
         .collection('users')
@@ -368,6 +375,7 @@ class _ratingState extends State<rating> {
 
   }
 
+  //the method that retrieves clinics picture
   Profilepic() {
     FirebaseFirestore.instance
         .collection('users')
@@ -385,32 +393,3 @@ class _ratingState extends State<rating> {
 }
 
 
-
-/*class Rate {
-
-  late double rate;
-  late String review;
-  late String expert_email;
-  late String ML_email;
-  late String RequestID;
-  Rate({
-
-    required this.rate,
-    required this.review,
-     required this.expert_email,
-    required this.ML_email,
-    required this.RequestID,
-
-  });
-
-  Map<String, dynamic> toJson() =>{
-
-    'rate': rate,
-    'review': review,
-    'expert_email':expert_email ,
-    'ML_email': ML_email,
-    'RequestID':RequestID,
-   // 'time': time,
-
-  };
-}*/

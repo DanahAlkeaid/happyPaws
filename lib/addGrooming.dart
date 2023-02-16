@@ -389,6 +389,7 @@ class _addGrooming extends State<addGrooming> {
                                                 ),
                                                 onPressed: () =>{
                                                 if(valPrice && valServise && valAvailablility){
+                                                  // add_service() will not be called till we make sure of the correctness of the entered values
                                                     add_service(
                                                         _serviceName.text
                                                             .trim(),
@@ -410,6 +411,8 @@ class _addGrooming extends State<addGrooming> {
     );
   }
 
+
+  //adds the new service to firebase cloud
   Future add_service(String name, String price, String availability) async {
     await FirebaseFirestore.instance.collection('services').add({
       "clinicEmail": widget.clinicEmail,
@@ -421,6 +424,7 @@ class _addGrooming extends State<addGrooming> {
     showPopup();
   }
 
+  //appears when service added successfully to firebase cloud
   void showPopup() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(
@@ -440,6 +444,7 @@ class _addGrooming extends State<addGrooming> {
 
           ),
           onPressed: () {
+            //routes the user to clinic services page again
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -454,7 +459,7 @@ class _addGrooming extends State<addGrooming> {
     ).show();
   }
 
-
+// //making sure the entered price isnt empty, is number
   String? validatePrice(String? formPrice) {
     //String msg = '';
     if (formPrice == null || formPrice
@@ -471,6 +476,7 @@ class _addGrooming extends State<addGrooming> {
     return null;
   }
 
+  //making sure the entered serviceName isnt empty
   String? validateService(String? formService) {
     //String msg = '';
     if (formService == null || formService
@@ -482,6 +488,7 @@ class _addGrooming extends State<addGrooming> {
     return null;
   }
 
+  //making sure the entered availability isnt empty, is number
   String? validateAvailability(String? formAvailability) {
     //String msg = '';
     if (formAvailability == null || formAvailability

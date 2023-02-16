@@ -392,8 +392,6 @@ class _userChangePassState extends State<userChangePass> {
               ),
             ],
           ).show();
-          //للتأكد فقط
-          print('succae');
         }).catchError((err) {
           setState(() {
             error2 = true;

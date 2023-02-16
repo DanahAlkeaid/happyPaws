@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names, prefer_const_constructors, unused_element, dead_code
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:form_field_validator/form_field_validator.dart';//أتأكد من دورها!!
+import 'package:form_field_validator/form_field_validator.dart';
 import 'SuccessReset.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -26,17 +25,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   }
 
   TextEditingController _emailTextController = TextEditingController();
-  /*  late EmailAuth emailAuth;
-      bool submitValid = false;
 
- // Initialize the package
-     void initState() {
-    super.initState();
-    emailAuth = new EmailAuth(
-      sessionName: "Sample session",
-    );
-    
-  }*/
 
   Future<bool> checkIfEmailInUse() async {
     try {
@@ -91,20 +80,6 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
 
-
-    /*        void sendOtp() async {
-   if(await checkIfEmailInUse()){
-    bool result = await emailAuth.sendOtp(
-        recipientMail: _emailTextController.value.text, otpLength: 5);
-    if (result) {
-      setState(() {
-        submitValid = true;
-      });
-      Navigator.push(context, MaterialPageRoute(builder:(context)=> OTP(_emailTextController.text)));
-    }}else{
-    ShowAlert();
-    }
-  } */
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
@@ -247,34 +222,4 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-  /*void ShowAlert() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        content: Container(
-          height: 30,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: Stack(children: [
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                "  هذا البريد الالكتروني غير مسجل مسبقاً في التطبيق",
-                style: TextStyle(
-                    fontSize: 9,
-                    fontFamily: 'Tajawal'),
-
-                  )],
-              ),
-            ),
-            //IconButton(icon:  ,onPressed: ,)
-          ]),
-        )));
-  }*/
 }

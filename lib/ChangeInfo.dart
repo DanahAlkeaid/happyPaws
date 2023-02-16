@@ -373,7 +373,7 @@ class _ChangePass extends State<ChangePass> {
     Alert(
       style: AlertStyle(descStyle:TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Tajawal') ),
       context: context,
-      desc: "تم حفط التعديلات بنجاح",
+      desc: "تم حفظ التعديلات بنجاح",
       closeFunction: null,
       closeIcon: Container(),
       buttons: [
