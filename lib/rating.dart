@@ -239,6 +239,7 @@ class _ratingState extends State<rating> {
         if(formKey.currentState!.validate()){
           Navigator.pop(context);
           addRating(RatingClinic);
+          Navigator.pop(context);
           showPopup();
         } }
     }catch(error){
