@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'clinicChangeInfo.dart';
+
 
 class clinicChangePass extends StatefulWidget{
   const clinicChangePass({Key? key}) : super(key: key);

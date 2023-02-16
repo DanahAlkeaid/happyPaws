@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:untitled/clinic_home.dart';
 import 'package:untitled/loginScreen.dart';
 
 import 'main.dart';

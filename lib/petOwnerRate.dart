@@ -4,13 +4,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'NavigationDrawer.dart';
 import 'rating.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'NavigationDrawer.dart' as NV;
-import 'rating.dart';
-
 
 class petOwnerRate extends StatefulWidget {
   final  petOwner_email;

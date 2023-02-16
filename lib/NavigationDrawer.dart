@@ -1,31 +1,12 @@
-import 'dart:io';
-import 'package:untitled/FirstScreen.dart';
-import 'package:untitled/clinic_Rate.dart';
 import 'package:untitled/gpi_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:untitled/petOwnerRate.dart';
 import 'package:url_launcher/link.dart';
-import 'petOwnerHome.dart';
 import 'MyAccount.dart';
-import 'gpi_page.dart';
-import 'FirstScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/src/services/platform_channel.dart';
 import 'package:url_launcher/src/link.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:untitled/gpi_page.dart';
-import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'MyAccount.dart';
-
-
-
 import 'package:flutter/widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 

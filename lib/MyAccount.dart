@@ -5,7 +5,6 @@ import 'package:untitled/petOwnerHome.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'ChangeInfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MyAccount extends StatefulWidget{
   const MyAccount(pEmail,{Key? key}) : super(key: key);

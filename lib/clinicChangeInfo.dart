@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:untitled/clinicMyAccount.dart';
 import 'package:untitled/userChangePass.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
 import 'package:flutter/gestures.dart';
 import 'dart:io';
