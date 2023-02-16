@@ -425,7 +425,8 @@ class _editService extends State<editService> {
                                                           fontFamily: 'Tajawal'),
                                                     ),
                                                     onPressed: () =>{
-                                                      if(valPrice && valServise && valAvailablility){SaveEdit(),}}
+                                                    //  if(valPrice && valServise && valAvailablility){
+                                                        SaveEdit(),}
                                                     // color: Color(0xFFC2D961),
                                                   ),
 
