@@ -303,10 +303,12 @@ class _ratingState extends State<rating> {
           ),
           onPressed: () => {
             Navigator.pop(context),
-            Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) => petOwnerHome()))},
+          //   Navigator.of(context).pop(),
+          //   Navigator.push(
+          // context,
+          // MaterialPageRoute(
+          // builder: (context) => petOwnerHome()))
+           },
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
 
