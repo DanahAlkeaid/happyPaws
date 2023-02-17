@@ -301,14 +301,14 @@ class _ratingState extends State<rating> {
 
 
           ),
-          onPressed: () => {
-            Navigator.popUntil(context, ModalRoute.withName('/petOwnerHome')),
-            // Navigator.pop(context),
-          //   Navigator.of(context).pop(),
-          //   Navigator.push(
-          // context,
-          // MaterialPageRoute(
-          // builder: (context) => petOwnerHome()))
+          onPressed: () async => {
+          //   Navigator.popUntil(context, ModalRoute.withName('/petOwnerHome')),
+          //   // Navigator.pop(context),
+          // //   Navigator.of(context).pop(),
+            Navigator.push(
+          context,
+          MaterialPageRoute(
+          builder: (context) => petOwnerHome()))
            },
           color: Color(0xFFC2D961),
           radius: BorderRadius.all(Radius.circular(15)),
