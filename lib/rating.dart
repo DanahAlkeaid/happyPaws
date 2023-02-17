@@ -302,7 +302,8 @@ class _ratingState extends State<rating> {
 
           ),
           onPressed: () => {
-            Navigator.pop(context),
+            Navigator.popUntil(context, ModalRoute.withName('/petOwnerHome')),
+            // Navigator.pop(context),
           //   Navigator.of(context).pop(),
           //   Navigator.push(
           // context,
