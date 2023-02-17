@@ -55,6 +55,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     }
   }
 
+  //sorts clinics alphabetically
   sortAlpha() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
@@ -63,6 +64,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
     clinicsNo = _clinicsStream.length;
   }
 
+  //sorts clinics depending on rate
   sortRate() {
     _clinicsStream = FirebaseFirestore.instance
         .collection('users')
@@ -70,6 +72,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
         .snapshots();
   }
 
+  //checks if there is a clinic need to be rated by petowner after completed appointment
   rate(){
     int numRate=0;
     FirebaseFirestore.instance
@@ -106,6 +109,7 @@ class _petOwnerHomeState extends State<petOwnerHome> {
 
   }
 
+  //calculates the average rate for each clinic
   var noclinics;
   rateAverage(){
     var email;
