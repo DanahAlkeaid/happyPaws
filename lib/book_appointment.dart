@@ -621,7 +621,7 @@ class _book_appointmentssState extends State<book_appointments> {
               ,ElevatedButton(
                   onPressed: () {
                     //Check if the chosen day is a workday and check information completion and check the service availability
-                    if (isWorkday() && isComplete() && checkAvailability()) {
+                    if ( isComplete() && isWorkday() && checkAvailability()) {
                       addAppointment();
                       Navigator.push(
                           context,

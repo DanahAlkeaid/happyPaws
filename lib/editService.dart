@@ -9,6 +9,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 
 
+
 class editService extends StatefulWidget {
   final cEmail;
   final sName;
@@ -30,9 +31,9 @@ class _editService extends State<editService> {
   String errorMessage = '';
   var doc_id;
   var loading = false;
-  bool valServise = false;
-  bool valPrice = false;
-  bool valAvailablility = false;
+  bool valServise = true;
+  bool valPrice = true;
+  bool valAvailablility = true;
 
   void dispose() {
     _serviceName.dispose();
@@ -425,9 +426,8 @@ class _editService extends State<editService> {
                                                           fontFamily: 'Tajawal'),
                                                     ),
                                                     onPressed: () =>{
-                                                     if(valPrice && valServise && valAvailablility){
-                                                       // method saveEdit() will not be called until making sure every entry is valid
-                                                        SaveEdit(),}}
+                                                      if(valPrice && valServise && valAvailablility){SaveEdit(),}}
+                                                    // color: Color(0xFFC2D961),
                                                   ),
 
 
@@ -444,7 +444,7 @@ class _editService extends State<editService> {
     );
   }
 
-  // SaveEdit() saves the new data to firebase
+
   SaveEdit() async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -477,7 +477,7 @@ class _editService extends State<editService> {
     }
   }
 
-  //appears when edit is saved successfully
+  //
   void showPopup() {
     Alert(
       style: AlertStyle(descStyle: TextStyle(
@@ -511,44 +511,49 @@ class _editService extends State<editService> {
     ).show();
   }
 
-//making sure the entered price isnt empty, is number
+
   String? validatePrice(String? formPrice) {
+    //String msg = '';
     if (formPrice == null || formPrice
         .trim()
         .isEmpty) {
+      valPrice=false;
       return "يرجى إدخال قيمة";
     }
     try {
       double.parse(formPrice);
     } catch (e) {
+      valPrice=false;
       return "يرجى إدخال رقم للسعر";
     }
     valPrice=true;
     return null;
   }
 
-  //making sure the entered service name isnt empty
   String? validateService(String? formService) {
+    //String msg = '';
     if (formService == null || formService
         .trim()
         .isEmpty) {
+      valServise=false;
       return "يرجى إدخال اسم الخدمة";
     }
     valServise=true;
     return null;
   }
 
-  //making sure the entered availability isnt empty, is number
   String? validateAvailability(String? formAvailability) {
 
     if (formAvailability == null || formAvailability
         .trim()
         .isEmpty) {
+      valAvailablility=false;
       return "يرجى إدخال السعة الاستيعابية للخدمة";
     }
     try {
       int.parse(formAvailability);
     } catch (e) {
+      valAvailablility=false;
       return "يرجى إدخال رقم صحيح للسعة الاستيعابية";
     }
     valAvailablility=true;
