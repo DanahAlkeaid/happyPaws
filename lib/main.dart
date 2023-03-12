@@ -3,9 +3,6 @@ import 'FirstScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
 
-//hello world
-//الووووووو
-
 
 Future main() async {
  ErrorWidget.builder = (FlutterErrorDetails details) => Scaffold(
